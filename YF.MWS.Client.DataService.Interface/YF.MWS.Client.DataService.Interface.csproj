@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6986F143-1AC2-4D3F-A197-62581A0DFC70}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YF.MWS.Client.DataService.Interface</RootNamespace>
+    <AssemblyName>YF.MWS.Client.DataService.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IAttributeService.cs" />
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="ICardService.cs" />
+    <Compile Include="ICarService.cs" />
+    <Compile Include="IClientService.cs" />
+    <Compile Include="ICompanyPayService.cs" />
+    <Compile Include="ICustomerService.cs" />
+    <Compile Include="IDataEntryService.cs" />
+    <Compile Include="IFileService.cs" />
+    <Compile Include="ILocationService.cs" />
+    <Compile Include="ICommonService.cs" />
+    <Compile Include="ILogService.cs" />
+    <Compile Include="ICompanyService.cs" />
+    <Compile Include="IMaterialService.cs" />
+    <Compile Include="IMasterService.cs" />
+    <Compile Include="IPayService.cs" />
+    <Compile Include="IPlanService.cs" />
+    <Compile Include="IReportService.cs" />
+    <Compile Include="IRoleService.cs" />
+    <Compile Include="ISeqNoService.cs" />
+    <Compile Include="IStatementService.cs" />
+    <Compile Include="ISumReportService.cs" />
+    <Compile Include="ISyncService.cs" />
+    <Compile Include="ITaskService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="IWarehService.cs" />
+    <Compile Include="IWeightExtService.cs" />
+    <Compile Include="IWeightProcessService.cs" />
+    <Compile Include="IWeightQcService.cs" />
+    <Compile Include="IWeightQueryService.cs" />
+    <Compile Include="IWeightService.cs" />
+    <Compile Include="IWeightTempService.cs" />
+    <Compile Include="IWeightViewService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remote\IWebCardService.cs" />
+    <Compile Include="Remote\IWebCarService.cs" />
+    <Compile Include="Remote\IWebClientService.cs" />
+    <Compile Include="Remote\IWebCompanyService.cs" />
+    <Compile Include="Remote\IWebCustomerService.cs" />
+    <Compile Include="Remote\IWebFileService.cs" />
+    <Compile Include="Remote\IWebMaterialService.cs" />
+    <Compile Include="Remote\IWebMessageService.cs" />
+    <Compile Include="Remote\IWebPayService.cs" />
+    <Compile Include="Remote\IWebUserService.cs" />
+    <Compile Include="Remote\IWebWeightProcessService.cs" />
+    <Compile Include="Remote\IWebWeightService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
+      <Project>{388fd347-fc4a-4ad8-b78d-ba4d94519975}</Project>
+      <Name>YF.MWS.BaseMetadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Db\YF.MWS.Db.csproj">
+      <Project>{919C4C21-69AC-4C6F-8B4D-C866BD044B8D}</Project>
+      <Name>YF.MWS.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Metadata\YF.MWS.Metadata.csproj">
+      <Project>{3ED33F32-0A07-46AF-866E-0101A7C2C50D}</Project>
+      <Name>YF.MWS.Metadata</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

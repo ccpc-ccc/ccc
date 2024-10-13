@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D538788-2778-4AEE-A762-21A10D7C27E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YF.MWS.Win.Util</RootNamespace>
+    <AssemblyName>YF.MWS.Win.Util</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Utils.v21.2.UI, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v21.2.Win, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v21.2.Extensions, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      
+    </Reference>
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Lib\Interop.SpeechLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UHFReader18CSharp">
+      <HintPath>..\Lib\UHFReader18\UHFReader18CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="YF.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CarPlate\ASBNewUtil.cs" />
+    <Compile Include="CarPlate\ASBSdk.cs" />
+    <Compile Include="CarPlate\CHCNetSDK.cs" />
+    <Compile Include="CarPlate\DaHuaSDK.cs" />
+    <Compile Include="CarPlate\DaHuaSDKStruct.cs" />
+    <Compile Include="CarPlate\DHCarPlateUtil.cs" />
+    <Compile Include="CarPlate\HKCarPlateRecognizer.cs" />
+    <Compile Include="CarPlate\HXPlateRecognizer.cs" />
+    <Compile Include="CarPlate\HXSDK.cs" />
+    <Compile Include="CarPlate\KHTNewSDK.cs" />
+    <Compile Include="CarPlate\KHTNewUtil.cs" />
+    <Compile Include="CarPlate\KHTSdk.cs" />
+    <Compile Include="CarPlate\QianYiPlateRecognizer.cs" />
+    <Compile Include="CarPlate\QianYiSdk.cs" />
+    <Compile Include="CarPlate\VzCarPlateRecognizer.cs" />
+    <Compile Include="CarPlate\VzClientSDK.cs" />
+    <Compile Include="CarRecognitionUtil.cs" />
+    <Compile Include="CfgUtil.cs" />
+    <Compile Include="DigitConvertUtil.cs" />
+    <Compile Include="DxHelper.cs" />
+    <Compile Include="ET99Util.cs" />
+    <Compile Include="ExportUtil.cs" />
+    <Compile Include="FormHelper.cs" />
+    <Compile Include="GQUtil.cs" />
+    <Compile Include="GridCheckMarksSelection.cs" />
+    <Compile Include="IdCard\IdCardReader.cs" />
+    <Compile Include="IdCard\IdCardSdk.cs" />
+    <Compile Include="IniUtility.cs" />
+    <Compile Include="CarPlate\KHTUtil.cs" />
+    <Compile Include="LocalizationCHS.cs" />
+    <Compile Include="MediaUtil.cs" />
+    <Compile Include="MessageDxUtil.cs" />
+    <Compile Include="ModbusUtil.cs" />
+    <Compile Include="NetworkUtil.cs" />
+    <Compile Include="PayUtil.cs" />
+    <Compile Include="PlcUtil.cs" />
+    <Compile Include="PrintUtil.cs" />
+    <Compile Include="ProcessUtil.cs" />
+    <Compile Include="ReadCardUtil.cs" />
+    <Compile Include="RF35Util.cs" />
+    <Compile Include="RoleUtil.cs" />
+    <Compile Include="ScreenUtil.cs" />
+    <Compile Include="Screen\ILedScreen.cs" />
+    <Compile Include="Screen\LXLedUtil.cs" />
+    <Compile Include="Screen\LXNewLedUtil.cs" />
+    <Compile Include="Screen\LXNewSDK.cs" />
+    <Compile Include="Screen\LXSDK.cs" />
+    <Compile Include="Screen\LXScreen.cs" />
+    <Compile Include="SearchLookupUtil.cs" />
+    <Compile Include="SearchUtil.cs" />
+    <Compile Include="SerialPortHelper.cs" />
+    <Compile Include="SoftValidator.cs" />
+    <Compile Include="SpeechUtil.cs" />
+    <Compile Include="UHFReader18Util.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VelocimeterUtil.cs" />
+    <Compile Include="VideoCameraSdk.cs" />
+    <Compile Include="VideoCameraUtil.cs" />
+    <Compile Include="Video\DHNetSDK.cs" />
+    <Compile Include="Video\DHNetSDKStruct.cs" />
+    <Compile Include="Video\DHNew\DHVideo.cs" />
+    <Compile Include="Video\DHNew\DHVideoUtil.cs" />
+    <Compile Include="Video\DHNew\NetSDKNew.cs" />
+    <Compile Include="Video\DHNew\NetSDKStructNew.cs" />
+    <Compile Include="Video\DHNew\OriginalSDK.cs" />
+    <Compile Include="Video\DHPlaySDK.cs" />
+    <Compile Include="Video\NETSDKHelper.cs" />
+    <Compile Include="WeightPrinter.cs" />
+    <Compile Include="WeightUtil.cs" />
+    <Compile Include="Win32API.cs" />
+    <Compile Include="WindowsMessage.cs" />
+    <Compile Include="XmlUtil.cs" />
+    <Compile Include="XMSDK.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
+      <Project>{388fd347-fc4a-4ad8-b78d-ba4d94519975}</Project>
+      <Name>YF.MWS.BaseMetadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.CacheService\YF.MWS.CacheService.csproj">
+      <Project>{D2718955-64DE-4D33-8A65-7B25D7C7466C}</Project>
+      <Name>YF.MWS.CacheService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Client.DataService.Interface\YF.MWS.Client.DataService.Interface.csproj">
+      <Project>{6986f143-1ac2-4d3f-a197-62581a0dfc70}</Project>
+      <Name>YF.MWS.Client.DataService.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Db\YF.MWS.Db.csproj">
+      <Project>{919C4C21-69AC-4C6F-8B4D-C866BD044B8D}</Project>
+      <Name>YF.MWS.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Metadata\YF.MWS.Metadata.csproj">
+      <Project>{3ED33F32-0A07-46AF-866E-0101A7C2C50D}</Project>
+      <Name>YF.MWS.Metadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.SQliteService\YF.MWS.SQliteService.csproj">
+      <Project>{35a630fb-5f07-4af2-9ab7-a3008b1ec053}</Project>
+      <Name>YF.MWS.SQliteService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Util\YF.MWS.Util.csproj">
+      <Project>{e44fef1a-deef-4936-862f-a22623ab5a0e}</Project>
+      <Name>YF.MWS.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

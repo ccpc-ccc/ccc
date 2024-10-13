@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SysCfg>
+  <MeasureFun>People</MeasureFun>
+  <NobodyWeight>
+    <BoundGate>SingleGate</BoundGate>
+    <StartBoundGate>false</StartBoundGate>
+    <StartInfrared>false</StartInfrared>
+    <MinWeightValue>0</MinWeightValue>
+    <AutoSaveTime>0</AutoSaveTime>
+    <OutWeightValue>0</OutWeightValue>
+    <AutoOutTime>0</AutoOutTime>
+    <StartReturnZero>false</StartReturnZero>
+    <ReturnZeroCommand />
+    <StartFunSix>false</StartFunSix>
+    <MaxReturnZeroWeightValue>0</MaxReturnZeroWeightValue>
+    <FunSixCloseTime>0</FunSixCloseTime>
+    <CloseGate>Command</CloseGate>
+    <OpenSingleGate>CarNoRecognize</OpenSingleGate>
+    <StartTrafficLight>false</StartTrafficLight>
+  </NobodyWeight>
+  <PeopleWeight>
+    <StartInfrared>false</StartInfrared>
+  </PeopleWeight>
+  <StartReadCard>true</StartReadCard>
+  <ReadCardCycle>0</ReadCardCycle>
+  <StartCarNoRecognition>false</StartCarNoRecognition>
+  <StartVideo>false</StartVideo>
+  <StartSpeeder>false</StartSpeeder>
+  <CarNoRecognition>
+    <Recognition />
+    <IP1 />
+    <Port1>0</Port1>
+    <UserName1 />
+    <Password1 />
+    <UserName2 />
+    <Password2 />
+    <UserName3 />
+    <Password3 />
+    <UserName4 />
+    <Password4 />
+    <IP2 />
+    <Port2>0</Port2>
+    <IP3 />
+    <Port3>0</Port3>
+    <IP4 />
+    <Port4>0</Port4>
+    <RecognitionTimeSpan>0</RecognitionTimeSpan>
+    <StartSameCarNoControl>false</StartSameCarNoControl>
+    <OutputVideo>false</OutputVideo>
+    <OutputScreen>false</OutputScreen>
+    <RecCondition>WeightGeZero</RecCondition>
+  </CarNoRecognition>
+  <Print>
+    <Mode>Manual</Mode>
+    <WeightType>Batch</WeightType>
+    <AutoPrintTemp>false</AutoPrintTemp>
+    <WeightPrinterName />
+    <WeightTempPrinterName />
+    <AppendPrintTemp>false</AppendPrintTemp>
+    <StartReWeightTemplate>false</StartReWeightTemplate>
+    <PrintPhoto>false</PrintPhoto>
+  </Print>
+  <Finance>
+    <Type>GrossWeight</Type>
+    <SettleType>Original</SettleType>
+    <DecimalDigit>0</DecimalDigit>
+    <UnitPrice>0.00</UnitPrice>
+    <MinCharge>0.00</MinCharge>
+    <AccurateUnit>Yuan</AccurateUnit>
+    <ApplyMoneyRuleColumns />
+    <MoneyUpperColumns />
+    <WeightUpperColumns />
+    <IsFree>false</IsFree>
+    <MaxFreeMoney>0.00</MaxFreeMoney>
+  </Finance>
+  <CarNo>
+    <AreaCode />
+    <StartValidate>false</StartValidate>
+    <RegExp />
+    <AutoSearchPanelX>0</AutoSearchPanelX>
+    <OutMode>Whole</OutMode>
+    <Length>0</Length>
+  </CarNo>
+  <Transfer>
+    <ServerUrl />
+    <AutoUpload>false</AutoUpload>
+    <PhotoAutoUpload>false</PhotoAutoUpload>
+    <PartnerServerUrl />
+    <StartPartnerServer>false</StartPartnerServer>
+  </Transfer>
+  <WeightNo>
+    <PrefixFormat>Date</PrefixFormat>
+    <Prefix />
+    <CardinalNo>0</CardinalNo>
+    <SerialNoDigit>3</SerialNoDigit>
+    <CurrentDate>0</CurrentDate>
+    <DecimalDigits>0</DecimalDigits>
+  </WeightNo>
+  <Weight>
+    <GrossTareTransform>false</GrossTareTransform>
+    <MinGrossWeight>0.00</MinGrossWeight>
+    <ShowShortCut>false</ShowShortCut>
+    <StartMeasure>false</StartMeasure>
+    <StartRefusePay>false</StartRefusePay>
+    <StartVoicePrompt>false</StartVoicePrompt>
+    <SaveFormData>false</SaveFormData>
+    <StartDoubleWeight>false</StartDoubleWeight>
+    <StartSimulateWeight>false</StartSimulateWeight>
+    <StartLoadImageWithRemote>false</StartLoadImageWithRemote>
+    <StartScreen>false</StartScreen>
+    <StartScreenCount>0</StartScreenCount>
+    <StartBatchWeight>false</StartBatchWeight>
+    <LoadUnfinishWeight>None</LoadUnfinishWeight>
+    <Process>One</Process>
+    <StartWeightProcessCfg>false</StartWeightProcessCfg>
+    <AutoLogin>false</AutoLogin>
+    <WeightProcessTrigger>CarRecognition</WeightProcessTrigger>
+    <LimitScope>None</LimitScope>
+    <StartInputItemAutoSave>false</StartInputItemAutoSave>
+    <StartOnlinePay>false</StartOnlinePay>
+    <OrderMode>FirstGross</OrderMode>
+  </Weight>
+  <OverWeight>
+    <MaxGrossWeight>0</MaxGrossWeight>
+    <StartGross>false</StartGross>
+    <StartTare>false</StartTare>
+  </OverWeight>
+  <FinanceSettle>
+    <SummaryFieldNames>毛重;皮重;净重</SummaryFieldNames>
+  </FinanceSettle>
+  <LstReadCard>
+    <ReadCardCfg>
+      <Type>Short</Type>
+      <IsStart>true</IsStart>
+      <SerialPort1>COM1</SerialPort1>
+      <SerialPort2>COM1</SerialPort2>
+      <SerialPort3>COM1</SerialPort3>
+      <SerialPort4>COM1</SerialPort4>
+      <PowerDbm>0</PowerDbm>
+      <CardIdGenerate>CardSN</CardIdGenerate>
+    </ReadCardCfg>
+    <ReadCardCfg>
+      <Type>Remote</Type>
+      <IsStart>false</IsStart>
+      <SerialPort1>COM1</SerialPort1>
+      <SerialPort2>COM1</SerialPort2>
+      <SerialPort3>COM1</SerialPort3>
+      <SerialPort4>COM1</SerialPort4>
+      <PowerDbm>30</PowerDbm>
+      <CardIdGenerate>CardSN</CardIdGenerate>
+    </ReadCardCfg>
+  </LstReadCard>
+  <WeightSearch>
+    <LstQueryCondition />
+    <SummaryFieldNames>毛重;皮重;净重</SummaryFieldNames>
+    <GroupFieldNames />
+    <DisplayFormat />
+  </WeightSearch>
+  <WeightControl>
+    <AutoCarNoSuggestion>false</AutoCarNoSuggestion>
+  </WeightControl>
+  <Launch>
+    <DefaultPage>Corp</DefaultPage>
+  </Launch>
+  <Page>
+    <PageSize>0</PageSize>
+    <Start>false</Start>
+  </Page>
+  <Video>
+    <LoadVideoApp>Exterior</LoadVideoApp>
+  </Video>
+  <RemoteServer>
+    <ServerUrl />
+    <CompanyCode />
+    <AppKey />
+    <AppSecret />
+  </RemoteServer>
+  <WeightCharge>
+    <StartWeightPay>false</StartWeightPay>
+    <ChargeTriggerCondtion>FinishWeight</ChargeTriggerCondtion>
+    <Mode>ControlFormula</Mode>
+  </WeightCharge>
+  <WeightStable>
+    <MinCredibleWeight>0</MinCredibleWeight>
+    <WeightDeviation>0</WeightDeviation>
+    <SamplingCount>0</SamplingCount>
+    <SampingInterval>0</SampingInterval>
+  </WeightStable>
+</SysCfg>

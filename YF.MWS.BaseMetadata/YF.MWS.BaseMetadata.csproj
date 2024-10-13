@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{388FD347-FC4A-4AD8-B78D-BA4D94519975}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YF.MWS.BaseMetadata</RootNamespace>
+    <AssemblyName>YF.MWS.BaseMetadata</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YF.Utility">
+      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthUser.cs" />
+    <Compile Include="CacheKeyCollection.cs" />
+    <Compile Include="CurrentUser.cs" />
+    <Compile Include="DisplayFormatValueAttribute.cs" />
+    <Compile Include="Enum\AppRunVersion.cs" />
+    <Compile Include="Enum\BoolValueType.cs" />
+    <Compile Include="Enum\CarPlateRecognizerType.cs" />
+    <Compile Include="Enum\CarType.cs" />
+    <Compile Include="Enum\CommunicationType.cs" />
+    <Compile Include="Enum\ConsultStateType.cs" />
+    <Compile Include="Enum\DefaultStateType.cs" />
+    <Compile Include="Enum\DeviceCommMode.cs" />
+    <Compile Include="Enum\DisplayFormatType.cs" />
+    <Compile Include="Enum\FileType.cs" />
+    <Compile Include="Enum\FinishState.cs" />
+    <Compile Include="Enum\InfraredBlockCondition.cs" />
+    <Compile Include="Enum\LocationType.cs" />
+    <Compile Include="Enum\LogActionType.cs" />
+    <Compile Include="Enum\MaterialStateType.cs" />
+    <Compile Include="Enum\MeasureProcessMode.cs" />
+    <Compile Include="Enum\MeasureUnitType.cs" />
+    <Compile Include="Enum\OrderSource.cs" />
+    <Compile Include="Enum\PayBizType.cs" />
+    <Compile Include="Enum\PayCodeType.cs" />
+    <Compile Include="Enum\PlanLimitType.cs" />
+    <Compile Include="Enum\PlanStateType.cs" />
+    <Compile Include="Enum\PlanType.cs" />
+    <Compile Include="Enum\UnitPriceType.cs" />
+    <Compile Include="Enum\ValidateInputMode.cs" />
+    <Compile Include="Enum\VideoFileType.cs" />
+    <Compile Include="Enum\WarehBizType.cs" />
+    <Compile Include="Enum\WeightControlType.cs" />
+    <Compile Include="Enum\CustomerType.cs" />
+    <Compile Include="Enum\DataBaseType.cs" />
+    <Compile Include="Enum\FileBusinessType.cs" />
+    <Compile Include="Enum\PayPluginType.cs" />
+    <Compile Include="Enum\PayStateType.cs" />
+    <Compile Include="Enum\QcState.cs" />
+    <Compile Include="Enum\RegisterMode.cs" />
+    <Compile Include="Enum\ReStartTimeSpanType.cs" />
+    <Compile Include="Enum\RowState.cs" />
+    <Compile Include="Enum\SummaryReportType.cs" />
+    <Compile Include="Enum\SyncState.cs" />
+    <Compile Include="Enum\TemplateType.cs" />
+    <Compile Include="Enum\UserType.cs" />
+    <Compile Include="Enum\VersionCodeType.cs" />
+    <Compile Include="Enum\VersionType.cs" />
+    <Compile Include="Enum\WeightPayType.cs" />
+    <Compile Include="Enum\WeightSummaryItemType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

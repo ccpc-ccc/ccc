@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3ED33F32-0A07-46AF-866E-0101A7C2C50D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YF.MWS.Metadata</RootNamespace>
+    <AssemblyName>YF.MWS.Metadata</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Drawing.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v23.1.Core, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Data.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YF.Utility">
+      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CalculateField.cs" />
+    <Compile Include="CameraState.cs" />
+    <Compile Include="CardField.cs" />
+    <Compile Include="CarPlate\ASBPlateInfo.cs" />
+    <Compile Include="CarPlate\PlateInfo.cs" />
+    <Compile Include="CarPlate\RecognitionResult.cs" />
+    <Compile Include="Cfg\AuthCfg.cs" />
+    <Compile Include="Cfg\AuthCfgExtend.cs" />
+    <Compile Include="Cfg\DeviceCfg.cs" />
+    <Compile Include="Cfg\CarNoCfg.cs" />
+    <Compile Include="Cfg\CarNoRecognitionCfg.cs" />
+    <Compile Include="Cfg\ExportCfg.cs" />
+    <Compile Include="Cfg\FinanceSettleCfg.cs" />
+    <Compile Include="Cfg\EmailCfg.cs" />
+    <Compile Include="Cfg\FontCfg.cs" />
+    <Compile Include="Cfg\IdCardCfg.cs" />
+    <Compile Include="Cfg\LaunchCfg.cs" />
+    <Compile Include="Cfg\LoginCfg.cs" />
+    <Compile Include="Cfg\NobodyWeightCfg.cs" />
+    <Compile Include="Cfg\OverWeightCfg.cs" />
+    <Compile Include="Cfg\PageCfg.cs" />
+    <Compile Include="Cfg\PeopleWeightCfg.cs" />
+    <Compile Include="Cfg\PlcCfg.cs" />
+    <Compile Include="Cfg\QrCodeCfg.cs" />
+    <Compile Include="Cfg\ReadCardCfg.cs" />
+    <Compile Include="Cfg\FormatPrintCfg.cs" />
+    <Compile Include="Cfg\PrintCfg.cs" />
+    <Compile Include="Cfg\RefusePayCfg.cs" />
+    <Compile Include="Cfg\SCompanyPayCfgFull.cs" />
+    <Compile Include="Cfg\SmsCfg.cs" />
+    <Compile Include="Cfg\SysCfg.cs" />
+    <Compile Include="Cfg\TransferCfg.cs" />
+    <Compile Include="Cfg\VideoDeviceCfg.cs" />
+    <Compile Include="Cfg\VideoCfg.cs" />
+    <Compile Include="Cfg\VoiceCfg.cs" />
+    <Compile Include="Cfg\WeightCfg.cs" />
+    <Compile Include="Cfg\WeightControlCfg.cs" />
+    <Compile Include="Cfg\WeightNoCfg.cs" />
+    <Compile Include="Cfg\WeightSearchCfg.cs" />
+    <Compile Include="Cfg\RemoteLoginCfg.cs" />
+    <Compile Include="Cfg\WeightStableCfg.cs" />
+    <Compile Include="Cfg\WeightStateTipCfg.cs" />
+    <Compile Include="Cfg\WriteCardCfg.cs" />
+    <Compile Include="MetadataConverter.cs" />
+    <Compile Include="CompanyTree.cs" />
+    <Compile Include="Consts.cs" />
+    <Compile Include="DeviceProtocol.cs" />
+    <Compile Include="Dto\BatchUpdate.cs" />
+    <Compile Include="Dto\DCompany.cs" />
+    <Compile Include="Dto\DCustomer.cs" />
+    <Compile Include="Dto\DFile.cs" />
+    <Compile Include="Dto\DRole.cs" />
+    <Compile Include="Dto\DSyncWeightView.cs" />
+    <Compile Include="Dto\DUser.cs" />
+    <Compile Include="Dto\DWeightStatement.cs" />
+    <Compile Include="Dto\Master\CustomerUpdate.cs" />
+    <Compile Include="Dto\Master\LocationFull.cs" />
+    <Compile Include="Dto\Message\ConsumeResultNotice.cs" />
+    <Compile Include="Dto\Message\RechargeResultNotice.cs" />
+    <Compile Include="Dto\Message\SmsAuthCode.cs" />
+    <Compile Include="Dto\Order\PlanFull.cs" />
+    <Compile Include="Dto\PayJumpPageModel.cs" />
+    <Compile Include="Dto\WeightQrCodeItem.cs" />
+    <Compile Include="Dto\WeightUpdate.cs" />
+    <Compile Include="Dto\Weight\CustomerMaterialStatistics.cs" />
+    <Compile Include="Dto\Weight\ReceiverCarGroupStatistics.cs" />
+    <Compile Include="Dto\Weight\WeightExtend.cs" />
+    <Compile Include="Dto\Weight\WeightMaterial.cs" />
+    <Compile Include="Dto\Weight\WeightQueryResult.cs" />
+    <Compile Include="MessageDxUtil.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="Enum\CaptureMode.cs" />
+    <Compile Include="Enum\CardIdGenerateMode.cs" />
+    <Compile Include="Enum\CarLimitScopeType.cs" />
+    <Compile Include="Enum\CarNoOutMode.cs" />
+    <Compile Include="Enum\FinaSettlement.cs" />
+    <Compile Include="Enum\ImportMode.cs" />
+    <Compile Include="Enum\LedVersionType.cs" />
+    <Compile Include="Enum\OpenSingleGateMode.cs" />
+    <Compile Include="Enum\PayState.cs" />
+    <Compile Include="Enum\PayType.cs" />
+    <Compile Include="Enum\SendReturnZeroProcessType.cs" />
+    <Compile Include="Enum\SuperTipStateType.cs" />
+    <Compile Include="Enum\UrlType.cs" />
+    <Compile Include="Enum\BroadcastWeightType.cs" />
+    <Compile Include="Enum\WeightFlowType.cs" />
+    <Compile Include="Enum\WeightSysCode.cs" />
+    <Compile Include="Event\DeviceReconnectedEventArgs.cs" />
+    <Compile Include="Event\CheckBoxChangedEventArgs.cs" />
+    <Compile Include="Event\Handler.cs" />
+    <Compile Include="Event\ManualCarRecognizeTriggerEventArgs.cs" />
+    <Compile Include="Event\PageChangedEventArgs.cs" />
+    <Compile Include="Event\ViewItemClickEventArgs.cs" />
+    <Compile Include="Event\WeightDoubleClickEventArgs.cs" />
+    <Compile Include="Event\WeightFocusedRowChangedEventArgs.cs" />
+    <Compile Include="Event\WeightItemClickEventArgs.cs" />
+    <Compile Include="Event\WeightVauleChangedEventArgs.cs" />
+    <Compile Include="FormData.cs" />
+    <Compile Include="GlobalCacher.cs" />
+    <Compile Include="IdCard\IdCardInfo.cs" />
+    <Compile Include="ImportResult.cs" />
+    <Compile Include="ListItem.cs" />
+    <Compile Include="LookupField.cs" />
+    <Compile Include="Message\SendEmail.cs" />
+    <Compile Include="PageList.cs" />
+    <Compile Include="Partner\PWeight.cs" />
+    <Compile Include="Partner\WeightObject.cs" />
+    <Compile Include="Query\BaseQuery.cs" />
+    <Compile Include="Query\CarStatementQuery.cs" />
+    <Compile Include="Query\LogQuery.cs" />
+    <Compile Include="Query\PlanCardQuery.cs" />
+    <Compile Include="Query\PlanQuery.cs" />
+    <Compile Include="Query\QWeightCustomer.cs" />
+    <Compile Include="Query\QWeightMaterial.cs" />
+    <Compile Include="Query\MergeRepWithCarQueryCondition.cs" />
+    <Compile Include="Query\QCardViewDtl.cs" />
+    <Compile Include="Query\QColumn.cs" />
+    <Compile Include="Query\QDriver.cs" />
+    <Compile Include="Query\QLog.cs" />
+    <Compile Include="Query\QPage.cs" />
+    <Compile Include="Query\QPay.cs" />
+    <Compile Include="Query\QReportTemplate.cs" />
+    <Compile Include="Query\PageQueryCondition.cs" />
+    <Compile Include="Query\QSeqNo.cs" />
+    <Compile Include="Query\QueryCommon.cs" />
+    <Compile Include="Query\FileQueryCondition.cs" />
+    <Compile Include="Query\MaterialQueryCondition.cs" />
+    <Compile Include="MyConvert.cs" />
+    <Compile Include="ModuleTree.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\CompanyQueryCondition.cs" />
+    <Compile Include="Query\QCard.cs" />
+    <Compile Include="Query\QueryCondition.cs" />
+    <Compile Include="Query\QWeight.cs" />
+    <Compile Include="Query\QWeightAttribute.cs" />
+    <Compile Include="Query\QWeightView.cs" />
+    <Compile Include="Query\SyncWeight.cs" />
+    <Compile Include="Query\TopWeightQuery.cs" />
+    <Compile Include="Query\WeightPageQueryCondition.cs" />
+    <Compile Include="Query\WeightQuery.cs" />
+    <Compile Include="Query\WeightTempQueryCondition.cs" />
+    <Compile Include="ReadCardResult.cs" />
+    <Compile Include="RetCode.cs" />
+    <Compile Include="Screen\LedShowCfg.cs" />
+    <Compile Include="Screen\LXCfg.cs" />
+    <Compile Include="Screen\ShowWeightStableCfg.cs" />
+    <Compile Include="Singlention\CurrentClient.cs" />
+    <Compile Include="Transfer\BaseResult.cs" />
+    <Compile Include="Transfer\Result.cs" />
+    <Compile Include="Transfer\TClientWeight.cs" />
+    <Compile Include="Transfer\TCode.cs" />
+    <Compile Include="Transfer\TCodeResult.cs" />
+    <Compile Include="Transfer\TCustomer.cs" />
+    <Compile Include="Transfer\TCustomerResult.cs" />
+    <Compile Include="Transfer\TLoginResult.cs" />
+    <Compile Include="Transfer\TMaterial.cs" />
+    <Compile Include="Transfer\TMaterialResult.cs" />
+    <Compile Include="Transfer\TMessage.cs" />
+    <Compile Include="Transfer\TMessageResult.cs" />
+    <Compile Include="Transfer\TPageMessage.cs" />
+    <Compile Include="Transfer\TPageResult.cs" />
+    <Compile Include="Transfer\TPWeight.cs" />
+    <Compile Include="CodeTree.cs" />
+    <Compile Include="UI\ColumnFilter.cs" />
+    <Compile Include="UI\ColumnOption.cs" />
+    <Compile Include="UI\ColumnProperty.cs" />
+    <Compile Include="UI\ControlProperty.cs" />
+    <Compile Include="UI\FileItem.cs" />
+    <Compile Include="UI\GridColumnProperties.cs" />
+    <Compile Include="Query\WeightQueryCondition.cs" />
+    <Compile Include="ValidateResult.cs" />
+    <Compile Include="Verify\VerifyEntity.cs" />
+    <Compile Include="VideoChannel.cs" />
+    <Compile Include="WeightCapture.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
+      <Project>{388fd347-fc4a-4ad8-b78d-ba4d94519975}</Project>
+      <Name>YF.MWS.BaseMetadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Db\YF.MWS.Db.csproj">
+      <Project>{919C4C21-69AC-4C6F-8B4D-C866BD044B8D}</Project>
+      <Name>YF.MWS.Db</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

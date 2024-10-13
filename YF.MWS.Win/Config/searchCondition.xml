@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Items>
+  <Item>
+    <Id>SearchLookup-1</Id>
+    <FieldType>Standard</FieldType>
+    <ControlType>SearchLookup</ControlType>
+    <SearchKey>FreightSettleState</SearchKey>
+    <ColumnName>c.FreightSettleState</ColumnName>
+    <Caption>运费结算</Caption>
+    <SettingCaption>运费结算</SettingCaption>
+    <Visible>0</Visible>
+  </Item>
+  <Item>
+    <Id>SearchLookup-2</Id>
+    <FieldType>Standard</FieldType>
+    <ControlType>SearchLookup</ControlType>
+    <SearchKey>PaymentSettleState</SearchKey>
+    <ColumnName>c.PaymentSettleState</ColumnName>
+    <Caption>货款结算</Caption>
+    <SettingCaption>货款结算</SettingCaption>
+    <Visible>0</Visible>
+  </Item>
+  <Item>
+    <Id>SearchLookup-3</Id>
+    <FieldType>Standard</FieldType>
+    <ControlType>SearchLookup</ControlType>
+    <SearchKey>SettleState</SearchKey>
+    <ColumnName>c.SettleState</ColumnName>
+    <Caption>财务审核</Caption>
+    <SettingCaption>财务审核</SettingCaption>
+    <Visible>0</Visible>
+  </Item>
+</Items>

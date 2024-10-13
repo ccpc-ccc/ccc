@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VoiceCfg>
+  <OverWeight>您已经超载,请下磅</OverWeight>
+  <CarRecognition>车牌已识别,请上磅</CarRecognition>
+  <CarStopFail>车未停好,请检查</CarStopFail>
+  <InfraredCovered>红外已经被遮挡</InfraredCovered>
+  <StartReadCard>请刷卡</StartReadCard>
+  <ReadCardSuccess>刷卡成功,请上磅</ReadCardSuccess>
+  <ReadCardFail>刷卡失败,请重试</ReadCardFail>
+  <StartWeight>请上磅</StartWeight>
+  <WeightUnStable>本次称重为{0}公斤,请下磅</WeightUnStable>
+  <FirstWeight>本次称重为{0}公斤,请下磅</FirstWeight>
+  <TimeOut>操作时间太长,系统自动终止</TimeOut>
+  <SecondWeight>本次称重为{0}公斤,称重完成,请下磅</SecondWeight>
+</VoiceCfg>

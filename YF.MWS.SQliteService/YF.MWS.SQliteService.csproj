@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{35A630FB-5F07-4AF2-9AB7-A3008B1EC053}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YF.MWS.SQliteService</RootNamespace>
+    <AssemblyName>YF.MWS.SQliteService</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentData">
+      <HintPath>..\Lib\FluentData.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=5.1.4.130, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SqlSugar.5.1.4.130\lib\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\Lib\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\Lib\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YF.Data.NHProvider">
+      <HintPath>..\Lib\YF.Data.NHProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="YF.Utility">
+      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttributeService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="CardService.cs" />
+    <Compile Include="CarService.cs" />
+    <Compile Include="ClientService.cs" />
+    <Compile Include="CompanyPayService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="DataEntryService.cs" />
+    <Compile Include="FileService.cs" />
+    <Compile Include="LocationService.cs" />
+    <Compile Include="CommonService.cs" />
+    <Compile Include="LogService.cs" />
+    <Compile Include="CompanyService.cs" />
+    <Compile Include="MaterialService.cs" />
+    <Compile Include="MasterService.cs" />
+    <Compile Include="PayService.cs" />
+    <Compile Include="PlanService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remote\WebBaseService.cs" />
+    <Compile Include="Remote\WebCardService.cs" />
+    <Compile Include="Remote\WebClientService.cs" />
+    <Compile Include="Remote\WebCompanyService.cs" />
+    <Compile Include="Remote\WebCustomerService.cs" />
+    <Compile Include="Remote\WebFileService.cs" />
+    <Compile Include="Remote\WebMaterialService.cs" />
+    <Compile Include="Remote\WebMessageService.cs" />
+    <Compile Include="Remote\WebPayService.cs" />
+    <Compile Include="Remote\WebUserService.cs" />
+    <Compile Include="Remote\WebWeightProcessService.cs" />
+    <Compile Include="Remote\WebWeightService.cs" />
+    <Compile Include="ReportService.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="SeqNoService.cs" />
+    <Compile Include="ServiceInitialization.cs" />
+    <Compile Include="StatementService.cs" />
+    <Compile Include="SumReportService.cs" />
+    <Compile Include="SyncService.cs" />
+    <Compile Include="TaskService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="WarehService.cs" />
+    <Compile Include="WeightExtService.cs" />
+    <Compile Include="WeightProcessService.cs" />
+    <Compile Include="WeightQcService.cs" />
+    <Compile Include="WeightQueryService.cs" />
+    <Compile Include="WeightService.cs" />
+    <Compile Include="WeightTempService.cs" />
+    <Compile Include="WeightViewService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
+      <Project>{388FD347-FC4A-4AD8-B78D-BA4D94519975}</Project>
+      <Name>YF.MWS.BaseMetadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Client.DataService.Interface\YF.MWS.Client.DataService.Interface.csproj">
+      <Project>{6986F143-1AC2-4D3F-A197-62581A0DFC70}</Project>
+      <Name>YF.MWS.Client.DataService.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Db\YF.MWS.Db.csproj">
+      <Project>{919C4C21-69AC-4C6F-8B4D-C866BD044B8D}</Project>
+      <Name>YF.MWS.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Metadata\YF.MWS.Metadata.csproj">
+      <Project>{3ED33F32-0A07-46AF-866E-0101A7C2C50D}</Project>
+      <Name>YF.MWS.Metadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YF.MWS.Util\YF.MWS.Util.csproj">
+      <Project>{E44FEF1A-DEEF-4936-862F-A22623AB5A0E}</Project>
+      <Name>YF.MWS.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
