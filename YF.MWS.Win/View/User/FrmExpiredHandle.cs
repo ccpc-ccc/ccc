@@ -99,7 +99,7 @@ namespace YF.MWS.Win.View.User
             if (client == null)
             {
                 string clientName = YF.MWS.Util.Utility.GetComputerName();
-                clientService.RegisterProbation(machineCode,clientName);
+                //clientService.RegisterProbation(machineCode,clientName);
                 client = clientService.Get(machineCode);
             }
             bool isSuccess = clientService.UpdateProbation(machineCode, 7);

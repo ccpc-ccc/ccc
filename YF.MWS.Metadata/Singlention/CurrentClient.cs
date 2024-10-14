@@ -66,12 +66,15 @@ namespace YF.MWS.Metadata
         /// 验证授权文件
         /// </summary>
         public string VerifyCode { get; set; }
+        /// <summary>
+        /// 过期日期
+        /// </summary>
         public DateTime ExpireDate { get; set; }
         public string ViewId { get; set; }
         public string SubjectId { get; set; }
         public DataBaseType DataBase { get; set; }
         /// <summary>
-        /// 注册类别
+        /// 注册方式
         /// </summary>
         public RegisterMode RegType { get; set; }
         public string VersionFunc { get; set; }

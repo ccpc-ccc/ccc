@@ -99,8 +99,9 @@
     <Reference Include="YF.Data.NHProvider">
       <HintPath>..\Lib\YF.Data.NHProvider.dll</HintPath>
     </Reference>
-    <Reference Include="YF.Utility">
-      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    <Reference Include="YF.Utility, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\YF.Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

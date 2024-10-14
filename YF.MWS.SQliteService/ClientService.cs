@@ -192,7 +192,7 @@ namespace YF.MWS.SQliteService
                 client.RegisterDate = DateTime.Now;
                 client.ClientName = clientName;
             }
-            client.RegisterType = CurrentClient.Instance.RegType.ToString();
+            client.RegisterType = "file";
             client.MachineCode = machineCode;
             client.RegisterCode = registerCode;
             client.AuthCode = authCode;

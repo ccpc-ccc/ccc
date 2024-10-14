@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRegister));
             this.lblRegisterFile = new DevExpress.XtraEditors.LabelControl();
             this.txtMachineCode = new DevExpress.XtraEditors.TextEdit();
             this.lblMachineCode = new DevExpress.XtraEditors.LabelControl();
@@ -41,8 +40,6 @@
             this.lblCopyright = new DevExpress.XtraEditors.LabelControl();
             this.lblNote = new DevExpress.XtraEditors.LabelControl();
             this.ofdRegisterFile = new System.Windows.Forms.OpenFileDialog();
-            this.btnTrial = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddConsult = new DevExpress.XtraEditors.SimpleButton();
             this.eventLog1 = new System.Diagnostics.EventLog();
             ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
@@ -93,9 +90,6 @@
             this.dxErrorProvider.SetIconAlignment(this.beRegisterFile, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             this.beRegisterFile.Location = new System.Drawing.Point(142, 105);
             this.beRegisterFile.Name = "beRegisterFile";
-            // 
-            // 
-            // 
             this.beRegisterFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.beRegisterFile.Size = new System.Drawing.Size(287, 20);
@@ -115,7 +109,7 @@
             this.btnRegister.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.apply_16x16;
             this.btnRegister.Location = new System.Drawing.Point(142, 147);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(116, 23);
+            this.btnRegister.Size = new System.Drawing.Size(179, 23);
             this.btnRegister.TabIndex = 20;
             this.btnRegister.Text = "软件授权注册";
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -143,26 +137,6 @@
             // 
             this.ofdRegisterFile.Filter = "注册文件|*.yrg";
             // 
-            // btnTrial
-            // 
-            this.btnTrial.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
-            this.btnTrial.Location = new System.Drawing.Point(275, 147);
-            this.btnTrial.Name = "btnTrial";
-            this.btnTrial.Size = new System.Drawing.Size(94, 23);
-            this.btnTrial.TabIndex = 26;
-            this.btnTrial.Text = "应急处理";
-            this.btnTrial.Click += new System.EventHandler(this.btnTrial_Click);
-            // 
-            // btnAddConsult
-            // 
-            this.btnAddConsult.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.help_16x16;
-            this.btnAddConsult.Location = new System.Drawing.Point(385, 147);
-            this.btnAddConsult.Name = "btnAddConsult";
-            this.btnAddConsult.Size = new System.Drawing.Size(92, 23);
-            this.btnAddConsult.TabIndex = 37;
-            this.btnAddConsult.Text = "在线咨询";
-            this.btnAddConsult.Click += new System.EventHandler(this.btnAddConsult_Click);
-            // 
             // eventLog1
             // 
             this.eventLog1.SynchronizingObject = this;
@@ -172,8 +146,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 227);
-            this.Controls.Add(this.btnAddConsult);
-            this.Controls.Add(this.btnTrial);
             this.Controls.Add(this.beRegisterFile);
             this.Controls.Add(this.lblNote);
             this.Controls.Add(this.lblCopyright);
@@ -187,7 +159,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(532, 266);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(532, 265);
+            this.MinimumSize = new System.Drawing.Size(518, 259);
             this.Name = "FrmRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "软件注册";
@@ -215,8 +187,6 @@
         private DevExpress.XtraEditors.LabelControl lblNote;
         private DevExpress.XtraEditors.ButtonEdit beRegisterFile;
         private System.Windows.Forms.OpenFileDialog ofdRegisterFile;
-        private DevExpress.XtraEditors.SimpleButton btnTrial;
-        private DevExpress.XtraEditors.SimpleButton btnAddConsult;
         private System.Diagnostics.EventLog eventLog1;
     }
 }
