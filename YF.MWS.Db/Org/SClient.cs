@@ -20,11 +20,17 @@ namespace YF.MWS.Db
         /// 机器码
         /// </summary>
         public virtual string MachineCode { get; set; }
+        /// <summary>
+        /// 版本权限
+        /// </summary>
         public virtual string AuthCode { get; set; }
         /// <summary>
         /// 注册码
         /// </summary>
         public virtual string RegisterCode { get; set; }
+        /// <summary>
+        /// 注册方式 none 未注册  file 文件注册 dong 加密狗注册
+        /// </summary>
         public virtual string RegisterType { get; set; }
         public virtual string CompanyId { get; set; }
         public virtual string DeptId { get; set; }
@@ -34,7 +40,7 @@ namespace YF.MWS.Db
         public virtual DateTime RegisterDate { get; set; }
 
         /// <summary>
-        /// 当前日期密文
+        /// 第一次使用时的密文
         /// </summary>
         public virtual string CurrentDate { get; set; }
 

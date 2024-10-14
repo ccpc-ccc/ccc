@@ -16,12 +16,8 @@ using YF.Utility.Security;
 
 namespace YF.MWS.SQliteService
 {
-    public class ClientService : IClientService
+    public class ClientService : BaseService, IClientService
     {
-        private SqliteDb sqliteDb = new SqliteDb();
-        private IService service = null;
-        
-
         public ClientService()
         {
             if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver)
@@ -152,18 +148,8 @@ namespace YF.MWS.SQliteService
 
         public SClient Get()
         {
-            SClient client = null;
             string sql= string.Format("select * from S_Client");
-            DataTable dt=null;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                client = TableHelper.RowToEntity<SClient>(dt.Rows[0]);
-            }
-            return client;
+            return getModel<SClient>(sql);
         }
 
         public List<SClient> GetList() 
@@ -177,25 +163,20 @@ namespace YF.MWS.SQliteService
 
         public SClient Get(string machineCode) 
         {
-            SClient client = null;
-            string sql;
-            sql =string.Format("select * from S_Client where MachineCode='{0}'",machineCode);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0) 
-            {
-                client = TableHelper.RowToEntity<SClient>(dt.Rows[0]);
-            }
-            return client;
+            string sql =string.Format("select * from S_Client where MachineCode='{0}'",machineCode);
+            return base.getModel<SClient>(sql);
         }
-
+        /// <summary>
+        /// 注册用户
+        /// </summary>
+        /// <param name="clientName">用户名</param>
+        /// <param name="machineCode">机器码</param>
+        /// <param name="registerCode">注册码</param>
+        /// <param name="expireCode">过期日期密文</param>
+        /// <param name="totalTimes"></param>
+        /// <param name="verifyCode"></param>
+        /// <param name="authCode"></param>
+        /// <returns></returns>
         public bool Register(string clientName, string machineCode, string registerCode, string expireCode, string totalTimes, string verifyCode,string authCode) 
         {
             string sql;
@@ -241,20 +222,28 @@ namespace YF.MWS.SQliteService
             return isRegistered;
         }
 
-        public bool RegisterProbation(string machineCode, string clientName)
+        public SClient RegisterProbation(string machineCode, string clientName,string authCode)
         {
-            bool isRegistered = false;
+            string expireCode = Encrypt.EncryptDES(DateTime.Now.AddDays(30).ToString("yyyyMMdd"), CurrentClient.Instance.EncryptKey);
+            string CurrentDate = Encrypt.EncryptDES(DateTime.Now.ToString("yyyyMMdd"), CurrentClient.Instance.EncryptKey);
+            //string registerCode = SoftRegister.GenerateRegisterCode(machineCode);
             SClient client = Get(machineCode);
             if (client == null)
             {
-                int maxUsedTimes = 30;
-                string expireCode = Encrypt.EncryptDES(DateTime.Now.AddMonths(1).ToString("yyyyMMdd"), CurrentClient.Instance.EncryptKey);
-                string totalTimes = Encrypt.EncryptDES(maxUsedTimes.ToString(), CurrentClient.Instance.EncryptKey);
-                string verifyCode = YF.MWS.Util.Utility.GetGuid();
-                string registerCode = SoftRegister.GenerateRegisterCode(machineCode);
-                isRegistered = Register(clientName, machineCode, registerCode, expireCode, totalTimes, verifyCode,"1");
+                client = new SClient() {
+                    Id = Guid.NewGuid().ToString("N"),
+                    MachineCode = machineCode,
+                    RegisterType = "none",
+                    ExpireCode = expireCode,
+                    CurrentDate = CurrentDate,
+                    RegisterDate = DateTime.Now,
+                    AuthCode = authCode,
+                    ClientName = clientName
+                };
+                save(client,"S_Client");
+                //isRegistered = Register(clientName, machineCode, registerCode, expireCode, totalTimes, verifyCode,"1");
             }
-            return isRegistered;
+            return client;
         }
 
         public bool Update(string clientId) 

@@ -19,7 +19,10 @@ namespace YF.MWS.Client.DataService.Interface
         List<SClient> GetList();
         bool IsConnect();
         bool Register(string clientName, string machineCode, string registerCode, string expireCode, string totalTimes, string verifyCode, string authCode);
-        bool RegisterProbation(string machineCode, string clientName);
+        /// <summary>
+        /// 加载用户信息
+        /// </summary>
+        SClient RegisterProbation(string machineCode, string clientName, string authCode);
         bool UpdateAuthCode(string machineCode, string authCode);
         bool UpdateClientName(string clientId, string clientName);
         bool Update(string clientId);

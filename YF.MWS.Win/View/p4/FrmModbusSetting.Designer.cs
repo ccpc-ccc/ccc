@@ -32,7 +32,9 @@
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnSend2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.txtSend2 = new DevExpress.XtraEditors.TextEdit();
             this.tabModbus = new DevExpress.XtraTab.XtraTabControl();
             this.pageNetworkCfg = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
@@ -45,24 +47,24 @@
             this.lblBoundGate = new DevExpress.XtraEditors.LabelControl();
             this.chkBoundGate = new DevExpress.XtraEditors.CheckEdit();
             this.lblOpenSingleGateMode = new DevExpress.XtraEditors.LabelControl();
+            this.lblFunSixCloseTime = new DevExpress.XtraEditors.LabelControl();
             this.rgOpenSingleGateMode = new DevExpress.XtraEditors.RadioGroup();
             this.rgCloseGateMode = new DevExpress.XtraEditors.RadioGroup();
+            this.teFunSixCloseTime = new DevExpress.XtraEditors.TextEdit();
+            this.lblFunSixCloseTimeUnit = new DevExpress.XtraEditors.LabelControl();
             this.lblCloseGateMode = new DevExpress.XtraEditors.LabelControl();
             this.gpPLCCfg = new DevExpress.XtraEditors.GroupControl();
             this.chkInfrared = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartTrafficLight = new DevExpress.XtraEditors.CheckEdit();
-            this.lblFunSixCloseTime = new DevExpress.XtraEditors.LabelControl();
-            this.teFunSixCloseTime = new DevExpress.XtraEditors.TextEdit();
-            this.lblFunSixCloseTimeUnit = new DevExpress.XtraEditors.LabelControl();
-            this.chkStartModBus = new DevExpress.XtraEditors.CheckEdit();
-            this.btnSend2 = new DevExpress.XtraEditors.SimpleButton();
-            this.txtSend2 = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtInfraredWeight = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.txtInfraredWeight = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.chkStartModBus = new DevExpress.XtraEditors.CheckEdit();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSend2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabModbus)).BeginInit();
             this.tabModbus.SuspendLayout();
             this.pageNetworkCfg.SuspendLayout();
@@ -74,14 +76,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkBoundGate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgOpenSingleGateMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgCloseGateMode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPLCCfg)).BeginInit();
             this.gpPLCCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkInfrared.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartTrafficLight.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartModBus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSend2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInfraredWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartModBus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -103,6 +104,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Controls.Add(this.btnSend2);
             this.tabPage2.Controls.Add(this.simpleButton4);
             this.tabPage2.Controls.Add(this.txtSend2);
@@ -118,6 +120,18 @@
             this.tabPage2.Text = "控制箱设置";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnSend2
+            // 
+            this.btnSend2.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnSend2.Appearance.Options.UseFont = true;
+            this.btnSend2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.send_16x16;
+            this.btnSend2.Location = new System.Drawing.Point(504, 94);
+            this.btnSend2.Name = "btnSend2";
+            this.btnSend2.Size = new System.Drawing.Size(70, 23);
+            this.btnSend2.TabIndex = 7;
+            this.btnSend2.Text = "发送";
+            this.btnSend2.Click += new System.EventHandler(this.btnSend2_Click);
+            // 
             // simpleButton4
             // 
             this.simpleButton4.Location = new System.Drawing.Point(246, 525);
@@ -126,6 +140,15 @@
             this.simpleButton4.TabIndex = 133;
             this.simpleButton4.Text = "保存";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
+            // txtSend2
+            // 
+            this.txtSend2.Location = new System.Drawing.Point(230, 96);
+            this.txtSend2.Name = "txtSend2";
+            this.txtSend2.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.txtSend2.Properties.Appearance.Options.UseFont = true;
+            this.txtSend2.Size = new System.Drawing.Size(268, 18);
+            this.txtSend2.TabIndex = 5;
             // 
             // tabModbus
             // 
@@ -256,6 +279,14 @@
             this.lblOpenSingleGateMode.TabIndex = 27;
             this.lblOpenSingleGateMode.Text = "单道闸开启时点：";
             // 
+            // lblFunSixCloseTime
+            // 
+            this.lblFunSixCloseTime.Location = new System.Drawing.Point(238, 40);
+            this.lblFunSixCloseTime.Name = "lblFunSixCloseTime";
+            this.lblFunSixCloseTime.Size = new System.Drawing.Size(60, 14);
+            this.lblFunSixCloseTime.TabIndex = 77;
+            this.lblFunSixCloseTime.Text = "闭合时间：";
+            // 
             // rgOpenSingleGateMode
             // 
             this.rgOpenSingleGateMode.EditValue = "CarNoRecognize";
@@ -282,6 +313,23 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem("SenseCoil", "车牌识别")});
             this.rgCloseGateMode.Size = new System.Drawing.Size(224, 30);
             this.rgCloseGateMode.TabIndex = 21;
+            // 
+            // teFunSixCloseTime
+            // 
+            this.teFunSixCloseTime.EditValue = "5";
+            this.teFunSixCloseTime.Location = new System.Drawing.Point(301, 37);
+            this.teFunSixCloseTime.Name = "teFunSixCloseTime";
+            this.teFunSixCloseTime.Size = new System.Drawing.Size(43, 20);
+            this.teFunSixCloseTime.TabIndex = 78;
+            this.teFunSixCloseTime.Tag = "FunSixCloseTime";
+            // 
+            // lblFunSixCloseTimeUnit
+            // 
+            this.lblFunSixCloseTimeUnit.Location = new System.Drawing.Point(347, 40);
+            this.lblFunSixCloseTimeUnit.Name = "lblFunSixCloseTimeUnit";
+            this.lblFunSixCloseTimeUnit.Size = new System.Drawing.Size(12, 14);
+            this.lblFunSixCloseTimeUnit.TabIndex = 79;
+            this.lblFunSixCloseTimeUnit.Text = "秒";
             // 
             // lblCloseGateMode
             // 
@@ -320,68 +368,13 @@
             this.chkStartTrafficLight.Size = new System.Drawing.Size(98, 20);
             this.chkStartTrafficLight.TabIndex = 23;
             // 
-            // lblFunSixCloseTime
+            // labelControl2
             // 
-            this.lblFunSixCloseTime.Location = new System.Drawing.Point(238, 40);
-            this.lblFunSixCloseTime.Name = "lblFunSixCloseTime";
-            this.lblFunSixCloseTime.Size = new System.Drawing.Size(60, 14);
-            this.lblFunSixCloseTime.TabIndex = 77;
-            this.lblFunSixCloseTime.Text = "闭合时间：";
-            // 
-            // teFunSixCloseTime
-            // 
-            this.teFunSixCloseTime.EditValue = "5";
-            this.teFunSixCloseTime.Location = new System.Drawing.Point(301, 37);
-            this.teFunSixCloseTime.Name = "teFunSixCloseTime";
-            this.teFunSixCloseTime.Size = new System.Drawing.Size(43, 20);
-            this.teFunSixCloseTime.TabIndex = 78;
-            this.teFunSixCloseTime.Tag = "FunSixCloseTime";
-            // 
-            // lblFunSixCloseTimeUnit
-            // 
-            this.lblFunSixCloseTimeUnit.Location = new System.Drawing.Point(347, 40);
-            this.lblFunSixCloseTimeUnit.Name = "lblFunSixCloseTimeUnit";
-            this.lblFunSixCloseTimeUnit.Size = new System.Drawing.Size(12, 14);
-            this.lblFunSixCloseTimeUnit.TabIndex = 79;
-            this.lblFunSixCloseTimeUnit.Text = "秒";
-            // 
-            // chkStartModBus
-            // 
-            this.chkStartModBus.Location = new System.Drawing.Point(267, 111);
-            this.chkStartModBus.Name = "chkStartModBus";
-            this.chkStartModBus.Properties.Caption = "启用控制箱";
-            this.chkStartModBus.Size = new System.Drawing.Size(103, 20);
-            this.chkStartModBus.TabIndex = 127;
-            this.chkStartModBus.CheckedChanged += new System.EventHandler(this.chkStartModBus_CheckedChanged);
-            // 
-            // btnSend2
-            // 
-            this.btnSend2.Appearance.Font = new System.Drawing.Font("宋体", 9F);
-            this.btnSend2.Appearance.Options.UseFont = true;
-            this.btnSend2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.send_16x16;
-            this.btnSend2.Location = new System.Drawing.Point(505, 174);
-            this.btnSend2.Name = "btnSend2";
-            this.btnSend2.Size = new System.Drawing.Size(70, 23);
-            this.btnSend2.TabIndex = 7;
-            this.btnSend2.Text = "发送";
-            this.btnSend2.Click += new System.EventHandler(this.btnSend2_Click);
-            // 
-            // txtSend2
-            // 
-            this.txtSend2.Location = new System.Drawing.Point(231, 176);
-            this.txtSend2.Name = "txtSend2";
-            this.txtSend2.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F);
-            this.txtSend2.Properties.Appearance.Options.UseFont = true;
-            this.txtSend2.Size = new System.Drawing.Size(268, 18);
-            this.txtSend2.TabIndex = 5;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(235, 132);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(24, 14);
-            this.labelControl1.TabIndex = 79;
-            this.labelControl1.Text = "公斤";
+            this.labelControl2.Location = new System.Drawing.Point(137, 132);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.TabIndex = 77;
+            this.labelControl2.Text = "启动重量";
             // 
             // txtInfraredWeight
             // 
@@ -392,13 +385,30 @@
             this.txtInfraredWeight.TabIndex = 78;
             this.txtInfraredWeight.Tag = "FunSixCloseTime";
             // 
-            // labelControl2
+            // labelControl1
             // 
-            this.labelControl2.Location = new System.Drawing.Point(137, 132);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 14);
-            this.labelControl2.TabIndex = 77;
-            this.labelControl2.Text = "启动重量";
+            this.labelControl1.Location = new System.Drawing.Point(235, 132);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(24, 14);
+            this.labelControl1.TabIndex = 79;
+            this.labelControl1.Text = "公斤";
+            // 
+            // chkStartModBus
+            // 
+            this.chkStartModBus.Location = new System.Drawing.Point(259, 28);
+            this.chkStartModBus.Name = "chkStartModBus";
+            this.chkStartModBus.Properties.Caption = "启用控制箱";
+            this.chkStartModBus.Size = new System.Drawing.Size(103, 20);
+            this.chkStartModBus.TabIndex = 127;
+            this.chkStartModBus.CheckedChanged += new System.EventHandler(this.chkStartModBus_CheckedChanged);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(230, 123);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(344, 110);
+            this.textBox1.TabIndex = 134;
             // 
             // FrmModbusSetting
             // 
@@ -419,6 +429,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSend2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabModbus)).EndInit();
             this.tabModbus.ResumeLayout(false);
             this.pageNetworkCfg.ResumeLayout(false);
@@ -432,15 +444,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkBoundGate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgOpenSingleGateMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgCloseGateMode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPLCCfg)).EndInit();
             this.gpPLCCfg.ResumeLayout(false);
             this.gpPLCCfg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkInfrared.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartTrafficLight.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartModBus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSend2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInfraredWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartModBus.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -477,5 +488,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.TextEdit txtInfraredWeight;
         private DevExpress.XtraEditors.LabelControl labelControl1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -1171,12 +1171,6 @@
     <Compile Include="View\User\FrmRoleList.Designer.cs">
       <DependentUpon>FrmRoleList.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\User\FrmTrialExpiredHandle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\User\FrmTrialExpiredHandle.designer.cs">
-      <DependentUpon>FrmTrialExpiredHandle.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\User\FrmUserEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1285,6 +1279,7 @@
     <Compile Include="View\Weight\FrmWeightSearch.Designer.cs">
       <DependentUpon>FrmWeightSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Weight\GateUnit.cs" />
     <EmbeddedResource Include="FrmLogin.fr.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -1732,9 +1727,6 @@
     <EmbeddedResource Include="View\User\FrmRoleList.resx">
       <DependentUpon>FrmRoleList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\User\FrmTrialExpiredHandle.resx">
-      <DependentUpon>FrmTrialExpiredHandle.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\User\FrmUserEdit.resx">
       <DependentUpon>FrmUserEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -2028,156 +2020,6 @@
     </Content>
     <Content Include="Uc\AppContainer.bmp" />
     <Content Include="VoiceCfg.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Data.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Office.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.PivotGrid.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Printing.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.RichEdit.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Utils.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Utils.v12.1.UI.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxEditors.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxGridView.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxHtmlEditor.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxScheduler.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxSpellChecker.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.ASPxTreeList.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Web.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Charts.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Core.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Docking.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Gauges.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Grid.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.LayoutControl.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.NavBar.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Printing.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.ReportDesigner.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Ribbon.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.RichEdit.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpf.Scheduler.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.Xpo.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraBars.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraCharts.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraEditors.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraGauges.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraGauges.v12.1.Presets.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraGrid.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraLayout.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraNavBar.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraPivotGrid.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraPrinting.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraReports.v12.1.Extensions.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraReports.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraReports.v12.1.Web.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraRichEdit.v12.1.Extensions.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraRichEdit.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraScheduler.v12.1.Core.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraScheduler.v12.1.Extensions.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraScheduler.v12.1.Reporting.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraScheduler.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraSpellChecker.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraTreeList.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraVerticalGrid.v12.1.resources.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zh-CN\DevExpress.XtraWizard.v12.1.resources.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\reset_16x16.png" />

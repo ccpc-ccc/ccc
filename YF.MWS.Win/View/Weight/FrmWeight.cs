@@ -888,18 +888,14 @@ namespace YF.MWS.Win.View.Weight {
                 //称重完成,红灯亮,绿灯灭
                 ChangeLight(1, true);
                 ChangeLight(2, true);
-                if (currentBoundGateType == BoundGateType.DoubleGate && startBoundGate) {
-                    //Thread.Sleep(Cfg.NobodyWeight.AutoOutTime.ToInt() * 1000);
+                if (startBoundGate) {
                     if (readerNo == 1) {
                         //关闭2#道闸
-                        CloseGate(2);
+                        CloseServerGate(2);
                     } else {
                         //关闭1#道闸
-                        CloseGate(1);
+                        CloseServerGate(1);
                     }
-                }
-                if (currentBoundGateType == BoundGateType.SingleGate && startBoundGate) {
-                    CloseSingleRoadGate();
                 }
                 FinishWeightProcess();
             }
@@ -1689,35 +1685,22 @@ namespace YF.MWS.Win.View.Weight {
                     isValidated = ValidateCard(cardId);
                     //if (isSuccess && isValidated && weightProcessTrigger == WeightProcessTriggerType.Card)
                     if (isSuccess && isValidated) {
-                        if (CanOpenDoubleGate())//双道闸方式
-                        {
                             this.readerNo = 1;
                             //1#道闸红灯灭、绿灯亮
                             ChangeLight(1, false);
-                            //开启道闸
-                            if (startBoundGate) {
-                                OpenGate(1);
-                            }
-                        }
-                        //单道闸方式
-                        if (currentBoundGateType == BoundGateType.SingleGate && openSingleGateMode == OpenSingleGateMode.CardRead
-                            && startBoundGate) {
-                            OpenSingleRoadGate();
-                        }
+                        OpenServerGate(this.readerNo);
                     }
                     //无人值守双道闸模式,1号IC卡读取失败情况下
-                    if (currentBoundGateType == BoundGateType.DoubleGate && !isSuccess) {
+                    if (!isSuccess) {
                         isSuccess = ReadeShortCardSN(icdevRight, ref cardId);
-                        isValidated = ValidateCard(cardId);
                         //if (isSuccess && isValidated && weightProcessTrigger == WeightProcessTriggerType.Card)
-                        if (isSuccess && isValidated && CanOpenDoubleGate()) {
+                        if (isSuccess && isValidated) {
                             this.readerNo = 2;
-                            //2#道闸红灯灭、绿灯亮
-                            ChangeLight(2, false);
-                            if (startBoundGate) {
-                                OpenGate(2);
-                            }
                         }
+                    }
+                    if (isSuccess) {
+                        isValidated = ValidateCard(cardId);
+
                     }
                 }
                 if (cardType == ReadCardType.Remote) {
@@ -1731,13 +1714,7 @@ namespace YF.MWS.Win.View.Weight {
                                 //1#道闸红灯灭、绿灯亮
                                 ChangeLight(1, false);
                                 //开启道闸
-                                OpenGate(1);
-                            }
-                            //单道闸方式
-                            if (currentBoundGateType == BoundGateType.SingleGate
-                                && openSingleGateMode == OpenSingleGateMode.CardRead
-                                && startBoundGate) {
-                                OpenSingleRoadGate();
+                                OpenServerGate(1);
                             }
                         }
                         //无人值守双道闸模式,1号IC卡读取失败情况下
@@ -1750,9 +1727,7 @@ namespace YF.MWS.Win.View.Weight {
                                 //2#道闸红灯灭、绿灯亮
                                 ChangeLight(2, false);
                                 //开启道闸
-                                if (startBoundGate) {
-                                    OpenGate(2);
-                                }
+                                CloseServerGate(2);
                             }
                         }
                     }
@@ -1885,29 +1860,13 @@ namespace YF.MWS.Win.View.Weight {
                             //红灯灭、绿灯亮
                             this.modbusLeft.SendControl(5, 0, 0);
                             this.modbusLeft.SendControl(5, 1, 1);
-                            //开启道闸
-                            if (Cfg.NobodyWeight.StartBoundGate) {
-                                if (startFunSix) {
-                                    modbusLeft.SendControl(6, 2, 0);
-                                } else {
-                                    this.modbusLeft.SendControl(5, 2, 1);
-                                    this.modbusLeft.SendControl(5, 3, 0);
-                                }
-                            }
                         } else {
                             //红灯灭、绿灯亮
                             this.modbusLeft.SendControl(5, 4, 0);
                             this.modbusLeft.SendControl(5, 5, 1);
-                            //开启道闸
-                            if (Cfg.NobodyWeight.StartBoundGate) {
-                                if (startFunSix) {
-                                    modbusLeft.SendControl(6, 6, 0);
-                                } else {
-                                    this.modbusLeft.SendControl(5, 6, 1);
-                                    this.modbusLeft.SendControl(5, 7, 0);
-                                }
-                            }
                         }
+                            //开启道闸
+                        CloseServerGate(this.readerNo);
 
                         if (Cfg.Weight.StartVoicePrompt) {
                             //语音提示车辆上磅称重

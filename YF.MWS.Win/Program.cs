@@ -41,10 +41,6 @@ namespace YF.MWS.Win
         private static bool isExpired = false;
         //private static string PID = "ADDB5E67";
         private static string KeyPath;
-        /// <summary>
-        /// 是否需要升级
-        /// </summary>
-        private static bool needUpgrade = false;
         private static bool hasShowDialog = false;
         private static bool startBackupDb = false;
         private static bool expiredOnLine = false;
@@ -369,12 +365,14 @@ namespace YF.MWS.Win
             }
             return isValidated;
         }
-
+        /// <summary>
+        /// 软件验证
+        /// </summary>
         private static void InitApplication()
         {
             try
             {
-                SysCfg cfg = CfgUtil.GetCfg();
+                //SysCfg cfg = CfgUtil.GetCfg();
                 //CurrentClient.Instance.IsConnectedServer = NetworkUtil.IsConnectedServer(cfg);
                 if (cfg != null) 
                 {
@@ -398,10 +396,8 @@ namespace YF.MWS.Win
                     CurrentUser.Instance.ClientName = client.ClientName;
                     CurrentClient.Instance.VerifyCode = client.VerifyCode;
                     DateTime regDate = client.RegisterDate;
-                    if (DateUtil.YearsDiff(regDate, DateTime.Now) > 1)
-                    {
-                        needUpgrade = true;
-                    }
+                } else {
+
                 }
                 InitClient(clientService, view);
                 bool isValidated = false;

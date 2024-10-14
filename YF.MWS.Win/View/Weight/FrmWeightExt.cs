@@ -984,16 +984,7 @@ namespace YF.MWS.Win.View.Weight
         {
             string message = string.Empty;
             bool isNeedOpen = IsNeedOpenGateWhenSaved();
-            if (currentBoundGateType == BoundGateType.SingleGate)
-            {
-                //开启放行道闸
-                if (startBoundGate && openSingleGateMode == OpenSingleGateMode.WeightSave)
-                {
-                    message = "单道闸开启放行道闸";
-                    OpenSingleRoadGate();
-                }
-            }
-            if (currentBoundGateType == BoundGateType.DoubleGate && isNeedOpen)
+            if (isNeedOpen)
             {
                 //从1#读卡器或车牌识别仪驶入
                 if (readerNo == 1)
@@ -1001,9 +992,9 @@ namespace YF.MWS.Win.View.Weight
                     if (startBoundGate)
                     {
                         //落下1#道闸
-                        CloseGate(1);
+                        CloseServerGate(1);
                         //开启2#道闸
-                        OpenGate(2);
+                        OpenServerGate(2);
                         message = "落下1#道闸,开启2#道闸";
                     }
                 }
@@ -1012,9 +1003,9 @@ namespace YF.MWS.Win.View.Weight
                     if (startBoundGate)
                     {
                         //落下2#道闸
-                        CloseGate(2);
+                        CloseServerGate(2);
                         //开启1#道闸
-                        OpenGate(1);
+                        OpenServerGate(1);
                         message = "落下2#道闸,开启1#道闸";
                     }
                 }

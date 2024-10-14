@@ -69,7 +69,7 @@ namespace YF.MWS.Win.View.Setting
                 teMaxWeight.Text = overWeight.MaxWeight.ToString();
                 chkStartCustomerBalanceLimit.Checked = weight.StartCustomerBalanceLimit;
                 chkGrossTareTransform.Checked = weight.GrossTareTransform;
-                chkShowShortCut.Checked = weight.ShowShortCut;
+                //chkShowShortCut.Checked = weight.ShowShortCut;
                 chkSaveFormData.Checked = weight.SaveFormData;
                 chkLoadImageWithRemote.Checked = weight.StartLoadImageWithRemote;
                 rgLoadUnfinishWeight.EditValue = weight.LoadUnfinishWeight.ToString();
@@ -201,7 +201,7 @@ namespace YF.MWS.Win.View.Setting
             overWeight.Start = chkStartOverWeight.Checked;
             overWeight.MaxWeight = teMaxWeight.Text.Trim().ToDecimal();
             weight.GrossTareTransform = chkGrossTareTransform.Checked;
-            weight.ShowShortCut = chkShowShortCut.Checked;
+            //weight.ShowShortCut = chkShowShortCut.Checked;
             weight.SaveFormData = chkSaveFormData.Checked;
             weight.StartLoadImageWithRemote = chkLoadImageWithRemote.Checked;
             weight.StartWeightProcessCfg = chkWeightProcessCfg.Checked;

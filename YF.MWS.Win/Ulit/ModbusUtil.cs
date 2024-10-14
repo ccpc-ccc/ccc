@@ -503,7 +503,7 @@ namespace YF.MWS.Win
         {
             bool isValidated = true;
             byte result = GetState();
-            if(blockCondition== InfraredBlockCondition.Zero)
+            /*if(blockCondition== InfraredBlockCondition.Zero)
             {
                 if ((result & 0x01) == 0x00 || (result >> 1 & 0x01) == 0x00) //X1或者X2被挡住
                 {
@@ -516,7 +516,7 @@ namespace YF.MWS.Win
                 {
                     isValidated = false;
                 }
-            }
+            }*/
             return isValidated;
         }
 

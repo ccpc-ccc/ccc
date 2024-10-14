@@ -99,10 +99,6 @@ namespace YF.MWS.Win.View.Weight
         /// 2#ASB(New)识别仪
         /// </summary>
         private ASBNewUtil asbNewRecognizerRight;
-        /// <summary>
-        /// 启用功能码6
-        /// </summary>
-        private bool startFunSix = false;
         private LoadUnfinishWeightType loadUnfinishWeight = LoadUnfinishWeightType.None;
         /// <summary>
         /// 识别时间间隔(分钟)
@@ -578,7 +574,6 @@ namespace YF.MWS.Win.View.Weight
                 {
                     startSaveWithManualFirst = Cfg.NobodyWeight.StartSaveWithManualFirst;
                     startSaveWithManualSecond = Cfg.NobodyWeight.StartSaveWithManualSecond;
-                    startFunSix = Cfg.NobodyWeight.StartFunSix;
                     currentCloseGateMode = Cfg.NobodyWeight.CloseGate;
                     openSingleGateMode = Cfg.NobodyWeight.OpenSingleGate;
                     startTrafficLight = Cfg.NobodyWeight.StartTrafficLight;
@@ -922,28 +917,12 @@ namespace YF.MWS.Win.View.Weight
                         //红灯灭绿灯亮
                         ChangeLight(1, false);
                         ChangeLight(2, false);
-                        if (currentBoundGateType == BoundGateType.DoubleGate  && startBoundGate)
+                        if (currentBoundGateType == BoundGateType.DoubleGate  && startBoundGate&& openSingleGateMode== OpenSingleGateMode.CarNoRecognize)
                         {
                             message = string.Format("正在开启{0}#道闸", readerNo);
                             ShowWeightStateTip(string.Format("正在开启{0}#道闸",readerNo));
                             //1#车牌识别仪识别车牌
-                            if (this.readerNo == 1)
-                            {
-                                //开启道闸
-                                OpenGate(1);
-                            }
-                            else
-                            {
-                                //开启道闸
-                                OpenGate(2);
-                            }
-                        }
-                        if (currentBoundGateType == BoundGateType.SingleGate && openSingleGateMode== OpenSingleGateMode.CarNoRecognize
-                            && startBoundGate)
-                        {
-                            message = "正在开启单道闸";
-                            ShowWeightStateTip("正在开启单道闸");
-                            OpenSingleRoadGate();
+                            this.OpenServerGate(this.readerNo);
                         }
                         Logger.Write("车牌识别后起闸情况:" + message);
                     }
@@ -1720,42 +1699,7 @@ namespace YF.MWS.Win.View.Weight
             }
             return hasLoaded;
         }
-
-        /// <summary>
-        /// 根据编号落匝
-        /// </summary>
-        /// <param name="no"></param>
-        private void CloseGate(int no,bool isAuto=true)
-        {
-            if (isAuto)
-            {
-                if (currentCloseGateMode == CloseGateMode.SenseCoil) return;
-            }
-            if (no == 1)
-            {
-                CloseDoubleRoadGate(2);
-            }
-            else
-            {
-                CloseDoubleRoadGate(1);
-            }
-        }
-
-        /// <summary>
-        /// 根据编号启匝
-        /// </summary>
-        /// <param name="no"></param>
-        private void OpenGate(int no)
-        {
-            if (no == 1)
-            {
-                OpenDoubleRoadGate(2);
-            }
-            else
-            {
-                OpenDoubleRoadGate(1);
-            }
-        }
+        #region 道闸操作
         private async void OpenServerGate(int no) {
             if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2 - 1;
@@ -1768,142 +1712,7 @@ namespace YF.MWS.Win.View.Weight
                await this.modbusLeft.SendData(no, 3);
             }
         }
-
-        /// <summary>
-        /// 关闭单道闸
-        /// </summary>
-        /// <returns></returns>
-        private bool CloseSingleRoadGate()
-        {
-            bool isSuccess = false;
-            if (currentCloseGateMode == CloseGateMode.SenseCoil)
-                return isSuccess;
-            if (startBoundGate && startModBus && modbusLeft!=null)
-            {
-                if (startFunSix)
-                {
-                    isSuccess = modbusLeft.SendControl(6, 3, 0);
-                }
-                else
-                {
-                    this.modbusLeft.SendControl(5, 2, 0);
-                    isSuccess = this.modbusLeft.SendControl(5, 3, 1);
-                }
-            }
-            return isSuccess;
-        }
-
-        /// <summary>
-        /// 关闭双道闸
-        /// </summary>
-        /// <returns></returns>
-        private bool CloseDoubleRoadGate(int no)
-        {
-            bool isSuccess = false;
-            if (!startModBus || modbusLeft == null)
-                return isSuccess;
-            //从1#读卡器或车牌识别仪驶入
-            if (no == 1)
-            {
-                //关闭放行道闸
-                if (startFunSix)
-                {
-                    isSuccess = modbusLeft.SendControl(6, 7, 0);
-                }
-                else
-                {
-                    this.modbusLeft.SendControl(5, 6, 0);
-                    isSuccess = this.modbusLeft.SendControl(5, 7, 1);
-                }
-            }
-            else
-            {
-                //关闭放行道闸
-                if (startFunSix)
-                {
-                    isSuccess = modbusLeft.SendControl(6, 3, 0);
-                }
-                else
-                {
-                    this.modbusLeft.SendControl(5, 2, 0);
-                    isSuccess = this.modbusLeft.SendControl(5, 3, 1);
-                }
-            }
-            return isSuccess;
-        }
-
-        /// <summary>
-        /// 开启双道闸
-        /// </summary>
-        /// <returns></returns>
-        private bool OpenDoubleRoadGate(int no)
-        {
-            bool isSuccess = false;
-            if (!startModBus && modbusLeft == null)
-                return isSuccess;
-            if (modbusLeft != null)
-            {
-                //从2#读卡器或车牌识别仪驶入
-                if (no == 1)
-                {
-                    //开启放行道闸
-                    if (startFunSix)
-                    {
-                        isSuccess = modbusLeft.SendControl(6, 6, 0);
-                    }
-                    else
-                    {
-                        this.modbusLeft.SendControl(5, 7, 0);
-                        isSuccess = this.modbusLeft.SendControl(5, 6, 1);
-                    }
-                }
-                else
-                {
-                    //1#道闸红灯灭、绿灯亮
-                    //this.modbusLeft.SendControl(5, 0, 0);
-                    //this.modbusLeft.SendControl(5, 1, 1);
-                    //开启放行道闸
-                    if (startFunSix)
-                    {
-                        isSuccess = modbusLeft.SendControl(6, 2, 0);
-                    }
-                    else
-                    {
-                        this.modbusLeft.SendControl(5, 3, 0);
-                        isSuccess = this.modbusLeft.SendControl(5, 2, 1);
-                    }
-                }
-            }
-            return isSuccess;
-        }
-
-        /// <summary>
-        /// 开启单道闸
-        /// </summary>
-        /// <returns></returns>
-        private bool OpenSingleRoadGate()
-        {
-            bool isSuccess = false;
-            if (!startModBus)
-                return isSuccess;
-            //红灯灭、绿灯亮
-            this.modbusLeft.SendControl(5, 0, 0);
-            this.modbusLeft.SendControl(5, 1, 1);
-            //开启放行道闸
-            if (startBoundGate)
-            {
-                if (startFunSix)
-                {
-                    isSuccess = modbusLeft.SendControl(6, 2, 0);
-                }
-                else
-                {
-                    this.modbusLeft.SendControl(5, 3, 0);
-                    isSuccess = this.modbusLeft.SendControl(5, 2, 1);
-                }
-            }
-            return isSuccess;
-        }
+        #endregion
 
         private void AsyncCapturePhoto(WeightCapture wc)
         {
