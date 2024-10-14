@@ -29,10 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YF.MWS.Win", "YF.MWS.Win\YF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YF.MWS.Db", "YF.MWS.Db\YF.MWS.Db.csproj", "{919C4C21-69AC-4C6F-8B4D-C866BD044B8D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{21C06A29-2598-4C79-B18F-739657FCB5A9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{D1C642BD-9C5A-4D3D-AAF0-C1BA868B8174}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

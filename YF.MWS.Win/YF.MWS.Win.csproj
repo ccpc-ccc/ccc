@@ -128,7 +128,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Interop.SpeechLib">
-      <HintPath>..\Lib\Interop.SpeechLib.dll</HintPath>
+      <HintPath>..\..\Lib\Interop.SpeechLib.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -155,14 +155,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="UHFReader18CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\UHFReader18\UHFReader18CSharp.dll</HintPath>
+      <HintPath>..\..\Lib\UHFReader18\UHFReader18CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="YF.Utility">
-      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+    <Reference Include="YF.Utility, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\YF.Utility.dll</HintPath>
     </Reference>
     <Reference Include="zxing, Version=1.0.4727.18517, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\zxing.dll</HintPath>
+      <HintPath>..\..\Lib\zxing.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -2197,15 +2198,6 @@
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="WMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
