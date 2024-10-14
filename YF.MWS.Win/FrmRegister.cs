@@ -30,7 +30,6 @@ namespace YF.MWS.Win {
         private IWebClientService webClientService = new WebClientService();
         private bool isExpired = false;
         private string machineCode = string.Empty;
-        private bool isUpgrade = false;
         public bool IsExpired {
             get { return isExpired; }
             set { isExpired = value; }
@@ -63,8 +62,7 @@ namespace YF.MWS.Win {
                     lblRegisterFile.Text = "升级文件";
                     lblNote.Text = "因文件缺失导致程序无法运行";
                     btnRegister.Text = "文件缺失升级";
-                    isUpgrade = true;
-                    btnTrial.Visible = false;
+                    //isUpgrade = true;
                     this.Text = "程序升级";
                 }
                 teClientName.Text = client.ClientName;
@@ -84,9 +82,6 @@ namespace YF.MWS.Win {
                 isValidated = false;
             }
             if (beRegisterFile.Text.Length == 0) {
-                if (isUpgrade)
-                    beRegisterFile.ErrorText = "请选择程序升级文件.";
-                else
                     beRegisterFile.ErrorText = "请选择注册文件.";
                 isValidated = false;
             }
@@ -97,9 +92,6 @@ namespace YF.MWS.Win {
             bool isValidated = true;
             string[] lines = File.ReadAllLines(beRegisterFile.Text);
             if (lines == null || lines.Length < 3) {
-                if (isUpgrade)
-                    MessageDxUtil.ShowWarning("程序升级文件无效,请联系软件供应商.");
-                else
                     MessageDxUtil.ShowWarning("注册文件无效,请联系软件供应商.");
                 isValidated = false;
                 return isValidated;
@@ -111,9 +103,6 @@ namespace YF.MWS.Win {
                     string expiredDate = YF.Utility.Security.Encrypt.DecryptDES(client.ExpireCode, CurrentClient.Instance.EncryptKey);
                     int expDate = YF.Utility.Security.Encrypt.DecryptDES(lines[1], CurrentClient.Instance.EncryptKey).ToInt();
                     if (expDate < expiredDate.ToInt()) {
-                        if (isUpgrade)
-                            MessageDxUtil.ShowWarning("程序升级文件无效,请联系软件供应商.");
-                        else
                             MessageDxUtil.ShowWarning("注册文件无效,请联系软件供应商.");
                         isValidated = false;
                         return isValidated;
@@ -128,9 +117,6 @@ namespace YF.MWS.Win {
             try {
                 string[] lines = File.ReadAllLines(beRegisterFile.Text);
                 if (lines == null || lines.Length < 3) {
-                    if (isUpgrade)
-                        lblNote.Text = "程序升级文件无效,请联系软件供应商.";
-                    else
                         lblNote.Text = "注册文件无效,请联系软件供应商.";
                     lblNote.Text += "\r\n" + AppSetting.GetValue("note");
                 } else {
@@ -150,24 +136,14 @@ namespace YF.MWS.Win {
                             }
                             isExpired = false;
                         }
-                        if (isUpgrade)
-                            MessageDxUtil.ShowTips("恭喜您:软件升级成功.");
-                        else
                             MessageDxUtil.ShowTips("恭喜您:软件注册成功.");
                     } else {
-                        if (isUpgrade) {
-                            lblNote.Text = "软件升级失败,请联系软件销售商.";
-                        } else {
                             lblNote.Text = "软件注册失败,请联系软件销售商.";
-                        }
                         lblNote.Text += "\r\n"+AppSetting.GetValue("note");
                     }
                 }
             } catch (Exception ex) {
                 Logger.WriteException(ex);
-                if (isUpgrade)
-                    lblNote.Text = "软件升级时发生未知错误,请重试.";
-                else
                     lblNote.Text = "软件注册时发生未知错误,请重试.";
             }
             return isRegistered;

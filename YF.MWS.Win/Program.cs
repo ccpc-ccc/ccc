@@ -46,6 +46,7 @@ namespace YF.MWS.Win
         private static bool expiredOnLine = false;
         private static bool hasRequested = false;
         private static string videoAppName = "磅房视频";
+        public static SClient SClient { get; private set; }
         /// <summary>
         /// 加密狗PID
         /// </summary>
@@ -128,69 +129,25 @@ namespace YF.MWS.Win
                 }
                 CfgUtil.Init();
                 CacheUtil.Init();
-                InitApplication();
-                InitRegedit();
-                bool flag = true;
-                if (!hasRegistered || isExpired)
-                {
-                    switch (CurrentClient.Instance.CurrentVersion)
-                    {
-                        case VersionType.Probation:
-                            using (FrmTrialExpired frmExpired = new FrmTrialExpired())
-                            {
-                                frmExpired.ShowDialog();
-                            }
-                            break;
-                        case VersionType.Official:
-                            if (needUpgrade)
-                            {
-                                using (FrmRepair frmRepair = new FrmRepair())
-                                {
-                                    frmRepair.IsExpired = isExpired;
-                                    if (frmRepair.ShowDialog() == DialogResult.OK)
-                                    {
-                                        hasRegistered = true;
-                                        isExpired = frmRepair.IsExpired;
-                                        InitApplication();
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                using (FrmRegister frmRegister = new FrmRegister())
-                                {
-                                    frmRegister.IsExpired = isExpired;
-                                    if (frmRegister.ShowDialog() == DialogResult.OK)
-                                    {
-                                        hasRegistered = true;
-                                        isExpired = frmRegister.IsExpired;
-                                        InitApplication();
-                                    }
-                                }
-                            }
-                            break;
+                bool isOk= InitApplication();
+                if (!isOk) {
+                    using (FrmRegister frmRegister = new FrmRegister()) {
+                        frmRegister.IsExpired = isExpired;
+                        if (frmRegister.ShowDialog() == DialogResult.OK) {
+                            hasRegistered = true;
+                            isExpired = frmRegister.IsExpired;
+                            InitApplication();
+                        }
                     }
-                }
-                if (hasRegistered && !isExpired)
-                {
-                    using (FrmLogin loginForm = new FrmLogin())
-                    {
-                        while (flag)
-                        {
+                } else {
+                    using (FrmLogin loginForm = new FrmLogin()) {
                             if (args != null && args.Length > 0)
                                 loginForm.ChangeUser = true;
-                            if (loginForm.ShowDialog() == DialogResult.OK)
-                            {
+                            if (loginForm.ShowDialog() == DialogResult.OK) {
                                 FrmMain mainForm = new FrmMain();
                                 mainForm.Icon = loginForm.Icon;
                                 Application.Run(mainForm);
-                                flag = false;
                             }
-                            else
-                            {
-                                flag = false;
-                            }
-                        }
                     }
                 }
             }
@@ -288,8 +245,9 @@ namespace YF.MWS.Win
             //这个用于判断系统中是否存在着加密锁。不需要是指定的加密锁,
             if (et99.FindPort(0, ref KeyPath) != 0)
             {
-                MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
-                Application.Exit();
+                //MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
+                //Application.Exit();
+                return false;
             }
            /* string pid = PID;
             bool isSuccess = et99.FindDevice(pid);
@@ -368,7 +326,7 @@ namespace YF.MWS.Win
         /// <summary>
         /// 软件验证
         /// </summary>
-        private static void InitApplication()
+        private static bool InitApplication()
         {
             try
             {
@@ -389,64 +347,47 @@ namespace YF.MWS.Win
                 SWeightView view = viewService.GetDefaultView(ViewType.Weight);
                 string machineCode = SoftValidator.GetMachineCode();
                 CurrentClient.Instance.MachineCode = machineCode;
-                SClient client = clientService.Get(machineCode);
-                if (client != null)
+                SClient = clientService.RegisterProbation(machineCode,"","");
+                if (SClient != null)
                 {
-                    CurrentUser.Instance.ClientId = client.Id;
-                    CurrentUser.Instance.ClientName = client.ClientName;
-                    CurrentClient.Instance.VerifyCode = client.VerifyCode;
-                    DateTime regDate = client.RegisterDate;
-                } else {
-
+                    CurrentUser.Instance.ClientId = SClient.Id;
+                    CurrentUser.Instance.ClientName = SClient.ClientName;
+                    CurrentClient.Instance.VerifyCode = SClient.VerifyCode;
                 }
                 InitClient(clientService, view);
                 bool isValidated = false;
-                PlcUtil.InitCfg(client);
+                PlcUtil.InitCfg(SClient);
                 //优先验证无文件类型的加密狗
-                isValidated = ValidateSoftWithSoftdogOnly(clientService, client);
-
-                //如果是试用版
-                if (CurrentClient.Instance.CurrentVersion == VersionType.Probation)
-                {
-                    string clientName = YF.MWS.Util.Utility.GetComputerName();
-                    bool registerProbation = clientService.RegisterProbation(machineCode,clientName);
-                    if (registerProbation) 
-                    {
-                        client = clientService.Get(machineCode);
-                    }
-                    ValidateResult probationResult = SoftValidator.ValidateProbation(client, machineCode);
-                    isExpired = probationResult.IsExpired;
-                    hasRegistered = probationResult.IsRegistered;
-
-                    CurrentClient.Instance.AvailableTimes = probationResult.AvailableTimes;
+                isValidated = ValidateSoftWithSoftdogOnly(clientService, SClient);
+                if (isValidated) {
+                    hasRegistered = true;
+                    timerApp = new System.Windows.Forms.Timer();
+                    timerApp.Interval = 10000;
+                    timerApp.Tick += timerApp_Tick;
+                    timerApp.Start();
+                } else {
+                    int days= ResidueDays();
+                    isExpired = true;
+                    if (days < 0) return false;
+                if (SClient.RegisterType == "none") {
+                    SClient.AuthCode= AppSetting.GetValue("use");
+                    hasRegistered = false;
+                    MessageBox.Show($"当前使用的为试用版，剩余{days}天后到期，请尽快联系代理商家注册");
                 }
-                if (client != null) 
-                {
-                    clientService.Update(client.Id);
-                    CurrentClient.Instance.ExpireDate = client.ExpireDate;
-                    //CurrentClient.Instance.MachineCode = client.MachineCode;
-                    CurrentClient.Instance.RegisterCode = client.RegisterCode;
-                    CurrentClient.Instance.RegisterDate = client.RegisterDate;
                 }
-                ////如果是正式版，无文件类型的加密狗验证如果没有验证通过
-                if (!isValidated && CurrentClient.Instance.CurrentVersion == VersionType.Official)
-                {
-                    //验证注册文件
-                    ValidateResult registerFileResult = SoftValidator.ValidateWithRegisterFile(client, machineCode);
-                    isExpired = registerFileResult.IsExpired;
-                    hasRegistered = registerFileResult.IsRegistered;
-                }
-                timerApp = new System.Windows.Forms.Timer();
-                timerApp.Interval = 10000;
-                timerApp.Tick += timerApp_Tick;
-                timerApp.Start();
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.WriteException(ex);
             }
+                return false;
         }
-
+        private static int ResidueDays() {
+            DateTime date = DateTime.Now.ToString("yyyyMMdd").ToDate("yyyyMMdd");
+            DateTime expire = Encrypt.DecryptDES(SClient.ExpireCode, CurrentClient.Instance.EncryptKey).ToDate("yyyyMMdd");
+            return (expire - date).Days;
+        }
         /// <summary>
         /// 检测加密狗连接电脑状态
         /// </summary>
