@@ -106,6 +106,9 @@ namespace YF.MWS.Win
                 if (cfg.Launch != null)
                     runMoreApps = cfg.Launch.RunMoreApps;
             }
+            CurrentClient.Instance.ServerUrl = cfg.ServerUrl;
+            CurrentClient.Instance.ServerToken = cfg.ServerToken;
+            CurrentClient.Instance.IsServer = cfg.IsServer;
             if (args != null && args.Length > 0)
                 runMoreApps = true;
             Process instance = ProcessUtil.RunningInstance(runMoreApps);

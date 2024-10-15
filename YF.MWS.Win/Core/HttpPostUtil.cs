@@ -113,5 +113,93 @@ namespace YF.MWS.Win.Core
             }
             return res;
         } 
+        private static string SendPost(string url, object obj)
+        {
+            string res = string.Empty;
+            string json = obj.JsonSerialize();
+            Logger.Write(string.Format("send weight json:{0}", json));
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            Stream dataStream = null;
+            StreamReader responseStream = null;
+            try
+            {
+                request = (HttpWebRequest)HttpWebRequest.Create(url);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                byte[] bytes = Encoding.UTF8.GetBytes(json);
+                using (dataStream = request.GetRequestStream())
+                {
+                    dataStream.Write(bytes, 0, bytes.Length);
+                }
+                response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.RequestTimeout)
+                {
+                    if (response != null)
+                    {
+                        response.Close();
+                        response = null;
+                    }
+                    if (request != null)
+                    {
+                        request.Abort();
+                    }
+                    return null;
+                }
+                responseStream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
+                res = responseStream.ReadToEnd();
+            }
+            catch (Exception ex)
+            {
+                if (dataStream != null)
+                {
+                    dataStream.Close();
+                    dataStream.Dispose();
+                    dataStream = null;
+                }
+                if (responseStream != null)
+                {
+                    responseStream.Close();
+                    responseStream.Dispose();
+                    responseStream = null;
+                }
+                if (response != null)
+                {
+                    response.Close();
+                    response = null;
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+                Logger.WriteException(ex);
+            }
+            finally
+            {
+                if (dataStream != null)
+                {
+                    dataStream.Close();
+                    dataStream.Dispose();
+                    dataStream = null;
+                }
+                if (responseStream != null)
+                {
+                    responseStream.Close();
+                    responseStream.Dispose();
+                    responseStream = null;
+                }
+                if (response != null)
+                {
+                    response.Close();
+                    response = null;
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+            }
+            return res;
+        } 
+
     }
 }

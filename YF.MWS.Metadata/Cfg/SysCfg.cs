@@ -56,7 +56,18 @@ namespace YF.MWS.Metadata.Cfg
         /// 启用视频
         /// </summary>
         public bool StartVideo { get; set; }
-        
+        /// <summary>
+        /// 远程服务器Url
+        /// </summary>
+        public string ServerUrl { get; set; }
+        /// <summary>
+        /// 服务器凭证
+        /// </summary>
+        public string ServerToken { get; set; }
+        /// <summary>
+        /// 是否连接到服务器
+        /// </summary>
+        public bool IsServer { get; set; }
         public CarNoRecognitionCfg CarNoRecognition { get; set; }
         public PrintCfg Print { get; set; }
         public CarNoCfg CarNo { get; set; }

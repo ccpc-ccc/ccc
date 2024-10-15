@@ -62,9 +62,11 @@
     <Compile Include="Master\SMaterialSeries.cs" />
     <Compile Include="Order\BPlan.cs" />
     <Compile Include="Org\SCompanyPay.cs" />
+    <Compile Include="Server\ServerWeight.cs" />
     <Compile Include="Server\ReturnEntity.cs" />
     <Compile Include="Server\FWeight.cs" />
     <Compile Include="Server\FClient.cs" />
+    <Compile Include="Weight\VWeight.cs" />
     <Compile Include="Weight\BWeight.cs" />
     <Compile Include="Weight\BWeightAttribute.cs" />
     <Compile Include="Weight\BWeightConfirm.cs" />

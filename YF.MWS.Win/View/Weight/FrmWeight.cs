@@ -40,6 +40,7 @@ using YF.Utility;
 using System.Collections;
 using System.Diagnostics;
 using YF.Utility.Data;
+using YF.MWS.Db.Server;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeight : BaseForm {
@@ -58,7 +59,6 @@ namespace YF.MWS.Win.View.Weight {
         private int currentDate = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
         private LoginCfg loginCfg = null;
         private string loginCfgXml = Path.Combine(Application.StartupPath, "LoginCfg.xml");
-        private SCompany _company= null;
         /// <summary>
         /// 抓拍图片和视频文件信息
         /// </summary>
@@ -805,7 +805,6 @@ namespace YF.MWS.Win.View.Weight {
             //gpMainWeight.AutoScroll = true;
             searchList.WeightService = weightService;
             searchList.WeightQueryService = weightQueryService;
-            _company = companyService.GetCompany(CurrentUser.Instance.CompanyId);
         }
 
         private void FrmWeight_Load(object sender, EventArgs e) {
@@ -1075,10 +1074,6 @@ namespace YF.MWS.Win.View.Weight {
         }
         private Task ShowWeightInfo1(double value) {
                 value=WeightUtil.GetMinWeight(value, Cfg.Device1);
-            if (((_company.ChargeType==1&&_company.OverNumber<=0)||(_company.ChargeType == 2 && _company.OverTime<=DateTime.Now))&&value>20)
-            {
-                return Task.CompletedTask;
-            }
             string unit = RetCode.UnitFile(Cfg.Device1.SUnit);
                 string waterMark = string.Format("{0}重量：{1}{2}", this.wlookCar == null || string.IsNullOrEmpty(this.wlookCar.Text) ? "" : "车牌：" + this.wlookCar.Text + " ", value.ToString(this.Cfg.Device1.ShowFormat), unit);
                 if (startVideo) {
@@ -1182,9 +1177,6 @@ namespace YF.MWS.Win.View.Weight {
         private Task ShowWeightInfo2(double value) {
                 value=WeightUtil.GetMinWeight(value, Cfg.Device2);
                 string unit = RetCode.UnitFile(Cfg.Device2.SUnit);
-            if (((_company.ChargeType == 1 && _company.OverNumber <= 0) || (_company.ChargeType == 2 && _company.OverTime <= DateTime.Now)) && value > 20) {
-                return Task.CompletedTask;
-            }
 
             string waterMark = string.Format("{0}重量：{1}{2}", this.wlookCar == null || string.IsNullOrEmpty(this.wlookCar.Text) ? "" : "车牌：" + this.wlookCar.Text + " ", value.ToString(this.Cfg.Device2.ShowFormat), unit);
                 if (startVideo) {
@@ -2113,15 +2105,6 @@ namespace YF.MWS.Win.View.Weight {
         public bool Save() {
             bool isSaved = false;
             try {
-                if(_company != null) {
-                    if (_company.ChargeType == 1&&_company.OverNumber<=0) {
-                        ShowWeightStateTip("称重次数已用完！");
-                        return false;
-                    }else if (_company.ChargeType == 2&&_company.OverTime<=DateTime.Now) {
-                        ShowWeightStateTip("称重时间已过期！");
-                        return false;
-                    }
-                }
                 bool isNew = false;
                 decimal weight = GetCurrentWeight();
                 OrderSource source = OrderSource.Weight;
@@ -2132,6 +2115,7 @@ namespace YF.MWS.Win.View.Weight {
                 if (currentWeight == null) {
                     isNew = true;
                     currentWeight = new BWeight();
+                    //currentWeight.Id = Guid.NewGuid().ToString("N");
                     currentWeight.MachineCode = CurrentClient.Instance.MachineCode;
                 } else {
                     if (!grossTareTransformed) {
@@ -2234,7 +2218,7 @@ namespace YF.MWS.Win.View.Weight {
                 if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
                     planService.Update(currentWeight);
                 }
-                if (isSaved&&Cfg.Transfer.isOpen&&currentWeight.FinishState == 1) {//
+                if (isSaved&&CurrentClient.Instance.IsServer) {//
                     Thread thread = new Thread(new ParameterizedThreadStart(sendWeight));
                     thread.Start(currentWeight);
                 }
@@ -2247,12 +2231,6 @@ namespace YF.MWS.Win.View.Weight {
                 //无人值守模式下保存重量后，将是否归零设为False，是为了反正重复保存
                 if (isSaved && currentWeighWay == WeightWay.Nobody) {
                     returnZero = false;
-                }
-                if (isSaved && currentWeight.FinishState == 1) {
-                    if(_company!=null&&_company.ChargeType==1) {
-                    companyService.upOverNumber(CurrentUser.Instance.CompanyId);
-                        _company.OverNumber -= 1;
-                    }
                 }
                 BPay pay = null;
                 if (isSaved && startWeightPay) {
@@ -2325,8 +2303,17 @@ namespace YF.MWS.Win.View.Weight {
         }
         private void sendWeight(object obj) {
             BWeight weight=obj as BWeight;
-            if (obj == null) return;
-            webWeightService.doneWeight(currentWeight);
+            if (weight == null) return;
+            if (weight.FinishState == 1) {
+                ServerReturnEntity entity= webWeightService.serverSaveEnterWeightData(weight.Id);
+                if (entity == null) {
+                    MessageBox.Show("上传数据失败");
+                }else if (entity.success) {
+                    MessageBox.Show("上传数据成功");
+                } else {
+                    MessageBox.Show(entity.msg);
+                }
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {

@@ -31,6 +31,7 @@ namespace YF.MWS.Client.DataService.Interface
         /// <param name="weightId"></param>
         /// <returns></returns>
         BWeight Get(string weightId);
+        VWeight GetAll(string weightId);
 
         /// <summary>
         /// 获取当前日期的磅单记录总数

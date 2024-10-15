@@ -641,23 +641,22 @@ namespace YF.MWS.SQliteService
 
         public BWeight Get(string weightId)
         {
-            BWeight weight = null;
-            string sql;
-            sql = string.Format(@"select * from B_Weight where Id='{0}'", weightId);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                weight = TableHelper.RowToEntity<BWeight>(dt.Rows[0]);
-            }
-            return weight;
+            string sql = string.Format(@"select * from B_Weight where Id='{0}'", weightId);
+            return base.getModel<BWeight>(sql);
+        }
+        public VWeight GetAll(string weightId)
+        {
+            string sql = string.Format(@"select a.*,b.MaterialName,b.MaterialCode,c.WarehName,d.CustomerName CustomerName,
+                                        e.CustomerName DeliveryName,f.CustomerName ReceiverName,g.CustomerName TransferName,j.CustomerName ManufacturerName,k.CustomerName SupplierName
+                                        from B_Weight a left join S_Material b on a.MaterialId=b.Id 
+                                                 left join S_Wareh c on a.WarehId=c.Id
+                                                 left join S_Customer d on a.CustomerId=d.Id 
+                                                 left join S_Customer e on a.DeliveryId=e.Id  
+                                                 left join S_Customer f on a.ReceiverId=f.Id 
+                                                 left join S_Customer g on a.TransferId=g.Id 
+                                                 left join S_Customer j on a.ManufacturerId=j.Id 
+                                                 left join S_Customer k on a.SupplierId=k.Id  where a.Id='{0}'", weightId);
+            return base.getModel<VWeight>(sql);
         }
 
         public BWeight GetLastWeight()

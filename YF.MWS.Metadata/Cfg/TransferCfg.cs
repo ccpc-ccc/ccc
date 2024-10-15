@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace YF.MWS.Metadata.Cfg
-{
+namespace YF.MWS.Metadata.Cfg {
     /// <summary>
     /// 传输服务设置类
     /// Author:仇军
     /// Date:2014-12-20
     /// </summary>
-    public class TransferCfg
-    {
+    public class TransferCfg {
         /// <summary>
         /// 服务端地址
         /// </summary>
@@ -33,4 +31,9 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public bool isOpen { get; set; }
     }
+    public class ServiceCfg{
+        public string ServerUrl { get; set; }
+        public string ServerToken { get; set; }
+
+        }
 }

@@ -46,10 +46,9 @@ namespace YF.MWS.Win.View.Setting
             if (cfg != null)
             {
                 TransferCfg transfer = cfg.Transfer;
-                txtMachineCode.Text = transfer.MachineCode;
-                txtRegisterCode.Text = transfer.RegisterCode;
-                txtCompanyCode.Text = transfer.CompanyCode;// AppSetting.GetValue("MobileServer");
-                checkEdit1.Checked = transfer.isOpen;
+                txtServerUrl.Text = cfg.ServerUrl;
+                txtToken.Text = cfg.ServerToken;
+                checkEdit1.Checked = cfg.IsServer;
             }
         }
 
@@ -61,19 +60,13 @@ namespace YF.MWS.Win.View.Setting
                 if (cfg == null)
                     cfg = new SysCfg();
             }
-            ReturnEntity client = WebWeightService.Login(txtCompanyCode.Text,txtMachineCode.Text, txtRegisterCode.Text);
-            if(client != null) {
-                WebWeightService.Token = client.Token;
-            } else {
-                WebWeightService.Token = "";
-            }
-            TransferCfg transfer = cfg.Transfer;
-            transfer.MachineCode = txtMachineCode.Text;
-            transfer.RegisterCode = txtRegisterCode.Text;
-            transfer.CompanyCode = txtCompanyCode.Text;
-            //transfer.ServerUrl = txtCompanyCode.Text;
-            transfer.isOpen = checkEdit1.Checked;
+            cfg.ServerToken = txtToken.Text;
+            cfg.ServerUrl = txtServerUrl.Text;
+            cfg.IsServer = checkEdit1.Checked;
             CfgUtil.SaveCfg(cfg);
+            CurrentClient.Instance.ServerToken = txtToken.Text;
+            CurrentClient.Instance.ServerUrl = txtServerUrl.Text;
+            CurrentClient.Instance.IsServer= checkEdit1.Checked;
             MessageDxUtil.ShowTips("成功保存云磅传输设置信息");
         }
 
@@ -91,17 +84,11 @@ namespace YF.MWS.Win.View.Setting
             gpRuiJieYun.Enabled = checkEdit1.Checked;
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e) {
-            string url =string.Format("{0}?access={1}&password={2}", txtCompanyCode.Text, txtMachineCode.Text,txtRegisterCode.Text);
-            FrmQrCode qrCode = new FrmQrCode(url);
-            qrCode.ShowDialog();
-        }
-
         private void simpleButton2_Click(object sender, EventArgs e) {
-            ReturnEntity entity = WebWeightService.Login(txtCompanyCode.Text, txtMachineCode.Text,txtRegisterCode.Text);
-            if(entity != null&&entity.Result) {
+            ReturnEntity model = WebWeightService.testServer(txtServerUrl.Text, txtToken.Text);
+            if(model!=null) {
                 MessageDxUtil.ShowTips("连接成功");
-            } else {
+            } else if(model==null){
                 MessageDxUtil.ShowTips("连接失败");
             }
             }

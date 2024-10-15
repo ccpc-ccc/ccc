@@ -1848,9 +1848,6 @@
     <None Include="Resources\show_16x16.png" />
     <None Include="Resources\summary_16x16.png" />
     <None Include="Resources\zoom_16x16.png" />
-    <None Include="Sync\Source\MWS.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\ExportCfg.xml">
@@ -2131,7 +2128,6 @@
     <Folder Include="File\Video\" />
     <Folder Include="File\Waybill\" />
     <Folder Include="Logo\" />
-    <Folder Include="Sync\Temp\" />
     <Folder Include="View\Customer\System\" />
   </ItemGroup>
   <ItemGroup>

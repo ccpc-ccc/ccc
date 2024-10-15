@@ -79,6 +79,11 @@ namespace YF.MWS.Metadata
         public RegisterMode RegType { get; set; }
         public string VersionFunc { get; set; }
         public string ServerUrl { get; set; }
+        public string ServerToken { get; set; }
+        /// <summary>
+        /// 是否连接后台服务器
+        /// </summary>
+        public bool IsServer {  get; set; }
         /// <summary>
         /// 启用基础数据同步
         /// </summary>

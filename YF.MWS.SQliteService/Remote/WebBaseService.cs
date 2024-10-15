@@ -13,6 +13,7 @@ using System.IO;
 using System.Net;
 using YF.Utility.Log;
 using YF.MWS.Db.Server;
+using RestSharp;
 
 namespace YF.MWS.SQliteService.Remote
 {
@@ -85,6 +86,22 @@ namespace YF.MWS.SQliteService.Remote
                 }
             }
             return JsonUtil.JsonDeserialize<ReturnEntity>(res);
+        }
+        public static ServerReturnEntity sendServerPost(string url, object query, string token="") {
+            string res = string.Empty;
+            var client = new RestClient(url);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+           if(!string.IsNullOrEmpty(token))  request.AddHeader("token", token);
+            request.AlwaysMultipartFormData = true;
+            request.AddParameter("data", query.JsonSerialize());
+            try {
+            RestResponse response = client.Execute(request);
+                res = response.Content;
+            } catch (Exception ex) {
+                Logger.WriteException(ex);
+            }
+            return JsonUtil.JsonDeserialize<ServerReturnEntity>(res);
         }
     }
 }

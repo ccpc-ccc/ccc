@@ -29,6 +29,14 @@ namespace YF.MWS.BaseMetadata
         public string UserGroup { get; set; }
         public UserType UserType { get; set; }
         public string ThemeName { get; set; }
+        /// <summary>
+        /// 远程服务器Url
+        /// </summary>
+        public string ServerUrl { get; set; }
+        /// <summary>
+        /// 登录服务器凭证
+        /// </summary>
+        public string ServerToken { get; set; }
         public int FontSize { get; set; }
         public string FontFamily { get; set; } 
         /// <summary>

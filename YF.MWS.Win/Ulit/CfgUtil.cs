@@ -40,7 +40,7 @@ namespace YF.MWS.Win
             {
                 if (cfg.Transfer != null) 
                 {
-                    CurrentClient.Instance.ServerUrl = cfg.Transfer.ServerUrl;
+                   // CurrentClient.Instance.ServerUrl = cfg.Transfer.ServerUrl;
                 }
             }
         }

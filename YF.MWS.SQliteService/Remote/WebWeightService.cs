@@ -3,6 +3,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -35,6 +36,7 @@ namespace YF.MWS.SQliteService.Remote
         ICustomerService customerService = new CustomerService();
         IMaterialService materialService = new MaterialService();
         IFileService fileService = new FileService();
+        IWeightService weightService = new WeightService();
         public WebWeightService() {
             WebWeightService.ServerUrl=AppSetting.GetValue("EcsServer");
         }
@@ -217,6 +219,50 @@ namespace YF.MWS.SQliteService.Remote
             string data = syncWeight.JsonSerialize();
             return WebApiUtil.Post(url, data);
         }
-
+        public static ReturnEntity testServer(string url,string token) {
+            object obj = new object();
+            url = url + "/login";
+            ReturnEntity entity = WebBaseService.sendPost(url, obj, token);
+            return entity;
+        }
+        public ServerReturnEntity serverSaveEnterWeightData(string id) {
+            if (!CurrentClient.Instance.IsServer || string.IsNullOrEmpty(CurrentClient.Instance.ServerToken)) return null;
+            VWeight weight = weightService.GetAll(id);
+            if(weight == null) return null;
+            ServerWeight serverWeight = new ServerWeight() {
+                cby=weight.WeighterName,
+                jld=weight.WeightNo,
+                clmc=weight.MaterialName,
+                ycllx=weight.MaterialCode,
+                clgg=weight.TransferName,
+                gysmc=weight.ReceiverName,
+                pc=weight.WaybillNo,
+                jcsj=weight.CreateTime,
+                jccz=weight.GrossWeight,
+                lcmc=weight.WarehName,
+                cph=weight.CarNo,
+                contractnumber=weight.t1,
+                contractid=weight.t2,
+                bz=weight.Remark,
+                cssj=weight.FinishTime,
+                cccz=weight.TareWeight,
+                jz=weight.SuttleWeight
+            };
+            string url = CurrentClient.Instance.ServerUrl+ "/ext/weight/saveEnterWeightData";
+            ServerReturnEntity entity = WebBaseService.sendServerPost(url, serverWeight, CurrentClient.Instance.ServerToken);
+            return entity;
+        }
+        public ServerReturnEntity serverSaveEnterWeightOut(string id) {
+            if (!CurrentClient.Instance.IsServer || string.IsNullOrEmpty(CurrentClient.Instance.ServerToken)) return null;
+            VWeight weight = weightService.GetAll(id);
+            ServerWeightOut serverWeight = new ServerWeightOut() {
+                jld=weight.WeightNo,
+                cssj=weight.FinishTime,
+                jz=weight.SuttleWeight
+            };
+            string url = CurrentClient.Instance.ServerUrl+ "/ext/weight/saveOutWeightData";
+            ServerReturnEntity entity = WebBaseService.sendServerPost(url, serverWeight, CurrentClient.Instance.ServerToken);
+            return entity;
+        }
     }
 }
