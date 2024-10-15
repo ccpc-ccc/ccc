@@ -64,7 +64,6 @@
             this.ClientSize = new System.Drawing.Size(326, 365);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.peQrCode);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmPay";

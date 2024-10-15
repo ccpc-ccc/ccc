@@ -269,7 +269,6 @@
             this.Controls.Add(this.labelControl6);
             this.Controls.Add(this.lblAuthCode);
             this.Controls.Add(this.txtContent);
-            this.IconOptions.LargeImage = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmSendEmail";

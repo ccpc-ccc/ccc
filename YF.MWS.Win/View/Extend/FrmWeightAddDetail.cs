@@ -125,8 +125,8 @@ namespace YF.MWS.Win.View.Extend
             syncObj.WeightExtService = weightExtService;
             IWebFileService webFileService = new WebFileService();
             syncObj.WebFileService = webFileService;
-            if (Cfg != null && Cfg.Transfer != null)
-                syncObj.Transfer = Cfg.Transfer;
+            if (Program._cfg != null && Program._cfg.Transfer != null)
+                syncObj.Transfer = Program._cfg.Transfer;
         }
 
         private void SetControl()

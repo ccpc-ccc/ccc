@@ -196,7 +196,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmImportCar";
             this.Text = "车辆导入";
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();

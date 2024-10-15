@@ -50,14 +50,14 @@ namespace YF.MWS.Win.View.Weight
         }
 
         private void BindData() {
-            if (Cfg != null) {
-                if (Cfg.Video != null)
-                    mode = Cfg.Video.CaptureMode;
-                if (Cfg.Weight != null) {
-                    loadImageWithRemote = Cfg.Weight.StartLoadImageWithRemote;
+            if (Program._cfg != null) {
+                if (Program._cfg.Video != null)
+                    mode = Program._cfg.Video.CaptureMode;
+                if (Program._cfg.Weight != null) {
+                    loadImageWithRemote = Program._cfg.Weight.StartLoadImageWithRemote;
                 }
-                if (Cfg.Transfer != null) {
-                    serverUrl = Cfg.Transfer.ServerUrl;
+                if (Program._cfg.Transfer != null) {
+                    serverUrl = Program._cfg.Transfer.ServerUrl;
                 }
             }
             if (loadImageWithRemote) {

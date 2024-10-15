@@ -48,7 +48,7 @@ namespace YF.MWS.Win.View.Weight
         public FrmViewVideoDevice()
         {
             InitializeComponent();
-            Cfg = CfgUtil.GetCfg();
+            Program._cfg = CfgUtil.GetCfg();
             Init();
             LoadVideo();
         }
@@ -60,7 +60,7 @@ namespace YF.MWS.Win.View.Weight
             Action Func = () => {
                 videoCameraUtils.Clear();
                 for (int i = 0; i < 4; i++) {
-                    VideoDeviceCfg deviceCfg = Cfg.VideoDevices[i];
+                    VideoDeviceCfg deviceCfg = Program._cfg.VideoDevices[i];
                     if (deviceCfg == null || !deviceCfg.isUse) continue;
                     VideoCameraUtil cameraUtil = new VideoCameraUtil(deviceCfg,i);
                     videoCameraUtils.Add(cameraUtil);
@@ -222,7 +222,7 @@ namespace YF.MWS.Win.View.Weight
         private void InitPict() {
             this.pnlVideo.Controls.Clear();
             for (int i = 0; i < 4; i++) {
-                VideoDeviceCfg deviceCfg = Cfg.VideoDevices[i];
+                VideoDeviceCfg deviceCfg = Program._cfg.VideoDevices[i];
                 //if (deviceCfg == null || !deviceCfg.isUse) continue;
                 this.VideoCamera = deviceCfg.VideoCamera;
                 PictureBox picOne = new PictureBox();
@@ -234,18 +234,18 @@ namespace YF.MWS.Win.View.Weight
             }
         }
         private void setPictSize() {
-            if (Cfg.Video.HeightNum <= 0) Cfg.Video.HeightNum = 2;
-            if (Cfg.Video.WidthNum <= 0) Cfg.Video.WidthNum = 2;
-            controlNum = Cfg.Video.HeightNum * Cfg.Video.WidthNum;
+            if (Program._cfg.Video.HeightNum <= 0) Program._cfg.Video.HeightNum = 2;
+            if (Program._cfg.Video.WidthNum <= 0) Program._cfg.Video.WidthNum = 2;
+            controlNum = Program._cfg.Video.HeightNum * Program._cfg.Video.WidthNum;
             if (currentControl != null) {
                 return;
             }
             for (int i = 0; i < 4; i++) {
                 Control c = this.pnlVideo.Controls[i];
-                c.Height = this.pnlVideo.Height / Cfg.Video.HeightNum;
-                c.Width = this.pnlVideo.Width / Cfg.Video.WidthNum;
-                int n = i % Cfg.Video.WidthNum;
-                c.Location = new Point(n * c.Width, i / Cfg.Video.WidthNum * c.Height);
+                c.Height = this.pnlVideo.Height / Program._cfg.Video.HeightNum;
+                c.Width = this.pnlVideo.Width / Program._cfg.Video.WidthNum;
+                int n = i % Program._cfg.Video.WidthNum;
+                c.Location = new Point(n * c.Width, i / Program._cfg.Video.WidthNum * c.Height);
             }
         }
         private void FrmViewVideoDevice_SizeChanged(object sender, EventArgs e) {
@@ -253,58 +253,58 @@ namespace YF.MWS.Win.View.Weight
         }
 
         private void 横向排列ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 1;
-            Cfg.Video.WidthNum = 2;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 1;
+            Program._cfg.Video.WidthNum = 2;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void 纵向排列ToolStripMenuItem_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 1;
-            Cfg.Video.WidthNum = 3;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 1;
+            Program._cfg.Video.WidthNum = 3;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 1;
-            Cfg.Video.WidthNum = 1;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 1;
+            Program._cfg.Video.WidthNum = 1;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 1;
-            Cfg.Video.WidthNum = 4;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 1;
+            Program._cfg.Video.WidthNum = 4;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 2;
-            Cfg.Video.WidthNum = 1;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 2;
+            Program._cfg.Video.WidthNum = 1;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 2;
-            Cfg.Video.WidthNum = 2;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 2;
+            Program._cfg.Video.WidthNum = 2;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 3;
-            Cfg.Video.WidthNum = 1;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 3;
+            Program._cfg.Video.WidthNum = 1;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e) {
-            Cfg.Video.HeightNum = 4;
-            Cfg.Video.WidthNum = 1;
-            CfgUtil.SaveCfg(Cfg);
+            Program._cfg.Video.HeightNum = 4;
+            Program._cfg.Video.WidthNum = 1;
+            CfgUtil.SaveCfg(Program._cfg);
             setPictSize();
         }
 

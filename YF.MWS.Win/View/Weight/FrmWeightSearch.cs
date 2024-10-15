@@ -166,27 +166,27 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void BindData() {
-            if (Cfg != null) {
-                if (Cfg.Print != null) {
-                    startPrintCountLimit = Cfg.Print.StartPrintCountLimit;
-                    maxPrintCount = Cfg.Print.MaxPrintCount;
-                    weightPrinterName = Cfg.Print.WeightPrinterName;
+            if (Program._cfg != null) {
+                if (Program._cfg.Print != null) {
+                    startPrintCountLimit = Program._cfg.Print.StartPrintCountLimit;
+                    maxPrintCount = Program._cfg.Print.MaxPrintCount;
+                    weightPrinterName = Program._cfg.Print.WeightPrinterName;
                 }
-                if (Cfg.Weight != null) {
-                    startPlan = Cfg.Weight.StartPlan;
+                if (Program._cfg.Weight != null) {
+                    startPlan = Program._cfg.Weight.StartPlan;
                 }
             }
             DataSet ds = new DataSet();
             ds.ReadXml(Path.Combine(Application.StartupPath, "Config", "SearchCondition.xml"));
             List<QueryCondition> lst = new List<QueryCondition>();
-            if (Cfg != null) {
-                if (Cfg.Print != null && Cfg.Print.StartReWeightTemplate) {
-                    startReWeightPrint = Cfg.Print.StartReWeightTemplate;
+            if (Program._cfg != null) {
+                if (Program._cfg.Print != null && Program._cfg.Print.StartReWeightTemplate) {
+                    startReWeightPrint = Program._cfg.Print.StartReWeightTemplate;
                 }
-                if (Cfg.Page != null) {
-                    startPage = Cfg.Page.Start;
-                    if (Cfg.Page.PageSize > 0) {
-                        pageSize = Cfg.Page.PageSize;
+                if (Program._cfg.Page != null) {
+                    startPage = Program._cfg.Page.Start;
+                    if (Program._cfg.Page.PageSize > 0) {
+                        pageSize = Program._cfg.Page.PageSize;
                     }
                 }
             }
@@ -654,7 +654,7 @@ namespace YF.MWS.Win.View.Weight {
                     string filePath = ofdFileImport.FileName;
                     DataTable dt = NPOIHelper.GetDataTable(filePath);
                     //weightService.Import(dt, CurrentClient.Instance.ViewId,Cfg.WeightNo);
-                    weightService.ImportNew(dt, Cfg);
+                    weightService.ImportNew(dt, Program._cfg);
                     MessageDxUtil.ShowTips("成功导入磅单数据");
                     barItemQuery.PerformClick();
                 }

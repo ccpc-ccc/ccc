@@ -601,7 +601,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmPlanList";
             this.Text = "计划单";
             this.Load += new System.EventHandler(this.FrmCarPlanList_Load);

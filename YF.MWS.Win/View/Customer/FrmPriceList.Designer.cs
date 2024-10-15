@@ -390,7 +390,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmPriceList";
             this.Text = "客户物资价格管理";
             this.Load += new System.EventHandler(this.FrmPriceList_Load);

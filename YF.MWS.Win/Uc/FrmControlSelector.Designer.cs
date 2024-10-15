@@ -59,7 +59,6 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.cancel_16x16;
             this.btnCancel.Location = new System.Drawing.Point(436, 11);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -69,7 +68,6 @@
             // 
             // btnOK
             // 
-            this.btnOK.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.apply_16x16;
             this.btnOK.Location = new System.Drawing.Point(333, 11);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -169,7 +167,6 @@
             this.ClientSize = new System.Drawing.Size(594, 419);
             this.Controls.Add(this.gcControl);
             this.Controls.Add(this.pcCarNo);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmControlSelector";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "控件选择";

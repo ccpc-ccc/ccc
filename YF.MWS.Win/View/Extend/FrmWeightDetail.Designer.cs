@@ -184,7 +184,6 @@
             this.mainWeight.Cfg = null;
             this.mainWeight.CurrentViewType = YF.MWS.Metadata.ViewType.Weight;
             this.mainWeight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainWeight.FrmWeight = null;
             this.mainWeight.Location = new System.Drawing.Point(0, 0);
             this.mainWeight.LstAttribute = null;
             this.mainWeight.Name = "mainWeight";
@@ -299,7 +298,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmWeightDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "磅单编辑";

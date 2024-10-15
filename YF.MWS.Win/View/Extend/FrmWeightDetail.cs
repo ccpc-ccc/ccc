@@ -135,13 +135,13 @@ namespace YF.MWS.Win.View.Extend
         private void InitConfig()
         {
             softOneUnit = IniUtility.GetIniKeyValue("Device1", "SUnit", "KG");
-            if (Cfg != null)
+            if (Program._cfg != null)
             {
-                if (Cfg.Weight != null)
+                if (Program._cfg.Weight != null)
                 {
-                    startPlan = Cfg.Weight.StartPlan;
-                    startInputItemAutoSave = Cfg.Weight.StartInputItemAutoSave;
-                    currentWeightProcess = Cfg.Weight.Process;
+                    startPlan = Program._cfg.Weight.StartPlan;
+                    startInputItemAutoSave = Program._cfg.Weight.StartInputItemAutoSave;
+                    currentWeightProcess = Program._cfg.Weight.Process;
                 }
             }
         }
@@ -154,8 +154,8 @@ namespace YF.MWS.Win.View.Extend
             syncObj.WeightExtService = weightExtService;
             IWebFileService webFileService = new WebFileService();
             syncObj.WebFileService = webFileService;
-            if (Cfg != null && Cfg.Transfer != null)
-                syncObj.Transfer = Cfg.Transfer;
+            if (Program._cfg != null && Program._cfg.Transfer != null)
+                syncObj.Transfer = Program._cfg.Transfer;
         }
 
         private void SetControl()

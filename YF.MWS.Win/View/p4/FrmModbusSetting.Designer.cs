@@ -132,7 +132,6 @@
             // 
             this.btnSend2.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.btnSend2.Appearance.Options.UseFont = true;
-            this.btnSend2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.send_16x16;
             this.btnSend2.Location = new System.Drawing.Point(504, 94);
             this.btnSend2.Name = "btnSend2";
             this.btnSend2.Size = new System.Drawing.Size(70, 23);
@@ -417,7 +416,6 @@
             this.ClientSize = new System.Drawing.Size(742, 648);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmModbusSetting";

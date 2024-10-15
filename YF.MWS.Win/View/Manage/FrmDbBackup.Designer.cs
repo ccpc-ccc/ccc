@@ -195,7 +195,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(574, 161);
             this.MinimizeBox = false;

@@ -132,7 +132,6 @@
             // 
             this.btnOK.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnOK.Appearance.Options.UseFont = true;
-            this.btnOK.Image = global::YF.MWS.Win.Properties.Resources.apply_32x32;
             this.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnOK.Location = new System.Drawing.Point(761, 15);
             this.btnOK.Name = "btnOK";
@@ -145,7 +144,6 @@
             // 
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Image = global::YF.MWS.Win.Properties.Resources.cancel_32x32;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.Location = new System.Drawing.Point(941, 15);
             this.btnCancel.Name = "btnCancel";
@@ -921,7 +919,6 @@
             this.ClientSize = new System.Drawing.Size(1091, 502);
             this.Controls.Add(this.plCarNoInput);
             this.Controls.Add(this.pcCarNo);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmCarSelectorPad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "车牌输入";

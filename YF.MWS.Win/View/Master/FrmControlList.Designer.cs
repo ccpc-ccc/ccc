@@ -237,7 +237,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmControlList";
             this.Text = "基础控件配置";
             this.Load += new System.EventHandler(this.FrmControlList_Load);

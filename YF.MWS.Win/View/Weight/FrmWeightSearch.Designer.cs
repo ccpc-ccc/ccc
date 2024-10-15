@@ -379,7 +379,6 @@
             this.barItemExportWithGv.ImageOptions.ImageIndex = 7;
             this.barItemExportWithGv.Name = "barItemExportWithGv";
             this.barItemExportWithGv.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
             toolTipTitleItem1.Text = "磅单格式导出";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "完全按照当前磅单的格式导出Excel，导出的数据不支持再次导入，如果要导入请用标准Excel导出功能。";
@@ -731,7 +730,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmWeightSearch";
             this.Text = "历史磅单搜索";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -85,7 +85,6 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExportExcel.Location = new System.Drawing.Point(573, 13);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
@@ -95,7 +94,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(487, 13);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);

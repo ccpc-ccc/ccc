@@ -138,7 +138,6 @@
             this.Controls.Add(this.lblNewPwd);
             this.Controls.Add(this.btnChangePwd);
             this.Controls.Add(this.teNewPwd);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(488, 387);
             this.MinimizeBox = false;

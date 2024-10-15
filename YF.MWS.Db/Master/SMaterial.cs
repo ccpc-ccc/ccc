@@ -37,6 +37,8 @@ namespace YF.MWS.Db
         public virtual string MaterialType { get; set; }
 
         public virtual int SyncState { get; set; }
+        public virtual decimal MaxWeight { get; set; }
+        public virtual decimal MinWeight { get; set; }
         /// <summary>
         /// 物资数量
         /// </summary>

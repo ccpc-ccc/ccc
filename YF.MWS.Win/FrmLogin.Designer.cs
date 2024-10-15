@@ -119,7 +119,6 @@
             // peWaitting
             // 
             this.peWaitting.Dock = System.Windows.Forms.DockStyle.Top;
-            this.peWaitting.EditValue = global::YF.MWS.Win.Properties.Resources.start;
             this.peWaitting.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
             this.peWaitting.Location = new System.Drawing.Point(0, 0);
             this.peWaitting.Name = "peWaitting";
@@ -195,7 +194,6 @@
             this.ClientSize = new System.Drawing.Size(517, 475);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.peWaitting);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(428, 494);

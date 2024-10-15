@@ -83,7 +83,6 @@
             // 
             this.btnSound.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.btnSound.Appearance.Options.UseFont = true;
-            this.btnSound.Image = global::YF.MWS.Win.Properties.Resources.voice_16x16;
             this.btnSound.Location = new System.Drawing.Point(415, 109);
             this.btnSound.Name = "btnSound";
             this.btnSound.Size = new System.Drawing.Size(60, 23);
@@ -95,7 +94,6 @@
             // 
             this.btnTransfer.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.btnTransfer.Appearance.Options.UseFont = true;
-            this.btnTransfer.Image = global::YF.MWS.Win.Properties.Resources.edit_16x16;
             this.btnTransfer.Location = new System.Drawing.Point(333, 109);
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.Size = new System.Drawing.Size(60, 23);
@@ -114,7 +112,6 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.txtNum);
             this.Controls.Add(this.labelControl1);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmSoundSetting";

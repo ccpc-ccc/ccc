@@ -16,6 +16,7 @@ using YF.Utility.Log;
 using YF.Utility.Language;
 using YF.MWS.CacheService;
 using YF.MWS.Win.Uc;
+using YF.Utility;
 
 namespace YF.MWS.Win.View.Master
 {
@@ -32,31 +33,19 @@ namespace YF.MWS.Win.View.Master
             get { return _materialId; }
             set { _materialId = value; }
         }
+        private string CompanyId { get; set; }
 
         private SMaterial material;
 
-        public FrmMaterialDetail()
+        public FrmMaterialDetail(int index)
         {
             InitializeComponent();
+            CompanyId = index.ToString();
         }
 
         private void FrmMaterialDetail_Load(object sender, EventArgs e)
         {
-            this.InitData();
             this.BindData();
-        }
-
-        /// <summary>
-        /// 初始化数据
-        /// </summary>
-        private void InitData()
-        {
-            //绑定物资类别
-            DxHelper.BindComboBoxEdit(this.cmbMaterialType, SysCode.MaterialType, null);
-            //绑定物资单位
-            DxHelper.BindComboBoxEdit(this.cmbUnit, SysCode.MeasureUnit, null);
-            //绑定启禁用状态
-            //DxHelper.BindComboBoxEdit(this.cmbState, SysCode.State, null);
         }
 
         private void btnItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -77,17 +66,11 @@ namespace YF.MWS.Win.View.Master
             if (!string.IsNullOrEmpty(this._materialId))
             {
                 material = materialService.GetMaterial(this._materialId);
-                FormHelper.BindControl<SMaterial>(this, this.material);
-                chkState.Checked = material.State == 1 ? true : false;
-                this.cmbMaterialType.Properties.Items.Clear();
-                //绑定物资类别
-                DxHelper.BindComboBoxEdit(this.cmbMaterialType, SysCode.MaterialType, this.material.MaterialType);
-                this.cmbUnit.Properties.Items.Clear();
-                //绑定物资单位
-                DxHelper.BindComboBoxEdit(this.cmbUnit, SysCode.MeasureUnit, this.material.Unit);
-                 
-                //绑定启禁用状态
-                //DxHelper.BindComboBoxEdit(this.cmbState, SysCode.State, this._material.State);
+                if (material != null) {
+                teMaterialName.Text = material.MaterialName;
+                    txtMaxWeight.Text = material.MaxWeight.ToString();
+                    txtMinWeight.Text = material.MinWeight.ToString();
+                }
             }
         }
 
@@ -141,10 +124,9 @@ namespace YF.MWS.Win.View.Master
                         material = new SMaterial();
                         material.Id = YF.MWS.Util.Utility.GetGuid();
                     }
-                    FormHelper.ControlToEntity<SMaterial>(this, ref material);
-                    material.MaterialType = DxHelper.GetCode(this.cmbMaterialType);
-                    material.Unit = DxHelper.GetCode(this.cmbUnit);
-                    material.State = chkState.Checked? 1: 0;
+                    material.MaterialName = teMaterialName.Text;
+                    material.MaxWeight = txtMinWeight.Text.ToDecimal();
+                    material.MinWeight = txtMaxWeight.Text.ToDecimal();
                     bool isSaved= materialService.SaveMaterial(material);
                     if (isSaved) 
                     {
@@ -165,7 +147,7 @@ namespace YF.MWS.Win.View.Master
 
         private void teMaterialName_EditValueChanged(object sender, EventArgs e)
         {
-            tePYMaterialName.Text = PinYinUtil.GetInitial(teMaterialName.Text);
+
         }
     }
 }

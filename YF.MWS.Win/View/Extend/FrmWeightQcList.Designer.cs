@@ -183,7 +183,6 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExportExcel.Location = new System.Drawing.Point(602, 14);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
@@ -193,7 +192,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(508, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -299,7 +297,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmWeightQcList";
             this.Text = "质量检测";
             this.Load += new System.EventHandler(this.FrmWeightQcList_Load);

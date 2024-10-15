@@ -27,11 +27,7 @@ namespace YF.MWS.Metadata.Cfg
         /// <summary>
         /// 1号仪表配置
         /// </summary>
-        public DeviceCfg Device1 { get; set; }
-        /// <summary>
-        /// 2号仪表配置
-        /// </summary>
-        public DeviceCfg Device2 { get; set; }
+        public List<DeviceCfg> Device { get; set; }
         public PeopleWeightCfg PeopleWeight { get; set; }
         /// <summary>
         /// 二维码设置
@@ -88,8 +84,7 @@ namespace YF.MWS.Metadata.Cfg
             CarNo = new CarNoCfg();
             Transfer = new TransferCfg();
             QrCode = new QrCodeCfg();
-            Device1=new DeviceCfg();
-            Device2=new DeviceCfg();
+            Device=new List<DeviceCfg>();
             LstReadCard = new List<ReadCardCfg>();
             CarNoRecognition = new CarNoRecognitionCfg(); 
             OverWeight = new OverWeightCfg();

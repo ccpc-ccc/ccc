@@ -31,6 +31,7 @@ using System.Security;
 using YF.MWS.Client.DataService.Interface.Remote;
 using YF.MWS.SQliteService.Remote;
 using YF.MWS.Db.Server;
+using DevExpress.XtraWaitForm;
 
 namespace YF.MWS.Win
 {
@@ -65,7 +66,7 @@ namespace YF.MWS.Win
         private static IMasterService masterService = null;
         private static IWebClientService webClientService = new WebClientService();
         private static string backDir = string.Empty;
-        public static SysCfg cfg = null;
+        public static SysCfg _cfg = null;
         public static FrmMain frmMain { get; set; }
         public static FrmViewVideoDevice frmViewVideoDevice { get; set; }
         /// <summary>
@@ -100,11 +101,12 @@ namespace YF.MWS.Win
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             bool runMoreApps = false;
-            cfg = CfgUtil.GetCfg();
-            if (cfg != null)
+            int debug = AppSetting.GetValue("debug").ToInt();
+            _cfg = CfgUtil.GetCfg();
+            if (_cfg != null)
             {
-                if (cfg.Launch != null)
-                    runMoreApps = cfg.Launch.RunMoreApps;
+                if (_cfg.Launch != null)
+                    runMoreApps = _cfg.Launch.RunMoreApps;
             }
             if (args != null && args.Length > 0)
                 runMoreApps = true;
@@ -140,6 +142,10 @@ namespace YF.MWS.Win
                         }
                     }
                 } else {
+                    if (debug == 1) {
+                        FrmWeight2 frm = new FrmWeight2();
+                        Application.Run(frm);
+                    } else {
                     using (FrmLogin loginForm = new FrmLogin()) {
                             if (args != null && args.Length > 0)
                                 loginForm.ChangeUser = true;
@@ -148,6 +154,7 @@ namespace YF.MWS.Win
                                 mainForm.Icon = loginForm.Icon;
                                 Application.Run(mainForm);
                             }
+                    }
                     }
                 }
             }
@@ -332,13 +339,10 @@ namespace YF.MWS.Win
             {
                 //SysCfg cfg = CfgUtil.GetCfg();
                 //CurrentClient.Instance.IsConnectedServer = NetworkUtil.IsConnectedServer(cfg);
-                if (cfg != null) 
-                {
-                    if (cfg.Weight != null)
+                    if (_cfg.Weight != null)
                     {
-                        backDir = cfg.Weight.BackupDir;
+                        backDir = _cfg.Weight.BackupDir;
                     }
-                }
                 hasRegistered = false;
                 isExpired = false;
                 IClientService clientService = new ClientService();
@@ -454,12 +458,12 @@ namespace YF.MWS.Win
                 CurrentClient.Instance.DataBase = AppSetting.GetValue("databaseType").ToEnum<DataBaseType>();
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                     string path = AppSetting.GetValue("dsnSqlite");
-                if (string.IsNullOrEmpty(cfg.Weight.BackupDir))
-                    cfg.Weight.BackupDir = @"D:\MWS\DataBack";
-                    if (!Directory.Exists(cfg.Weight.BackupDir)) {
-                        Directory.CreateDirectory(cfg.Weight.BackupDir);
+                if (string.IsNullOrEmpty(_cfg.Weight.BackupDir))
+                        _cfg.Weight.BackupDir = @"D:\MWS\DataBack";
+                    if (!Directory.Exists(_cfg.Weight.BackupDir)) {
+                        Directory.CreateDirectory(_cfg.Weight.BackupDir);
                     }
-                    System.IO.File.Copy(path, cfg.Weight.BackupDir+"\\MWS.db", true);
+                    System.IO.File.Copy(path, _cfg.Weight.BackupDir+"\\MWS.db", true);
                 }
 
                 //Environment.Exit(0);

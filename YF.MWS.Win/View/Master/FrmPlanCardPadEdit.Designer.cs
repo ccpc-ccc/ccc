@@ -138,7 +138,6 @@
             // 
             this.btnSelectReceiver.Appearance.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.btnSelectReceiver.Appearance.Options.UseFont = true;
-            this.btnSelectReceiver.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnSelectReceiver.Location = new System.Drawing.Point(961, 461);
             this.btnSelectReceiver.Name = "btnSelectReceiver";
             this.btnSelectReceiver.Size = new System.Drawing.Size(267, 60);
@@ -168,7 +167,6 @@
             // 
             this.btnSelectDeliver.Appearance.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.btnSelectDeliver.Appearance.Options.UseFont = true;
-            this.btnSelectDeliver.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnSelectDeliver.Location = new System.Drawing.Point(961, 355);
             this.btnSelectDeliver.Name = "btnSelectDeliver";
             this.btnSelectDeliver.Size = new System.Drawing.Size(267, 60);
@@ -198,7 +196,6 @@
             // 
             this.btnSelectCustomer.Appearance.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.btnSelectCustomer.Appearance.Options.UseFont = true;
-            this.btnSelectCustomer.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnSelectCustomer.Location = new System.Drawing.Point(961, 250);
             this.btnSelectCustomer.Name = "btnSelectCustomer";
             this.btnSelectCustomer.Size = new System.Drawing.Size(267, 60);
@@ -228,7 +225,6 @@
             // 
             this.btnSelectMaterial.Appearance.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.btnSelectMaterial.Appearance.Options.UseFont = true;
-            this.btnSelectMaterial.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnSelectMaterial.Location = new System.Drawing.Point(961, 142);
             this.btnSelectMaterial.Name = "btnSelectMaterial";
             this.btnSelectMaterial.Size = new System.Drawing.Size(267, 60);
@@ -258,7 +254,6 @@
             // 
             this.btnSelectCarNo.Appearance.Font = new System.Drawing.Font("微软雅黑", 28F);
             this.btnSelectCarNo.Appearance.Options.UseFont = true;
-            this.btnSelectCarNo.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnSelectCarNo.Location = new System.Drawing.Point(961, 31);
             this.btnSelectCarNo.Name = "btnSelectCarNo";
             this.btnSelectCarNo.Size = new System.Drawing.Size(267, 64);
@@ -286,7 +281,6 @@
             // 
             this.btnFinishInput.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnFinishInput.Appearance.Options.UseFont = true;
-            this.btnFinishInput.Image = global::YF.MWS.Win.Properties.Resources.apply_32x32;
             this.btnFinishInput.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnFinishInput.Location = new System.Drawing.Point(202, 17);
             this.btnFinishInput.Name = "btnFinishInput";
@@ -299,7 +293,6 @@
             // 
             this.btnReconnect.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnReconnect.Appearance.Options.UseFont = true;
-            this.btnReconnect.Image = global::YF.MWS.Win.Properties.Resources.add_32x32;
             this.btnReconnect.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnReconnect.Location = new System.Drawing.Point(1022, 17);
             this.btnReconnect.Name = "btnReconnect";
@@ -322,7 +315,6 @@
             // 
             this.btnClose.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnClose.Appearance.Options.UseFont = true;
-            this.btnClose.Image = global::YF.MWS.Win.Properties.Resources.close_32x32;
             this.btnClose.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnClose.Location = new System.Drawing.Point(1199, 17);
             this.btnClose.Name = "btnClose";
@@ -340,7 +332,6 @@
             // 
             this.btnStartInput.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnStartInput.Appearance.Options.UseFont = true;
-            this.btnStartInput.Image = global::YF.MWS.Win.Properties.Resources.apply_32x32;
             this.btnStartInput.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnStartInput.Location = new System.Drawing.Point(12, 17);
             this.btnStartInput.Name = "btnStartInput";
@@ -357,7 +348,6 @@
             this.Controls.Add(this.plBottom);
             this.Controls.Add(this.plBody);
             this.Controls.Add(this.plHeader);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmPlanCardPadEdit";
             this.Text = "自助写卡";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

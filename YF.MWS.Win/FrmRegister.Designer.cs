@@ -106,7 +106,6 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.apply_16x16;
             this.btnRegister.Location = new System.Drawing.Point(142, 147);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(179, 23);
@@ -155,7 +154,6 @@
             this.Controls.Add(this.lblRegisterFile);
             this.Controls.Add(this.txtMachineCode);
             this.Controls.Add(this.lblMachineCode);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(532, 266);
             this.MinimizeBox = false;

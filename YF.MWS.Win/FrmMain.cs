@@ -58,7 +58,6 @@ namespace YF.MWS.Win {
         private AuthCfg auth = null;
         private SysCfg cfg = null;
         private WeightCacher weightCacher = new WeightCacher();
-        private FrmWeight fWeight = null;
         /// <summary>
         /// 是否自动维护
         /// </summary>
@@ -165,31 +164,12 @@ namespace YF.MWS.Win {
             HandleItemClick(tag,fullName);
         }
         public void LoadCar() {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadCar();
         }
 
         public void LoadMaterial() {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadMaterial();
         }
 
         public void LoadCustomer(CustomerType customerType) {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadCustomer(customerType);
-        }
-
-        private FrmWeight GetFrmWeight() {
-            FrmWeight frmWeight = null;
-            foreach (Form f in MdiChildren) {
-                if (f.Tag != null && f.Tag.ToString() == "YF.MWS.Win.View.Weight.FrmWeight") {
-                    frmWeight = (FrmWeight)f;
-                }
-            }
-            return frmWeight;
         }
 
         private void HandleItemClick(string tag,string fullName,bool fromNavBarItem = false) {
@@ -233,11 +213,6 @@ namespace YF.MWS.Win {
                                 RemoveChildForm(formName);
                                 isContiue = true;
                             }
-                        }
-                        if (isContiue) {
-                            FrmDeviceSetting frmDevice = new FrmDeviceSetting();
-                            //frmDevice.DeviceNo = Convert.ToInt32(parameter);
-                            frmDevice.ShowDialog();
                         }
                         return;
                     }
@@ -356,8 +331,6 @@ namespace YF.MWS.Win {
             if (form == null) {
                 return;
             }
-            if (formName.Contains("Weight.FrmWeight")) fWeight= form as FrmWeight;
-            form.Icon = global::YF.MWS.Win.Properties.Resources.favicon;
             form.Tag = formName;
             form.MdiParent = this;
             form.Show();
@@ -581,16 +554,7 @@ namespace YF.MWS.Win {
                 }
             }
         }
-
-        private void toolStripButton7_Click(object sender, EventArgs e) {
-            if (fWeight == null) return;
-            SysCfg cfg = CfgUtil.GetCfg();
-            fWeight.setDevice2(!cfg.Device2.StartDevice);
-        }
-
         private void toolStripButton1_Click(object sender, EventArgs e) {
-            RemoveChildForm(new FrmWeight().GetType().FullName);
-            fWeight = null;
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e) {

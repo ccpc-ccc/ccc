@@ -343,7 +343,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmExtendControl";
             this.Text = "扩展控件管理";
             this.Load += new System.EventHandler(this.FrmExtendControl_Load);

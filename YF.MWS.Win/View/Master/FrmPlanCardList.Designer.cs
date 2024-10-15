@@ -580,7 +580,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmPlanCardList";
             this.Text = "IC卡管理";
             this.Load += new System.EventHandler(this.FrmCardList_Load);

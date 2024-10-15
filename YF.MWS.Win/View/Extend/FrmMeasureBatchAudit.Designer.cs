@@ -225,7 +225,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmMeasureBatchAudit";
             this.Text = "计量方财务审核";
             this.Load += new System.EventHandler(this.FrmMeasureBatchAudit_Load);

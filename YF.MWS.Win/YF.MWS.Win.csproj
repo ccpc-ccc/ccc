@@ -330,6 +330,12 @@
     <Compile Include="Uc\ReportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Uc\WeightControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\WeightControl.Designer.cs">
+      <DependentUpon>WeightControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\VideoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1244,17 +1250,11 @@
     <Compile Include="View\Weight\FrmVoice.Designer.cs">
       <DependentUpon>FrmVoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Weight\FrmWeight.cs">
+    <Compile Include="View\Weight\FrmWeight2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Weight\FrmWeight.Designer.cs">
-      <DependentUpon>FrmWeight.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Weight\FrmWeightExt.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Weight\FrmWeightExtend.cs">
-      <SubType>Form</SubType>
+    <Compile Include="View\Weight\FrmWeight2.Designer.cs">
+      <DependentUpon>FrmWeight2.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Weight\FrmWeightImage.cs">
       <SubType>Form</SubType>
@@ -1299,16 +1299,6 @@
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Uc\CardView.resx">
       <DependentUpon>CardView.cs</DependentUpon>
     </EmbeddedResource>
@@ -1359,6 +1349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcPage.resx">
       <DependentUpon>UcPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\WeightControl.resx">
+      <DependentUpon>WeightControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\VideoControl.resx">
       <DependentUpon>VideoControl.cs</DependentUpon>
@@ -1758,8 +1751,8 @@
     <EmbeddedResource Include="View\Weight\FrmVoice.resx">
       <DependentUpon>FrmVoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Weight\FrmWeight.resx">
-      <DependentUpon>FrmWeight.cs</DependentUpon>
+    <EmbeddedResource Include="View\Weight\FrmWeight2.resx">
+      <DependentUpon>FrmWeight2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Weight\FrmWeightImage.resx">
       <DependentUpon>FrmWeightImage.cs</DependentUpon>
@@ -1818,36 +1811,6 @@
     <None Include="Report\Weight\rptWeightSummary.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\addfile_16x16.png" />
-    <None Include="Resources\additem_16x16.png" />
-    <None Include="Resources\add_16x16.png" />
-    <None Include="Resources\app.png" />
-    <None Include="Resources\apply_16x16.png" />
-    <None Include="Resources\cancel_16x16.png" />
-    <None Include="Resources\close_16x16.png" />
-    <None Include="Resources\contact_16x16.png" />
-    <None Include="Resources\copy_16x16.png" />
-    <None Include="Resources\customization_16x16.png" />
-    <None Include="Resources\customizegrid_16x16.png" />
-    <None Include="Resources\cut_16x16.png" />
-    <None Include="Resources\design_16x16.png" />
-    <None Include="Resources\edit_16x16.png" />
-    <None Include="Resources\find_16x16.png" />
-    <None Include="Resources\insert_16x16.png" />
-    <None Include="Resources\in_16x16.png" />
-    <None Include="Resources\login.png" />
-    <None Include="Resources\new_16x16.png" />
-    <None Include="Resources\new_32x32.png" />
-    <None Include="Resources\out_16x16.png" />
-    <None Include="Resources\photo_16x16.png" />
-    <None Include="Resources\print_16x16.png" />
-    <None Include="Resources\refresh_16x16.png" />
-    <None Include="Resources\remove_16x16.png" />
-    <None Include="Resources\save_16x16.png" />
-    <None Include="Resources\security_16x16.png" />
-    <None Include="Resources\show_16x16.png" />
-    <None Include="Resources\summary_16x16.png" />
-    <None Include="Resources\zoom_16x16.png" />
     <None Include="Sync\Source\MWS.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1870,109 +1833,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LoginCfg.xml" />
-    <Content Include="Resources\addnewdatasource_16x16.png" />
-    <Content Include="Resources\add_32x32.png" />
-    <Content Include="Resources\admin_16x16.png" />
-    <Content Include="Resources\alignverticalleft_32x32.png" />
-    <None Include="Resources\app.jpg" />
-    <Content Include="Resources\apply_32x32.png" />
-    <None Include="Resources\banner.png" />
-    <Content Include="Resources\banner.jpg" />
-    <Content Include="Resources\bugreport_16x16.png" />
-    <None Include="Resources\close_32x32.png" />
-    <None Include="Resources\cancel_32x32.png" />
-    <None Include="Resources\calendar_16x16.png" />
-    <None Include="Resources\calc.bmp" />
-    <Content Include="Resources\camera_16x16.png" />
-    <None Include="Resources\clear.bmp" />
-    <Content Include="Resources\closegate_32x32.png" />
-    <Content Include="Resources\close_gate_16x16.png" />
-    <Content Include="Resources\corp_16x16.png" />
-    <Content Include="Resources\currency_16x16.png" />
-    <Content Include="Resources\customer_16x16.png" />
-    <Content Include="Resources\delete_16x16.png" />
-    <None Include="Resources\double.bmp" />
-    <Content Include="Resources\double_16x16.png" />
-    <Content Include="Resources\dstart.png" />
-    <Content Include="Resources\editcomment_16x16.png" />
-    <Content Include="Resources\editfeed_16x16.png" />
-    <None Include="Resources\exit.bmp" />
-    <Content Include="Resources\export_16x16.png" />
-    <Content Include="Resources\extend_16x16.png" />
-    <None Include="Resources\favicon.ico" />
-    <Content Include="Resources\first_16x16.png" />
-    <Content Include="Resources\font_16x16.png" />
-    <Content Include="Resources\font_32x32.png" />
-    <Content Include="Resources\gague_16x16.png" />
-    <Content Include="Resources\greenlightclose_16x16.png" />
-    <Content Include="Resources\greenlightclose_32x32.png" />
-    <Content Include="Resources\greenlighton_16x16.png" />
-    <Content Include="Resources\greenlighton_32x32.png" />
-    <None Include="Resources\gross.bmp" />
-    <Content Include="Resources\gross_32x32.png" />
-    <None Include="Resources\Image1.bmp" />
-    <Content Include="Resources\image_16x16.png" />
-    <Content Include="Resources\import_16x16.png" />
-    <Content Include="Resources\info_32x32.png" />
-    <Content Include="Resources\invalid.png" />
-    <Content Include="Resources\invalid_32x32.png" />
-    <Content Include="Resources\last_16x16.png" />
-    <None Include="Resources\logout.bmp" />
-    <Content Include="Resources\movedown_32x32.png" />
-    <Content Include="Resources\moveup_32x32.png" />
-    <None Include="Resources\net.bmp" />
-    <Content Include="Resources\newdoc_32x32.png" />
-    <Content Include="Resources\next_16x16.png" />
-    <Content Include="Resources\notes_16x16.png" />
-    <Content Include="Resources\opengate_32x32.png" />
-    <Content Include="Resources\open_gate_16x16.png" />
-    <Content Include="Resources\org_16x16.png" />
-    <Content Include="Resources\package_32x32.png" />
-    <Content Include="Resources\packag_32x32.png" />
-    <Content Include="Resources\pad_32x32.png" />
-    <None Include="Resources\phone.bmp" />
-    <None Include="Resources\phone1.bmp" />
-    <Content Include="Resources\photo_32x32.png" />
-    <Content Include="Resources\previewdoc_32x32.png" />
-    <Content Include="Resources\prev_16x16.png" />
-    <None Include="Resources\print.bmp" />
-    <Content Include="Resources\printdoc_32x32.png" />
-    <Content Include="Resources\properties_16x16.png" />
-    <None Include="Resources\query.bmp" />
-    <Content Include="Resources\redlightclose_16x16.png" />
-    <Content Include="Resources\redlightclose_32x32.png" />
-    <Content Include="Resources\redlighton_16x16.png" />
-    <Content Include="Resources\redlighton_32x32.png" />
-    <Content Include="Resources\redo-32x32.png" />
-    <Content Include="Resources\redo_16x16.png" />
-    <Content Include="Resources\report_32x32.png" />
-    <Content Include="Resources\reset_32x32.png" />
-    <Content Include="Resources\return_16x16.png" />
-    <Content Include="Resources\save-32x32.png" />
-    <None Include="Resources\savepagesetup_32x32.png" />
-    <None Include="Resources\save.bmp" />
-    <Content Include="Resources\savesetup_16x16.png" />
-    <None Include="Resources\setTare.bmp" />
-    <Content Include="Resources\setup_16x16.png" />
-    <None Include="Resources\start.jpg" />
-    <None Include="Resources\start1.png" />
-    <None Include="Resources\start.png" />
-    <Content Include="Resources\summay_32x32.png" />
-    <None Include="Resources\tare.bmp" />
-    <Content Include="Resources\tare_32x32.png" />
-    <Content Include="Resources\template_16x16.png" />
-    <Content Include="Resources\textbox_16x16.png" />
-    <Content Include="Resources\text_32x32.png" />
-    <None Include="Resources\ticket.bmp" />
-    <Content Include="Resources\tree_32x32.png" />
-    <None Include="Resources\video.bmp" />
-    <Content Include="Resources\video_32x32.png" />
-    <None Include="Resources\voice.bmp" />
-    <Content Include="Resources\voice_16x16.png" />
-    <Content Include="Resources\voice_32x32.png" />
-    <None Include="Resources\weigh.png" />
-    <None Include="Resources\weight.bmp" />
-    <Content Include="Resources\windows_32x32.png" />
     <Content Include="Sound\ALARM.WAV">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2013,11 +1873,6 @@
     <Content Include="VoiceCfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\reset_16x16.png" />
-    <None Include="Resources\exportexcel_16x16.png" />
-    <None Include="Resources\weight_16x16.png" />
-    <None Include="Resources\Loading.gif" />
-    <None Include="Resources\build_16x16.png" />
     <Content Include="Config\SearchCondition.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -2097,32 +1952,6 @@
     <Content Include="Sound\YYI.WAV">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\clear_16x16.png" />
-    <Content Include="Resources\database_16x16.png" />
-    <Content Include="Resources\deletedatasource_16x16.png" />
-    <Content Include="Resources\device_16x16.png" />
-    <Content Include="Resources\download_16x16.png" />
-    <Content Include="Resources\help_16x16.png" />
-    <Content Include="Resources\info_16x16.png" />
-    <Content Include="Resources\list_16x16.png" />
-    <Content Include="Resources\material_16x16.png" />
-    <Content Include="Resources\module_16x16.png" />
-    <Content Include="Resources\open_16x16.png" />
-    <Content Include="Resources\paste_16x16.png" />
-    <Content Include="Resources\preview_16x16.png" />
-    <Content Include="Resources\preview_32x32.png" />
-    <Content Include="Resources\print_32x32.png" />
-    <Content Include="Resources\refresh_32x32.png" />
-    <Content Include="Resources\report_16x16.png" />
-    <Content Include="Resources\role_16x16.png" />
-    <Content Include="Resources\scode_16x16.png" />
-    <Content Include="Resources\scripts_16x16.png" />
-    <Content Include="Resources\search_16x16.png" />
-    <Content Include="Resources\search_32x32.png" />
-    <None Include="Resources\send_16x16.png" />
-    <Content Include="Resources\upload_16x16.png" />
-    <Content Include="Resources\user_16x16.png" />
-    <Content Include="Resources\video_16x16.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

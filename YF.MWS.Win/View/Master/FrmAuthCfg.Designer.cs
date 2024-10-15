@@ -53,7 +53,6 @@
             // 
             // btnVerify
             // 
-            this.btnVerify.Image = global::YF.MWS.Win.Properties.Resources.security_16x16;
             this.btnVerify.Location = new System.Drawing.Point(108, 76);
             this.btnVerify.Name = "btnVerify";
             this.btnVerify.Size = new System.Drawing.Size(75, 23);
@@ -69,7 +68,6 @@
             this.Controls.Add(this.btnVerify);
             this.Controls.Add(this.tePassword);
             this.Controls.Add(this.lblPassword);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmAuthCfg";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

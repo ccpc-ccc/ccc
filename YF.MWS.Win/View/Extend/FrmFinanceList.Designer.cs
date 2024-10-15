@@ -242,7 +242,6 @@
             // 
             // btnExortWithGV
             // 
-            this.btnExortWithGV.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExortWithGV.Location = new System.Drawing.Point(709, 14);
             this.btnExortWithGV.Name = "btnExortWithGV";
             this.btnExortWithGV.Size = new System.Drawing.Size(113, 23);
@@ -266,7 +265,6 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExportExcel.Location = new System.Drawing.Point(843, 14);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(113, 23);
@@ -276,7 +274,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(613, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -372,7 +369,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmFinanceList";
             this.Text = "财务结算";
             this.Load += new System.EventHandler(this.FrmFinanceList_Load);

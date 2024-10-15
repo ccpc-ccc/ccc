@@ -257,7 +257,6 @@ namespace YF.MWS.Win.View.Manage
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmCustomCodeList";
             this.Text = "自定义编码";
             this.Load += new System.EventHandler(this.FrmCodeList_Load);

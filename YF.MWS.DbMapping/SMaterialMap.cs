@@ -29,6 +29,8 @@ namespace YF.MWS.DbMapping
             Map(m => m.Remark);
             Map(m => m.CompanyId);
             Map(m => m.Quantity);
+            Map(m => m.MaxWeight);
+            Map(m=>m.MinWeight);
         } 
     }
 }

@@ -69,9 +69,9 @@ namespace YF.MWS.Win.View.Weight
         {
             teEndDate.Time = DateTime.Now;
             teStartDate.Time = DateTime.Now;
-            if (Cfg.Transfer != null)
+            if (Program._cfg.Transfer != null)
             {
-                serverUrl = Cfg.Transfer.ServerUrl;
+                serverUrl = Program._cfg.Transfer.ServerUrl;
             }
         }
 

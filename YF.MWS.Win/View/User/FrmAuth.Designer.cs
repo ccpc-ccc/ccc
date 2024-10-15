@@ -40,7 +40,6 @@
             // 
             // btnVerify
             // 
-            this.btnVerify.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.security_16x16;
             this.btnVerify.Location = new System.Drawing.Point(125, 121);
             this.btnVerify.Name = "btnVerify";
             this.btnVerify.Size = new System.Drawing.Size(75, 23);
@@ -90,7 +89,6 @@
             this.Controls.Add(this.btnVerify);
             this.Controls.Add(this.teAuthCode);
             this.Controls.Add(this.lblAuthCode);
-            this.IconOptions.LargeImage = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmAuth";

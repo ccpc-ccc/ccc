@@ -89,7 +89,6 @@
             this.btnViewPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewPhoto.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnViewPhoto.Appearance.Options.UseFont = true;
-            this.btnViewPhoto.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.photo_16x16;
             this.btnViewPhoto.Location = new System.Drawing.Point(1237, 8);
             this.btnViewPhoto.Name = "btnViewPhoto";
             this.btnViewPhoto.Size = new System.Drawing.Size(91, 25);
@@ -137,7 +136,6 @@
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExportExcel.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportExcel.Appearance.Options.UseFont = true;
-            this.btnExportExcel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExportExcel.Location = new System.Drawing.Point(931, 10);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 25);
@@ -150,7 +148,6 @@
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSearch.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Appearance.Options.UseFont = true;
-            this.btnSearch.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(833, 10);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 25);

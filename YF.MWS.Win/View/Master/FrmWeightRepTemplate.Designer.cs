@@ -278,7 +278,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmWeightRepTemplate";
             this.Text = "单据模板管理";
             this.Load += new System.EventHandler(this.FrmWeightReportList_Load);

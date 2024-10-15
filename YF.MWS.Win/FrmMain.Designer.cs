@@ -260,7 +260,6 @@
             // 
             // ribbon
             // 
-            this.ribbon.ApplicationButtonImageOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
@@ -2007,7 +2006,6 @@
             // toolStripButton1
             // 
             this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.Image = global::YF.MWS.Win.Properties.Resources.exit;
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
@@ -2025,7 +2023,6 @@
             // toolStripButton2
             // 
             this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.Image = global::YF.MWS.Win.Properties.Resources.logout;
             this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2039,7 +2036,6 @@
             // toolStripButton3
             // 
             this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.Image = global::YF.MWS.Win.Properties.Resources.weight;
             this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2054,7 +2050,6 @@
             // toolStripButton4
             // 
             this.toolStripButton4.AutoSize = false;
-            this.toolStripButton4.Image = global::YF.MWS.Win.Properties.Resources.query;
             this.toolStripButton4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2069,7 +2064,6 @@
             // toolStripButton5
             // 
             this.toolStripButton5.AutoSize = false;
-            this.toolStripButton5.Image = global::YF.MWS.Win.Properties.Resources.video;
             this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2084,7 +2078,6 @@
             // toolStripButton6
             // 
             this.toolStripButton6.AutoSize = false;
-            this.toolStripButton6.Image = global::YF.MWS.Win.Properties.Resources.calc;
             this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2103,7 +2096,6 @@
             // toolStripButton7
             // 
             this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.Image = global::YF.MWS.Win.Properties.Resources._double;
             this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2112,12 +2104,10 @@
             this.toolStripButton7.Size = new System.Drawing.Size(60, 60);
             this.toolStripButton7.Text = "一机双衡";
             this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
             // toolStripButton8
             // 
             this.toolStripButton8.AutoSize = false;
-            this.toolStripButton8.Image = global::YF.MWS.Win.Properties.Resources.net;
             this.toolStripButton8.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2132,7 +2122,6 @@
             // toolStripButton9
             // 
             this.toolStripButton9.AutoSize = false;
-            this.toolStripButton9.Image = global::YF.MWS.Win.Properties.Resources.voice;
             this.toolStripButton9.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton9.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
@@ -2158,7 +2147,6 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.IsMdiContainer = true;
             this.Name = "FrmMain";
             this.Ribbon = this.ribbon;

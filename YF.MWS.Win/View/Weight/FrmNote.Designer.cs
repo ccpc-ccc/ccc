@@ -45,7 +45,6 @@
             // btnClose
             // 
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnClose.Image = global::YF.MWS.Win.Properties.Resources.close_16x16;
             this.btnClose.Location = new System.Drawing.Point(239, 6);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(24, 23);
@@ -62,7 +61,6 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblOverweightNote);
             this.DoubleBuffered = true;
-            this.Icon = global::YF.MWS.Win.Properties.Resources.favicon;
             this.MaximumSize = new System.Drawing.Size(272, 71);
             this.MinimumSize = new System.Drawing.Size(272, 71);
             this.Name = "FrmNote";

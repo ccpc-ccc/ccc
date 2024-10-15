@@ -170,7 +170,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximumSize = new System.Drawing.Size(456, 199);
             this.MinimumSize = new System.Drawing.Size(456, 199);
             this.Name = "FrmAttributeSubject";

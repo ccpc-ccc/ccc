@@ -50,7 +50,6 @@
             // 
             this.btnOK.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnOK.Appearance.Options.UseFont = true;
-            this.btnOK.Image = global::YF.MWS.Win.Properties.Resources.apply_32x32;
             this.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnOK.Location = new System.Drawing.Point(39, 146);
             this.btnOK.Name = "btnOK";
@@ -73,7 +72,6 @@
             // 
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Image = global::YF.MWS.Win.Properties.Resources.cancel_32x32;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.TopCenter;
             this.btnCancel.Location = new System.Drawing.Point(216, 146);
             this.btnCancel.Name = "btnCancel";
@@ -91,7 +89,6 @@
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.tePassword);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmConfirmExit";

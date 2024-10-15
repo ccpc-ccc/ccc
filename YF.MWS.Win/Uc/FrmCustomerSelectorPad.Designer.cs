@@ -143,7 +143,6 @@
             // 
             this.btnCancel.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Image = global::YF.MWS.Win.Properties.Resources.cancel_32x32;
             this.btnCancel.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnCancel.Location = new System.Drawing.Point(789, 15);
             this.btnCancel.Name = "btnCancel";
@@ -156,7 +155,6 @@
             // 
             this.btnOK.Appearance.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnOK.Appearance.Options.UseFont = true;
-            this.btnOK.Image = global::YF.MWS.Win.Properties.Resources.apply_32x32;
             this.btnOK.ImageLocation = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
             this.btnOK.Location = new System.Drawing.Point(609, 15);
             this.btnOK.Name = "btnOK";
@@ -192,7 +190,6 @@
             this.ClientSize = new System.Drawing.Size(935, 490);
             this.Controls.Add(this.gcCustomer);
             this.Controls.Add(this.pcCarNo);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmCustomerSelectorPad";

@@ -15,10 +15,6 @@ namespace YF.MWS.Win.Uc
     public class BaseForm : XtraForm
     {
         public string RecId { get; set; }
-        /// <summary>
-        /// 系统配置
-        /// </summary>
-        public SysCfg Cfg { get; set; }
         public AuthCfg Auth { get; set; }
         private List<SModule> lstModule = new List<SModule>();
 
@@ -46,7 +42,6 @@ namespace YF.MWS.Win.Uc
         protected override void OnLoad(EventArgs e)
         {
             if (!DesignMode) {
-                Cfg = CfgUtil.GetCfg();
                 Auth=CfgUtil.GetAuth();
                 var lst = UserCacher.GetModuleList(CurrentUser.Instance.Id);
                 string fullName = this.GetType().FullName;

@@ -112,8 +112,8 @@ namespace YF.MWS.Win.View.Weight
             syncObj.MasterService = masterService;
             syncObj.WeightService = weightService;
             syncObj.WeightExtService = weightExtService;
-            if (Cfg != null && Cfg.Transfer != null)
-                syncObj.Transfer = Cfg.Transfer;
+            if (Program._cfg != null && Program._cfg.Transfer != null)
+                syncObj.Transfer = Program._cfg.Transfer;
         }
 
         private void SetControl()

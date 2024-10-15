@@ -155,7 +155,6 @@ namespace YF.MWS.Win.View.Weight
             this.ClientSize = new System.Drawing.Size(812, 572);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.pnlVideo);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MinimizeBox = false;
             this.Name = "FrmViewVideoDevice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

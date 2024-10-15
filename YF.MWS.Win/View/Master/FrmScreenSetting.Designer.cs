@@ -178,7 +178,6 @@
             // 
             this.btnSend.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.btnSend.Appearance.Options.UseFont = true;
-            this.btnSend.Image = global::YF.MWS.Win.Properties.Resources.send_16x16;
             this.btnSend.Location = new System.Drawing.Point(380, 165);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(70, 23);
@@ -190,7 +189,6 @@
             // 
             this.btnClean.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.btnClean.Appearance.Options.UseFont = true;
-            this.btnClean.Image = global::YF.MWS.Win.Properties.Resources.clear_16x16;
             this.btnClean.Location = new System.Drawing.Point(288, 165);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(70, 23);
@@ -434,7 +432,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

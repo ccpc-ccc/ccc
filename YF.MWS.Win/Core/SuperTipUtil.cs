@@ -21,9 +21,7 @@ namespace YF.MWS.Win.Core
         {
             SuperToolTip tip = new SuperToolTip();
             ToolTipItem item = new ToolTipItem();
-            item.Appearance.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
             item.Appearance.Options.UseImage = true;
-            item.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
             item.Text = string.Format("<b><color=\"red\">{0}</color></b>",module.SuperTipContent);
             tip.Items.Add(item);
             tip.AllowHtmlText = DefaultBoolean.True;

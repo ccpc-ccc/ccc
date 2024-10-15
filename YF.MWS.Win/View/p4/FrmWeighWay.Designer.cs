@@ -748,7 +748,6 @@
             this.btnSelectBackupDbDirectory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.btnSelectBackupDbDirectory.Size = new System.Drawing.Size(306, 20);
-            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
             toolTipTitleItem1.Text = "提示";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "如果是网络版数据库，则需要确保此目录存在于安装数据库的那台电脑上。";
@@ -856,9 +855,7 @@
             this.chkStartInputItemAutoSave.Name = "chkStartInputItemAutoSave";
             this.chkStartInputItemAutoSave.Properties.Caption = "开启输入项目自动保存";
             this.chkStartInputItemAutoSave.Size = new System.Drawing.Size(148, 20);
-            toolTipItem2.Appearance.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
             toolTipItem2.Appearance.Options.UseImage = true;
-            toolTipItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
             toolTipItem2.Text = "开启此功能会延长保存磅单的时间,如无必要请不要开启此功能.";
             superToolTip2.Items.Add(toolTipItem2);
             this.chkStartInputItemAutoSave.SuperTip = superToolTip2;
@@ -1023,7 +1020,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 627);
             this.Controls.Add(this.plMain);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmWeighWay";

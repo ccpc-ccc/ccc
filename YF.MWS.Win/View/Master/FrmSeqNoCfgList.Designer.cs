@@ -261,7 +261,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmSeqNoCfgList";
             this.Text = "序列号设置";
             this.Load += new System.EventHandler(this.FrmSeqNoCfgList_Load);

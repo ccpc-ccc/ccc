@@ -72,15 +72,15 @@ namespace YF.MWS.Win.View.Master
                 barItemSaveAndNew.Enabled = true;
                 btnItemSave.Enabled = true;
             }
-            if (Cfg != null)
+            if (Program._cfg != null)
             {
-                if (Cfg.WriteCard != null)
+                if (Program._cfg.WriteCard != null)
                 {
-                    writeCard = Cfg.WriteCard;
+                    writeCard = Program._cfg.WriteCard;
                 }
-                if (Cfg.Weight != null)
+                if (Program._cfg.Weight != null)
                 {
-                    startAppCardRead = Cfg.Weight.StartAppWeightConfirm;
+                    startAppCardRead = Program._cfg.Weight.StartAppWeightConfirm;
                 }
             }
             ucCardEdit.IsVirtualCard = IsVirtualCard;

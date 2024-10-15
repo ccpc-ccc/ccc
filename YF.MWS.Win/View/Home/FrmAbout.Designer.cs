@@ -91,7 +91,6 @@
             // 
             // btnCopyMachineCode
             // 
-            this.btnCopyMachineCode.Image = global::YF.MWS.Win.Properties.Resources.copy_16x16;
             this.btnCopyMachineCode.Location = new System.Drawing.Point(369, 261);
             this.btnCopyMachineCode.Name = "btnCopyMachineCode";
             this.btnCopyMachineCode.Size = new System.Drawing.Size(75, 23);
@@ -101,7 +100,6 @@
             // 
             // peWaitting
             // 
-            this.peWaitting.EditValue = global::YF.MWS.Win.Properties.Resources.start;
             this.peWaitting.Location = new System.Drawing.Point(18, 22);
             this.peWaitting.Name = "peWaitting";
             this.peWaitting.Properties.AllowFocused = false;
@@ -124,7 +122,6 @@
             this.Controls.Add(this.lblExpireDate);
             this.Controls.Add(this.lblRegisterDate);
             this.Controls.Add(this.lblAppName);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(479, 414);

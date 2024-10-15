@@ -76,7 +76,6 @@
             // 
             // btnUploadPhoto
             // 
-            this.btnUploadPhoto.Image = global::YF.MWS.Win.Properties.Resources.upload_16x16;
             this.btnUploadPhoto.Location = new System.Drawing.Point(727, 14);
             this.btnUploadPhoto.Name = "btnUploadPhoto";
             this.btnUploadPhoto.Size = new System.Drawing.Size(89, 23);
@@ -87,7 +86,6 @@
             // 
             // btnUpload
             // 
-            this.btnUpload.Image = global::YF.MWS.Win.Properties.Resources.upload_16x16;
             this.btnUpload.Location = new System.Drawing.Point(629, 14);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(75, 23);
@@ -97,7 +95,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(529, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -303,7 +300,6 @@
             this.ClientSize = new System.Drawing.Size(1012, 469);
             this.Controls.Add(this.gcWeight);
             this.Controls.Add(this.panelControl1);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmSyncWeightList";
             this.Text = "磅单数据同步";
             this.Load += new System.EventHandler(this.FrmSyncWeightList_Load);

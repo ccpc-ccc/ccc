@@ -196,20 +196,13 @@ namespace YF.MWS.SQliteService
         /// <returns></returns>
         public List<SMaterial> GetMaterialList()
         {
-            string sql;
-            sql = "select * from S_Material";
-            DataTable dt = null;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            return TableHelper.TableToList<SMaterial>(dt);
+            string sql = "select * from S_Material";
+            return base.getList<SMaterial>(sql);
         }
-
+        public List<SMaterial> GetMaterialByCompanyId(string companyId) {
+            string sql = $"select * from S_Material where CompanyId='{companyId}'";
+            return base.getList<SMaterial>(sql);
+        }
         /// <summary>
         /// 获取物资列表
         /// </summary>
@@ -255,17 +248,8 @@ namespace YF.MWS.SQliteService
         /// <returns></returns>
         public bool DeleteMaterial(string materialId)
         {
-            bool isDeleted = false;
             string sql = string.Format(@"delete from S_Material where Id = '{0}'", materialId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                isDeleted = sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            else 
-            {
-                isDeleted = service.ExecuteNonQuery(sql);
-            }
-            return isDeleted;
+            return base.ExecuteSql(sql);
         }
 
         /// <summary>

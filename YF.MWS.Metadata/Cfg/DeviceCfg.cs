@@ -90,6 +90,10 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public bool StartReturnZero { get; set; } = false;
         /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
         /// 流程节点
         /// </summary>
         public SendReturnZeroProcessType SendReturnZeroProcess { get; set; }

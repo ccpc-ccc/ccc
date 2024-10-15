@@ -113,7 +113,6 @@
             // 
             // btnSendSmsAuthCode
             // 
-            this.btnSendSmsAuthCode.Image = global::YF.MWS.Win.Properties.Resources.send_16x16;
             this.btnSendSmsAuthCode.Location = new System.Drawing.Point(358, 68);
             this.btnSendSmsAuthCode.Name = "btnSendSmsAuthCode";
             this.btnSendSmsAuthCode.Size = new System.Drawing.Size(115, 30);
@@ -123,7 +122,6 @@
             // 
             // btnVerifySmsAuthCode
             // 
-            this.btnVerifySmsAuthCode.Image = global::YF.MWS.Win.Properties.Resources.security_16x16;
             this.btnVerifySmsAuthCode.Location = new System.Drawing.Point(105, 160);
             this.btnVerifySmsAuthCode.Name = "btnVerifySmsAuthCode";
             this.btnVerifySmsAuthCode.Size = new System.Drawing.Size(80, 30);
@@ -160,7 +158,6 @@
             // 
             // btnVerify
             // 
-            this.btnVerify.Image = global::YF.MWS.Win.Properties.Resources.security_16x16;
             this.btnVerify.Location = new System.Drawing.Point(110, 130);
             this.btnVerify.Name = "btnVerify";
             this.btnVerify.Size = new System.Drawing.Size(80, 30);
@@ -205,7 +202,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 276);
             this.Controls.Add(this.tabHandle);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmExpiredHandle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "软件升级维护";

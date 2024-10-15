@@ -42,6 +42,7 @@ namespace YF.MWS.Client.DataService.Interface
         /// </summary>
         /// <returns></returns>
         List<SMaterial> GetMaterialList();
+        List<SMaterial> GetMaterialByCompanyId(string companyId);
         DataTable GetMaterialExport();
         /// <summary>
         /// 根据物资编号删除物资信息

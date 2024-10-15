@@ -46,8 +46,6 @@ namespace YF.MWS.Win.Uc
         public string CurrentViewId;
         private List<SAttribute> lstAttribute = new List<SAttribute>();
 
-        public FrmWeight FrmWeight { get; set; }
-
         public List<SAttribute> LstAttribute
         {
             get { return lstAttribute; }
@@ -96,79 +94,6 @@ namespace YF.MWS.Win.Uc
             }
             InitData();
             base.OnLoad(e);
-        }
-
-        public override bool ValidateChildren()
-        {
-            bool isValidated = true;
-            try
-            {
-                IField field = null;
-                foreach (string key in fields.Keys)
-                {
-                    field = fields[key];
-                    if (field != null && field.IsRequired)
-                    {
-                        if (key == "CarId")
-                        {
-                            WCarLookup wCarLookup = field as WCarLookup;
-                            if (wCarLookup != null)
-                            {
-                                if (wCarLookup.Text.Length == 0)
-                                {
-                                    if (FrmWeight != null)
-                                        FrmWeight.ShowWeightStateTip(field.ErrorTipText);
-                                    isValidated = false;
-                                    return isValidated;
-                                }
-                            }
-                        }
-                        /*else if (key == "PayType")
-                        {
-                            WComboBoxValueEdit wePayType = field as WComboBoxValueEdit;
-                            if (wePayType != null)
-                            {
-                                if (wePayType.CurrentValue.ToInt() == 0)
-                                {
-                                    if (FrmWeight != null)
-                                        FrmWeight.ShowWeightStateTip(field.ErrorTipText);
-                                    isValidated = false;
-                                    return isValidated;
-                                }
-                            }
-                        }*/
-                        else
-                        {
-                            if (field.CurrentValue == null || field.Text.Length == 0)
-                            {
-                                if (FrmWeight != null)
-                                    FrmWeight.ShowWeightStateTip(field.ErrorTipText);
-                                isValidated = false;
-                                return isValidated;
-                            }
-                        }
-                    }
-                }
-                foreach (string key in extendFields.Keys)
-                {
-                    field = extendFields[key];
-                    if (field != null && field.IsRequired)
-                    {
-                        if (field.CurrentValue == null || field.CurrentValue.ToString().Length == 0)
-                        {
-                            if (FrmWeight != null)
-                                FrmWeight.ShowWeightStateTip(field.ErrorTipText);
-                            isValidated = false;
-                            return isValidated;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException(ex);
-            }
-            return isValidated;
         }
 
         public void SetRole(List<SModule> lstModule)

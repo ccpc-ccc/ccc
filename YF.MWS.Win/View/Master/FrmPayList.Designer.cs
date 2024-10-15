@@ -349,7 +349,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmPayList";
             this.Text = "往来账目";
             this.Load += new System.EventHandler(this.FrmWarehList_Load);

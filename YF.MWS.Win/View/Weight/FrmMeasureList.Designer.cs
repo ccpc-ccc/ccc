@@ -231,7 +231,6 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
             this.btnExportExcel.Location = new System.Drawing.Point(451, 14);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 23);
@@ -241,7 +240,6 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
             this.btnSearch.Location = new System.Drawing.Point(348, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -306,7 +304,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.LargeImage = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmMeasureList";
             this.Text = "计量方";
             this.Load += new System.EventHandler(this.FrmMeasureList_Load);

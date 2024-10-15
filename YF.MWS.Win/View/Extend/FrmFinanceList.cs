@@ -70,14 +70,14 @@ namespace YF.MWS.Win.View.Extend
 
         private void SetSummaryField()
         {
-            if (Cfg.FinanceSettle == null || string.IsNullOrEmpty(Cfg.FinanceSettle.SummaryFieldNames))
+            if (Program._cfg.FinanceSettle == null || string.IsNullOrEmpty(Program._cfg.FinanceSettle.SummaryFieldNames))
             {
                 return;
             }
             GridColumn col = null;
             string fieldName = string.Empty;
 
-            string[] fields = Cfg.FinanceSettle.SummaryFieldNames.Split(';');
+            string[] fields = Program._cfg.FinanceSettle.SummaryFieldNames.Split(';');
             string displayFormat = "{0:F2}";
             string countDisplayFormat = "{0:F0}";
             foreach (string f in fields)

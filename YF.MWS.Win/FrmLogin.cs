@@ -20,13 +20,7 @@ using YF.Utility.Configuration;
 using System.IO;
 using YF.MWS.Metadata.Cfg;
 using YF.Utility.Security;
-using YF.MWS.CacheService;
-using YF.MWS.Win.View.User;
-using YF.MWS.Util;
 using YF.MWS.Metadata;
-using System.Runtime.InteropServices;
-using YF.Utility.Net;
-using YF.MWS.Win.View.Home;
 
 namespace YF.MWS.Win
 {
@@ -52,7 +46,6 @@ namespace YF.MWS.Win
         {
             InitializeComponent();
             SplashScreenManager.CloseForm();
-            this.Icon= global::YF.MWS.Win.Properties.Resources.favicon;
         }
       
         private void btnLogin_Click(object sender, EventArgs e)

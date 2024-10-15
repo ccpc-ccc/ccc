@@ -289,7 +289,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmSumReportTemplate";
             this.Text = "统计报表模板";
             this.Load += new System.EventHandler(this.FrmSumReportTemplate_Load);

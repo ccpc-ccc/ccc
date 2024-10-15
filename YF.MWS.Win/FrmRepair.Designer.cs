@@ -120,7 +120,6 @@
             // 
             // btnRepair
             // 
-            this.btnRepair.Image = global::YF.MWS.Win.Properties.Resources.apply_16x16;
             this.btnRepair.Location = new System.Drawing.Point(180, 201);
             this.btnRepair.Name = "btnRepair";
             this.btnRepair.Size = new System.Drawing.Size(115, 23);
@@ -130,7 +129,6 @@
             // 
             // btnAddConsult
             // 
-            this.btnAddConsult.Image = global::YF.MWS.Win.Properties.Resources.help_16x16;
             this.btnAddConsult.Location = new System.Drawing.Point(324, 201);
             this.btnAddConsult.Name = "btnAddConsult";
             this.btnAddConsult.Size = new System.Drawing.Size(92, 23);
@@ -144,7 +142,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 254);
             this.Controls.Add(this.plMain);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmRepair";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "软件修复";

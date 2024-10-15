@@ -302,7 +302,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmMaterialList";
             this.Text = "物资列表";
             this.Load += new System.EventHandler(this.FrmMaterialList_Load);

@@ -226,7 +226,7 @@ namespace YF.MWS.Win.View.Master
          
 
         private void barItemAddExtendControl_ItemClick(object sender, ItemClickEventArgs e) {
-            if (!Cfg.Transfer.isOpen) {
+            if (!Program._cfg.Transfer.isOpen) {
                 MessageDxUtil.ShowTips("请先开启远程服务！");
                 return;
             }

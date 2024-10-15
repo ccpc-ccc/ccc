@@ -218,7 +218,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmClientList";
             this.Text = "客户端管理";
             this.Load += new System.EventHandler(this.FrmClientList_Load);

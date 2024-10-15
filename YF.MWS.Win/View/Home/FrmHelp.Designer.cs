@@ -124,7 +124,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 460);
             this.Controls.Add(this.gcReport);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmHelp";
             this.Text = "帮助文档浏览";
             this.Load += new System.EventHandler(this.FrmHelp_Load);

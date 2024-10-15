@@ -296,7 +296,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(486, 355);
             this.Controls.Add(this.xtraTabControl1);
-            this.IconOptions.Image= global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(488, 387);
             this.MinimizeBox = false;

@@ -154,7 +154,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmViewCustomDataSource";
             this.Text = "预览报表数据";
             this.Load += new System.EventHandler(this.FrmViewCustomDataSource_Load);

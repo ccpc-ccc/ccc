@@ -310,7 +310,6 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Image = global::YF.MWS.Win.Properties.Resources.next_16x16;
             this.btnAdd.Location = new System.Drawing.Point(499, 145);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(116, 42);
@@ -320,7 +319,6 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Image = global::YF.MWS.Win.Properties.Resources.prev_16x16;
             this.btnRemove.Location = new System.Drawing.Point(499, 226);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(116, 42);
@@ -339,7 +337,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.Name = "FrmViewConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "界面简单配置";

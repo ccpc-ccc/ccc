@@ -84,7 +84,6 @@
             this.Controls.Add(this.picWeight3);
             this.Controls.Add(this.picWeight2);
             this.Controls.Add(this.picWeight1);
-            this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmWeightImage";
