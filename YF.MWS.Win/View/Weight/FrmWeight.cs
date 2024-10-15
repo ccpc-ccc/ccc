@@ -2283,7 +2283,7 @@ namespace YF.MWS.Win.View.Weight {
                 }
                 //如果设置了自动打印，则开启自动打印磅单功能
                 if (autoPrintWeight&& (CurrentUser.Instance.Powers != null &&CurrentUser.Instance.Powers.Contains("p2_5"))) {
-                    AutoPrint(currentWeight);
+                    Print(currentWeight.Id);
                 }
                 if (printPhoto&& CurrentUser.Instance.Powers != null && CurrentUser.Instance.Powers.Contains("p2_5")) {
                     PrintUtil.PrintWeightReportPdf(currentViewId, currentWeight, reportService, null, weightPrinterName);

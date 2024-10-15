@@ -113,7 +113,7 @@ namespace YF.MWS.Win.View.Master {
             this.cmbCom1.EditValue = cfg.Device1.Port;
             DxHelper.BindComboBoxEdit(cmbBaudRate1, SysCode.BaundRate, cfg.Device1.BaundRate);
             DxHelper.BindComboBoxEdit(cmbDataBits1, SysCode.DataBit, cfg.Device1.DataBit);
-            DxHelper.BindComboBoxEdit(cmbStopBits1, SysCode.StopBit, cfg.Device1.StopBit);
+            DxHelper.BindComboBoxEdit<StopBits>(cmbStopBits1, cfg.Device1.StopBit);
             DxHelper.BindComboBoxEdit(cmbParity1, SysCode.ParityVerifyBit, cfg.Device1.Parity);
             if (cfg.Device1.DataFormat == "DEC") {
                 this.radioDigit1.SelectedIndex = 0;
@@ -216,22 +216,11 @@ namespace YF.MWS.Win.View.Master {
             this.serialPort2 = new SerialPortHelper(2,cfg.Device2);
 
             if (this.serialPort1 != null) {
-                this.OnShowData = new ShowData(this.ShowDataInfo1);
                 this.serialPort1.OnDataReceived = new SerialPortHelper.DataReceived(this.ShowReceivedData1);
             }
             if (this.serialPort2 != null) {
-                this.OnShowData = new ShowData(this.ShowDataInfo2);
                 this.serialPort2.OnDataReceived = new SerialPortHelper.DataReceived(this.ShowReceivedData2);
             }
-        }
-
-        /// <summary>
-        /// 修改串口
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmbCom_SelectedIndexChanged(object sender, EventArgs e) {
-            ChangeDevice1();
         }
 
         /// <summary>
@@ -266,7 +255,9 @@ namespace YF.MWS.Win.View.Master {
                     dataStr = sbData.ToString();
 
                 }
-                this.Invoke(this.OnShowData, dataStr);
+                this.Invoke(new Action<string>((str) => {
+                    this.ShowDataInfo1(str);
+                }), dataStr);
             }
         }
         private void ShowReceivedData2(byte[] byteData) {
@@ -284,14 +275,10 @@ namespace YF.MWS.Win.View.Master {
                     dataStr = sbData.ToString();
 
                 }
-                this.Invoke(this.OnShowData, dataStr);
+                this.Invoke(new Action<string>((str) => {
+                    this.ShowDataInfo2(str);
+                }), dataStr);
             }
-        }
-        /// <summary>
-        /// 显示数据
-        /// </summary>
-        /// <param name="value">接收到的数据</param>
-        private void ShowDataInfo3(string value) {
         }
 
         /// <summary>
@@ -421,9 +408,19 @@ namespace YF.MWS.Win.View.Master {
 
         private void btnSend_Click(object sender, EventArgs e) {
             if (this.serialPort1 == null) return;
-            this.serialPort1.ClosePort();
-            this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
-            this.serialPort1.OpenPort();
+            if (simpleButton2.Text == "连接") {
+                this.serialPort1.ClosePort();
+                this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
+                this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.EditValue.ToInt();
+                this.serialPort1.SerlPort.DataBits = cmbDataBits1.EditValue.ToInt();
+                this.serialPort1.SerlPort.StopBits = (StopBits)cmbStopBits1.SelectedIndex.ToInt();
+                this.serialPort1.SetParity(cmbParity1.EditValue.ToString());
+                this.serialPort1.OpenPort();
+                simpleButton2.Text = "断开";
+            } else {
+                this.serialPort1.ClosePort();
+                simpleButton2.Text = "连接";
+            }
         }
 
         private void FrmDeviceSetting_FormClosed(object sender, FormClosedEventArgs e) {
@@ -509,15 +506,21 @@ namespace YF.MWS.Win.View.Master {
             }
         }
 
-        private void cmbCom1_2_SelectedIndexChanged(object sender, EventArgs e) {
-            ChangeDevice2();
-        }
-
         private void simpleButton8_Click(object sender, EventArgs e) {
             if (this.serialPort2 == null) return;
-            this.serialPort2.ClosePort();
-            this.serialPort2.SerlPort.PortName = cmbCom1.EditValue.ToString();
-            this.serialPort2.OpenPort();
+            if (simpleButton8.Text == "连接") {
+                this.serialPort2.ClosePort();
+                this.serialPort2.SerlPort.PortName = cmbCom1_2.EditValue.ToString();
+                this.serialPort2.SerlPort.BaudRate = cmbBaudRate1_2.EditValue.ToInt();
+                this.serialPort2.SerlPort.DataBits = cmbDataBits1_2.EditValue.ToInt();
+                this.serialPort2.SerlPort.StopBits = (StopBits)cmbStopBits1_2.SelectedIndex.ToInt();
+                this.serialPort2.SetParity(cmbParity1_2.EditValue.ToString());
+                this.serialPort2.OpenPort();
+                simpleButton8.Text = "断开";
+            } else {
+                this.serialPort2.ClosePort();
+                simpleButton8.Text = "连接";
+            }
         }
 
         private void simpleButton6_Click(object sender, EventArgs e) {

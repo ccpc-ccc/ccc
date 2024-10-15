@@ -116,14 +116,21 @@ namespace YF.MWS.Win
         private void InitPort(DeviceCfg deviceCfg)
         {
             string section = string.Format("SerialPort{0}", this.DeviceNo);
-
             this.serlPort = new SerialPort();
-            this.serlPort.PortName = deviceCfg.Port;
-            this.serlPort.BaudRate = Convert.ToInt32(deviceCfg.BaundRate);
-            this.serlPort.DataBits = Convert.ToInt32(deviceCfg.DataBit);
-            this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), deviceCfg.StopBit, true);
-            this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), deviceCfg.Parity, true);
-            //this.serlPort.DataReceived += new SerialDataReceivedEventHandler(this.SerlPort_DataReceived);
+            if(!string.IsNullOrEmpty(deviceCfg.Port)) this.serlPort.PortName = deviceCfg.Port ?? "COM1";
+            if (!string.IsNullOrEmpty(deviceCfg.BaundRate)) this.serlPort.BaudRate = Convert.ToInt32(deviceCfg.BaundRate);
+            if (!string.IsNullOrEmpty(deviceCfg.DataBit)) this.serlPort.DataBits = Convert.ToInt32(deviceCfg.DataBit);
+            if (!string.IsNullOrEmpty(deviceCfg.StopBit)) {
+                StopBits bits = StopBits.One;
+                Enum.TryParse(deviceCfg.StopBit, out bits);
+                if (bits == StopBits.None) bits = StopBits.One;
+                this.serlPort.StopBits = bits;
+            }
+            if (!string.IsNullOrEmpty(deviceCfg.Parity)) {
+                Parity bits = Parity.None;
+                Enum.TryParse(deviceCfg.Parity, out bits);
+                this.serlPort.Parity = bits;
+            }
         }
 
         public bool HasReceiveData()

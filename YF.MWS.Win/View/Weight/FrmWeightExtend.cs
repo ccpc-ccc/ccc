@@ -1212,10 +1212,10 @@ namespace YF.MWS.Win.View.Weight
         /// </summary>
         private void InitPort()
         {
-            InitPort(this.serialPort1,1, Cfg.Device1);
-            InitPort(this.serialPort2,2, Cfg.Device2);
+            InitPort(ref this.serialPort1,1, Cfg.Device1);
+            InitPort(ref this.serialPort2,2, Cfg.Device2);
         }
-        private void InitPort(SerialPortHelper serialPort,int deviceNo,DeviceCfg deviceCfg) {
+        private void InitPort(ref SerialPortHelper serialPort,int deviceNo,DeviceCfg deviceCfg) {
             try {
                 if (deviceCfg.StartDevice) {
                     serialPort = new SerialPortHelper(deviceNo, deviceCfg);

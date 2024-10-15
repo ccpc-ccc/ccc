@@ -32,6 +32,7 @@
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSend2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.txtSend2 = new DevExpress.XtraEditors.TextEdit();
@@ -60,7 +61,6 @@
             this.txtInfraredWeight = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.chkStartModBus = new DevExpress.XtraEditors.CheckEdit();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -119,6 +119,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "控制箱设置";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(230, 123);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(344, 110);
+            this.textBox1.TabIndex = 134;
             // 
             // btnSend2
             // 
@@ -309,8 +317,8 @@
             this.rgCloseGateMode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rgCloseGateMode.Properties.Appearance.Options.UseBackColor = true;
             this.rgCloseGateMode.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Command", "控制箱"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("SenseCoil", "车牌识别")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Modbus", "控制箱"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Car", "车牌识别")});
             this.rgCloseGateMode.Size = new System.Drawing.Size(224, 30);
             this.rgCloseGateMode.TabIndex = 21;
             // 
@@ -401,14 +409,6 @@
             this.chkStartModBus.Size = new System.Drawing.Size(103, 20);
             this.chkStartModBus.TabIndex = 127;
             this.chkStartModBus.CheckedChanged += new System.EventHandler(this.chkStartModBus_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(230, 123);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(344, 110);
-            this.textBox1.TabIndex = 134;
             // 
             // FrmModbusSetting
             // 

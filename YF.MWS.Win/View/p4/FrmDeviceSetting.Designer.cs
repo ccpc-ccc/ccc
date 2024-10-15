@@ -317,7 +317,6 @@
             this.cmbCom1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbCom1.Size = new System.Drawing.Size(92, 18);
             this.cmbCom1.TabIndex = 10;
-            this.cmbCom1.SelectedIndexChanged += new System.EventHandler(this.cmbCom_SelectedIndexChanged);
             // 
             // labelControl5
             // 
@@ -935,7 +934,6 @@
             this.cmbCom1_2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbCom1_2.Size = new System.Drawing.Size(92, 18);
             this.cmbCom1_2.TabIndex = 10;
-            this.cmbCom1_2.SelectedIndexChanged += new System.EventHandler(this.cmbCom1_2_SelectedIndexChanged);
             // 
             // labelControl35
             // 

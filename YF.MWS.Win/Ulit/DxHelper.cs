@@ -324,7 +324,23 @@ namespace YF.MWS.Win
                 combo.EditValue = selectedCode;
             }
         }
-
+        public static void BindComboBoxEdit<T>(ComboBoxEdit combo,object selectedValue)where T:Enum {
+            SCode selectedCode = null;
+            ComboBoxItemCollection coll = combo.Properties.Items;
+            coll.BeginUpdate();
+            foreach (int eemun in Enum.GetValues(typeof(T))) {
+                string sName = Enum.GetName(typeof(T), eemun);//获取名称
+                coll.Add(new ListItem() {
+                    Text = sName,
+                    Value=eemun.ToString()
+                });
+            }
+            coll.EndUpdate();
+            combo.SelectedIndex = -1;
+            if (selectedCode != null) {
+                combo.EditValue = selectedCode;
+            }
+        }
         public static void BindComboBoxEdit(ComboBoxEdit combo, string code, object selectedValue)
         {
             combo.Properties.Items.Clear();
