@@ -39,6 +39,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SqlSugar, Version=5.1.4.130, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\SqlSugar.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\Lib\StructureMap.dll</HintPath>
     </Reference>
