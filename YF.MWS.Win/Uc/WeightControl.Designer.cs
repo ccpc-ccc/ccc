@@ -35,6 +35,9 @@
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.ColMaterialName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
@@ -48,9 +51,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(4, 47);
+            this.label3.Location = new System.Drawing.Point(4, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(177, 45);
+            this.label3.Size = new System.Drawing.Size(177, 48);
             this.label3.TabIndex = 44;
             this.label3.Text = "当前重量";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,7 +67,7 @@
             this.label2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(4, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(177, 45);
+            this.label2.Size = new System.Drawing.Size(177, 48);
             this.label2.TabIndex = 1;
             this.label2.Text = "仓库编码";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,10 +98,15 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 93);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(370, 294);
             this.tableLayoutPanel1.TabIndex = 100;
             // 
             // lbName
@@ -110,7 +118,7 @@
             this.lbName.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbName.Location = new System.Drawing.Point(188, 1);
             this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(178, 45);
+            this.lbName.Size = new System.Drawing.Size(178, 48);
             this.lbName.TabIndex = 1;
             this.lbName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -119,11 +127,11 @@
             this.gcWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcWeight.Location = new System.Drawing.Point(3, 126);
+            this.gcWeight.Location = new System.Drawing.Point(3, 300);
             this.gcWeight.MainView = this.gvWeight;
             this.gcWeight.Margin = new System.Windows.Forms.Padding(0);
             this.gcWeight.Name = "gcWeight";
-            this.gcWeight.Size = new System.Drawing.Size(373, 275);
+            this.gcWeight.Size = new System.Drawing.Size(373, 101);
             this.gcWeight.TabIndex = 99;
             this.gcWeight.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvWeight});
@@ -184,6 +192,10 @@
             this.gvWeight.Appearance.VertLine.Options.UseFont = true;
             this.gvWeight.Appearance.ViewCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.gvWeight.Appearance.ViewCaption.Options.UseFont = true;
+            this.gvWeight.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.ColMaterialName,
+            this.ColWeight,
+            this.ColCreateTime});
             this.gvWeight.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gvWeight.FooterPanelHeight = 0;
             this.gvWeight.GridControl = this.gcWeight;
@@ -201,6 +213,30 @@
             this.simpleButton1.TabIndex = 46;
             this.simpleButton1.Text = "仪表设置";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // ColMaterialName
+            // 
+            this.ColMaterialName.Caption = "物料名称";
+            this.ColMaterialName.FieldName = "MaterialName";
+            this.ColMaterialName.Name = "ColMaterialName";
+            this.ColMaterialName.Visible = true;
+            this.ColMaterialName.VisibleIndex = 0;
+            // 
+            // ColWeight
+            // 
+            this.ColWeight.Caption = "重量";
+            this.ColWeight.FieldName = "Weight";
+            this.ColWeight.Name = "ColWeight";
+            this.ColWeight.Visible = true;
+            this.ColWeight.VisibleIndex = 1;
+            // 
+            // ColCreateTime
+            // 
+            this.ColCreateTime.Caption = "称重时间";
+            this.ColCreateTime.FieldName = "CreateTime";
+            this.ColCreateTime.Name = "ColCreateTime";
+            this.ColCreateTime.Visible = true;
+            this.ColCreateTime.VisibleIndex = 2;
             // 
             // WeightControl
             // 
@@ -231,5 +267,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private DevExpress.XtraGrid.Columns.GridColumn ColMaterialName;
+        private DevExpress.XtraGrid.Columns.GridColumn ColWeight;
+        private DevExpress.XtraGrid.Columns.GridColumn ColCreateTime;
     }
 }

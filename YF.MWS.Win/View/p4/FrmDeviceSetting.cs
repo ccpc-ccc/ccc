@@ -104,6 +104,7 @@ namespace YF.MWS.Win.View.Master {
             this.rgSendReturnZeroProcess1.EditValue = cfg.Device[Index].SendReturnZeroProcess.ToString();
             this.teReturnZeroCommand1.Text = cfg.Device[Index].ReturnZeroCommand;
             txtName.Text = cfg.Device[Index].Name;
+           teSettlementTime.EditValue = cfg.Device[Index].SettlementTime;
             DxHelper.BindComboBoxEdit(cmbSequence1, SysCode.Sequence, cfg.Device[Index].Sequence);
         }
 
@@ -135,6 +136,7 @@ namespace YF.MWS.Win.View.Master {
             cfg.Device[Index].SendReturnZeroProcess = rgSendReturnZeroProcess1.EditValue.ToEnum<SendReturnZeroProcessType>();
             cfg.Device[Index].ReturnZeroCommand = teReturnZeroCommand1.Text;
             cfg.Device[Index].Name=txtName.Text;
+            cfg.Device[Index].SettlementTime = teSettlementTime.EditValue.ToDateTime();
             string fomart = cmbFormat1.Text;
             int decimalDigits = 0;
             DisplayFormatStringType displayType = DisplayFormatStringType.Int;
@@ -203,7 +205,7 @@ namespace YF.MWS.Win.View.Master {
             gcWeight.RefreshDataSource();
         }
         private void simpleButton1_Click(object sender, EventArgs e) {
-            FrmMaterialDetail frm = new FrmMaterialDetail();
+            FrmMaterialDetail frm = new FrmMaterialDetail(this.Index);
             if (frm.ShowDialog() == DialogResult.OK) {
                 bindData();
             }
@@ -215,7 +217,7 @@ namespace YF.MWS.Win.View.Master {
                 MessageBox.Show("请选择需要修改的数据");
                 return;
             }
-            FrmMaterialDetail frm = new FrmMaterialDetail();
+            FrmMaterialDetail frm = new FrmMaterialDetail(this.Index);
             frm.MaterialId = material.Id;
             if (frm.ShowDialog() == DialogResult.OK) {
                 bindData();

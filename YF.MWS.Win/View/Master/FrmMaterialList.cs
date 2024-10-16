@@ -47,7 +47,7 @@ namespace YF.MWS.Win.View.Master
 
         private void btnItemAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (FrmMaterialDetail frmDetail = new FrmMaterialDetail())
+            using (FrmMaterialDetail frmDetail = new FrmMaterialDetail(0))
             {
                 frmDetail.FrmMain = GetMain();
                 if (frmDetail.ShowDialog() == DialogResult.OK)
@@ -59,7 +59,7 @@ namespace YF.MWS.Win.View.Master
 
         private void btnItemEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (FrmMaterialDetail frmDetail = new FrmMaterialDetail())
+            using (FrmMaterialDetail frmDetail = new FrmMaterialDetail(0))
             {
                 frmDetail.FrmMain = GetMain();
                 //获取物资编号

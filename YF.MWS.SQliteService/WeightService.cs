@@ -13,8 +13,6 @@ using YF.MWS.Metadata.Query;
 using YF.Utility.Log;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.BaseMetadata;
-using YF.Data.NHProvider;
-using FluentData;
 using YF.Utility.Language;
 using static System.Windows.Forms.AxHost;
 
@@ -308,18 +306,8 @@ namespace YF.MWS.SQliteService
 
         public DataTable GetWeighter() 
         {
-            DataTable dt;
-            string sql;
-            sql = "select distinct WeighterName from B_Weight ";
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            { 
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else
-            { 
-                dt = service.GetDataTable(sql);
-            }
-            return dt;
+            string sql = "select distinct WeighterName from B_Weight ";
+            return base.GetTable(sql);
         }
 
         public int GetWeightCountByMaterial(string materialId)
@@ -1254,6 +1242,31 @@ namespace YF.MWS.SQliteService
             {
                 return service.ExecuteNonQuery(sql);
             }
+        }
+        public bool save(BWeight weight,DateTime time) {
+            int seconds = time.Hour * 3600 + time.Minute * 60 + time.Second;
+            int nowSeconds=weight.CreateTime.Hour*3600+weight.CreateTime.Minute*60+weight.CreateTime.Second;
+            int date = weight.CreateTime.ToString("yyyyMMdd").ToInt();
+            if (weight.CreateTime > time&&time.Hour>12) {
+                date++;
+            }   else if (weight.CreateTime < time && time.Hour < 12){
+                date--;
+            }
+            string sql = $"select * from B_Weight where MaterialId='{weight.MaterialId}' and Date={date}";
+            BWeightTotal total = base.getModel<BWeightTotal>(sql);
+            if (total == null) {
+                total = new BWeightTotal() {
+                    Id = Guid.NewGuid().ToString("N"),
+                    Weight=weight.SuttleWeight,
+                    MaterialId=weight.MaterialId,
+                    Date=date,
+                    CompanyId = weight.CompanyId
+                };
+            } else {
+                total.Weight += weight.SuttleWeight;
+            }
+            base.save<BWeightTotal>(total,"B_WeightTotal");
+             base.save<BWeight>(weight,"B_Weight");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using YF.Utility;
 
 namespace YF.MWS.Metadata.Cfg
 {
@@ -93,6 +94,7 @@ namespace YF.MWS.Metadata.Cfg
         /// 名称
         /// </summary>
         public string Name { get; set; }
+        public DateTime SettlementTime { get; set; } = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").ToDateTime();
         /// <summary>
         /// 流程节点
         /// </summary>

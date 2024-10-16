@@ -65,6 +65,7 @@
     <Compile Include="Server\ReturnEntity.cs" />
     <Compile Include="Server\FWeight.cs" />
     <Compile Include="Server\FClient.cs" />
+    <Compile Include="Weight\BWeightTotal.cs" />
     <Compile Include="Weight\BWeight.cs" />
     <Compile Include="Weight\BWeightAttribute.cs" />
     <Compile Include="Weight\BWeightConfirm.cs" />

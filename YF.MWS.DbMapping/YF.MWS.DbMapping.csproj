@@ -62,6 +62,7 @@
     <Compile Include="BWeightDetailMap.cs" />
     <Compile Include="BWeightExtMap.cs" />
     <Compile Include="BPayDetailMap.cs" />
+    <Compile Include="BWeightTotalMap.cs" />
     <Compile Include="BWeightMap.cs" />
     <Compile Include="BWeightTempMap.cs" />
     <Compile Include="SCardViewDtlMap.cs" />

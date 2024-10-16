@@ -87,25 +87,9 @@ namespace YF.MWS.Win.View.Master
                 teMaterialName.ErrorText = "请输入物资名称";
                 isValidated = false;
             }
-            if (isValidated)
-            {
-                SMaterial find = materialService.GetMaterialByName(teMaterialName.Text.Trim());
-                if (find != null)
-                {
-                    if (material != null)
-                    {
-                        if (find.Id != material.Id)
-                        {
-                            MessageDxUtil.ShowWarning(string.Format("此物资({0})已经存在不能重复添加", teMaterialName.Text.Trim()));
-                            isValidated = false;
-                        }
-                    }
-                    else
-                    {
-                        MessageDxUtil.ShowWarning(string.Format("此物资({0})已经存在不能重复添加", teMaterialName.Text.Trim()));
-                        isValidated = false;
-                    }
-                }
+            if (txtMaxWeight.Text.ToDecimal() <= txtMinWeight.Text.ToDecimal()) {
+                txtMaxWeight.ErrorText = "最低重量必须小于最高重量";
+                isValidated = false;
             }
             return isValidated;
         }
@@ -127,6 +111,7 @@ namespace YF.MWS.Win.View.Master
                     material.MaterialName = teMaterialName.Text;
                     material.MaxWeight = txtMinWeight.Text.ToDecimal();
                     material.MinWeight = txtMaxWeight.Text.ToDecimal();
+                    material.CompanyId = this.CompanyId;
                     bool isSaved= materialService.SaveMaterial(material);
                     if (isSaved) 
                     {

@@ -95,6 +95,8 @@
             this.ColName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColMinWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColMaxWeight = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.teSettlementTime = new DevExpress.XtraEditors.TimeEdit();
+            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCom)).BeginInit();
             this.gcCom.SuspendLayout();
@@ -139,6 +141,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teSettlementTime.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -297,9 +300,11 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.teSettlementTime);
             this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Controls.Add(this.txtName);
             this.panelControl1.Controls.Add(this.memoReceive1);
+            this.panelControl1.Controls.Add(this.labelControl19);
             this.panelControl1.Controls.Add(this.labelControl18);
             this.panelControl1.Location = new System.Drawing.Point(225, 15);
             this.panelControl1.Name = "panelControl1";
@@ -334,7 +339,7 @@
             // txtName
             // 
             this.txtName.EditValue = "";
-            this.txtName.Location = new System.Drawing.Point(326, 183);
+            this.txtName.Location = new System.Drawing.Point(311, 108);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(112, 20);
             this.txtName.TabIndex = 15;
@@ -352,7 +357,7 @@
             // 
             this.labelControl18.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl18.Appearance.Options.UseFont = true;
-            this.labelControl18.Location = new System.Drawing.Point(284, 186);
+            this.labelControl18.Location = new System.Drawing.Point(270, 113);
             this.labelControl18.Name = "labelControl18";
             this.labelControl18.Size = new System.Drawing.Size(36, 12);
             this.labelControl18.TabIndex = 5;
@@ -916,6 +921,26 @@
             this.ColMaxWeight.Visible = true;
             this.ColMaxWeight.VisibleIndex = 2;
             // 
+            // teSettlementTime
+            // 
+            this.teSettlementTime.EditValue = new System.DateTime(2024, 10, 16, 0, 0, 0, 0);
+            this.teSettlementTime.Location = new System.Drawing.Point(311, 143);
+            this.teSettlementTime.Name = "teSettlementTime";
+            this.teSettlementTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.teSettlementTime.Size = new System.Drawing.Size(112, 20);
+            this.teSettlementTime.TabIndex = 16;
+            // 
+            // labelControl19
+            // 
+            this.labelControl19.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl19.Appearance.Options.UseFont = true;
+            this.labelControl19.Location = new System.Drawing.Point(246, 148);
+            this.labelControl19.Name = "labelControl19";
+            this.labelControl19.Size = new System.Drawing.Size(60, 12);
+            this.labelControl19.TabIndex = 5;
+            this.labelControl19.Text = "结算时间：";
+            // 
             // FrmDeviceSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -980,6 +1005,7 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teSettlementTime.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1050,5 +1076,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.TimeEdit teSettlementTime;
+        private DevExpress.XtraEditors.LabelControl labelControl19;
     }
 }

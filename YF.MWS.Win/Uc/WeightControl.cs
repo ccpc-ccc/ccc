@@ -1,29 +1,21 @@
-﻿using System;
+﻿using DevExpress.Office.Utils;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Drawing;
-using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using DevExpress.XtraLayout;
-using YF.MWS.Metadata;
-using YF.MWS.Win.Util;
-using YF.MWS.Metadata.Cfg;
-using YF.MWS.Metadata.UI;
+using YF.MWS.Client.DataService.Interface;
 using YF.MWS.Db;
-using YF.MWS.Win.Util.Video;
-using YF.Utility.Log;
-using System.IO;
+using YF.MWS.SQliteService;
 using YF.MWS.Win.View.Master;
 
 namespace YF.MWS.Win.Uc
 {
     public partial class WeightControl : UserControl
     {
+        private IMaterialService materialService = new MaterialService();
         public int Index { get; private set; }
+        private List<SMaterial> materials { get; set; }
+        private List<Label> labels { get; set; }
         public WeightControl(int index)
         {
             InitializeComponent();
@@ -33,32 +25,37 @@ namespace YF.MWS.Win.Uc
         private void VideoControl_Load(object sender, EventArgs e)
         {
             this.lbName.Text = Program._cfg.Device[Index].Name;
+            materials = materialService.GetMaterialByCompanyId(Index.ToString());
+            labels = new List<Label>();
+            int i = 2;
+            if (materials != null && materials.Count > 0) {
+            foreach(SMaterial material in materials) {
+                Label lb = setLabel();
+                    lb.Text = material.MaterialName;
+                    tableLayoutPanel1.Controls.Add(lb, 0, i);
+                lb = setLabel();
+                    lb.Text = "0";
+                tableLayoutPanel1.Controls.Add(lb, 1, i);
+                labels.Add(lb);
+                i++;
+                if (i > 7) break;
+            }
+            }
         }
-
-        /// <summary>
-        ///  Device Disconnection Handling
-        /// </summary>
-        /// <param name="lLoginID"></param>
-        /// <param name="pchDVRIP"></param>
-        /// <param name="nDVRPort"></param>
-        /// <param name="dwUser"></param>
-        private void DisConnectEvent(int lLoginID, StringBuilder pchDVRIP, int nDVRPort, IntPtr dwUser)
-        {
-            //Device Disconnection Handling          
-            //MessageBox.Show("Device User Disconnect", pMsgTitle);
+        private Label setLabel() {
+            Label lb = new Label();
+            lb.AutoSize = false;
+            lb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lb.Font = new System.Drawing.Font(lb.Font.FontFamily, 14);
+            lb.Dock= DockStyle.Fill;
+            return lb;
         }
-
-        /// <summary>
-        /// 重连回调函数
-        /// </summary>
-        private void DisConnectCallBack(int loginId, string dvrIP, int dvrPort, IntPtr hwdUser)
-        {
-
-        }
-
         private void simpleButton1_Click(object sender, EventArgs e) {
             FrmDeviceSetting frm = new FrmDeviceSetting(this.Index);
             frm.ShowDialog();
+        }
+        private void saveWeight(decimal weight) {
+
         }
     }
 }
