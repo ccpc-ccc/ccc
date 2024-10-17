@@ -27,17 +27,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lbName = new System.Windows.Forms.Label();
+            this.lbWeight = new System.Windows.Forms.Label();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.ColMaterialName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColWeight = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.lbConnected = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
@@ -93,9 +100,10 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lbName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lbName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lbWeight, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -121,6 +129,21 @@
             this.lbName.Size = new System.Drawing.Size(178, 48);
             this.lbName.TabIndex = 1;
             this.lbName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbWeight
+            // 
+            this.lbWeight.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbWeight.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lbWeight.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbWeight.ForeColor = System.Drawing.Color.Red;
+            this.lbWeight.Location = new System.Drawing.Point(188, 50);
+            this.lbWeight.Name = "lbWeight";
+            this.lbWeight.Size = new System.Drawing.Size(178, 48);
+            this.lbWeight.TabIndex = 1;
+            this.lbWeight.Text = "0.00";
+            this.lbWeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gcWeight
             // 
@@ -204,16 +227,6 @@
             this.gvWeight.OptionsBehavior.ReadOnly = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.Location = new System.Drawing.Point(294, 412);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 46;
-            this.simpleButton1.Text = "仪表设置";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // ColMaterialName
             // 
             this.ColMaterialName.Caption = "物料名称";
@@ -229,6 +242,7 @@
             this.ColWeight.Name = "ColWeight";
             this.ColWeight.Visible = true;
             this.ColWeight.VisibleIndex = 1;
+            this.ColWeight.Width = 60;
             // 
             // ColCreateTime
             // 
@@ -237,12 +251,73 @@
             this.ColCreateTime.Name = "ColCreateTime";
             this.ColCreateTime.Visible = true;
             this.ColCreateTime.VisibleIndex = 2;
+            this.ColCreateTime.Width = 200;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton1.Location = new System.Drawing.Point(317, 412);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(52, 23);
+            this.simpleButton1.TabIndex = 46;
+            this.simpleButton1.Text = "仪表设置";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // lbConnected
+            // 
+            this.lbConnected.AutoSize = true;
+            this.lbConnected.Location = new System.Drawing.Point(6, 37);
+            this.lbConnected.Name = "lbConnected";
+            this.lbConnected.Size = new System.Drawing.Size(41, 12);
+            this.lbConnected.TabIndex = 47;
+            this.lbConnected.Text = "连接中";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton2.Location = new System.Drawing.Point(257, 413);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(54, 23);
+            this.simpleButton2.TabIndex = 46;
+            this.simpleButton2.Text = "清理数据";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton3.Location = new System.Drawing.Point(3, 412);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton3.TabIndex = 46;
+            this.simpleButton3.Text = "保存测试";
+            this.simpleButton3.Visible = false;
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton4.Location = new System.Drawing.Point(200, 413);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(54, 23);
+            this.simpleButton4.TabIndex = 46;
+            this.simpleButton4.Text = "导出";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // WeightControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(236)))), ((int)(((byte)(239)))));
+            this.Controls.Add(this.lbConnected);
+            this.Controls.Add(this.simpleButton3);
+            this.Controls.Add(this.simpleButton4);
+            this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(0);
@@ -255,6 +330,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -265,10 +341,16 @@
         private DevExpress.XtraGrid.GridControl gcWeight;
         private DevExpress.XtraGrid.Views.Grid.GridView gvWeight;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private System.Windows.Forms.Label lbName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraGrid.Columns.GridColumn ColMaterialName;
         private DevExpress.XtraGrid.Columns.GridColumn ColWeight;
         private DevExpress.XtraGrid.Columns.GridColumn ColCreateTime;
+        private System.Windows.Forms.Label lbName;
+        private System.Windows.Forms.Label lbConnected;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbWeight;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
     }
 }

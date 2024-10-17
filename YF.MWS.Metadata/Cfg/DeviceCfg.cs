@@ -94,6 +94,16 @@ namespace YF.MWS.Metadata.Cfg
         /// 名称
         /// </summary>
         public string Name { get; set; }
+        public string Code { get; set; }
+        public string ServerIP { get; set; }
+        public int ServerPort { get; set; }
+        /// <summary>
+        /// 连接方式 0为串口 1为网口
+        /// </summary>
+        public int ConnectType { get; set; }
+        /// <summary>
+        /// 结算时间
+        /// </summary>
         public DateTime SettlementTime { get; set; } = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").ToDateTime();
         /// <summary>
         /// 流程节点

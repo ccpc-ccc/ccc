@@ -130,5 +130,6 @@ namespace YF.MWS.Client.DataService.Interface
         void UpdateSyncState(string weightId);
         bool UpdateQcState(string weightId, QcState state,decimal deducteWeight);
         bool UpdateWeightNo(string weightId, string weightNo);
+        bool save(BWeight weight, DateTime time);
     }
 }

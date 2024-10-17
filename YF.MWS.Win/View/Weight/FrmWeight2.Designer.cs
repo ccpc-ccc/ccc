@@ -35,11 +35,12 @@
             // simpleButton1
             // 
             this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.simpleButton1.Location = new System.Drawing.Point(25, 602);
+            this.simpleButton1.Location = new System.Drawing.Point(24, 620);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 23);
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "数据查询";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // tbPlan
             // 
@@ -57,7 +58,7 @@
             this.tbPlan.Name = "tbPlan";
             this.tbPlan.RowCount = 1;
             this.tbPlan.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tbPlan.Size = new System.Drawing.Size(1490, 580);
+            this.tbPlan.Size = new System.Drawing.Size(1490, 609);
             this.tbPlan.TabIndex = 2;
             // 
             // FrmWeight2
