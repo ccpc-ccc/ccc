@@ -56,11 +56,6 @@ namespace YF.MWS.Win.View.Customer
                 isSaved = ucTransfer.Save();
                 customerType = CustomerType.Transfer;
             }
-            if (isSaved)
-            {
-                if (FrmMain != null)
-                    FrmMain.LoadCustomer(customerType);
-            }
         }
 
         private void barItemDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

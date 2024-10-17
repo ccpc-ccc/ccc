@@ -248,7 +248,6 @@
             this.toolStripButton5 = new YF.MWS.Win.myToolButton();
             this.toolStripButton6 = new YF.MWS.Win.myToolButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new YF.MWS.Win.myToolButton();
             this.toolStripButton8 = new YF.MWS.Win.myToolButton();
             this.toolStripButton9 = new YF.MWS.Win.myToolButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -1995,7 +1994,6 @@
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripSeparator2,
-            this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripButton9});
             this.toolStrip1.Location = new System.Drawing.Point(0, 160);
@@ -2099,20 +2097,6 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 64);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.AutoSize = false;
-            this.toolStripButton7.Image = global::YF.MWS.Win.Properties.Resources._double;
-            this.toolStripButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.PowerNo = null;
-            this.toolStripButton7.Size = new System.Drawing.Size(60, 60);
-            this.toolStripButton7.Text = "一机双衡";
-            this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
             // toolStripButton8
             // 
@@ -2388,7 +2372,6 @@
         private myToolButton toolStripButton4;
         private myToolButton toolStripButton5;
         private myToolButton toolStripButton6;
-        private myToolButton toolStripButton7;
         private myToolButton toolStripButton8;
         private myToolButton toolStripButton9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

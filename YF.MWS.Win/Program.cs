@@ -32,10 +32,8 @@ using YF.MWS.Client.DataService.Interface.Remote;
 using YF.MWS.SQliteService.Remote;
 using YF.MWS.Db.Server;
 
-namespace YF.MWS.Win
-{
-    static class Program
-    {
+namespace YF.MWS.Win {
+    static class Program {
         public delegate void MyDelegate(int number);
         private static bool hasRegistered = false;
         private static bool isExpired = false;
@@ -72,8 +70,7 @@ namespace YF.MWS.Win
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             //应用程序退出事件
             Application.ApplicationExit += new EventHandler(Application_Exit);
             //处理未捕获的异常   
@@ -91,8 +88,7 @@ namespace YF.MWS.Win
             DevExpress.LookAndFeel.DefaultLookAndFeel feel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             string skinName = "Money Twins";
             LoginCfg loginCfg = CfgUtil.GetLoginCfg();
-            if (loginCfg != null && !string.IsNullOrEmpty(loginCfg.SkinName))
-            {
+            if (loginCfg != null && !string.IsNullOrEmpty(loginCfg.SkinName)) {
                 skinName = loginCfg.SkinName;
             }
             feel.LookAndFeel.SetSkinStyle(skinName);
@@ -101,21 +97,18 @@ namespace YF.MWS.Win
             Application.SetCompatibleTextRenderingDefault(false);
             bool runMoreApps = false;
             cfg = CfgUtil.GetCfg();
-            if (cfg != null)
-            {
+            if (cfg != null) {
                 if (cfg.Launch != null)
                     runMoreApps = cfg.Launch.RunMoreApps;
             }
             if (args != null && args.Length > 0)
                 runMoreApps = true;
             Process instance = ProcessUtil.RunningInstance(runMoreApps);
-            if (instance == null)
-            {
+            if (instance == null) {
                 //控件汉化
                 Localizer.Active = new LocalizationCHS();
                 CurrentClient.Instance.DataBase = AppSetting.GetValue("databaseType").ToEnum<DataBaseType>();
-                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver) 
-                {
+                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver) {
                     ServiceInitialization.Init();
                 }
                 masterService = new MasterService();
@@ -123,13 +116,12 @@ namespace YF.MWS.Win
                 bool isConnected = false;
                 InitRegisterMode();
                 isConnected = CheckDbConfig();
-                if (!isConnected)
-                {
+                if (!isConnected) {
                     return;
                 }
                 CfgUtil.Init();
                 CacheUtil.Init();
-                bool isOk= InitApplication();
+                bool isOk = InitApplication();
                 if (!isOk) {
                     using (FrmRegister frmRegister = new FrmRegister()) {
                         frmRegister.IsExpired = isExpired;
@@ -140,89 +132,65 @@ namespace YF.MWS.Win
                         }
                     }
                 } else {
-                    using (FrmLogin loginForm = new FrmLogin()) {
-                            if (args != null && args.Length > 0)
-                                loginForm.ChangeUser = true;
-                            if (loginForm.ShowDialog() == DialogResult.OK) {
-                                FrmMain mainForm = new FrmMain();
-                                mainForm.Icon = loginForm.Icon;
-                                Application.Run(mainForm);
-                            }
-                    }
+                            FrmWeight mainForm = new FrmWeight();
+                            Application.Run(mainForm);
                 }
-            }
-            else 
-            {
+            } else {
                 ProcessUtil.HandleRunningInstance(instance);
             }
         }
 
-        private static bool CheckDbConfig()
-        {
+        private static bool CheckDbConfig() {
             bool isConnected = false;
-            try
-            {
+            try {
                 IClientService clientService = new ClientService();
-                if (clientService == null)
-                {
+                if (clientService == null) {
                     return isConnected;
                 }
                 isConnected = clientService.IsConnect();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Logger.WriteException(e);
             }
-            if (!isConnected)
-            {
+            if (!isConnected) {
                 MessageDxUtil.ShowWarning("数据库连接不成功\n请检查配置文件(MWS.exe.config)中的数据库连接信息配置是否正确或者联系软件供应商获取帮助.");
             }
             return isConnected;
         }
 
-        private static void InitRegedit()
-        {
+        private static void InitRegedit() {
             string adDomain = AppSetting.GetValue("AdDomain");
-            if (string.IsNullOrEmpty(adDomain))
-            {
+            if (string.IsNullOrEmpty(adDomain)) {
                 return;
             }
-            if (Regex.Split(adDomain, "//").Length > 1)
-            {
+            if (Regex.Split(adDomain, "//").Length > 1) {
                 string domain = Regex.Split(adDomain, "//")[1];
                 string prefix = domain.Split('.')[0];
                 RegeditUtil.InsertDomain(domain.Split(':')[0], prefix);
             }
         }
 
-        private static void InitRegisterMode()
-        {
+        private static void InitRegisterMode() {
             string filePath = Path.Combine(Application.StartupPath, "auth.yrg");
-            if (File.Exists(filePath))
-            {
+            if (File.Exists(filePath)) {
                 CurrentClient.Instance.RegType = RegisterMode.Softdog;
-            }
-            else
-            {
+            } else {
                 CurrentClient.Instance.RegType = RegisterMode.File;
             }
         }
 
-        private static void InitClient(IClientService clientService, SWeightView view)
-        {
+        private static void InitClient(IClientService clientService, SWeightView view) {
             SysCfg cfg = CfgUtil.GetCfg();
-            WebWeightService.ServerUrl= AppSetting.GetValue("EcsServer");
+            WebWeightService.ServerUrl = AppSetting.GetValue("EcsServer");
             AppRunVersion runVersion = AppRunVersion.Corp;
-            if (cfg != null) 
-            {
-                if(cfg.Video != null)
+            if (cfg != null) {
+                if (cfg.Video != null)
                     videoAppName = cfg.Video.VideoAppName;
-                if(cfg.Weight != null)
+                if (cfg.Weight != null)
                     startBackupDb = cfg.Weight.StartBackupDb;
                 if (cfg.Launch != null)
                     runVersion = cfg.Launch.RunVersion;
-                if(cfg.Transfer != null&&cfg.Transfer.isOpen) {
-                    ReturnEntity client = WebWeightService.Login(cfg.Transfer.CompanyCode,cfg.Transfer.MachineCode,cfg.Transfer.RegisterCode);
+                if (cfg.Transfer != null && cfg.Transfer.isOpen) {
+                    ReturnEntity client = WebWeightService.Login(cfg.Transfer.CompanyCode, cfg.Transfer.MachineCode, cfg.Transfer.RegisterCode);
                     if (client != null) WebWeightService.Token = client.Token;
                 }
             }
@@ -230,94 +198,86 @@ namespace YF.MWS.Win
             CurrentClient.Instance.CurrentVersion = AppSetting.GetValue("version").ToEnum<VersionType>();
             CurrentClient.Instance.CompanyName = AppSetting.GetValue("corpName");
             CfgUtil.SetAppRunVersion(runVersion);
-            if (view != null)
-            {
+            if (view != null) {
                 CurrentClient.Instance.ViewId = view.Id;
                 CurrentClient.Instance.SubjectId = view.SubjectId;
             }
         }
 
-        private static bool ValidateSoftWithSoftdogOnly(IClientService clientService,SClient client) 
-        {
+        private static bool ValidateSoftWithSoftdogOnly(IClientService clientService, SClient client) {
             bool isValidated = false;
             //初始化我们的操作加密锁的类
             et99 = new SoftKeyPWD();
             //这个用于判断系统中是否存在着加密锁。不需要是指定的加密锁,
-            if (et99.FindPort(0, ref KeyPath) != 0)
-            {
+            if (et99.FindPort(0, ref KeyPath) != 0) {
                 //MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
                 //Application.Exit();
                 return false;
             }
-           /* string pid = PID;
-            bool isSuccess = et99.FindDevice(pid);
-            if (isSuccess)
-            {
-                isSuccess = et99.OpenDevice(pid, 1);
-                if (isSuccess)
-                {
-                    isSuccess = et99.VerifyUser("ffffffffffffffff", YF.Utility.Metadata.ET99Role.SuperUser);
-                    if (isSuccess)
-                    {
-                        string version = et99.ReadData(0, 8);
-                        CurrentClient.Instance.VersionFunc = version;
-                        string lastUsedDate;
-                        int usedTimes=1;
-                        hasRegistered = true;
-                        lastUsedDate = Encrypt.DecryptDES(et99.ReadData(8, 24), CurrentClient.Instance.EncryptKey);
-                        string expiredDate = Encrypt.DecryptDES(et99.ReadData(32, 24), CurrentClient.Instance.EncryptKey);
-                        if (YF.MWS.Util.Utility.CompareDate(expiredDate, lastUsedDate) ==1)
-                        {
-                            isExpired = true;
-                        }
-                        usedTimes = Encrypt.DecryptDES(et99.ReadData(56, 12), CurrentClient.Instance.EncryptKey).ToInt();
-                        int totalTimes = Encrypt.DecryptDES(et99.ReadData(68, 12), CurrentClient.Instance.EncryptKey).ToInt();
-                        string oldSN = et99.ReadData(80, 16);
-                        string sn = et99.GetSN();
-                        oldSN = oldSN.Replace("?", "");
-                        if (!string.IsNullOrEmpty(oldSN) &&!string.IsNullOrEmpty(sn) &&sn != oldSN) 
-                        {
-                            isExpired = true;
-                        }
-                        if (usedTimes > totalTimes)
-                        {
-                            isExpired = true;
-                        }
-                        int currentDate = DateTime.Now.ToString("yyyyMMdd").ToInt();
-                        if (currentDate > lastUsedDate.ToInt())
-                        {
-                            lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
-                            usedTimes += 1;
-                        }
-                        et99.WriteData(Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey), 8);
-                        et99.WriteData(Encrypt.EncryptDES(usedTimes.ToString(), CurrentClient.Instance.EncryptKey), 56);
-                        et99PID = pid;
-                        Logger.Info(string.Format("lastUsedDate:{0};expiredDate:{1};usedTimes:{2};totalTimes:{3};oldSN:{4};sn:{5}", 
-                                            lastUsedDate, expiredDate, usedTimes, totalTimes,oldSN,sn));
-                        
-                        isValidated = true;
-                    }
-                }
-            }
-            */if (isValidated) 
-            {
+            /* string pid = PID;
+             bool isSuccess = et99.FindDevice(pid);
+             if (isSuccess)
+             {
+                 isSuccess = et99.OpenDevice(pid, 1);
+                 if (isSuccess)
+                 {
+                     isSuccess = et99.VerifyUser("ffffffffffffffff", YF.Utility.Metadata.ET99Role.SuperUser);
+                     if (isSuccess)
+                     {
+                         string version = et99.ReadData(0, 8);
+                         CurrentClient.Instance.VersionFunc = version;
+                         string lastUsedDate;
+                         int usedTimes=1;
+                         hasRegistered = true;
+                         lastUsedDate = Encrypt.DecryptDES(et99.ReadData(8, 24), CurrentClient.Instance.EncryptKey);
+                         string expiredDate = Encrypt.DecryptDES(et99.ReadData(32, 24), CurrentClient.Instance.EncryptKey);
+                         if (YF.MWS.Util.Utility.CompareDate(expiredDate, lastUsedDate) ==1)
+                         {
+                             isExpired = true;
+                         }
+                         usedTimes = Encrypt.DecryptDES(et99.ReadData(56, 12), CurrentClient.Instance.EncryptKey).ToInt();
+                         int totalTimes = Encrypt.DecryptDES(et99.ReadData(68, 12), CurrentClient.Instance.EncryptKey).ToInt();
+                         string oldSN = et99.ReadData(80, 16);
+                         string sn = et99.GetSN();
+                         oldSN = oldSN.Replace("?", "");
+                         if (!string.IsNullOrEmpty(oldSN) &&!string.IsNullOrEmpty(sn) &&sn != oldSN) 
+                         {
+                             isExpired = true;
+                         }
+                         if (usedTimes > totalTimes)
+                         {
+                             isExpired = true;
+                         }
+                         int currentDate = DateTime.Now.ToString("yyyyMMdd").ToInt();
+                         if (currentDate > lastUsedDate.ToInt())
+                         {
+                             lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
+                             usedTimes += 1;
+                         }
+                         et99.WriteData(Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey), 8);
+                         et99.WriteData(Encrypt.EncryptDES(usedTimes.ToString(), CurrentClient.Instance.EncryptKey), 56);
+                         et99PID = pid;
+                         Logger.Info(string.Format("lastUsedDate:{0};expiredDate:{1};usedTimes:{2};totalTimes:{3};oldSN:{4};sn:{5}", 
+                                             lastUsedDate, expiredDate, usedTimes, totalTimes,oldSN,sn));
+
+                         isValidated = true;
+                     }
+                 }
+             }
+             */
+            if (isValidated) {
                 CurrentClient.Instance.RegType = RegisterMode.SoftdogOnly;
-                if (CurrentClient.Instance.CurrentVersion == VersionType.Probation)
-                {
+                if (CurrentClient.Instance.CurrentVersion == VersionType.Probation) {
                     AppConfigUtil.SetConfigValue("version", VersionType.Official.ToString());
                 }
                 CurrentClient.Instance.CurrentVersion = VersionType.Official;
             }
-            if (isValidated) 
-            {
-                AuthCfg cfg = CfgUtil.GetAuthFromVersion(CurrentClient.Instance.VersionFunc,new AuthCfg());
+            if (isValidated) {
+                AuthCfg cfg = CfgUtil.GetAuthFromVersion(CurrentClient.Instance.VersionFunc, new AuthCfg());
                 string authCode = CfgUtil.GetAuthCode(cfg);
-                if (client == null)
-                {
+                if (client == null) {
                     clientService.Add(CurrentClient.Instance.MachineCode, authCode);
-                }
-                else 
-                {
+                } else {
                     //clientService.UpdateAuthCode(CurrentClient.Instance.MachineCode, authCode);
                 }
             }
@@ -326,16 +286,12 @@ namespace YF.MWS.Win
         /// <summary>
         /// 软件验证
         /// </summary>
-        private static bool InitApplication()
-        {
-            try
-            {
+        private static bool InitApplication() {
+            try {
                 //SysCfg cfg = CfgUtil.GetCfg();
                 //CurrentClient.Instance.IsConnectedServer = NetworkUtil.IsConnectedServer(cfg);
-                if (cfg != null) 
-                {
-                    if (cfg.Weight != null)
-                    {
+                if (cfg != null) {
+                    if (cfg.Weight != null) {
                         backDir = cfg.Weight.BackupDir;
                     }
                 }
@@ -347,9 +303,8 @@ namespace YF.MWS.Win
                 SWeightView view = viewService.GetDefaultView(ViewType.Weight);
                 string machineCode = SoftValidator.GetMachineCode();
                 CurrentClient.Instance.MachineCode = machineCode;
-                SClient = clientService.RegisterProbation(machineCode,"","");
-                if (SClient != null)
-                {
+                SClient = clientService.RegisterProbation(machineCode, "", "");
+                if (SClient != null) {
                     CurrentUser.Instance.ClientId = SClient.Id;
                     CurrentUser.Instance.ClientName = SClient.ClientName;
                     CurrentClient.Instance.VerifyCode = SClient.VerifyCode;
@@ -366,22 +321,20 @@ namespace YF.MWS.Win
                     timerApp.Tick += timerApp_Tick;
                     timerApp.Start();
                 } else {
-                    int days= ResidueDays();
+                    int days = ResidueDays();
                     isExpired = true;
                     if (days < 0) return false;
-                if (SClient.RegisterType == "none") {
-                    SClient.AuthCode= AppSetting.GetValue("use");
-                    hasRegistered = false;
-                    MessageBox.Show($"当前使用的为试用版，剩余{days}天后到期，请尽快联系代理商家注册");
-                }
+                    if (SClient.RegisterType == "none") {
+                        SClient.AuthCode = AppSetting.GetValue("use");
+                        hasRegistered = false;
+                        MessageBox.Show($"当前使用的为试用版，剩余{days}天后到期，请尽快联系代理商家注册");
+                    }
                 }
                 return true;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Logger.WriteException(ex);
             }
-                return false;
+            return false;
         }
         private static int ResidueDays() {
             DateTime date = DateTime.Now.ToString("yyyyMMdd").ToDate("yyyyMMdd");
@@ -391,8 +344,7 @@ namespace YF.MWS.Win
         /// <summary>
         /// 检测加密狗连接电脑状态
         /// </summary>
-        private static void CheckSoftdogConnectState() 
-        {
+        private static void CheckSoftdogConnectState() {
             /*if (CurrentClient.Instance.CurrentVersion == VersionType.Official && CurrentClient.Instance.RegType!= RegisterMode.File) 
             {
                 bool isSuccess = et99.FindDevice(et99PID);
@@ -408,44 +360,37 @@ namespace YF.MWS.Win
             }*/
         }
 
-        private static void timerApp_Tick(object sender, EventArgs e)
-        {
+        private static void timerApp_Tick(object sender, EventArgs e) {
             CheckSoftdogConnectState();
         }
 
-        public static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
-        {
+        public static void Application_ThreadException(object sender, ThreadExceptionEventArgs e) {
             Logger.WriteException(e.Exception);
-            MessageDxUtil.ShowError("发生未知错误:"+e.Exception.Message);
+            MessageDxUtil.ShowError("发生未知错误:" + e.Exception.Message);
             //Util.Utility.ReStart();
         }
 
-        public static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Logger.Write(string.Format("current domain unhandled exception,is terminating:{0}",e.IsTerminating));
+        public static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            Logger.Write(string.Format("current domain unhandled exception,is terminating:{0}", e.IsTerminating));
             Exception ex = null;
             ex = e.ExceptionObject as Exception;
             Logger.WriteException(ex);
-            MessageDxUtil.ShowError("发生未知错误:" + ex!=null ? ex.Message:"请重试");
+            MessageDxUtil.ShowError("发生未知错误:" + ex != null ? ex.Message : "请重试");
             //Environment.Exit(System.Environment.ExitCode);//有此句则不弹异常对话框
             //Util.Utility.ReStart();
         }
 
-        private static void Application_Exit(object sender, EventArgs e)
-        {
-            try
-            {
+        private static void Application_Exit(object sender, EventArgs e) {
+            try {
                 if (masterService != null && startBackupDb)
                     masterService.DataBackup(backDir);
                 string processName = "MWS.Video";
                 ProcessUtil.KillProcess(processName, videoAppName);
-                if (et99 != null)
-                {
+                if (et99 != null) {
                     //关闭加密狗设备
                     //et99.CloseDevice();
                     //关闭加密狗检测定时器
-                    if (timerApp != null && timerApp.Enabled)
-                    {
+                    if (timerApp != null && timerApp.Enabled) {
                         timerApp.Stop();
                         timerApp = null;
                     }
@@ -454,18 +399,16 @@ namespace YF.MWS.Win
                 CurrentClient.Instance.DataBase = AppSetting.GetValue("databaseType").ToEnum<DataBaseType>();
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                     string path = AppSetting.GetValue("dsnSqlite");
-                if (string.IsNullOrEmpty(cfg.Weight.BackupDir))
-                    cfg.Weight.BackupDir = @"D:\MWS\DataBack";
+                    if (string.IsNullOrEmpty(cfg.Weight.BackupDir))
+                        cfg.Weight.BackupDir = @"D:\MWS\DataBack";
                     if (!Directory.Exists(cfg.Weight.BackupDir)) {
                         Directory.CreateDirectory(cfg.Weight.BackupDir);
                     }
-                    System.IO.File.Copy(path, cfg.Weight.BackupDir+"\\MWS.db", true);
+                    System.IO.File.Copy(path, cfg.Weight.BackupDir + "\\MWS.db", true);
                 }
 
                 //Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Logger.Write("关闭加密狗设备异常：" + ex.ToString());
             }
         }

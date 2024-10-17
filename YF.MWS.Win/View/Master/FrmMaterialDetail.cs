@@ -148,8 +148,6 @@ namespace YF.MWS.Win.View.Master
                     bool isSaved= materialService.SaveMaterial(material);
                     if (isSaved) 
                     {
-                        if (FrmMain != null)
-                            FrmMain.LoadMaterial();
                         MaterialCacher.Refresh();
                     }
                     MessageDxUtil.ShowTips("成功保存物资信息.");

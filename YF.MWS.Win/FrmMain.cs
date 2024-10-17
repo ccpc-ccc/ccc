@@ -164,23 +164,6 @@ namespace YF.MWS.Win {
                 }
             HandleItemClick(tag,fullName);
         }
-        public void LoadCar() {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadCar();
-        }
-
-        public void LoadMaterial() {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadMaterial();
-        }
-
-        public void LoadCustomer(CustomerType customerType) {
-            FrmWeight frmWeight = GetFrmWeight();
-            if (frmWeight != null)
-                frmWeight.LoadCustomer(customerType);
-        }
 
         private FrmWeight GetFrmWeight() {
             FrmWeight frmWeight = null;
@@ -580,12 +563,6 @@ namespace YF.MWS.Win {
                     CfgUtil.SaveCfg(cfg);
                 }
             }
-        }
-
-        private void toolStripButton7_Click(object sender, EventArgs e) {
-            if (fWeight == null) return;
-            SysCfg cfg = CfgUtil.GetCfg();
-            fWeight.setDevice2(!cfg.Device2.StartDevice);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e) {

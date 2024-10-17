@@ -103,13 +103,6 @@ namespace YF.MWS.Win.View.Master
                 else
                 {
                     bool isSaved=masterService.SaveCustomer(customer);
-                    if (isSaved)
-                    {
-                        if (FrmMain != null)
-                        {
-                            FrmMain.LoadCustomer(customer.CustomerType.ToEnum<CustomerType>());
-                        }
-                    }
                     if (isSaved && startAutoUpload)
                     {
                         CustomerCacher.UpdateCustomer(customer.Id);

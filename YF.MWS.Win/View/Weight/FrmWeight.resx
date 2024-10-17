@@ -128,19 +128,4 @@
         ZXZFeHByZXNzLlV0aWxzLkltYWdlQ29sbGVjdGlvblN0cmVhbWVyAAAAAAIAAAAL
 </value>
   </data>
-  <metadata name="timerReader.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>399, 17</value>
-  </metadata>
-  <metadata name="timerSimulate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>523, 17</value>
-  </metadata>
-  <metadata name="timerAutoTask.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>657, 17</value>
-  </metadata>
-  <metadata name="timerSync.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>795, 17</value>
-  </metadata>
-  <metadata name="timerStateSync.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>905, 17</value>
-  </metadata>
 </root>

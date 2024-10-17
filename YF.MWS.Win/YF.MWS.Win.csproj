@@ -174,12 +174,6 @@
     <Compile Include="Core\SyncObject.cs" />
     <Compile Include="Core\SyncUtil.cs" />
     <Compile Include="Core\Weight\SimulateWeight.cs" />
-    <Compile Include="FrmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmLogin.Designer.cs">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1248,12 +1242,6 @@
     <Compile Include="View\Weight\FrmWeight.Designer.cs">
       <DependentUpon>FrmWeight.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Weight\FrmWeightExt.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Weight\FrmWeightExtend.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="View\Weight\FrmWeightImage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1272,15 +1260,6 @@
     <Compile Include="View\Weight\FrmWeightSearch.Designer.cs">
       <DependentUpon>FrmWeightSearch.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FrmLogin.fr.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmLogin.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmLogin.zh-CN.resx">
-      <DependentUpon>FrmLogin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>

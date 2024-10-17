@@ -100,8 +100,6 @@ namespace YF.MWS.Win.View.Master
                         bool isSaved=carService.Save(car);
                         if (isSaved)
                         {
-                            if (FrmMain != null)
-                                FrmMain.LoadCar();
                             CarCacher.Remove(car.CarNo);
                             CarCacher.Remove();
                         }
