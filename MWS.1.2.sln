@@ -43,8 +43,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{21C06A29
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "加密狗", "..\加密狗\加密狗.csproj", "{1C901933-0444-4784-84C8-AAC9F35E0FB6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{D1C642BD-9C5A-4D3D-AAF0-C1BA868B8174}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YF.MWS.Win.Test", "YF.MWS.Win.Test\YF.MWS.Win.Test.csproj", "{35EB17D1-27F7-47F8-9B4A-D576D2DF7605}"
 EndProject
 Global

@@ -937,12 +937,6 @@
     <Compile Include="View\Master\FrmWarehList.Designer.cs">
       <DependentUpon>FrmWarehList.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmWeightColumFormat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmWeightColumFormat.Designer.cs">
-      <DependentUpon>FrmWeightColumFormat.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Master\FrmWeightRepTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1605,9 +1599,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmWarehList.resx">
       <DependentUpon>FrmWarehList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmWeightColumFormat.resx">
-      <DependentUpon>FrmWeightColumFormat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmWeightRepTemplate.resx">
       <DependentUpon>FrmWeightRepTemplate.cs</DependentUpon>
