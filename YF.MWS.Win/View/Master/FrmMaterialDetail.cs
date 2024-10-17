@@ -109,8 +109,8 @@ namespace YF.MWS.Win.View.Master
                         material.Id = YF.MWS.Util.Utility.GetGuid();
                     }
                     material.MaterialName = teMaterialName.Text;
-                    material.MaxWeight = txtMinWeight.Text.ToDecimal();
-                    material.MinWeight = txtMaxWeight.Text.ToDecimal();
+                    material.MinWeight = txtMinWeight.Text.ToDecimal();
+                    material.MaxWeight = txtMaxWeight.Text.ToDecimal();
                     material.CompanyId = this.CompanyId;
                     bool isSaved= materialService.SaveMaterial(material);
                     if (isSaved) 

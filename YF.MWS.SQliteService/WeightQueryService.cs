@@ -725,7 +725,16 @@ namespace YF.MWS.SQliteService
                 }
             }
         }
-
+        public List<BWeight> GetBWeights(string where) {
+            string sql = "select * from B_Weight a left join S_Material b on a.MaterialId=b.Id where 1=1";
+            if (string.IsNullOrEmpty(where)) sql += where;
+            return base.getList<BWeight>(sql);
+        }
+        public DataTable GetBWeightTable(string where) {
+            string sql = "select * from B_Weight a left join S_Material b on a.MaterialId=b.Id where 1=1";
+            if (string.IsNullOrEmpty(where)) sql += where;
+            return base.GetTable(sql);
+        }
         public WeightQueryResult Query(WeightQueryCondition qc, bool startPage) 
         {
             WeightQueryResult result = new WeightQueryResult();

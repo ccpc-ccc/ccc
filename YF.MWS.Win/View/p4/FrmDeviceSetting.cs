@@ -18,6 +18,9 @@ using YF.MWS.Client.DataService.Interface;
 using YF.MWS.BaseMetadata;
 using System.Runtime.InteropServices.ComTypes;
 using YF.MWS.Db;
+using System.Net.Sockets;
+using System.Net;
+using System.Threading;
 
 namespace YF.MWS.Win.View.Master {
     public partial class FrmDeviceSetting : DevExpress.XtraEditors.XtraForm {
@@ -29,7 +32,8 @@ namespace YF.MWS.Win.View.Master {
         /// 串口
         /// </summary>
         private SerialPortHelper serialPort;//1号仪表
-
+        private Socket _socket;
+        private List<SMaterial> materials = new List<SMaterial>();
         /// <summary>
         /// 显示串口接收到的数据
         /// </summary>
@@ -46,6 +50,8 @@ namespace YF.MWS.Win.View.Master {
             cfg = Program._cfg;
             SetDeviceInfo1();
             this.SetComInfo1();
+            materials = materialService.GetMaterialByCompanyId(Index.ToString());
+            gcWeight.DataSource = materials;
         }
 
         #region 设置串口及仪表信息
@@ -105,6 +111,9 @@ namespace YF.MWS.Win.View.Master {
             this.teReturnZeroCommand1.Text = cfg.Device[Index].ReturnZeroCommand;
             txtName.Text = cfg.Device[Index].Name;
            teSettlementTime.EditValue = cfg.Device[Index].SettlementTime;
+            txtServerIP.Text = cfg.Device[Index].ServerIP;
+            txtServerProt.Text = cfg.Device[Index].ServerPort.ToString();
+            tabConnectType.SelectedTabPageIndex = cfg.Device[Index].ConnectType;
             DxHelper.BindComboBoxEdit(cmbSequence1, SysCode.Sequence, cfg.Device[Index].Sequence);
         }
 
@@ -137,6 +146,10 @@ namespace YF.MWS.Win.View.Master {
             cfg.Device[Index].ReturnZeroCommand = teReturnZeroCommand1.Text;
             cfg.Device[Index].Name=txtName.Text;
             cfg.Device[Index].SettlementTime = teSettlementTime.EditValue.ToDateTime();
+            cfg.Device[Index].Code = Index.ToString();
+            cfg.Device[Index].ServerIP= txtServerIP.Text;
+            cfg.Device[Index].ServerPort = txtServerProt.Text.ToInt();
+            cfg.Device[Index].ConnectType = tabConnectType.SelectedTabPageIndex;
             string fomart = cmbFormat1.Text;
             int decimalDigits = 0;
             DisplayFormatStringType displayType = DisplayFormatStringType.Int;
@@ -193,6 +206,9 @@ namespace YF.MWS.Win.View.Master {
             if (this.serialPort != null) {
                 this.serialPort.ClosePort();
             }
+            if (this._socket != null && this._socket.Connected) {
+                this._socket.Close();
+            }
         }
 
         private void simpleButton3_Click(object sender, EventArgs e) {
@@ -234,6 +250,51 @@ namespace YF.MWS.Win.View.Master {
                 materialService.DeleteMaterial(material.Id);
                 bindData();
             }
+        }
+        private void simpleButton6_Click(object sender, EventArgs e) {
+            if (this.btnConnect.Text == "连接") {
+            this._socket=new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try {
+                    new Thread(() => {
+                        this.Invoke(new Action(() => {
+                        this.btnConnect.Text = "连接中";
+                        }));
+                        try {
+                this._socket.Connect(txtServerIP.Text, txtServerProt.Text.ToInt());
+                        this.Invoke(new Action(() => {
+                btnConnect.Text = "断开";
+                        }));
+                        byte[] bytes = new byte[48];
+                        while (true) {
+                                Thread.Sleep(100);
+                        if (this._socket == null || !this._socket.Connected) return;
+                        int received= this._socket.Receive(bytes);
+                        string message = Encoding.ASCII.GetString(bytes, 0, received);
+                                memoReceive1.Text += message;
+                        }
+
+                        }catch(Exception ex) {
+                            Logger.WriteException(ex);
+                            MessageBox.Show("连接失败");
+                            this.Invoke(new Action(() => {
+                                btnConnect.Text = "连接";
+                            }));
+                        }
+                    }).Start();
+            } catch (Exception ex) {
+                Logger.Write("网络连接失败，" + ex.Message);
+                MessageBox.Show("连接失败");
+            }
+            } else {
+                if(this._socket!=null&&this._socket.Connected) this._socket.Close();
+                btnConnect.Text = "连接";
+            }
+        }
+
+        private void simpleButton6_Click_1(object sender, EventArgs e) {
+            materials = materialService.GetMaterialByCompanyId(Index.ToString());
+            gcWeight.DataSource = materials;
+            gcWeight.RefreshDataSource();
         }
     }
 }

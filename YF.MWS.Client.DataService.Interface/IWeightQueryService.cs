@@ -23,5 +23,7 @@ namespace YF.MWS.Client.DataService.Interface
         DataTable GetQcList(DateTime dtStart, DateTime dtEnd, int qcState);
         WeightQueryResult Query(WeightQueryCondition qc, bool startPage);
         DataTable GetTopListTable(TopWeightQuery query);
+        List<BWeight> GetBWeights(string where);
+        DataTable GetBWeightTable(string where);
     }
 }

@@ -77,5 +77,10 @@ namespace YF.MWS.Win.View.Weight {
             }
             Program._cfg.Device = lstDevice;
         }
+
+        private void simpleButton1_Click(object sender, EventArgs e) {
+            FrmWeightSearch frm = new FrmWeightSearch(-1);
+            frm.ShowDialog();
+        }
     }
 }

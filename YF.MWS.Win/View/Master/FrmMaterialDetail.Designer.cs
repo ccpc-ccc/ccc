@@ -190,7 +190,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(40, 125);
+            this.labelControl1.Location = new System.Drawing.Point(46, 125);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(54, 12);
             this.labelControl1.TabIndex = 14;
@@ -212,7 +212,7 @@
             // 
             this.lblUnitPrice.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.lblUnitPrice.Appearance.Options.UseFont = true;
-            this.lblUnitPrice.Location = new System.Drawing.Point(40, 75);
+            this.lblUnitPrice.Location = new System.Drawing.Point(46, 75);
             this.lblUnitPrice.Name = "lblUnitPrice";
             this.lblUnitPrice.Size = new System.Drawing.Size(54, 12);
             this.lblUnitPrice.TabIndex = 14;
