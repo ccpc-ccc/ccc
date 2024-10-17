@@ -388,6 +388,7 @@ namespace YF.MWS.Win {
 
         private void FrmMain_Load(object sender, EventArgs e) {
             Program.frmMain = this;
+            AllFormCfg frmCfg=CfgUtil.GetFormCfg();
             loginCfg = YF.Utility.Serialization.XmlUtil.Deserialize<LoginCfg>(loginCfgXml);
             if (cfg != null) {
                 if (cfg.Launch != null) {
@@ -403,6 +404,12 @@ namespace YF.MWS.Win {
             lstModule = UserCacher.GetModuleList();
             //SetBarItem();
             this.lbNote.Caption= AppSetting.GetValue("note");
+            if (frmCfg.mainFrm.isMax != -1) {
+                this.WindowState = frmCfg.mainFrm.isMax==1? FormWindowState.Maximized:FormWindowState.Normal;
+                this.Location =new Point( frmCfg.mainFrm.x,frmCfg.mainFrm.y);
+                this.Height = frmCfg.mainFrm.height;
+                this.Width = frmCfg.mainFrm.width;
+            }
         }
         /// <summary>
         /// 权限验证
@@ -609,6 +616,12 @@ namespace YF.MWS.Win {
                 Program.frmViewVideoDevice.Close();
                 Program.frmViewVideoDevice= null;
             }
+            CfgUtil.allFormCfg.mainFrm.isMax = this.WindowState == FormWindowState.Maximized ? 1 : 0;
+            CfgUtil.allFormCfg.mainFrm.x = this.Location.X;
+            CfgUtil.allFormCfg.mainFrm.y = this.Location.Y;
+            CfgUtil.allFormCfg.mainFrm.width = this.Width;
+            CfgUtil.allFormCfg.mainFrm.height = this.Height;
+            CfgUtil.SaveFormCfg(CfgUtil.allFormCfg);
         }
 
         private void ribbon_Click(object sender, EventArgs e) {

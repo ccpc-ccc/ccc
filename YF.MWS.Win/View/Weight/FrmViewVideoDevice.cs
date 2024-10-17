@@ -54,6 +54,8 @@ namespace YF.MWS.Win.View.Weight
         }
 
         private void FrmViewVideo_Load(object sender, EventArgs e) {
+             CfgUtil.GetFormCfg();
+            FormUtil.LoadFormCfg(this,CfgUtil.allFormCfg.videoFrm);
         }
 
         private void LoadVideo() {
@@ -311,7 +313,8 @@ namespace YF.MWS.Win.View.Weight
         private void FrmViewVideoDevice_FormClosing(object sender, FormClosingEventArgs e) {
             e.Cancel = true;
            this.Hide();
-            this.WindowState = FormWindowState.Normal;
+           CfgUtil.allFormCfg.videoFrm= FormUtil.CloseFormCfg(this);
+           CfgUtil.SaveFormCfg(CfgUtil.allFormCfg);
         }
 
         /// <summary>

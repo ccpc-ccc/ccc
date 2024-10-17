@@ -412,6 +412,7 @@
     <Compile Include="Ulit\CarPlate\VzCarPlateRecognizer.cs" />
     <Compile Include="Ulit\CarPlate\VzClientSDK.cs" />
     <Compile Include="Ulit\CarRecognitionUtil.cs" />
+    <Compile Include="Ulit\FormUtil.cs" />
     <Compile Include="Ulit\CfgUtil.cs" />
     <Compile Include="Ulit\DigitConvertUtil.cs" />
     <Compile Include="Ulit\DxHelper.cs" />
@@ -1307,6 +1308,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Uc\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uc\CardView.resx">
       <DependentUpon>CardView.cs</DependentUpon>
     </EmbeddedResource>

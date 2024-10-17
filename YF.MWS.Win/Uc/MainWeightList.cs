@@ -116,7 +116,7 @@ namespace YF.MWS.Win.Uc
             {
                 if (gvWeight.GetFocusedDataRow() != null)
                 {
-                    return gvWeight.GetFocusedRowCellValue("WeightId").ToObjectString();
+                    return gvWeight.GetFocusedRowCellValue("Id").ToObjectString();
                 }
                 else 
                 {

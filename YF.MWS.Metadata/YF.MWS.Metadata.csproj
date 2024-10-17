@@ -95,6 +95,7 @@
     <Compile Include="Cfg\OverWeightCfg.cs" />
     <Compile Include="Cfg\PageCfg.cs" />
     <Compile Include="Cfg\PeopleWeightCfg.cs" />
+    <Compile Include="Cfg\FormCfg.cs" />
     <Compile Include="Cfg\PlcCfg.cs" />
     <Compile Include="Cfg\QrCodeCfg.cs" />
     <Compile Include="Cfg\ReadCardCfg.cs" />

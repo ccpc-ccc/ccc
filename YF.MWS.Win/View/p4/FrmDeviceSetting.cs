@@ -23,18 +23,6 @@ namespace YF.MWS.Win.View.Master {
         private IWeightViewService weightViewService = new WeightViewService();
         private SysCfg cfg;
         private int modbusNo = 1;
-        /// <summary>
-        /// 控制器编号
-        /// </summary>
-        public int ModbusNo {
-            get { return modbusNo; }
-            set { modbusNo = value; }
-        }
-
-        /// <summary>
-        /// Ini文件控制器小节名称
-        /// </summary>
-        private string section;
 
         /// <summary>
         /// 串口
@@ -48,55 +36,17 @@ namespace YF.MWS.Win.View.Master {
         private delegate void ShowData(string value);
 
         private ShowData OnShowData;
-        /// <summary>
-        /// Ini文件仪表小节名称
-        /// </summary>
-        string deviceSection3;
-
         public FrmDeviceSetting() {
             InitializeComponent();
         }
 
         private void FrmDeviceSetting_Load(object sender, EventArgs e) {
             cfg = CfgUtil.GetCfg();
-            //测速仪表小节名称
-            deviceSection3 = "Velocimeter";
-            if (!File.Exists(IniUtility.FilePath)) {
-                File.Create(IniUtility.FilePath);
-            }
-            //控制器小节名称
-            section = string.Format("Modbus{0}", this.modbusNo);
             InitSerialPort();
             SetDeviceInfo1();
             SetDeviceInfo2();
             this.SetComInfo1();
             this.SetComInfo1_2();
-            AddEvent();
-        }
-
-        private void AddEvent() {
-            this.cmbDevice1.SelectedIndexChanged += new System.EventHandler(this.cmbDevice_SelectedIndexChanged);
-            this.cmbBaudRate1.SelectedIndexChanged += new System.EventHandler(this.cmbBaudRate_SelectedIndexChanged1);
-            this.cmbStopBits1.SelectedIndexChanged += new System.EventHandler(this.cmbStopBits_SelectedIndexChanged1);
-            this.cmbDataBits1.SelectedIndexChanged += new System.EventHandler(this.cmbDataBits_SelectedIndexChanged1);
-            this.cmbParity1.SelectedIndexChanged += new System.EventHandler(this.cmbParity_SelectedIndexChanged1);
-            this.cmbBaudRate1_2.SelectedIndexChanged += new System.EventHandler(this.cmbBaudRate_SelectedIndexChanged2);
-            this.cmbStopBits1_2.SelectedIndexChanged += new System.EventHandler(this.cmbStopBits_SelectedIndexChanged2);
-            this.cmbDataBits1_2.SelectedIndexChanged += new System.EventHandler(this.cmbDataBits_SelectedIndexChanged2);
-            this.cmbParity1_2.SelectedIndexChanged += new System.EventHandler(this.cmbParity_SelectedIndexChanged2);
-        }
-
-        private void ChangeDevice1() {
-            if (this.serialPort1 == null) return;
-            this.serialPort1.ClosePort();
-            this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
-            this.serialPort1.OpenPort();
-        }
-        private void ChangeDevice2() {
-            if (this.serialPort2 == null) return;
-            this.serialPort1.ClosePort();
-            this.serialPort2.SerlPort.PortName = cmbCom1_2.EditValue.ToString();
-            this.serialPort2.OpenPort();
         }
 
         #region 设置串口及仪表信息
@@ -111,10 +61,10 @@ namespace YF.MWS.Win.View.Master {
                 cmbCom1.Properties.Items.Add(item);
             }
             this.cmbCom1.EditValue = cfg.Device1.Port;
-            DxHelper.BindComboBoxEdit(cmbBaudRate1, SysCode.BaundRate, cfg.Device1.BaundRate);
-            DxHelper.BindComboBoxEdit(cmbDataBits1, SysCode.DataBit, cfg.Device1.DataBit);
+            cmbBaudRate1.Text = cfg.Device1.BaundRate;
+            cmbDataBits1.Text = cfg.Device1.DataBit;
             DxHelper.BindComboBoxEdit<StopBits>(cmbStopBits1, cfg.Device1.StopBit);
-            DxHelper.BindComboBoxEdit(cmbParity1, SysCode.ParityVerifyBit, cfg.Device1.Parity);
+            DxHelper.BindComboBoxEdit<Parity>(cmbParity1, cfg.Device1.Parity);
             if (cfg.Device1.DataFormat == "DEC") {
                 this.radioDigit1.SelectedIndex = 0;
             } else {
@@ -128,10 +78,10 @@ namespace YF.MWS.Win.View.Master {
                 cmbCom1_2.Properties.Items.Add(item);
             }
             this.cmbCom1_2.EditValue = cfg.Device1.Port;
-            DxHelper.BindComboBoxEdit(cmbBaudRate1_2, SysCode.BaundRate, cfg.Device2.BaundRate);
-            DxHelper.BindComboBoxEdit(cmbDataBits1_2, SysCode.DataBit, cfg.Device2.DataBit);
-            DxHelper.BindComboBoxEdit(cmbStopBits1_2, SysCode.StopBit, cfg.Device2.StopBit);
-            DxHelper.BindComboBoxEdit(cmbParity1_2, SysCode.ParityVerifyBit, cfg.Device2.Parity);
+            cmbBaudRate1_2.Text = cfg.Device2.BaundRate;
+            cmbDataBits1_2.Text = cfg.Device2.DataBit;
+            DxHelper.BindComboBoxEdit<StopBits>(cmbStopBits1_2, cfg.Device2.StopBit);
+            DxHelper.BindComboBoxEdit<Parity>(cmbParity1_2, cfg.Device2.Parity);
             if (cfg.Device2.DataFormat == "DEC") {
                 this.radioDigit1_2.SelectedIndex = 0;
             } else {
@@ -299,10 +249,10 @@ namespace YF.MWS.Win.View.Master {
         private void Save1() {
             cfg = CfgUtil.GetCfg();
             cfg.Device1.Port = this.cmbCom1.EditValue.ToObjectString();
-            cfg.Device1.BaundRate = DxHelper.GetCode(cmbBaudRate1);
-            cfg.Device1.DataBit = DxHelper.GetCode(cmbDataBits1);
-            cfg.Device1.StopBit = DxHelper.GetCode(cmbStopBits1);
-            cfg.Device1.Parity = DxHelper.GetCode(cmbParity1);
+            cfg.Device1.BaundRate =cmbBaudRate1.Text;
+            cfg.Device1.DataBit =cmbDataBits1.Text;
+            cfg.Device1.StopBit = cmbStopBits1.GetStrValue().ToString();
+            cfg.Device1.Parity = cmbParity1.GetStrValue().ToString();
             cfg.Device1.DataFormat = this.radioDigit1.SelectedIndex == 0 ? "DEC" : "HEX";
             cfg.Device1.Version = DxHelper.GetCode(cmbDevice1);
             cfg.Device1.DUnit = DxHelper.GetCode(cmbDUnit1);
@@ -353,10 +303,10 @@ namespace YF.MWS.Win.View.Master {
         private void Save1_2() {
             cfg = CfgUtil.GetCfg();
             cfg.Device2.Port = this.cmbCom1_2.EditValue.ToObjectString();
-            cfg.Device2.BaundRate = DxHelper.GetCode(cmbBaudRate1_2);
-            cfg.Device2.DataBit = DxHelper.GetCode(cmbDataBits1_2);
-            cfg.Device2.StopBit = DxHelper.GetCode(cmbStopBits1_2);
-            cfg.Device2.Parity = DxHelper.GetCode(cmbParity1_2);
+            cfg.Device2.BaundRate =cmbBaudRate1_2.Text;
+            cfg.Device2.DataBit =cmbDataBits1_2.Text;
+            cfg.Device2.StopBit =cmbStopBits1_2.GetStrValue().ToString();
+            cfg.Device2.Parity = cmbParity1_2.GetStrValue().ToString();
             cfg.Device2.DataFormat = this.radioDigit1_2.SelectedIndex == 0 ? "DEC" : "HEX";
             cfg.Device2.Version = DxHelper.GetCode(cmbDevice1_2);
             cfg.Device2.DUnit = DxHelper.GetCode(cmbDUnit1_2);
@@ -411,10 +361,10 @@ namespace YF.MWS.Win.View.Master {
             if (simpleButton2.Text == "连接") {
                 this.serialPort1.ClosePort();
                 this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
-                this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.EditValue.ToInt();
-                this.serialPort1.SerlPort.DataBits = cmbDataBits1.EditValue.ToInt();
-                this.serialPort1.SerlPort.StopBits = (StopBits)cmbStopBits1.SelectedIndex.ToInt();
-                this.serialPort1.SetParity(cmbParity1.EditValue.ToString());
+                this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.Text.ToInt();
+                this.serialPort1.SerlPort.DataBits = cmbDataBits1.Text.ToInt();
+                this.serialPort1.SerlPort.StopBits = (StopBits)cmbStopBits1.GetStrValue().ToInt();
+                this.serialPort1.SetParity((Parity)cmbParity1.GetStrValue().ToInt());
                 this.serialPort1.OpenPort();
                 simpleButton2.Text = "断开";
             } else {
@@ -511,10 +461,10 @@ namespace YF.MWS.Win.View.Master {
             if (simpleButton8.Text == "连接") {
                 this.serialPort2.ClosePort();
                 this.serialPort2.SerlPort.PortName = cmbCom1_2.EditValue.ToString();
-                this.serialPort2.SerlPort.BaudRate = cmbBaudRate1_2.EditValue.ToInt();
-                this.serialPort2.SerlPort.DataBits = cmbDataBits1_2.EditValue.ToInt();
-                this.serialPort2.SerlPort.StopBits = (StopBits)cmbStopBits1_2.SelectedIndex.ToInt();
-                this.serialPort2.SetParity(cmbParity1_2.EditValue.ToString());
+                this.serialPort2.SerlPort.BaudRate = cmbBaudRate1_2.Text.ToInt();
+                this.serialPort2.SerlPort.DataBits = cmbDataBits1_2.Text.ToInt();
+                this.serialPort2.SerlPort.StopBits = (StopBits)cmbStopBits1_2.GetStrValue().ToInt();
+                this.serialPort2.SetParity((Parity)cmbParity1_2.GetStrValue().ToInt());
                 this.serialPort2.OpenPort();
                 simpleButton8.Text = "断开";
             } else {
@@ -526,26 +476,6 @@ namespace YF.MWS.Win.View.Master {
         private void simpleButton6_Click(object sender, EventArgs e) {
             Save1_2();
             MessageDxUtil.ShowTips("成功保存2号仪表设置信息");
-        }
-
-        /// <summary>
-        /// 修改奇偶校验
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cmbParity_SelectedIndexChanged1(object sender, EventArgs e) {
-            if (this.serialPort1 != null) {
-                this.serialPort1.SetParity(DxHelper.GetCode(cmbParity1));
-            }
-        }
-        private void cmbParity_SelectedIndexChanged2(object sender, EventArgs e) {
-            if (this.serialPort2 != null) {
-                this.serialPort2.SetParity(DxHelper.GetCode(cmbParity1_2));
-            }
-        }
-
-        private void simpleButton7_Click(object sender, EventArgs e) {
-            
         }
     }
 }

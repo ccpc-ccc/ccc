@@ -8,8 +8,8 @@ namespace YF.MWS.BaseMetadata
 {
     /// <summary>
     /// 当前系统登录用户
-    /// Author:仇军
-    /// Date:2014-10-07
+    /// Author:闫孝感
+    /// Date:2024-10-07
     /// </summary>
     public class CurrentUser : Singleton<CurrentUser>
     {

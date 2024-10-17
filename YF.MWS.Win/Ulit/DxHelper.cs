@@ -325,15 +325,19 @@ namespace YF.MWS.Win
             }
         }
         public static void BindComboBoxEdit<T>(ComboBoxEdit combo,object selectedValue)where T:Enum {
-            SCode selectedCode = null;
+            ListItem selectedCode = null;
             ComboBoxItemCollection coll = combo.Properties.Items;
             coll.BeginUpdate();
             foreach (int eemun in Enum.GetValues(typeof(T))) {
                 string sName = Enum.GetName(typeof(T), eemun);//获取名称
-                coll.Add(new ListItem() {
+                ListItem temp = new ListItem() {
                     Text = sName,
-                    Value=eemun.ToString()
-                });
+                    Value = eemun.ToString()
+                };
+                coll.Add(temp);
+                if(selectedValue != null && selectedValue.ToString() == eemun.ToString()) {
+                    selectedCode = temp;
+                }
             }
             coll.EndUpdate();
             combo.SelectedIndex = -1;

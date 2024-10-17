@@ -32,6 +32,7 @@ namespace YF.MWS.Win
         private static FontCfg fontCfg;
         private static LoginCfg loginCfg = null;
         private static VoiceCfg voiceCfg = null;
+        public static AllFormCfg allFormCfg = null;
 
         public static void Init() 
         {
@@ -385,6 +386,13 @@ namespace YF.MWS.Win
             return f;
         }
 
+        public static void SaveCfg(SysCfg cfg)
+        {
+            string xmlPath = Path.Combine(Application.StartupPath, "SysCfg.xml");
+            XmlUtil.Serialize<SysCfg>(cfg, xmlPath);
+            ResetCfg();
+        }
+
         public static SysCfg GetCfg()
         {
             if (cfg == null)
@@ -402,12 +410,28 @@ namespace YF.MWS.Win
             }
             return cfg;
         }
-
-        public static void SaveCfg(SysCfg cfg)
+        public static AllFormCfg GetFormCfg()
         {
-            string xmlPath = Path.Combine(Application.StartupPath, "SysCfg.xml");
-            XmlUtil.Serialize<SysCfg>(cfg, xmlPath);
-            ResetCfg();
+            if(allFormCfg!=null) return allFormCfg;
+                string xmlPath = Path.Combine(Application.StartupPath, "Layerout/FormCfg.xml");
+                if (File.Exists(xmlPath))
+                {
+                allFormCfg = XmlUtil.Deserialize<AllFormCfg>(xmlPath);
+            } else {
+                allFormCfg = new AllFormCfg();
+            }
+            return allFormCfg;
+        }
+        public static void SaveFormCfg(AllFormCfg cfg)
+        {
+            string xmlPath = Path.Combine(Application.StartupPath, "Layerout/FormCfg.xml");
+            XmlUtil.Serialize<AllFormCfg>(cfg, xmlPath);
+            allFormCfg = cfg;
+        }
+        public static void LoadFormCfg(Form frm,FormCfg cfg) {
+            if (cfg.isMax < 0) return;
+            frm.WindowState= cfg.isMax==1? FormWindowState.Maximized : FormWindowState.Normal;
+            frm.Location =new Point(cfg.x,cfg.y);
         }
 
         public static void SaveSmsCfg(SmsCfg cfg)
@@ -439,11 +463,6 @@ namespace YF.MWS.Win
         public static void ResetCfg()
         {
             cfg = null;
-        }
-
-        public static void ResetSmsCfg()
-        {
-            smsCfg = null;
         }
 
         public static void ResetFontCfg()

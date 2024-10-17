@@ -215,10 +215,9 @@ namespace YF.MWS.Win
         /// 设置奇偶校验
         /// </summary>
         /// <param name="parity">奇偶校验</param>
-        public void SetParity(string parity)
-        {
+        public void SetParity(Parity parity) {
             if (this.serlPort != null)
-                this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), parity, true);
+                this.serlPort.Parity = parity;
         }
 
         /// <summary>
