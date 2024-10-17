@@ -171,8 +171,6 @@
     <Compile Include="Core\CalculateUtil.cs" />
     <Compile Include="Core\CustomerUtil.cs" />
     <Compile Include="Core\HttpPostUtil.cs" />
-    <Compile Include="Core\PrintViewUtil.cs" />
-    <Compile Include="Core\SuperTipUtil.cs" />
     <Compile Include="Core\SyncObject.cs" />
     <Compile Include="Core\SyncUtil.cs" />
     <Compile Include="Core\Weight\SimulateWeight.cs" />
