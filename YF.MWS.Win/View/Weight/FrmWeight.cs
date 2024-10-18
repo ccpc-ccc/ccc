@@ -133,11 +133,6 @@ namespace YF.MWS.Win.View.Weight {
         /// </summary>
         private volatile int checkCarCount = 0;
 
-
-        /// <summary>
-        /// 皮重详情
-        /// </summary>
-        private BWeightDetail tareDetail;
         /// <summary>
         /// 上次皮重
         /// </summary>
@@ -147,11 +142,6 @@ namespace YF.MWS.Win.View.Weight {
         /// </summary>
         private decimal currentTareWeight = 0;
         private DateTime tareWeightTime = DateTime.Now;
-
-        /// <summary>
-        /// 毛重详情
-        /// </summary>
-        private BWeightDetail grossDetail;
         /// <summary>
         /// 当前毛重
         /// </summary>
@@ -779,12 +769,6 @@ namespace YF.MWS.Win.View.Weight {
                                 weGrossWeight.Text = tare.ToString();
                             }
                         }));
-                    if (tareDetail != null && grossDetail != null) {
-                        DateTime deTare = tareDetail.WeightTime;
-                        DateTime deGross = grossDetail.WeightTime;
-                        tareDetail.WeightTime = deGross;
-                        grossDetail.WeightTime = deTare;
-                    }
                 }
             }
         }
@@ -1393,14 +1377,10 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         public void Print(string weightId) {
-            int printCount = 0;
-            if (startReWeightTemplate) {
-                printCount = searchList.CurrentWeightPrintCount;
-            }
             Hashtable parameters = new Hashtable {
                 { "当前时间", DateTime.Now }
             };
-            PrintUtil.PrintWeightReport(searchList.CurrentViewId, weightId, DocumentType.Weight, reportService, parameters, 0, weightPrinterName);
+            PrintUtil.PrintWeightReport(searchList.CurrentViewId, weightId, reportService, weightPrinterName);
             if (appendPrintTemp) {
                 PrintUtil.PrintWeightReport(searchList.CurrentViewId, weightId, DocumentType.TemporaryWeight, reportService, parameters, weightTempPrinterName);
             }
@@ -1794,8 +1774,6 @@ namespace YF.MWS.Win.View.Weight {
             isNewWeight = true;
             currentWeightId = YF.MWS.Util.Utility.GetGuid();
             currentWeight = null;
-            tareDetail = null;
-            grossDetail = null;
             currentTareWeight = 0;
             oldTareWeight = 0;
             oldGrossWeight = 0;
@@ -1864,18 +1842,6 @@ namespace YF.MWS.Win.View.Weight {
                 if (wlookCar != null)
                     wlookCar.Text = weight.CarNo;
             }
-            tareDetail = weightService.GetDetail(weight.Id, WeightType.Tare);
-            if (tareDetail != null) {
-                tareWeightTime = tareDetail.WeightTime;
-                currentTareWeight = tareDetail.TareWeight;
-                oldTareWeight = tareDetail.TareWeight;
-            }
-            grossDetail = weightService.GetDetail(weight.Id, WeightType.Gross);
-            if (grossDetail != null) {
-                grossWeightTime = grossDetail.WeightTime;
-                currentGrossWeight = grossDetail.GrossWeight;
-                oldGrossWeight = grossDetail.GrossWeight;
-            }
             if (oldTareWeight > 0)
                 processMode = MeasureProcessMode.FirstTare;
             else
@@ -1898,30 +1864,12 @@ namespace YF.MWS.Win.View.Weight {
                 return;
             }
             mainWeight.BindControl<BWeight>(currentWeight);
-            tareDetail = weightService.GetDetail(currentWeight.Id, WeightType.Tare);
-            grossDetail = weightService.GetDetail(currentWeight.Id, WeightType.Gross);
         }
         /// <summary>
         /// 获取当前称重重量
         /// </summary>
         private decimal GetCurrentWeight() {
             return currentlblWeight.Text.ToDecimal();
-        }
-
-        private void InitDetail(WeightType weightType) {
-            if (weightType == WeightType.Tare) {
-                if (tareDetail == null) {
-                    tareDetail = new BWeightDetail();
-                    tareDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                }
-                tareDetail.WeightTime = DateTime.Now;
-            } else {
-                if (grossDetail == null) {
-                    grossDetail = new BWeightDetail();
-                    grossDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                }
-                grossDetail.WeightTime = DateTime.Now;
-            }
         }
 
         /// <summary>
@@ -1948,8 +1896,6 @@ namespace YF.MWS.Win.View.Weight {
                         }
                     }));
             }
-            //Thread.Sleep(100);
-            InitDetail(weightType);
             TareGrossTransform();
         }
 
@@ -1959,8 +1905,6 @@ namespace YF.MWS.Win.View.Weight {
             this.isStable = false;
             this.checkCarCount = 0;
             currentPlan = null;
-            tareDetail = null;
-            grossDetail = null;
             currentWeight = null;
             overWeight = 0;
             refusePay = false;
@@ -2044,43 +1988,10 @@ namespace YF.MWS.Win.View.Weight {
                 if (wCardNo != null) {
                     currentWeight.CardNo = wCardNo.Text;
                 }
-                if (tareDetail == null) {
-                    tareDetail = new BWeightDetail();
-                    tareDetail.WeightTime = DateTime.Now;
-                    tareDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                    tareDetail.WeighterName = CurrentUser.Instance.FullName;
-                    tareDetail.WeighterId = CurrentUser.Instance.Id;
-                }
-                tareDetail.WeightId = currentWeight.Id;
-                tareDetail.OrderSource = source.ToString();
-                tareDetail.WeightType = (int)WeightType.Tare;
-                if (weTareWeight != null) {
-                    tareDetail.TareWeight = weTareWeight.Text.ToDecimal();
-                }
-                if (grossDetail == null) {
-                    grossDetail = new BWeightDetail();
-                    grossDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                    grossDetail.WeightTime = DateTime.Now;
-                    grossDetail.WeighterId = CurrentUser.Instance.Id;
-                    grossDetail.WeighterName = CurrentUser.Instance.FullName;
-                }
-                grossDetail.WeightId = currentWeight.Id;
-                grossDetail.OrderSource = source.ToString();
-                grossDetail.WeightType = (int)WeightType.Gross;
-                if (weGrossWeight != null) {
-                    grossDetail.GrossWeight = weGrossWeight.Text.ToDecimal();
-                }
                 FinishState state = FinishState.Unfinished;
-                if (currentWeightProcess == WeightProcess.Two) {
-                    if (tareDetail.TareWeight > 0 && grossDetail.GrossWeight > 0) {
+                    if (currentWeight.TareWeight > 0 && currentWeight.GrossWeight > 0) {
                         state = FinishState.Finished;
                     }
-                }
-                if (currentWeightProcess == WeightProcess.One) {
-                    if (grossDetail.GrossWeight > 0) {
-                        state = FinishState.Finished;
-                    }
-                }
                 currentWeight.OrderSource = source.ToString();
                 currentWeight.FinishState = (int)state;
                 currentWeight.MeasureUnit = currentDeviceCfg.SUnit;
@@ -2117,9 +2028,9 @@ namespace YF.MWS.Win.View.Weight {
                     if (currentPlan != null)
                         currentWeight.RefId = currentPlan.Id;
                 }
-                isSaved = weightService.Save(currentWeight, tareDetail, grossDetail);
+                isSaved = weightService.Save(currentWeight);
                 if (!isSaved) {
-                    isSaved = weightService.Save(currentWeight, tareDetail, grossDetail);
+                    isSaved = weightService.Save(currentWeight);
                 }
                 if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
                     planService.Update(currentWeight);

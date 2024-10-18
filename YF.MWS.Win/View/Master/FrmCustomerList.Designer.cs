@@ -41,13 +41,13 @@
             this.barItemRefreshPayRecord = new DevExpress.XtraBars.BarButtonItem();
             this.barItemRecovery = new DevExpress.XtraBars.BarButtonItem();
             this.btnItemDelete = new DevExpress.XtraBars.BarButtonItem();
-            this.barItemRealDelete = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.btnItemCancel = new DevExpress.XtraBars.BarButtonItem();
+            this.barItemRealDelete = new DevExpress.XtraBars.BarButtonItem();
             this.gcCustomer = new DevExpress.XtraGrid.GridControl();
             this.gvCustomer = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colCustomerCode = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,10 +59,14 @@
             this.colContracter = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colTel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager
@@ -102,10 +106,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnItemEdit),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemImport),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemExport),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barItemRefreshPayRecord),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemRecovery, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnItemDelete),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barItemRealDelete)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnItemDelete)});
             this.bar1.Text = "Tools";
             // 
             // barItemRefresh
@@ -191,15 +193,6 @@
             this.btnItemDelete.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnItemDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnItemDelete_ItemClick);
             // 
-            // barItemRealDelete
-            // 
-            this.barItemRealDelete.Caption = "彻底删除";
-            this.barItemRealDelete.Id = 14;
-            this.barItemRealDelete.ImageOptions.ImageIndex = 7;
-            this.barItemRealDelete.Name = "barItemRealDelete";
-            this.barItemRealDelete.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barItemRealDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemRealDelete_ItemClick);
-            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -252,14 +245,22 @@
             this.btnItemCancel.Name = "btnItemCancel";
             this.btnItemCancel.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
+            // barItemRealDelete
+            // 
+            this.barItemRealDelete.Caption = "彻底删除";
+            this.barItemRealDelete.Id = 14;
+            this.barItemRealDelete.ImageOptions.ImageIndex = 7;
+            this.barItemRealDelete.Name = "barItemRealDelete";
+            this.barItemRealDelete.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barItemRealDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemRealDelete_ItemClick);
+            // 
             // gcCustomer
             // 
-            this.gcCustomer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcCustomer.Location = new System.Drawing.Point(0, 24);
+            this.gcCustomer.Location = new System.Drawing.Point(0, 49);
             this.gcCustomer.MainView = this.gvCustomer;
             this.gcCustomer.MenuManager = this.barManager;
             this.gcCustomer.Name = "gcCustomer";
-            this.gcCustomer.Size = new System.Drawing.Size(1418, 695);
+            this.gcCustomer.Size = new System.Drawing.Size(1418, 670);
             this.gcCustomer.TabIndex = 23;
             this.gcCustomer.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCustomer});
@@ -280,9 +281,6 @@
             this.gvCustomer.IndicatorWidth = 40;
             this.gvCustomer.Name = "gvCustomer";
             this.gvCustomer.NewItemRowText = "点此添加数据";
-            this.gvCustomer.OptionsFind.AlwaysVisible = true;
-            this.gvCustomer.OptionsFind.FindMode = DevExpress.XtraEditors.FindMode.Always;
-            this.gvCustomer.OptionsView.ShowAutoFilterRow = true;
             this.gvCustomer.OptionsView.ShowGroupPanel = false;
             this.gvCustomer.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvCustomer_CustomDrawRowIndicator);
             this.gvCustomer.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gvCustomer_RowStyle);
@@ -377,11 +375,42 @@
             this.colCreateTime.VisibleIndex = 8;
             this.colCreateTime.Width = 169;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(0, 26);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1406, 23);
+            this.tabControl1.TabIndex = 28;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1398, 0);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1398, 0);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // FrmCustomerList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 719);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.gcCustomer);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -395,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvCustomer)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,5 +461,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colCustomerCode;
         private DevExpress.XtraGrid.Columns.GridColumn colBalanceAmount;
         private DevExpress.XtraGrid.Columns.GridColumn colMinBalanceAmount;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

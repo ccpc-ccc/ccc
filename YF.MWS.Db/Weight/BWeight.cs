@@ -163,6 +163,14 @@ namespace YF.MWS.Db
         /// </summary>
         public virtual DateTime FinishTime { get; set; }
         /// <summary>
+        /// 毛重时间
+        /// </summary>
+        public virtual DateTime GrossTime { get; set; }
+        /// <summary>
+        /// 皮重时间
+        /// </summary>
+        public virtual DateTime TareTime { get; set; }
+        /// <summary>
         /// 收费单价
         /// </summary>
         public virtual decimal UnitCharge { get; set; }
@@ -252,6 +260,12 @@ namespace YF.MWS.Db
         /// 结算重量
         /// </summary>
         public virtual decimal d3 { get; set; }
+        public virtual decimal d4 { get; set; }
+        public virtual decimal d5 { get; set; }
+        public virtual decimal d6 { get; set; }
+        public virtual decimal d7 { get; set; }
+        public virtual decimal d8 { get; set; }
+        public virtual decimal d9 { get; set; }
         public virtual string t1 { get; set; }
         public virtual string t2 { get; set; }
         public virtual string t3 { get; set; }

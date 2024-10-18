@@ -22,12 +22,16 @@ using YF.Utility.Log;
 using YF.MWS.CacheService;
 using YF.MWS.SQliteService.Remote;
 using YF.MWS.Client.DataService.Interface.Remote;
+using YF.MWS.Win.View.Weight;
+using DevExpress.Utils.MVVM.Services;
+using System.Collections;
 
 namespace YF.MWS.Win.View.Extend
 {
     public partial class FrmWeightDetail : BaseForm
     {
         private IMaterialService materialService = new MaterialService();
+        private IReportService reportService = new SQliteService.ReportService();
         private ICarService carService = new CarService();
         private ICardService cardService = new CardService();
         private ICustomerService customerService = new CustomerService();
@@ -67,15 +71,6 @@ namespace YF.MWS.Win.View.Extend
         /// </summary>
         private WNumbericEdit weUnitPrice;
         private string softOneUnit;
-
-        /// <summary>
-        /// 毛重详情
-        /// </summary>
-        private BWeightDetail tareDetail;
-        /// <summary>
-        /// 皮重详情
-        /// </summary>
-        private BWeightDetail grossDetail;
 
         private bool isSearchEdit = false;
         /// <summary>
@@ -127,7 +122,7 @@ namespace YF.MWS.Win.View.Extend
             wCustomerBalance = mainWeight.FindControl<WNumbericEdit>("CustomerBalance");
             wePayType = mainWeight.FindControl<WComboBoxValueEdit>("PayType");
             weUnitPrice = mainWeight.FindControl<WNumbericEdit>("UnitPrice");
-            deFinishTime.DateTime = DateTime.Now;
+            deCreateTime.DateTime = DateTime.Now;
             deGrossTime.DateTime = DateTime.Now;
             deTareTime.DateTime = DateTime.Now;
         }
@@ -313,28 +308,14 @@ namespace YF.MWS.Win.View.Extend
                     MessageDxUtil.ShowWarning("加载磅单时发生未知错误,请重试.");
                     return;
                 }
-                BWeightDetail grossDetail = weightService.GetDetail(weight.Id, WeightType.Gross);
-                if (grossDetail != null && grossDetail.WeightTime != DateTime.MinValue)
-                {
-                    deGrossTime.DateTime = grossDetail.WeightTime;
-                }
-                BWeightDetail tareDetail = weightService.GetDetail(weight.Id, WeightType.Tare);
-                if (tareDetail != null && tareDetail.WeightTime != DateTime.MinValue)
-                {
-                    deTareTime.DateTime = tareDetail.WeightTime;
-                }
-                List<BWeightAttribute> lstAttr = attributeService.GetWeightAttributeList(RecId);
+                mainWeight.BindControl<BWeight>(weight);
                 if (isSearchEdit)
                 {
-                    OrderSource boundSource = weight.OrderSource.ToEnum<OrderSource>();
-                    if (boundSource == OrderSource.Weight)
-                    {
-                        //deFinishTime.Enabled = false;
-                    }
-                    mainWeight.BoundSource = boundSource;
+                    mainWeight.BoundSource = weight.OrderSource.ToEnum<OrderSource>();
                 }
-                mainWeight.BindExtendControl(lstAttr);
-                mainWeight.BindControl<BWeight>(weight); 
+                deCreateTime.DateTime = weight.CreateTime;
+                deGrossTime.DateTime = weight.GrossTime;
+                deTareTime.DateTime = weight.TareTime;
                 deFinishTime.DateTime = weight.FinishTime;
                 if (wlookCar != null)
                 {
@@ -421,7 +402,7 @@ namespace YF.MWS.Win.View.Extend
             decimal grossWeight = 0;
             if (weGrossWeight != null)
                 grossWeight = weGrossWeight.Text.ToDecimal();
-            if (deFinishTime.DateTime == DateTime.MinValue)
+            if (deCreateTime.DateTime == DateTime.MinValue)
             {
                 MessageDxUtil.ShowWarning("请选择过磅日期.");
                 isValidate = false;
@@ -474,6 +455,16 @@ namespace YF.MWS.Win.View.Extend
 
         private void Save()
         {
+            if (sendData()) {
+                MessageDxUtil.ShowTips("成功保存磅单信息.");
+                this.DialogResult = DialogResult.OK;
+            } else {
+                MessageDxUtil.ShowError("保存磅单信息时发生未知错误,请重试.");
+            }
+        }
+
+        private bool sendData()
+        {
             try
             {
                 SaveWeightInputItem();
@@ -502,86 +493,25 @@ namespace YF.MWS.Win.View.Extend
                 }
                 weight.MachineCode = CurrentClient.Instance.MachineCode;
                 mainWeight.ControlToEntity<BWeight>(ref weight); 
-                weight.WeighterId = CurrentUser.Instance.Id; 
+                weight.WeighterId = CurrentUser.Instance.Id;
                 if (wlookCar != null)
                 {
                     weight.CarNo = wlookCar.Text;
                 } 
-                tareDetail = weightService.GetDetail(weight.Id, WeightType.Tare);
-                if (tareDetail == null)
-                {
-                    tareDetail = new BWeightDetail(); 
-                    tareDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                } 
-                if (deTareTime.DateTime != DateTime.MinValue)
-                {
-                    tareDetail.WeightTime = deTareTime.DateTime;
-                }
-                else
-                {
-                    tareDetail.WeightTime = DateTime.Now;
-                }
-                tareDetail.WeightId = weight.Id;
-                tareDetail.OrderSource = OrderSource.Weight.ToString();
-                tareDetail.WeightType = (int)WeightType.Tare;
-
-                tareDetail.WeighterId = CurrentUser.Instance.Id;
-                if (string.IsNullOrEmpty(weight.WeighterName))
-                {
-                    weight.WeighterName = CurrentUser.Instance.FullName;
-                }
-                if (weTareWeight != null)
-                {
-                    tareDetail.TareWeight = weTareWeight.Text.ToDecimal();
-                }
-
-                grossDetail = weightService.GetDetail(weight.Id, WeightType.Gross);
-                if (grossDetail == null)
-                {
-                    grossDetail = new BWeightDetail();
-                    grossDetail.Id = YF.MWS.Util.Utility.GetGuid();
-                    
-                }
-                if (deGrossTime.DateTime != DateTime.MinValue)
-                {
-                    grossDetail.WeightTime = deGrossTime.DateTime;
-                }
-                else 
-                {
-                    grossDetail.WeightTime = DateTime.Now;
-                }
-                grossDetail.WeightId = weight.Id;
-                grossDetail.OrderSource = OrderSource.Weight.ToString();
-                grossDetail.WeightType = (int)WeightType.Gross;
-                grossDetail.WeighterId = CurrentUser.Instance.Id;
-                if (weGrossWeight != null)
-                {
-                    grossDetail.GrossWeight = weGrossWeight.Text.ToDecimal();
-                }
                 FinishState state = FinishState.Unfinished;
-                if (currentWeightProcess == WeightProcess.Two)
-                {
-                    if (tareDetail.TareWeight > 0 && grossDetail.GrossWeight > 0)
+                    if (weight.TareWeight > 0 && weight.GrossWeight > 0)
                     {
                         state = FinishState.Finished;
                     }
-                }
-                if (currentWeightProcess == WeightProcess.One)
-                {
-                    if (grossDetail.GrossWeight > 0)
-                    {
-                        state = FinishState.Finished;
-                    }
-                }
                 weight.FinishState = (int)state;
                 weight.MeasureUnit = softOneUnit;
                 weight.WeightProcess = (int)WeightProcess.Two;
                 
-                weight.FinishTime = deFinishTime.DateTime;
+                weight.FinishTime = deCreateTime.DateTime;
                 weight.ViewId = CurrentClient.Instance.ViewId;
                 weight.AdditionalTime = DateTime.Now;
                 weight.SyncState = (int)SyncState.UnSynced;
-                bool isSaved=weightService.Save(weight, tareDetail, grossDetail,oldWeight);
+                bool isSaved=weightService.Save(weight);
                 if (isSaved)
                 {
                     if (startPlan)
@@ -603,24 +533,17 @@ namespace YF.MWS.Win.View.Extend
                     }
                     logService.Add(LogActionType.Weight,weight.Id,weight.WeightNo,desc);
                 }
-                MessageDxUtil.ShowTips("成功保存磅单信息.");
-
-                syncObj.WeightId = weight.Id;
-                //if (Cfg.Transfer != null && Cfg.Transfer.AutoUpload)
-                //{
-                //    SyncUtil.SyncWeight(syncObj);
-                //}
-                this.DialogResult = DialogResult.OK;
+                this.RecId = weight.Id;
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.WriteException(ex);
                 MessageDxUtil.ShowError("保存磅单信息时发生未知错误,请重试.");
+                return false;
             }
         }
-        private void Save2() {
 
-        }
         private void btnItemSave_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (ValidateForm())
@@ -641,6 +564,15 @@ namespace YF.MWS.Win.View.Extend
             SetEvent();
             SetControl();
             BindData();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e) {
+            if (ValidateForm()) {
+               if(sendData()) {
+                    MessageBox.Show("磅单保存成功！");
+                    PrintUtil.PrintWeightReport(CurrentClient.Instance.ViewId, this.RecId, reportService, Cfg.Print.WeightPrinterName);
+                }
+            }
         }
     }
 }

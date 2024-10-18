@@ -20,12 +20,15 @@ namespace YF.MWS.Win
     public class PrintUtil
     {
         private static PrintDocument fPrintDocument = new PrintDocument();
-
-        /// <summary>
-        /// 获取本机默认打印机名称
-        /// </summary>
-        /// <returns></returns>
-        public static String GetDefaultPrinter()
+        private static Hashtable parameters = new Hashtable {
+                        { "当前时间", DateTime.Now
+    }
+};
+/// <summary>
+/// 获取本机默认打印机名称
+/// </summary>
+/// <returns></returns>
+public static String GetDefaultPrinter()
         {
             return fPrintDocument.PrinterSettings.PrinterName;
         }
@@ -53,28 +56,6 @@ namespace YF.MWS.Win
                 Logger.WriteException(ex);
             }
             return fPrinters;
-        }
-
-        public static void Print(IReportService reportService, DataSet dsReport, SReportTemplate template, Hashtable parameters, string printerName = null)
-        {
-            string reportFilePath = string.Empty;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                if (!string.IsNullOrEmpty(template.TemplateUrl))
-                {
-                    reportFilePath = Path.Combine(Application.StartupPath, template.TemplateUrl);
-                }
-            }
-            else
-            {
-                SReportTemplate source = reportService.Get(template.Id);
-                if (source != null)
-                {
-                    reportFilePath = Utility.GetReportTemplate(source);
-                }
-                
-            }
-            Print(reportFilePath, dsReport, parameters, printerName);
         }
 
         public static void PrintWeightReport(string viewId, string weightId, DocumentType type, IReportService reportService, Hashtable parameters, string printerName = null) 
@@ -131,35 +112,22 @@ namespace YF.MWS.Win
             PrintPdf(reportFilePath, dsReport, parameters, weight, printerName);
         }
 
-        public static void PrintWeightReport(string viewId, string weightId, DocumentType type, IReportService reportService, Hashtable parameters,int printCount, string printerName = null)
-        {
+        public static void PrintWeightReport(string viewId, string weightId, IReportService reportService, string printerName = null) {
             DataSet dsReport = new DataSet();
             SReportTemplate template = reportService.GetDefaultTemplate(DocumentType.Weight);
             dsReport = reportService.GetWeight(viewId, weightId);
             string reportFilePath = string.Empty;
-            if (template != null)
-            {
-                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-                {
-                    if (!string.IsNullOrEmpty(template.TemplateUrl))
-                    {
+            if (template != null) {
+                    if (!string.IsNullOrEmpty(template.TemplateUrl)) {
                         reportFilePath = Path.Combine(Application.StartupPath, template.TemplateUrl);
                     }
-                }
-                else
-                {
-                    SReportTemplate templateFind = reportService.Get(template.Id);
-                    reportFilePath = Utility.GetReportTemplate(templateFind);
-                }
-            }
-            else
-            {
+            } else {
                 reportFilePath = Application.StartupPath + "\\Report\\Weight\\rptDefault.repx";
             }
             Print(reportFilePath, dsReport, parameters, printerName);
         }
 
-        public static void PrintWeightReportWithTemplate(string viewId, string weightId, string templateId, IReportService reportService, Hashtable parameters, string printerName = null)
+        public static void PrintWeightReportWithTemplate(string viewId, string weightId, string templateId, IReportService reportService, string printerName = null)
         {
             DataSet dsReport = new DataSet();
             SReportTemplate template = reportService.Get(templateId);
@@ -190,43 +158,7 @@ namespace YF.MWS.Win
             Print(reportFilePath, dsReport, parameters, printerName);
         }
 
-        public static void PrintWeightReport(string viewId, string weightId, string qcNo, DocumentType type, IReportService reportService, Hashtable parameters, int printCount, string printerName = null)
-        {
-            DataSet dsReport = new DataSet();
-            SReportTemplate template = null;
-            if (printCount > 0)
-            {
-                template = reportService.GetDefaultTemplate(DocumentType.ReWeight);
-            }
-            if (template == null || template.Id == null || template.Id.Length == 0)
-            {
-                template = reportService.GetDefaultTemplate(DocumentType.Weight);
-            }
-            dsReport = reportService.GetWeight(viewId, weightId);
-            string reportFilePath = string.Empty;
-            if (template != null)
-            {
-                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-                {
-                    if (!string.IsNullOrEmpty(template.TemplateUrl))
-                    {
-                        reportFilePath = Path.Combine(Application.StartupPath, template.TemplateUrl);
-                    }
-                }
-                else
-                {
-                    SReportTemplate templateFind = reportService.Get(template.Id);
-                    reportFilePath = Utility.GetReportTemplate(templateFind);
-                }
-            }
-            else
-            {
-                reportFilePath = Application.StartupPath + "\\Report\\Weight\\rptDefault.repx";
-            }
-            Print(reportFilePath, dsReport, parameters, printerName);
-        }
-
-        public static void Print(string reportFilePath, object dataSource, Hashtable parameters,string printerName=null) 
+       public static void Print(string reportFilePath, object dataSource, Hashtable parameters,string printerName=null) 
         {
             XtraReport report = new XtraReport();
             try
@@ -313,13 +245,5 @@ namespace YF.MWS.Win
                 }
             }
         }
-
-        /// <summary>
-        /// 调用win api将指定名称的打印机设置为默认打印机
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
-        [DllImport("winspool.drv")]
-        public static extern bool SetDefaultPrinter(String Name);
     }
 }

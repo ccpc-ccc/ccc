@@ -343,25 +343,11 @@ namespace YF.MWS.SQliteService
             return code;
         }
 
-        public bool CustomerExist(CustomerType type,string customerName, string customerId)
+        public bool CustomerExist(string type,string customerName, string customerId)
         {
             bool isExist = false;
-            string sql = string.Format("select count(CustomerId) from S_Customer where CustomerType='{0}' and CustomerName='{1}' and Id!='{2}' ", type.ToString(), customerName, customerId);
-            int rows = 0;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                rows = sqliteDb.ExecuteScalar(sql).ToInt();
-            }
-            else
-            {
-                sql = string.Format("select count(Id) from S_Customer where CustomerType='{0}' and CustomerName=N'{1}' and Id!='{2}' ", type.ToString(), customerName, customerId);
-                rows = service.GetDataTable(sql).Rows[0][0].ToInt();
-            }
-            if (rows > 0)
-            {
-                isExist = true;
-            }
-            return isExist;
+            string sql = string.Format("select count(Id) from S_Customer where CustomerType='{0}' and CustomerName='{1}' and Id!='{2}' ", type, customerName, customerId);
+            return sqliteDb.ExecuteScalar(sql).ToInt() > 0;
         }
 
         public SCustomer GetCustomer(string customerId)

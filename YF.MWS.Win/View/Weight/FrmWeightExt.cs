@@ -453,7 +453,7 @@ namespace YF.MWS.Win.View.Weight
                         weightPrinterName = Cfg.Print.WeightPrinterName;
                     }
                     weightService.UpdatePrint(weightId);
-                    PrintUtil.PrintWeightReportWithTemplate(searchList.CurrentViewId, weightId, e.Item.Tag.ToObjectString(), reportService, null, weightPrinterName);
+                    PrintUtil.PrintWeightReportWithTemplate(searchList.CurrentViewId, weightId, e.Item.Tag.ToObjectString(), reportService, weightPrinterName);
                 }
             }
         }

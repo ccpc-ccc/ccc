@@ -365,8 +365,6 @@ namespace YF.MWS.Win.View.Weight
                 weight.AdditionalTime = DateTime.Now;
                 weightService.Save(weight, tareDetail, grossDetail);
                 MessageDxUtil.ShowTips("成功保存计量方信息.");
-
-                syncObj.WeightId = weight.Id;
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)

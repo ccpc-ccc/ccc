@@ -148,7 +148,7 @@ namespace YF.MWS.Win.Uc
                 FormHelper.ControlToEntity<SCustomer>(this, ref customer);
                 if(string.IsNullOrEmpty(customer.CustomerCode))
                     customer.CustomerCode = seqNoService.GetSeqNo(SeqCode.Customer.ToString());
-                if (masterService.CustomerExist(customer.CustomerType.ToEnum<CustomerType>(), customer.CustomerName, customer.Id))
+                if (masterService.CustomerExist(customer.CustomerType, customer.CustomerName, customer.Id))
                 {
                     MessageDxUtil.ShowWarning(string.Format("客户类型为({0})的客户({1})已经存在,请勿重复添加.", customerType.ToDescription(), customer.CustomerName));
                 }

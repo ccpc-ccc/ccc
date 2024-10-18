@@ -16,7 +16,7 @@ namespace YF.MWS.Client.DataService.Interface
     /// </summary>
     public interface IMasterService
     {
-        bool CustomerExist(CustomerType type, string customerName, string customerId);
+        bool CustomerExist(string type, string customerName, string customerId);
 
         /// <summary>
         /// 压缩数据库

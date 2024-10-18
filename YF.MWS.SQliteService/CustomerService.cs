@@ -38,17 +38,8 @@ namespace YF.MWS.SQliteService
 
         public bool Delete(string priceId)
         {
-            bool isDeleted = false;
             string sql = string.Format(@"delete from S_CustomerPrice where Id='{0}'",priceId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver)
-            {
-                isDeleted = service.ExecuteNonQuery(sql);
-            }
-            else
-            {
-                isDeleted = sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            return isDeleted;
+            return base.ExecuteSql(sql);
         }
 
         /// <summary>
@@ -70,6 +61,8 @@ namespace YF.MWS.SQliteService
             sqls.Add(sql);
             sql = string.Format(@"delete from B_Pay where CustomerId='{0}'", customerId);
             sqls.Add(sql);
+            sql = string.Format(@"delete from S_CustomerPrice where CustomerId='{0}'", customerId);
+            sqls.Add(sql);
             return base.ExecuteSql(sqls);
         }
 
@@ -85,9 +78,10 @@ namespace YF.MWS.SQliteService
             return getModel<SCustomer>(sql);
         }
 
-        public List<SCustomer> GetAllCustomerList()
+        public List<SCustomer> GetAllCustomerList(string type)
         {
-            string sql = string.Format("select * from S_Customer");
+            string sql = $"select * from S_Customer";
+            if (!string.IsNullOrEmpty(type)) sql += $" where CustomerType='{type}'";
             return base.getList<SCustomer>(sql);
         }
 

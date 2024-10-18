@@ -151,8 +151,7 @@ namespace YF.MWS.Util {
         /// <param name="commandParameters">传入的参数</param>
         /// <returns></returns>
         public object ExecuteScalar(string cmdText, params object[] p) {
-            if (db == null) return null;
-            DataTable dt = db.Ado.GetDataTable(cmdText, p);
+            DataTable dt = ExecuteDataTable(cmdText, p);
             if (dt == null || dt.Rows.Count == 0) return null;
             return dt.Rows[0][0];
         }

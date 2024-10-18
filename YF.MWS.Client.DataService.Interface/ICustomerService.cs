@@ -20,7 +20,7 @@ namespace YF.MWS.Client.DataService.Interface
         SCustomer GetCustomer(string Id);
         SCustomerPrice Get(string customerId, string materialId);
         SCustomer GetCustomerByName(CustomerType customerType, string customerName);
-        List<SCustomer> GetAllCustomerList();
+        List<SCustomer> GetAllCustomerList(string type);
         List<SCustomer> GetCustomerList();
         int GetRechargeCount(string customerId);
         int GetWeightCount(CustomerType type, string customerId);

@@ -31,10 +31,12 @@ namespace YF.MWS.Win.View.Master
         private IWebUserService webUserService = new WebUserService();
         private SCustomer customer = null;
         private bool startAutoUpload = false;
+        private string currentType = "";
 
-        public FrmCustomerDetail()
+        public FrmCustomerDetail(string type)
         {
             InitializeComponent();
+            currentType = type;
         }
 
         private void FrmCustomerDetail_Load(object sender, EventArgs e)
@@ -44,6 +46,7 @@ namespace YF.MWS.Win.View.Master
 
         private void BindData() 
         {
+            List<ListItem> list = ClassUtil.CumtomerList();
             if (!string.IsNullOrEmpty(RecId))
             {
                 customer = masterService.GetCustomer(RecId);
@@ -52,28 +55,12 @@ namespace YF.MWS.Win.View.Master
                     combCustomerType.Enabled = false;
                 }
                 FormHelper.BindControl<SCustomer>(this, customer);
-                DxHelper.BindComboBoxEdit(combCustomerType, SysCode.CustomerType, customer.CustomerType);
+                DxHelper.BindComboBoxEdit(combCustomerType, list, customer.CustomerType);
             }
             else 
             {
-                DxHelper.BindComboBoxEdit(combCustomerType, SysCode.CustomerType, null);
+                DxHelper.BindComboBoxEdit(combCustomerType, list, currentType);
                 teCustomerCode.Text = seqNoService.GetSeqNo(SeqCode.Customer.ToString());
-            }
-        }
-
-        private void SyncUser(SCustomer customer)
-        {
-            if (customer != null && !string.IsNullOrEmpty(customer.Tel) && ValidateUtils.IsMobile(customer.Tel)
-                && customer.CustomerType.ToEnum<CustomerType>() == CustomerType.Customer)
-            {
-                SUser user = new SUser();
-                user.UserName = customer.Tel;
-                user.UserPwd = "123456".ToMd5();
-                user.UserType = UserType.CorpCustomer.ToString();
-                user.FullName = customer.Contracter;
-                user.MobilePhone = customer.Tel;
-                user.CustomerId = customer.Id;
-                webUserService.SaveUser(user);
             }
         }
 
@@ -91,12 +78,12 @@ namespace YF.MWS.Win.View.Master
                 {
                     customer.RowState = (int)RowState.Edit;
                 }
-                customer.CustomerType = DxHelper.GetCode(combCustomerType);
-                customer.CustomerName = teCustomerName.Text;
                 FormHelper.ControlToEntity<SCustomer>(this, ref customer);
+                customer.CustomerName = teCustomerName.Text;
+                customer.CustomerType = combCustomerType.GetStrValue();
                 if (string.IsNullOrEmpty(customer.CustomerCode))
                     customer.CustomerCode = seqNoService.GetSeqNo(SeqCode.Customer.ToString());
-                if (masterService.CustomerExist(customer.CustomerType.ToEnum<CustomerType>(), customer.CustomerName, customer.Id))
+                if (masterService.CustomerExist(customer.CustomerType, customer.CustomerName, customer.Id))
                 {
                     MessageDxUtil.ShowWarning(string.Format("客户类型为({0})的客户({1})已经存在,请勿重复添加.", combCustomerType.Text,customer.CustomerName));
                 }

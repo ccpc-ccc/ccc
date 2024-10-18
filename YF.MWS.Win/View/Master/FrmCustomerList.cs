@@ -40,13 +40,12 @@ namespace YF.MWS.Win.View.Master
             using (Utility.GetWaitForm())
             {
                 InitializeComponent();
-                BindData();
             }
         }
 
         private void btnItemAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (FrmCustomerDetail frmDetail = new FrmCustomerDetail()) 
+            using (FrmCustomerDetail frmDetail = new FrmCustomerDetail(tabControl1.SelectedTab.Tag.ToString())) 
             {
                 frmDetail.FrmMain = GetMain();
                 if (frmDetail.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
@@ -58,8 +57,10 @@ namespace YF.MWS.Win.View.Master
 
         private void BindData() 
         {
-            lstCustomer = customerService.GetAllCustomerList(); 
+            string type = tabControl1.SelectedTab.Tag.ToObjectString();
+            lstCustomer = customerService.GetAllCustomerList(type); 
             gcCustomer.DataSource = lstCustomer;
+            gcCustomer.RefreshDataSource();
             lstCustomerType = MasterCacher.GetSubCodeList(SysCode.CustomerType.ToString());
             gvCustomer.Columns["CustomerType"].ColumnEdit = DxHelper.SetItemComboBox("repItemCustomerType", lstCustomerType);
             if (chkCustomer == null)
@@ -79,7 +80,7 @@ namespace YF.MWS.Win.View.Master
             if (gvCustomer.GetFocusedRow() != null)
             {
                 SCustomer customer = (SCustomer)gvCustomer.GetFocusedRow();
-                using (FrmCustomerDetail frmDetail = new FrmCustomerDetail())
+                using (FrmCustomerDetail frmDetail = new FrmCustomerDetail(customer.CustomerType))
                 {
                     frmDetail.FrmMain = GetMain();
                     frmDetail.RecId = customer.Id;
@@ -94,6 +95,20 @@ namespace YF.MWS.Win.View.Master
         private void FrmCustomerList_Load(object sender, EventArgs e)
         {
             InitRoleControl();
+            InitPage();
+            BindData();
+            this.tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+        }
+        private void InitPage() {
+            tabControl1.TabPages.Clear();
+            List<ListItem> list = ClassUtil.CumtomerList();
+            foreach (ListItem item in list) {
+                tabControl1.TabPages.Add(new TabPage() {
+                    Text=item.Text,
+                    Tag=item.Value
+                });
+            }
+            tabControl1.SelectTab(0);
         }
 
         private void btnItemDelete_ItemClick(object sender, ItemClickEventArgs e)
@@ -104,7 +119,7 @@ namespace YF.MWS.Win.View.Master
             }
             else
             {
-                if (MessageDxUtil.ShowYesNoAndTips("确实要删除该客户信息吗?此删除可通过恢复操作还原客户信息,请谨慎操作.") == DialogResult.Yes) 
+                if (MessageDxUtil.ShowYesNoAndTips("确实要删除该客户信息吗?此删除不可恢复,请谨慎操作.") == DialogResult.Yes) 
                 {
                     List<object> lstObj = chkCustomer.GetSelectedRow();
                     List<string> customerIds = new List<string>();
@@ -114,7 +129,7 @@ namespace YF.MWS.Win.View.Master
                         SCustomer customer = (SCustomer)obj;
                         if (customer != null)
                         {
-                            isDeleted = customerService.DeleteCustomer(customer.Id);
+                            isDeleted = customerService.DeleteCustomerPhysics(customer.Id);
                             if (isDeleted)
                                 customerIds.Add(customer.Id);
                         }
@@ -297,5 +312,8 @@ namespace YF.MWS.Win.View.Master
             }
         }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            BindData();
+        }
     }
 }

@@ -80,37 +80,6 @@ namespace YF.MWS.Win.Uc
             }
         }
 
-        public int CurrentWeightPrintCount
-        {
-            get
-            {
-                if (gvWeight.GetFocusedDataRow() != null)
-                {
-                    return gvWeight.GetFocusedRowCellValue("PrintCount").ToInt();
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
-
-        public string CurrentQcNo
-        {
-            get
-            {
-                if (gvWeight.GetFocusedDataRow() != null)
-                {
-                    string qcNo = gvWeight.GetFocusedRowCellValue("QcNo").ToObjectString();
-                    return qcNo;
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
         public string CurrentWeightId 
         {
             get 

@@ -410,7 +410,6 @@ namespace YF.MWS.Win.View.Extend
                 weightService.Save(weight, tareDetail, grossDetail);
                 MessageDxUtil.ShowTips("成功保存磅单信息.");
 
-                syncObj.WeightId = weight.Id;
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)

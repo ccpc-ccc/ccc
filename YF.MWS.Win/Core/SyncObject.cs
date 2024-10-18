@@ -13,10 +13,8 @@ namespace YF.MWS.Win.Core
 {
     public class SyncObject
     {
-        public string WeightId;
         public TransferCfg Transfer;
         public TPWeight Weight;
-        public BPay Pay { get; set; }
         public IFileService FileService;
         public IWebFileService WebFileService;
         public IMasterService MasterService;
