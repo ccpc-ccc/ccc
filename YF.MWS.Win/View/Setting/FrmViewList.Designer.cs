@@ -1,4 +1,4 @@
-﻿namespace YF.MWS.Win.View.Master
+﻿namespace YF.MWS.Win.View
 {
     partial class FrmViewList
     {
@@ -59,7 +59,11 @@
             this.colCaption = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOrderNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colShow1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.colShow2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.ColRowIndex = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ColColIndex = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gpList = new DevExpress.XtraEditors.GroupControl();
             this.gcViewList = new DevExpress.XtraGrid.GridControl();
@@ -75,6 +79,8 @@
             this.pageStandardControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcViewDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpList)).BeginInit();
             this.gpList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcViewList)).BeginInit();
@@ -318,6 +324,9 @@
             this.gcViewDetail.MainView = this.gvViewDetail;
             this.gcViewDetail.MenuManager = this.barManager;
             this.gcViewDetail.Name = "gcViewDetail";
+            this.gcViewDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit1,
+            this.repositoryItemCheckEdit2});
             this.gcViewDetail.Size = new System.Drawing.Size(1041, 659);
             this.gcViewDetail.TabIndex = 25;
             this.gcViewDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -332,6 +341,8 @@
             this.colOrderNo,
             this.colShow1,
             this.colShow2,
+            this.ColRowIndex,
+            this.ColColIndex,
             this.colCreateTime});
             this.gvViewDetail.GridControl = this.gcViewDetail;
             this.gvViewDetail.Name = "gvViewDetail";
@@ -339,6 +350,7 @@
             this.gvViewDetail.OptionsView.ShowGroupPanel = false;
             this.gvViewDetail.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colOrderNo, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvViewDetail.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvViewDetail_CellValueChanged);
             this.gvViewDetail.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvViewDetail_CustomColumnDisplayText);
             // 
             // colControlName
@@ -381,19 +393,53 @@
             // 
             // colShow1
             // 
-            this.colShow1.Caption = "控件显示";
+            this.colShow1.Caption = "界面显示";
+            this.colShow1.ColumnEdit = this.repositoryItemCheckEdit2;
             this.colShow1.FieldName = "RowState";
             this.colShow1.Name = "colShow1";
             this.colShow1.Visible = true;
-            this.colShow1.VisibleIndex = 5;
+            this.colShow1.VisibleIndex = 7;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            this.repositoryItemCheckEdit2.AutoHeight = false;
+            this.repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            this.repositoryItemCheckEdit2.ValueUnchecked = ((short)(3));
             // 
             // colShow2
             // 
             this.colShow2.Caption = "列表显示";
+            this.colShow2.ColumnEdit = this.repositoryItemCheckEdit1;
             this.colShow2.FieldName = "Show2";
             this.colShow2.Name = "colShow2";
             this.colShow2.Visible = true;
-            this.colShow2.VisibleIndex = 4;
+            this.colShow2.VisibleIndex = 6;
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Caption = "";
+            this.repositoryItemCheckEdit1.HotTrackWhenReadOnly = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            this.repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Inactive;
+            this.repositoryItemCheckEdit1.ValueChecked = ((short)(1));
+            this.repositoryItemCheckEdit1.ValueUnchecked = ((short)(0));
+            // 
+            // ColRowIndex
+            // 
+            this.ColRowIndex.Caption = "行序号";
+            this.ColRowIndex.FieldName = "RowIndex";
+            this.ColRowIndex.Name = "ColRowIndex";
+            this.ColRowIndex.Visible = true;
+            this.ColRowIndex.VisibleIndex = 4;
+            // 
+            // ColColIndex
+            // 
+            this.ColColIndex.Caption = "列序号";
+            this.ColColIndex.FieldName = "ColIndex";
+            this.ColColIndex.Name = "ColColIndex";
+            this.ColColIndex.Visible = true;
+            this.ColColIndex.VisibleIndex = 5;
             // 
             // colCreateTime
             // 
@@ -404,7 +450,7 @@
             this.colCreateTime.Name = "colCreateTime";
             this.colCreateTime.OptionsFilter.AllowAutoFilter = false;
             this.colCreateTime.Visible = true;
-            this.colCreateTime.VisibleIndex = 6;
+            this.colCreateTime.VisibleIndex = 8;
             // 
             // gpList
             // 
@@ -484,6 +530,8 @@
             this.pageStandardControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcViewDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpList)).EndInit();
             this.gpList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcViewList)).EndInit();
@@ -531,5 +579,9 @@
         private DevExpress.XtraBars.BarButtonItem barItemHiden;
         private DevExpress.XtraGrid.Columns.GridColumn colShow1;
         private DevExpress.XtraGrid.Columns.GridColumn colShow2;
+        private DevExpress.XtraGrid.Columns.GridColumn ColRowIndex;
+        private DevExpress.XtraGrid.Columns.GridColumn ColColIndex;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
     }
 }

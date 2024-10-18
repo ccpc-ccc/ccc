@@ -46,14 +46,6 @@ namespace YF.MWS.BaseMetadata
 
         #region Remote Info
         /// <summary>
-        /// Company ID
-        /// </summary>
-        public string RemoteCompanyId { get; set; }
-        public string RemoteViewId { get; set; }
-        public bool HasLoginedServer { get; set; }
-        public UserType RemoteUserType { get; set; }
-        public bool RemoteIsAdmin { get; set; }
-        /// <summary>
         /// 权限列表
         /// </summary>
         public string[] Powers { get; set; }

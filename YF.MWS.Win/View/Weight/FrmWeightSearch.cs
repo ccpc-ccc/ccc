@@ -523,22 +523,12 @@ namespace YF.MWS.Win.View.Weight {
             } else {
                 string weightId;
                 string weightNo = string.Empty;
-                string desc;
-                WeightUpdate update = new WeightUpdate();
-                update.RowState = RowState.Delete;
                 foreach (DataRow row in listWeight) {
-                    weightId = row["WeightId"].ToObjectString();
+                    weightId = row["Id"].ToObjectString();
                     weightNo = row["WeightNo"].ToObjectString();
                     bool isUpdated = weightService.UpdateWeight(weightId, RowState.Delete);
                     if (isUpdated) {
-                        if (startPlan) {
-                            BWeight weight = weightService.Get(weightId);
-                            if (weight != null) {
-                                planService.Update(weight);
-                            }
-                        }
-                        update.WeightIds.Add(weightId);
-                        desc = string.Format("作废磅单号:{0}", weightNo);
+                        string desc = string.Format("作废磅单号:{0}", weightNo);
                         logService.Add(LogActionType.Weight, weightId, weightNo, desc);
                     }
                 }
@@ -588,7 +578,7 @@ namespace YF.MWS.Win.View.Weight {
                     string weightNo = string.Empty;
                     string desc;
                     foreach (DataRow row in listWeight) {
-                        weightId = row["WeightId"].ToObjectString();
+                        weightId = row["Id"].ToObjectString();
                         weightNo = row["WeightNo"].ToObjectString();
                         BWeight weight = weightService.Get(weightId);
                         bool isDeleted = weightService.DeleteWeight(weight);
@@ -610,31 +600,13 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void barItemModify_ItemClick(object sender, ItemClickEventArgs e) {
-            List<DataRow> listWeight = chkWeight.GetSelectedDataRow();
-            if (listWeight.Count <= 0) {
+            DataRow listWeight = gvWeight.GetFocusedDataRow();
+            if (listWeight==null) {
                 MessageDxUtil.ShowError("请选择数据");
                 return;
             }
-            DataTable dt = new DataTable();
-            foreach(DataColumn column in ((DataTable)gcWeight.DataSource).Columns) {
-                DataColumn col = new DataColumn() {
-                    ColumnName= column.ColumnName,
-                    Caption = column.Caption,
-                    DataType = column.DataType
-                };
-                dt.Columns.Add(col);
-            }
-            foreach (DataRow dr in listWeight)
-            {
-                if (dr["PayType"].ToString() == "已结算") {
-                    MessageDxUtil.ShowError("存在已结算的数据");
-                    return;
-                }
-                dt.Rows.Add(dr.ItemArray);
-            }
-            using (FrmWeightDetail2 frmDetail = new FrmWeightDetail2()) {
-                frmDetail.IsSearchEdit = true;
-                frmDetail.Dt = dt;
+            using (FrmWeightDetail frmDetail = new FrmWeightDetail()) {
+                frmDetail.RecId = listWeight["Id"].ToObjectString();
                 if (frmDetail.ShowDialog() == DialogResult.OK) {
                     Search();
                 }

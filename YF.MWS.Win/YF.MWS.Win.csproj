@@ -685,18 +685,6 @@
     <Compile Include="View\Master\FrmImportMaterial.Designer.cs">
       <DependentUpon>FrmImportMaterial.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmLocationEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmLocationEdit.designer.cs">
-      <DependentUpon>FrmLocationEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Master\FrmLocationList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmLocationList.designer.cs">
-      <DependentUpon>FrmLocationList.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Master\FrmMaterialSeriesEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -883,34 +871,34 @@
     <Compile Include="View\Master\FrmViewCustomDataSource.Designer.cs">
       <DependentUpon>FrmViewCustomDataSource.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmViewShow.cs">
+    <Compile Include="View\Setting\FrmViewShow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmViewShow.Designer.cs">
+    <Compile Include="View\Setting\FrmViewShow.Designer.cs">
       <DependentUpon>FrmViewShow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmViewDetail.cs">
+    <Compile Include="View\Setting\FrmViewDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmViewDetail.Designer.cs">
+    <Compile Include="View\Setting\FrmViewDetail.Designer.cs">
       <DependentUpon>FrmViewDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmViewEdit.cs">
+    <Compile Include="View\Setting\FrmViewEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmViewEdit.Designer.cs">
+    <Compile Include="View\Setting\FrmViewEdit.Designer.cs">
       <DependentUpon>FrmViewEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmViewList.cs">
+    <Compile Include="View\Setting\FrmViewList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmViewList.Designer.cs">
+    <Compile Include="View\Setting\FrmViewList.Designer.cs">
       <DependentUpon>FrmViewList.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmVoiceSetting.cs">
+    <Compile Include="View\p4\FrmVoiceSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmVoiceSetting.Designer.cs">
+    <Compile Include="View\p4\FrmVoiceSetting.Designer.cs">
       <DependentUpon>FrmVoiceSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Master\FrmPayEdit.cs">
@@ -943,10 +931,10 @@
     <Compile Include="View\Master\FrmWeightRepTemplate.Designer.cs">
       <DependentUpon>FrmWeightRepTemplate.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmVideoSetting.cs">
+    <Compile Include="View\p4\FrmVideoSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmVideoSetting.Designer.cs">
+    <Compile Include="View\p4\FrmVideoSetting.Designer.cs">
       <DependentUpon>FrmVideoSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Master\FrmWeightSummaryItem.cs">
@@ -1480,12 +1468,6 @@
     <EmbeddedResource Include="View\Master\FrmImportMaterial.resx">
       <DependentUpon>FrmImportMaterial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmLocationEdit.resx">
-      <DependentUpon>FrmLocationEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmLocationList.resx">
-      <DependentUpon>FrmLocationList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmCompanyPayEdit.resx">
       <DependentUpon>FrmCompanyPayEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -1573,19 +1555,19 @@
     <EmbeddedResource Include="View\Master\FrmViewCustomDataSource.resx">
       <DependentUpon>FrmViewCustomDataSource.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmViewShow.resx">
+    <EmbeddedResource Include="View\Setting\FrmViewShow.resx">
       <DependentUpon>FrmViewShow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmViewDetail.resx">
+    <EmbeddedResource Include="View\Setting\FrmViewDetail.resx">
       <DependentUpon>FrmViewDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmViewEdit.resx">
+    <EmbeddedResource Include="View\Setting\FrmViewEdit.resx">
       <DependentUpon>FrmViewEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmViewList.resx">
+    <EmbeddedResource Include="View\Setting\FrmViewList.resx">
       <DependentUpon>FrmViewList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmVoiceSetting.resx">
+    <EmbeddedResource Include="View\p4\FrmVoiceSetting.resx">
       <DependentUpon>FrmVoiceSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmPayEdit.resx">
@@ -1603,7 +1585,7 @@
     <EmbeddedResource Include="View\Master\FrmWeightRepTemplate.resx">
       <DependentUpon>FrmWeightRepTemplate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmVideoSetting.resx">
+    <EmbeddedResource Include="View\p4\FrmVideoSetting.resx">
       <DependentUpon>FrmVideoSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmWeightSummaryItem.resx">

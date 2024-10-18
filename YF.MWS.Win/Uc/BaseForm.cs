@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using YF.MWS.BaseMetadata;
 using YF.MWS.CacheService;
 using YF.MWS.Db;
+using YF.MWS.Metadata;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.Win.Util;
 
@@ -47,7 +48,7 @@ namespace YF.MWS.Win.Uc
         {
             if (!DesignMode) {
                 Cfg = CfgUtil.GetCfg();
-                Auth=CfgUtil.GetAuth();
+                Auth=CfgUtil.GetAuthFromAuthCode(CurrentClient.Instance.AutoCfg);
                 var lst = UserCacher.GetModuleList(CurrentUser.Instance.Id);
                 string fullName = this.GetType().FullName;
                 if (lst != null && lst.Count > 0)

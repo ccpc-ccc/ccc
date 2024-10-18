@@ -49,19 +49,5 @@ namespace YF.MWS.SQliteService
                 Logger.WriteException(ex);
             }
         }
-
-        public static void InitDbService() 
-        {
-            try
-            {
-                string assmblyName = AppSetting.GetValue("MapAssembly");
-                string connectionString = AppSetting.GetValue("dsn");
-                service = DataServiceFactory.GetInstance(assmblyName, connectionString, DataSourceType.SqlServer.ToString());
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException(ex);
-            }
-        }
     }
 }

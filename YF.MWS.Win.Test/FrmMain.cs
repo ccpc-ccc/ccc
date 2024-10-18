@@ -1,10 +1,6 @@
 ﻿using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Filtering.Templates;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using System;
 using DevExpress.Utils.Zip;
 using System.Collections.Generic;
@@ -32,6 +28,10 @@ namespace YF.MWS.Win.Test
 {
     public partial class FrmMain : Form
     {
+        private string _writeL = "E10ADC39";
+        private string _writeH = "49BA59AB";
+        private string _readL = "BE56E057";
+        private string _readH = "F20F883E";
         public FrmMain()
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace YF.MWS.Win.Test
                 StartPad= true,
                 StartScreen= true,
                 StartVideo=true
-            };
+            } ;
             cfg.AutoWeight = raFileType.EditValue.ToString() == "all";
             cfg.CarNoRecognition = raFileType.EditValue.ToString() == "all";
             string line3=Encrypt.EncryptDES(cfg.JsonSerialize(), CurrentClient.Instance.EncryptKey);
@@ -69,11 +69,6 @@ namespace YF.MWS.Win.Test
             dateDongle.Time = DateTime.Now.AddYears(3);
         }
 
-        private void btnVerify_Click(object sender, EventArgs e) {
-            int authCode = CodeUtil.GetAuthCode(teRandCode.Text.ToInt());
-            teAuthCode.Text = authCode.ToString();
-        }
-
         private void simpleButton1_Click(object sender, EventArgs e) {
             SoftKeyPWD et99 = new SoftKeyPWD();
             string KeyPath="";
@@ -82,16 +77,30 @@ namespace YF.MWS.Win.Test
                 MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
                 return;
             }
-           /* txtPID2.Text=et99.GenPID("12345678");
-            et99.WriteData("11111111", 0);
-            string lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
-            et99.WriteData(Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey), 8);
-            lastUsedDate = dateDongle.Time.ToString("yyyyMMdd");
-            et99.WriteData(Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey), 32);
-            et99.WriteData(Encrypt.EncryptDES(0.ToString(), CurrentClient.Instance.EncryptKey), 56);
-            et99.WriteData(Encrypt.EncryptDES(100.ToString(), CurrentClient.Instance.EncryptKey), 68);
-            et99.WriteData(et99.GetSN(), 80);*/
-            MessageBox.Show("加密狗生成失败！");
+            int ret = et99.ReSet(KeyPath);
+            if (ret != 0) {
+                MessageBox.Show("加密狗初始化失败");
+                return;
+            }
+            ret = et99.SetWritePassword("00000000", "00000000", _writeH, _writeL, KeyPath);
+            if (ret != 0) {
+                MessageBox.Show("设置写密码错误。"); return;
+            }
+            ret = et99.SetReadPassword(_writeH, _writeL, _readH, _readL, KeyPath);
+            if (ret != 0) {
+                MessageBox.Show("设置读密码错误。"); return;
+            }
+            string auth = "11111111";
+            if (raType.EditValue.ToString() == "manual") auth = "10001111";
+             string lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
+            lastUsedDate=Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey);
+            auth += lastUsedDate;
+             lastUsedDate = dateDongle.Time.ToString("yyyyMMdd");
+            lastUsedDate = Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey);
+            auth += lastUsedDate;
+            ret = et99.YWriteString(auth, 0, _writeH, _writeL, KeyPath);
+            if (ret != 0) { MessageBox.Show("写字符串失败"); return; }
+            MessageBox.Show("加密狗生成成功！");
         }
 
         private void simpleButton2_Click(object sender, EventArgs e) {
@@ -110,6 +119,36 @@ namespace YF.MWS.Win.Test
             } catch (Exception ex) {
                 Console.WriteLine("发生错误：" + ex.Message);
             }
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e) {
+            SoftKeyPWD et99 = new SoftKeyPWD();
+            string KeyPath = "";
+            if (et99.FindPort(0, ref KeyPath) != 0) {
+                MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
+                return;
+            }
+            string outstring = "";
+            int ret = et99.YReadString(ref outstring, 0, 56, _readH, _readL, KeyPath);
+            if (ret != 0) {
+                MessageBox.Show("读字符串失败"); return;
+            }
+            if (outstring.Length != 56) {
+                MessageBox.Show("字符串长度错误"); return;
+            }
+            string message="";
+            string auth = outstring.Substring(0, 8);
+            if (auth == "11111111") {
+                message="当前版本为：无人值守";
+            } else if(auth == "10001111"){
+                message="当前版本为：普通版";
+            }
+            string date = outstring.Substring(32, 24);
+            date=Encrypt.DecryptDES(date, CurrentClient.Instance.EncryptKey);
+            if (date.Length >= 8) {
+            message += $"\r\n到期日期：{date.Substring(0,4)}年{date.Substring(4,2)}月{date.Substring(6,2)}日";
+            }
+            MessageBox.Show(message);
         }
     }
 }

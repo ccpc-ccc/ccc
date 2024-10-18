@@ -1,4 +1,4 @@
-﻿namespace YF.MWS.Win.View.Master
+﻿namespace YF.MWS.Win.View
 {
     partial class FrmViewShow {
         /// <summary>

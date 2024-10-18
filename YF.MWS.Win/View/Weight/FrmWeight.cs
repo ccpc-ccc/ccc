@@ -40,6 +40,7 @@ using YF.Utility;
 using System.Collections;
 using System.Diagnostics;
 using YF.Utility.Data;
+using com.google.zxing;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeight : BaseForm {
@@ -437,8 +438,6 @@ namespace YF.MWS.Win.View.Weight {
             buttons.Add(btnOpenSecondGate);
             buttons.Add(btnCloseFirstGate);
             buttons.Add(btnCloseSecondGate);
-            buttons.Add(btnLightFirstGroup);
-            buttons.Add(btnLightSecondGroup);
             buttons.Add(btnPrintView);
             List<BarSubItem> subItems = new List<BarSubItem>();
             RoleUtil.SetButton(buttons, LstModule);
@@ -816,6 +815,7 @@ namespace YF.MWS.Win.View.Weight {
                 currentlblWeight = this.lblWeight1;
                 currentDeviceCfg = this.Cfg.Device1;
                 using (Utility.GetWaitForm(this)) {
+                this.searchList.frmWeight = this;
                     InitCommandBar();
                     InitConfig();
                     InitData();
@@ -837,7 +837,7 @@ namespace YF.MWS.Win.View.Weight {
                         speecher = new SpeechUtil();
                         voiceCfg = CfgUtil.GetVoiceCfg();
                     }
-                            InitModBus();
+                    InitModBus();
                     //无人职守
                     if (Cfg.MeasureFun == "Nobody") {
                         //判断车辆是否完全驶出地磅
@@ -886,8 +886,7 @@ namespace YF.MWS.Win.View.Weight {
                 isBounding = false;
                 isNoteReadCard = false;
                 //称重完成,红灯亮,绿灯灭
-                ChangeLight(1, true);
-                ChangeLight(2, true);
+                RedServerLight(1);
                 if (startBoundGate) {
                     if (readerNo == 1) {
                         //关闭2#道闸
@@ -898,50 +897,6 @@ namespace YF.MWS.Win.View.Weight {
                     }
                 }
                 FinishWeightProcess();
-            }
-        }
-
-        private void SetVideoControl() {
-            //plMainWeight.Dock = DockStyle.Fill;
-            SetDHRecognition(1);
-            SetDHRecognition(2);
-        }
-
-        private PictureBox GetPictureBoxFromVideoControl(int no) {
-            PictureBox picBox = null;
-            if (videoContainer != null && startVideo && isCarRecognitionOutputVideo) {
-                List<Control> lstControl = videoContainer.ListCtrl;
-                if (lstControl != null && lstControl.Count > 0) {
-                    if (no == 1) {
-                        picBox = (PictureBox)lstControl[0];
-                    }
-                    if (no == 2) {
-                        if (lstControl.Count >= 2) {
-                            picBox = (PictureBox)lstControl[1];
-                        }
-                    }
-                }
-            }
-            return picBox;
-        }
-        private void SetDHRecognition(int no) {
-            if (videoContainer != null
-                && startVideo && isCarRecognitionOutputVideo) {
-                List<Control> lstControl = videoContainer.ListCtrl;
-                if (lstControl != null && lstControl.Count > 0) {
-                    if (no == 1) {
-                        if (dhRecognizerLeft != null) {
-                            dhRecognizerLeft.PicVideo = (PictureBox)lstControl[0];
-                            dhRecognizerLeft.OpenRealPlay();
-                        }
-                    }
-                    if (no == 2) {
-                        if (lstControl.Count >= 2 && dhRecognizerRight != null) {
-                            dhRecognizerRight.PicVideo = (PictureBox)lstControl[1];
-                            dhRecognizerRight.OpenRealPlay();
-                        }
-                    }
-                }
             }
         }
 
@@ -1121,24 +1076,6 @@ namespace YF.MWS.Win.View.Weight {
                     if (value > 0) {
                         bool state = false;
                         bool isStartWeightTimer = StartWeightWeightTimer();
-                        if (currentBoundGateType == BoundGateType.SingleGate) {
-                            state = value.ToDecimal() >= this.minWeightValue;
-                            //单道砸方式下需要播报请读卡的语音
-                            if (state && startReadCard && !this.isNoteReadCard) {
-                                bool canSpeek = true;
-                                if (weightProcessTrigger == WeightProcessTriggerType.CarRecognitionOrCard && hasGetCarNo) {
-                                    canSpeek = false;
-                                }
-                                if (canSpeek && startVoice && speecher != null && voiceCfg != null && !string.IsNullOrEmpty(voiceCfg.StartReadCard)) {
-                                    isNoteReadCard = true;
-                                    speecher.Speak(voiceCfg.StartReadCard);
-                                }
-                            }
-                            if (state && !this.isBounding) {
-                                this.isBounding = true;
-                                ChangeSingleLight(true);
-                            }
-                        } else {
                             state = value.ToDecimal() >= this.minWeightValue && isStartWeightTimer;
                             if (state && !this.isBounding) {
                                 this.isBounding = true;
@@ -1149,7 +1086,6 @@ namespace YF.MWS.Win.View.Weight {
                                     // ChangeLight(2, true, "show-weight");
                                 }
                             }
-                        }
                         if (state) {
                             //新的判断重量稳定的方法
                             if (!isStable) {
@@ -1227,24 +1163,6 @@ namespace YF.MWS.Win.View.Weight {
                     if (value > 0) {
                         bool state = false;
                         bool isStartWeightTimer = StartWeightWeightTimer();
-                        if (currentBoundGateType == BoundGateType.SingleGate) {
-                            state = value.ToDecimal() >= this.minWeightValue;
-                            //单道砸方式下需要播报请读卡的语音
-                            if (state && startReadCard && !this.isNoteReadCard) {
-                                bool canSpeek = true;
-                                if (weightProcessTrigger == WeightProcessTriggerType.CarRecognitionOrCard && hasGetCarNo) {
-                                    canSpeek = false;
-                                }
-                                if (canSpeek && startVoice && speecher != null && voiceCfg != null && !string.IsNullOrEmpty(voiceCfg.StartReadCard)) {
-                                    isNoteReadCard = true;
-                                    speecher.Speak(voiceCfg.StartReadCard);
-                                }
-                            }
-                            if (state && !this.isBounding) {
-                                this.isBounding = true;
-                                ChangeSingleLight(true);
-                            }
-                        } else {
                             state = value.ToDecimal() >= this.minWeightValue && isStartWeightTimer;
                             if (state && !this.isBounding) {
                                 this.isBounding = true;
@@ -1255,7 +1173,6 @@ namespace YF.MWS.Win.View.Weight {
                                     // ChangeLight(2, true, "show-weight");
                                 }
                             }
-                        }
                         if (state) {
                             //新的判断重量稳定的方法
                             if (!isStable) {
@@ -1338,31 +1255,7 @@ namespace YF.MWS.Win.View.Weight {
                 e.Cancel = true;
         }
 
-        private void ReleaseVideo() {
-            if (startVideo) {
-                //关闭视频、释放资源
-                    if (this.videoContainer == null) return;
-                    this.videoContainer.Close();
-                    //释放SDK资源
-                    switch (this.videoContainer.VideoCamera) {
-                        case "DH":
-                            NETClient.NETCleanup();
-                            break;
-                        case "Hikvision":
-                            VideoCameraSdk.NET_DVR_Cleanup();
-                            break;
-                        case "XM":
-                            XMSDK.H264_DVR_Cleanup();
-                            break;
-                        case "YS":
-                            NETDEVSDK.NETDEV_Cleanup();
-                            break;
-                    }
-            }
-        }
-
         private void FrmWeight_FormClosed(object sender, FormClosedEventArgs e) {
-            ReleaseVideo();
             if (timerAutoTask != null && timerAutoTask.Enabled) {
                 timerAutoTask.Stop();
                 timerAutoTask.Dispose();
@@ -1499,7 +1392,7 @@ namespace YF.MWS.Win.View.Weight {
             }
         }
 
-        private void Print(string weightId) {
+        public void Print(string weightId) {
             int printCount = 0;
             if (startReWeightTemplate) {
                 printCount = searchList.CurrentWeightPrintCount;
@@ -1686,8 +1579,8 @@ namespace YF.MWS.Win.View.Weight {
                     //if (isSuccess && isValidated && weightProcessTrigger == WeightProcessTriggerType.Card)
                     if (isSuccess && isValidated) {
                             this.readerNo = 1;
-                            //1#道闸红灯灭、绿灯亮
-                            ChangeLight(1, false);
+                        //1#道闸红灯灭、绿灯亮
+                        GreeServerLight(readerNo);
                         OpenServerGate(this.readerNo);
                     }
                     //无人值守双道闸模式,1号IC卡读取失败情况下
@@ -1712,20 +1605,20 @@ namespace YF.MWS.Win.View.Weight {
                             this.readerNo = 1;
                             if (CanOpenDoubleGate()) {
                                 //1#道闸红灯灭、绿灯亮
-                                ChangeLight(1, false);
+                                GreeServerLight(1);
                                 //开启道闸
                                 OpenServerGate(1);
                             }
                         }
                         //无人值守双道闸模式,1号IC卡读取失败情况下
-                        if (currentBoundGateType == BoundGateType.DoubleGate && !isSuccess) {
+                        if (!isSuccess) {
                             isSuccess = ReadRemoteCardSN(remoteReaderRight, ref cardId);
                             isValidated = ValidateCard(cardId);
                             //if (isSuccess && isValidated && weightProcessTrigger == WeightProcessTriggerType.Card)
                             if (isSuccess && isValidated && CanOpenDoubleGate()) {
                                 this.readerNo = 2;
                                 //2#道闸红灯灭、绿灯亮
-                                ChangeLight(2, false);
+                                GreeServerLight(2);
                                 //开启道闸
                                 CloseServerGate(2);
                             }
@@ -1853,8 +1746,6 @@ namespace YF.MWS.Win.View.Weight {
                         wlookCar.CurrentValue = string.Empty;
                         AddCarRecognitionPhoto(resInfo);
                     }));
-
-                    if (Cfg.MeasureFun == "Nobody" && Cfg.NobodyWeight.BoundGate == BoundGateType.DoubleGate) {
                         //1#车牌识别仪识别车牌
                         if (this.readerNo == 1) {
                             //红灯灭、绿灯亮
@@ -1873,7 +1764,6 @@ namespace YF.MWS.Win.View.Weight {
                             //MediaUtil.PlayAsync("./Sound/RECARNO.WAV");
                             this.speecher.Speak(this.voiceCfg.CarRecognition);
                         }
-                    }
                 }
             } catch (Exception ex) {
                 Logger.WriteException(ex);
@@ -2440,34 +2330,6 @@ namespace YF.MWS.Win.View.Weight {
             }
         }
 
-        private void btnLightFirstGroup_Click(object sender, EventArgs e) {
-            if (firstLightGroupRed) {
-                firstLightGroupRed = false;
-                ChangeRedLight(1, false);
-                ChangeGreenLight(1, true);
-                btnLightFirstGroup.ImageOptions.ImageIndex = 22;
-            } else {
-                firstLightGroupRed = true;
-                ChangeRedLight(1, true);
-                ChangeGreenLight(1, false);
-                btnLightFirstGroup.ImageOptions.ImageIndex = 20;
-            }
-        }
-
-        private void btnLightSecondGroup_Click(object sender, EventArgs e) {
-            if (secondLightGroupRed) {
-                secondLightGroupRed = false;
-                ChangeRedLight(2, false);
-                ChangeGreenLight(2, true);
-                btnLightSecondGroup.ImageOptions.ImageIndex = 22;
-            } else {
-                secondLightGroupRed = true;
-                ChangeRedLight(2, true);
-                ChangeGreenLight(2, false);
-                btnLightSecondGroup.ImageOptions.ImageIndex = 20;
-            }
-        }
-
         private void rgWeightProcess_SelectedIndexChanged(object sender, EventArgs e) {
             currentWeightProcess = rgWeightProcess.EditValue.ToEnum<WeightProcess>();
         }
@@ -2616,6 +2478,22 @@ namespace YF.MWS.Win.View.Weight {
             if (weRegularCharge != null) {
                     weRegularCharge.Enabled = radWarehBizType.EditValue.ToString() == "9";
             }
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e) {
+            GreeServerLight(1);
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e) {
+            RedServerLight(1);
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e) {
+            GreeServerLight(2);
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e) {
+            RedServerLight(2);
         }
     }
 }

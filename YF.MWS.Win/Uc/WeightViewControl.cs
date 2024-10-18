@@ -18,6 +18,7 @@ using DevExpress.Utils.Controls;
 using System.Threading.Tasks;
 using YF.MWS.Win.View.Master;
 using DevExpress.XtraEditors.Controls;
+using YF.MWS.Win.View;
 
 namespace YF.MWS.Win.Uc
 {

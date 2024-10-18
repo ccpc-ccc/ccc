@@ -265,45 +265,13 @@ namespace YF.MWS.SQliteService
 
         public bool UpdateWeight(string weightId, RowState state)
         {
-            bool isUpdated = false;
             string sql = string.Empty;
-            sql = string.Format("select * from B_Weight where Id = '{0}'", weightId);
-            DataTable dt = GetTable(sql);
-            BWeight weight = null;
-            if (dt != null && dt.Rows.Count > 0) {
-             weight = TableHelper.RowToEntity<BWeight>(dt.Rows[0]);
-            }
             List<string> lstSql = new List<string>();
-            if (weight != null&&state==RowState.Delete) {
-                decimal dw = weight.SuttleWeight;
-                if (weight.d2 > 0) dw = weight.d2;
-                SMaterial material = materialService.GetMaterial(weight.MaterialId);
-                if (material != null) {
-                    if (weight.WarehBizType == "RuKu") {
-                        material.Quantity = material.Quantity - dw;
-                    } else if (weight.WarehBizType == "ChuKu") {
-                        material.Quantity = material.Quantity + dw;
-                    }
-                    materialService.SaveMaterial(material);
-                }
-            }
             sql = string.Format(@"UPDATE B_Weight SET RowState = '{1}' WHERE Id = '{0}'", weightId, (int)state);
             lstSql.Add(sql);
             sql = string.Format(@"UPDATE B_WeightDetail SET RowState = '{1}' WHERE Id = '{0}'", weightId, (int)state);
             lstSql.Add(sql);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                isUpdated = sqliteDb.ExecuteNonQuery(lstSql) > 0;
-            }
-            else
-            {
-                isUpdated = service.ExecuteNonQuery(lstSql);
-            }
-            if (isUpdated)
-            {
-                payService.UpdateRowState(state, weightId);
-            }
-            return isUpdated;
+            return base.ExecuteSql(lstSql);
         }
 
         public DataTable GetWeighter() 

@@ -10,11 +10,13 @@ using System.Threading;
 using YF.Utility.Log;
 using YF.Utility.Data;
 using SqlSugar;
+using YF.MWS.BaseMetadata;
+using YF.MWS.Metadata;
 
 namespace YF.MWS.Util {
     public class SqliteDb {
         private string dbPath;
-        SqlSugarClient db;
+        public SqlSugarClient db;
         private bool isExistDbFile = false;
         /// <summary>
         /// sqlite 
@@ -31,7 +33,11 @@ namespace YF.MWS.Util {
         public SqliteDb() {
             dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AppSetting.GetValue("dsnSqlite"));
             isExistDbFile = File.Exists(dbPath);
+            if(CurrentClient.Instance.DataBase == DataBaseType.Sqlserver) {
+                GetSQLserverConnection();
+            } else if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
             GetSQLiteConnection();
+            }
         }
 
         public SqliteDb(string dbFilePath) {
@@ -57,6 +63,15 @@ namespace YF.MWS.Util {
                 ConnectionString = conStr,
                 IsAutoCloseConnection = true,
                 DbType = SqlSugar.DbType.Sqlite
+            };
+            db = new SqlSugarClient(config);
+        }
+        public void GetSQLserverConnection() {
+            string conStr = AppSetting.GetValue("dsn");
+            ConnectionConfig config = new ConnectionConfig() {
+                ConnectionString = conStr,
+                IsAutoCloseConnection = true,
+                DbType = SqlSugar.DbType.SqlServer
             };
             db = new SqlSugarClient(config);
         }

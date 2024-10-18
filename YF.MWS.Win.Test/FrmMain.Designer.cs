@@ -35,47 +35,33 @@
             this.label2 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.teRandCode = new DevExpress.XtraEditors.TextEdit();
-            this.lblRandCode = new DevExpress.XtraEditors.LabelControl();
-            this.btnVerify = new DevExpress.XtraEditors.SimpleButton();
-            this.teAuthCode = new DevExpress.XtraEditors.TextEdit();
-            this.lblAuthCode = new DevExpress.XtraEditors.LabelControl();
+            this.raFileType = new DevExpress.XtraEditors.RadioGroup();
+            this.label11 = new System.Windows.Forms.Label();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.raType = new DevExpress.XtraEditors.RadioGroup();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.label4 = new System.Windows.Forms.Label();
             this.dateDongle = new DevExpress.XtraEditors.TimeEdit();
-            this.txtPID2 = new DevExpress.XtraEditors.TextEdit();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtPID = new DevExpress.XtraEditors.TextEdit();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.txtPackPath = new DevExpress.XtraEditors.TextEdit();
             this.label9 = new System.Windows.Forms.Label();
             this.txtFilePath = new DevExpress.XtraEditors.TextEdit();
             this.label8 = new System.Windows.Forms.Label();
-            this.raType = new DevExpress.XtraEditors.RadioGroup();
-            this.label10 = new System.Windows.Forms.Label();
-            this.raFileType = new DevExpress.XtraEditors.RadioGroup();
-            this.label11 = new System.Windows.Forms.Label();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.teRandCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teAuthCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.raFileType.Properties)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.raType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateDongle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPID2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPID.Properties)).BeginInit();
             this.xtraTabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackPath.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilePath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raFileType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // txtCode
@@ -139,7 +125,6 @@
             this.xtraTabControl1.TabIndex = 64;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
-            this.xtraTabPage2,
             this.xtraTabPage3,
             this.xtraTabPage4});
             // 
@@ -156,70 +141,48 @@
             this.xtraTabPage1.Size = new System.Drawing.Size(489, 293);
             this.xtraTabPage1.Text = "软件注册";
             // 
-            // xtraTabPage2
+            // raFileType
             // 
-            this.xtraTabPage2.Controls.Add(this.teRandCode);
-            this.xtraTabPage2.Controls.Add(this.lblRandCode);
-            this.xtraTabPage2.Controls.Add(this.btnVerify);
-            this.xtraTabPage2.Controls.Add(this.teAuthCode);
-            this.xtraTabPage2.Controls.Add(this.lblAuthCode);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(489, 293);
-            this.xtraTabPage2.Text = "生成验证码";
+            this.raFileType.EditValue = "manual";
+            this.raFileType.Location = new System.Drawing.Point(64, 133);
+            this.raFileType.Name = "raFileType";
+            this.raFileType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
+            this.raFileType.Size = new System.Drawing.Size(269, 27);
+            this.raFileType.TabIndex = 73;
             // 
-            // teRandCode
+            // label11
             // 
-            this.teRandCode.Location = new System.Drawing.Point(151, 84);
-            this.teRandCode.Name = "teRandCode";
-            this.teRandCode.Size = new System.Drawing.Size(134, 20);
-            this.teRandCode.TabIndex = 34;
-            // 
-            // lblRandCode
-            // 
-            this.lblRandCode.Location = new System.Drawing.Point(87, 87);
-            this.lblRandCode.Name = "lblRandCode";
-            this.lblRandCode.Size = new System.Drawing.Size(40, 14);
-            this.lblRandCode.TabIndex = 33;
-            this.lblRandCode.Text = "随机码:";
-            // 
-            // btnVerify
-            // 
-            this.btnVerify.Location = new System.Drawing.Point(151, 169);
-            this.btnVerify.Name = "btnVerify";
-            this.btnVerify.Size = new System.Drawing.Size(75, 23);
-            this.btnVerify.TabIndex = 32;
-            this.btnVerify.Text = "获取";
-            this.btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
-            // 
-            // teAuthCode
-            // 
-            this.teAuthCode.Location = new System.Drawing.Point(151, 123);
-            this.teAuthCode.Name = "teAuthCode";
-            this.teAuthCode.Size = new System.Drawing.Size(134, 20);
-            this.teAuthCode.TabIndex = 31;
-            // 
-            // lblAuthCode
-            // 
-            this.lblAuthCode.Location = new System.Drawing.Point(87, 126);
-            this.lblAuthCode.Name = "lblAuthCode";
-            this.lblAuthCode.Size = new System.Drawing.Size(40, 14);
-            this.lblAuthCode.TabIndex = 30;
-            this.lblAuthCode.Text = "授权码:";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 139);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 14);
+            this.label11.TabIndex = 72;
+            this.label11.Text = "系统版本";
             // 
             // xtraTabPage3
             // 
             this.xtraTabPage3.Controls.Add(this.raType);
+            this.xtraTabPage3.Controls.Add(this.simpleButton3);
             this.xtraTabPage3.Controls.Add(this.simpleButton1);
             this.xtraTabPage3.Controls.Add(this.label4);
             this.xtraTabPage3.Controls.Add(this.dateDongle);
             this.xtraTabPage3.Controls.Add(this.label10);
-            this.xtraTabPage3.Controls.Add(this.txtPID2);
-            this.xtraTabPage3.Controls.Add(this.label7);
-            this.xtraTabPage3.Controls.Add(this.txtPID);
-            this.xtraTabPage3.Controls.Add(this.label6);
             this.xtraTabPage3.Name = "xtraTabPage3";
             this.xtraTabPage3.Size = new System.Drawing.Size(489, 293);
             this.xtraTabPage3.Text = "加密狗注册";
+            // 
+            // raType
+            // 
+            this.raType.EditValue = "manual";
+            this.raType.Location = new System.Drawing.Point(75, 124);
+            this.raType.Name = "raType";
+            this.raType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
+            this.raType.Size = new System.Drawing.Size(269, 27);
+            this.raType.TabIndex = 71;
             // 
             // simpleButton1
             // 
@@ -233,7 +196,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 75);
+            this.label4.Location = new System.Drawing.Point(16, 40);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 14);
             this.label4.TabIndex = 67;
@@ -242,7 +205,7 @@
             // dateDongle
             // 
             this.dateDongle.EditValue = new System.DateTime(2026, 11, 4, 23, 59, 0, 0);
-            this.dateDongle.Location = new System.Drawing.Point(64, 65);
+            this.dateDongle.Location = new System.Drawing.Point(75, 30);
             this.dateDongle.Name = "dateDongle";
             this.dateDongle.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
             this.dateDongle.Properties.Appearance.Options.UseFont = true;
@@ -256,38 +219,14 @@
             this.dateDongle.Size = new System.Drawing.Size(129, 28);
             this.dateDongle.TabIndex = 70;
             // 
-            // txtPID2
+            // label10
             // 
-            this.txtPID2.Location = new System.Drawing.Point(64, 39);
-            this.txtPID2.Name = "txtPID2";
-            this.txtPID2.Size = new System.Drawing.Size(147, 20);
-            this.txtPID2.TabIndex = 64;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 42);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 14);
-            this.label7.TabIndex = 69;
-            this.label7.Text = "新PID:";
-            // 
-            // txtPID
-            // 
-            this.txtPID.EditValue = "ADDB5E67";
-            this.txtPID.Location = new System.Drawing.Point(64, 13);
-            this.txtPID.Name = "txtPID";
-            this.txtPID.Size = new System.Drawing.Size(147, 20);
-            this.txtPID.TabIndex = 64;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 14);
-            this.label6.TabIndex = 69;
-            this.label6.Text = "旧PID:";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 130);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 14);
+            this.label10.TabIndex = 68;
+            this.label10.Text = "系统版本";
             // 
             // xtraTabPage4
             // 
@@ -344,45 +283,14 @@
             this.label8.TabIndex = 5;
             this.label8.Text = "文件路径";
             // 
-            // raType
+            // simpleButton3
             // 
-            this.raType.EditValue = "manual";
-            this.raType.Location = new System.Drawing.Point(64, 125);
-            this.raType.Name = "raType";
-            this.raType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
-            this.raType.Size = new System.Drawing.Size(269, 27);
-            this.raType.TabIndex = 71;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 131);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 14);
-            this.label10.TabIndex = 68;
-            this.label10.Text = "系统版本";
-            // 
-            // raFileType
-            // 
-            this.raFileType.EditValue = "manual";
-            this.raFileType.Location = new System.Drawing.Point(64, 133);
-            this.raFileType.Name = "raFileType";
-            this.raFileType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
-            this.raFileType.Size = new System.Drawing.Size(269, 27);
-            this.raFileType.TabIndex = 73;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 139);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(55, 14);
-            this.label11.TabIndex = 72;
-            this.label11.Text = "系统版本";
+            this.simpleButton3.Location = new System.Drawing.Point(195, 189);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(86, 36);
+            this.simpleButton3.TabIndex = 66;
+            this.simpleButton3.Text = "读取加密狗";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // FrmMain
             // 
@@ -399,21 +307,15 @@
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage1.PerformLayout();
-            this.xtraTabPage2.ResumeLayout(false);
-            this.xtraTabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.teRandCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teAuthCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.raFileType.Properties)).EndInit();
             this.xtraTabPage3.ResumeLayout(false);
             this.xtraTabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.raType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateDongle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPID2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPID.Properties)).EndInit();
             this.xtraTabPage4.ResumeLayout(false);
             this.xtraTabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackPath.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilePath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.raFileType.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -426,20 +328,10 @@
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private DevExpress.XtraEditors.TextEdit teRandCode;
-        private DevExpress.XtraEditors.LabelControl lblRandCode;
-        private DevExpress.XtraEditors.SimpleButton btnVerify;
-        private DevExpress.XtraEditors.TextEdit teAuthCode;
-        private DevExpress.XtraEditors.LabelControl lblAuthCode;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.TimeEdit dateDongle;
-        private DevExpress.XtraEditors.TextEdit txtPID;
-        private System.Windows.Forms.Label label6;
-        private DevExpress.XtraEditors.TextEdit txtPID2;
-        private System.Windows.Forms.Label label7;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.TextEdit txtPackPath;
@@ -450,6 +342,7 @@
         private System.Windows.Forms.Label label10;
         private DevExpress.XtraEditors.RadioGroup raFileType;
         private System.Windows.Forms.Label label11;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
     }
 }
 

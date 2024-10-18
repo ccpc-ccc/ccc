@@ -22,20 +22,21 @@ using YF.Utility.Data;
 namespace YF.MWS.SQliteService
 {
     public abstract class BaseService {
-        protected SqliteDb sqliteDb = new SqliteDb();
+        protected SqliteDb sqliteDb;
         protected IService service = null;
         public BaseService() {
+            sqliteDb = new SqliteDb();
             if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver) {
                 service = ServiceInitialization.DbService;
             }
         }
         protected virtual DataTable GetTable(string sql) {
             DataTable dt = null;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                 dt = sqliteDb.ExecuteDataTable(sql);
+            /*if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
             } else {
                 dt = service.GetDataTable(sql);
-            }
+            }*/
             return dt;
         }
         protected virtual bool ExecuteSql(string sql) {

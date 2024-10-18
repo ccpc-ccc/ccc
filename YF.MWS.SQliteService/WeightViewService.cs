@@ -91,21 +91,20 @@ namespace YF.MWS.SQliteService
 
         public List<SWeightViewDtl> GetAllDetailList(string viewId)
         {
-            List<SWeightViewDtl> lstDetail = new List<SWeightViewDtl>();
             string sql = string.Format("select * from S_WeightViewDtl where ViewId='{0}' order by OrderNo",viewId);
-            DataTable dt = GetTable(sql);
-            lstDetail = TableHelper.TableToList<SWeightViewDtl>(dt);
-            return lstDetail;
+            return base.getList<SWeightViewDtl>(sql);
+        }
+
+        public List<SWeightViewDtl> GetAllShowDetailList(string viewId)
+        {
+            string sql = string.Format("select * from S_WeightViewDtl where ViewId='{0}' order by RowIndex,ColIndex",viewId);
+            return base.getList<SWeightViewDtl>(sql);
         }
 
         public List<SWeightViewDtl> GetDetailList(string viewId)
         {
-            List<SWeightViewDtl> lstDetail = new List<SWeightViewDtl>();
-            string sql;
-            sql = string.Format("select * from S_WeightViewDtl where ViewId='{0}' and RowState!={1} order by OrderNo", viewId,(int)RowState.Delete);
-            DataTable dt = GetTable(sql);
-            lstDetail = TableHelper.TableToList<SWeightViewDtl>(dt);
-            return lstDetail;
+            string sql = string.Format("select * from S_WeightViewDtl where ViewId='{0}' and RowState!={1} order by OrderNo", viewId,(int)RowState.Delete);
+            return base.getList<SWeightViewDtl>(sql);
         }
         public List<SWeightViewDtl> GetShow2DetailList(string viewId) {
             List<SWeightViewDtl> lstDetail = new List<SWeightViewDtl>();
@@ -126,9 +125,7 @@ namespace YF.MWS.SQliteService
             SWeightView view =GetDefaultView(type);
             if (view == null) return null;
             string sql = string.Format("select * from S_WeightViewDtl where ViewId='{0}' and (Show2=1 or Show2 is null)", view.Id);
-            DataTable dt = GetTable(sql);
-            lstDetail = TableHelper.TableToList<SWeightViewDtl>(dt);
-            return lstDetail;
+            return base.getList<SWeightViewDtl>(sql);
         }
         public bool SetDefaultView(ViewType type,string viewId) 
         {
@@ -171,27 +168,13 @@ namespace YF.MWS.SQliteService
         public bool UpdateState(string detailId, RowState state) 
         {
             string sql = string.Format(@"update S_WeightViewDtl set RowState={0} where Id='{1}'",(int)state,detailId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                return sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            else 
-            {
-                return service.ExecuteNonQuery(sql);
-            }
+            return base.ExecuteSql(sql);
         }
 
         public bool UpdateExpression(string detailId, string expression)
         {
             string sql = string.Format(@"update S_WeightViewDtl set Expression='{0}' where Id='{1}'",expression,detailId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                return sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            else
-            {
-                return service.ExecuteNonQuery(sql);
-            }
+            return base.ExecuteSql(sql);
         }
 
         public bool UpdateState(string detailId, RowState state, int orderNo)
@@ -209,14 +192,7 @@ namespace YF.MWS.SQliteService
         public bool UpdateColumns(string viewId, int columnsCount) 
         {
             string sql = string.Format(@"update S_WeightView set ColumnsCount={0} where sId='{1}'", columnsCount, viewId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                return sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            else
-            {
-                return service.ExecuteNonQuery(sql);
-            }
+            return base.ExecuteSql(sql);
         }
 
         public bool UpdateWeightColumnDecimalDigits(int decimalDigits) 
@@ -269,6 +245,22 @@ namespace YF.MWS.SQliteService
                 }
             }
             return  SaveView(sWeight);
+        }
+        public void saveWeightViewDtlShow2(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set Show2={dtl.Show2} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
+        }
+        public void saveWeightViewDtlRowState(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set RowState={dtl.RowState} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
+        }
+        public void saveWeightViewDtlColIndex(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set ColIndex={dtl.ColIndex} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
+        }
+        public void saveWeightViewDtlRowIndex(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set RowIndex={dtl.RowIndex} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
         }
         #endregion
     }

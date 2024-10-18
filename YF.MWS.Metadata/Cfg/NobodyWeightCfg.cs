@@ -5,10 +5,6 @@ namespace YF.MWS.Metadata.Cfg
 {
     public class NobodyWeightCfg
     {
-        /// <summary>
-        /// 地磅道闸类型
-        /// </summary>
-        public BoundGateType BoundGate { get; set; }
 
         /// <summary>
         /// 是否启用道闸
@@ -55,14 +51,9 @@ namespace YF.MWS.Metadata.Cfg
         public int FunSixCloseTime { get; set; }
 
         /// <summary>
-        /// 落匝方式
+        /// 道闸控制方式 Modbus 控制箱控制 Car 车牌识别控制
         /// </summary>
-        public CloseGateMode CloseGate { get; set; }
-
-        /// <summary>
-        /// 单道闸开启时点
-        /// </summary>
-        public OpenSingleGateMode OpenSingleGate { get; set; }
+        public string GateControl { get; set; }
 
         /// <summary>
         /// 启用红绿灯

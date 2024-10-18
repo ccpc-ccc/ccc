@@ -16,7 +16,7 @@ using YF.Utility.Log;
 using YF.Utility;
 using YF.MWS.Metadata;
 
-namespace YF.MWS.Win.View.Master
+namespace YF.MWS.Win.View
 {
     public partial class FrmViewEdit : BaseForm
     {

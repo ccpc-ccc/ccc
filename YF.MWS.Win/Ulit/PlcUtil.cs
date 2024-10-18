@@ -60,37 +60,5 @@ namespace YF.MWS.Win
             }
             return isStart;
         }
-
-        /// <summary>
-        /// 初始化PLC配置信息
-        /// </summary>
-        public static void InitCfg(SClient client)
-        {
-            if (!File.Exists(cfgFilePath))
-            {
-                PlcCfg cfg = new PlcCfg();
-                cfg.Start = true;
-                Random rd = new Random();
-                int days = rd.Next(800, 860);
-                int expireDate = DateTime.Now.AddDays(days).ToString("yyyyMMdd").ToInt();
-                cfg.ExpireDate = expireDate;
-                YF.Utility.Serialization.XmlUtil.Serialize<PlcCfg>(cfg, cfgFilePath);
-            }
-            else 
-            {
-                if (client != null)
-                {
-                    PlcCfg cfg = YF.Utility.Serialization.XmlUtil.Deserialize<PlcCfg>(cfgFilePath);
-                    Random rd = new Random();
-                    int days = rd.Next(280, 400);
-                    int theoryExpireDate = client.ExpireDate.AddDays(days).ToString("yyyyMMdd").ToInt();
-                    if (cfg != null && cfg.ExpireDate < theoryExpireDate)
-                    {
-                        cfg.ExpireDate = theoryExpireDate;
-                        YF.Utility.Serialization.XmlUtil.Serialize<PlcCfg>(cfg, cfgFilePath);
-                    }
-                }
-            }
-        }
     }
 }

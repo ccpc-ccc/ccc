@@ -692,38 +692,6 @@ namespace YF.MWS.SQliteService
                 }
                 dtTarget.Rows.Add(drTarget);
             }
-            List<string> weightIds = weights.Select(c => c.Id).Distinct().ToList();
-            List<WeightExtend> extends = null;
-            List<WeightExtend> extendFind = null;
-            WeightExtend find = null;
-            string sql = string.Format(@"select a.WeightId,a.AttributeValue,b.AttributeName,b.FieldName from B_WeightAttribute a 
-                                                           inner join S_Attribute b on a.AttributeId=b.Id where a.WeightId in({0})", SqlConditionUtil.GetArrayIn(weightIds));
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                extends = sqliteDb.GetObjectList<WeightExtend>(sql);
-            }
-            else
-            {
-                extends = service.GetObjectList<WeightExtend>(sql);
-            }
-            if (extends == null || extends.Count == 0)
-                return;
-            string columnName = "Id";
-            string weightId = string.Empty;
-            foreach (DataRow drTarget in dtTarget.Rows) 
-            {
-                weightId = drTarget[columnName].ToObjectString();
-                extendFind = extends.FindAll(c => c.WeightId == weightId);
-                if (extendFind == null || extendFind.Count == 0)
-                    continue;
-                foreach (DataColumn dc in dtTarget.Columns)
-                {
-                    find = extendFind.Find(c => c.FieldName.ToUpper() == dc.ColumnName.ToUpper());
-                    if (find == null)
-                        continue;
-                    drTarget[dc] = find.AttributeValue;
-                }
-            }
         }
 
         public WeightQueryResult Query(WeightQueryCondition qc, bool startPage) 

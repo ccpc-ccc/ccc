@@ -49,75 +49,19 @@ namespace YF.MWS.Win
         public static string GetAuthCode(AuthCfg cfg) 
         {
             StringBuilder sb = new StringBuilder();
-            if (cfg.StartVideo)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.ReadCard)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.CarNoRecognition)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.StartOnline)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.AutoWeight)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.StartScreen)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.StartFinance)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
-            if (cfg.StartPad)
-            {
-                sb.Append("1");
-            }
-            else
-            {
-                sb.Append("0");
-            }
+            sb.Append(cfg.StartVideo ? "1" : "0");
+            sb.Append(cfg.ReadCard ? "1" : "0");
+            sb.Append(cfg.CarNoRecognition ? "1" : "0");
+            sb.Append(cfg.StartOnline ? "1" : "0");
+            sb.Append(cfg.AutoWeight ? "1" : "0");
+            sb.Append(cfg.StartScreen ? "1" : "0");
+            sb.Append(cfg.StartFinance ? "1" : "0");
+            sb.Append(cfg.StartPad ? "1" : "0");
             string authCode = Encrypt.EncryptDES(sb.ToString(), CurrentClient.Instance.EncryptKey);
             return authCode;
         }
 
-        private static AuthCfg GetAuthFromAuthCode(string authCode)
+        public static AuthCfg GetAuthFromAuthCode(string authCode)
         {
             AuthCfg cfg = new AuthCfg();
             if (string.IsNullOrEmpty(authCode))
@@ -230,59 +174,7 @@ namespace YF.MWS.Win
                 cfg.StartPad = true;
                 cfg.StartFinance = true;
                 cfg.StartScreen = true;
-            /*if (CurrentClient.Instance.CurrentVersion == VersionType.Probation)
-            {
-            }
-            else
-            {
-                IClientService clientService = new ClientService();
-                SClient client = clientService.Get(CurrentClient.Instance.MachineCode);
-                bool hasLoadAuthCode = false;
-                if (client != null)
-                {
-                    AuthCfg baseCfg = new AuthCfg();
-                    if (!string.IsNullOrEmpty(client.AuthCode))
-                    {
-                        baseCfg = GetAuthFromAuthCode(client.AuthCode);
-                    }
-                    if (CurrentClient.Instance.RegType == RegisterMode.SoftdogOnly)
-                    {
-                        cfg = CfgUtil.GetAuthFromVersion(CurrentClient.Instance.VersionFunc, baseCfg);
-                    }
-                    if (CurrentClient.Instance.RegType == RegisterMode.File)
-                    {
-                        cfg = baseCfg;
-                    }
-                    hasLoadAuthCode = true;
-                }
-                if (!hasLoadAuthCode)
-                {
-                    string path = Path.Combine(Application.StartupPath, "auth.cfg");
-                    if (File.Exists(path))
-                    {
-                        string[] lines = File.ReadAllLines(path);
-                        if (lines != null && lines.Length > 0)
-                        {
-                            cfg = Encrypt.DecryptDES(lines[0], CurrentClient.Instance.EncryptKey).JsonDeserialize<AuthCfg>();
-                            hasLoadAuthCode = true;
-                        }
-                    }
-                    if (!hasLoadAuthCode)
-                    {
-                        path = Path.Combine(Application.StartupPath, "auth.yrg");
-                        if (File.Exists(path))
-                        {
-                            string[] lines = File.ReadAllLines(path);
-                            if (lines != null && lines.Length > 0)
-                            {
-                                cfg = Encrypt.DecryptDES(lines[3], CurrentClient.Instance.EncryptKey).JsonDeserialize<AuthCfg>();
-                                hasLoadAuthCode = true;
-                            }
-                        }
-                    }
-                }
-            }
-            */
+
             return cfg;
         }
 

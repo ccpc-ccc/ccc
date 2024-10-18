@@ -12,10 +12,11 @@ using YF.MWS.Metadata.Cfg;
 using YF.Utility;
 using System.IO;
 using YF.MWS.Db;
+using YF.MWS.Win.Uc;
 
 namespace YF.MWS.Win.View.Master
 {
-    public partial class FrmVideoSetting : DevExpress.XtraEditors.XtraForm
+    public partial class FrmVideoSetting : BaseForm
     {
         private string configFilePath = Path.Combine(Application.StartupPath, "SysSetting.xml");
         private SysCfg cfg;
@@ -41,10 +42,11 @@ namespace YF.MWS.Win.View.Master
 
         private void FrmVideoSetting_Load(object sender, EventArgs e)
         {
+            this.cfg = Cfg;
             this.videoCamera = string.Format("VideoCamera{0}", this.cameraNo);
-            cfg = CfgUtil.GetCfg();
             this.Init();
-            if (cfg != null) 
+            this.xtraTabPage2.PageVisible = this.Auth.CarNoRecognition;
+            if (Cfg != null) 
             {
                 chkStartVideo.Checked = cfg.StartVideo;
                 rgCaptureMode.EditValue = cfg.Video.CaptureMode.ToString();
@@ -289,6 +291,7 @@ namespace YF.MWS.Win.View.Master
             cfg.CarNo.AutoLoadTareWeight = chkAutoLoadTareWeight.Checked;
             cfg.CarNo.AutoSaveTareWeight = chkAutoSaveTareWeight.Checked;
             cfg.CarNoRecognition.StartCarRecAdjust = chkStartCarRecAdjust.Checked;
+            if (!this.Auth.CarNoRecognition) cfg.StartCarNoRecognition = false;
             CfgUtil.SaveCfg(cfg);
             MessageDxUtil.ShowTips("成功保存车牌识别设置信息");
         }

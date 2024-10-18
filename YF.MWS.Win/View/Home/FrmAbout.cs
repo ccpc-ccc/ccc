@@ -33,7 +33,6 @@ namespace YF.MWS.Win.View.Home
             lblVersion.Text = string.Format(lblVersion.Text, Application.ProductVersion);
             lblAppName.Text=string.Format(lblAppName.Text,AppSetting.GetValue("appName"));
             lblRegisterDate.Text = string.Format(lblRegisterDate.Text, CurrentClient.Instance.RegisterDate.ToString("yyyy-MM-dd"));
-            lblExpireDate.Text = string.Format(lblExpireDate.Text, CurrentClient.Instance.ExpireDate.ToString("yyyy-MM-dd"));
             if (CurrentUser.Instance.IsAdministrator) 
             {
                 //lblExpireDate.Visible = true;

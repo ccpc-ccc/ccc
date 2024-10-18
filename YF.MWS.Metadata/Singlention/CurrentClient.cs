@@ -67,9 +67,13 @@ namespace YF.MWS.Metadata
         /// </summary>
         public string VerifyCode { get; set; }
         /// <summary>
-        /// 过期日期
+        /// 版本权限
         /// </summary>
-        public DateTime ExpireDate { get; set; }
+        public string AutoCfg { get; set; }
+        /// <summary>
+        /// 剩余天数
+        /// </summary>
+        public int ResidualDays { get; set; }
         public string ViewId { get; set; }
         public string SubjectId { get; set; }
         public DataBaseType DataBase { get; set; }

@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWeight));
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState49 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState50 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState51 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState52 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState53 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState54 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState55 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState56 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState57 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState58 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState59 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
-            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState60 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState1 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState2 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState3 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState4 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState5 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState6 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState7 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState8 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState9 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState10 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState11 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
+            DevExpress.XtraGauges.Core.Model.IndicatorState indicatorState12 = new DevExpress.XtraGauges.Core.Model.IndicatorState();
             this.imgListLarger = new DevExpress.Utils.ImageCollection(this.components);
             this.gpWeightDetail = new DevExpress.XtraEditors.GroupControl();
             this.searchList = new YF.MWS.Win.Uc.MainWeightList();
@@ -53,6 +53,7 @@
             this.timerSync = new System.Windows.Forms.Timer(this.components);
             this.plMainWeight = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.gpQuickAction = new DevExpress.XtraEditors.GroupControl();
             this.btnSaveTare = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
@@ -60,20 +61,25 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnWeight = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.rgWeightProcess = new DevExpress.XtraEditors.RadioGroup();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.radWarehBizType = new DevExpress.XtraEditors.RadioGroup();
             this.plLeft = new DevExpress.XtraEditors.PanelControl();
             this.mainWeight = new YF.MWS.Win.Uc.MainWeight();
             this.spWeightAction = new DevExpress.XtraEditors.SplitterControl();
             this.gpWeight = new DevExpress.XtraEditors.GroupControl();
-            this.gpDeviceAction = new DevExpress.XtraEditors.GroupControl();
-            this.btnLightFirstGroup = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLightSecondGroup = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCloseFirstGate = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenSecondGate = new DevExpress.XtraEditors.SimpleButton();
-            this.btnOpenFirstGate = new DevExpress.XtraEditors.SimpleButton();
+            this.rgWeightProcess = new DevExpress.XtraEditors.RadioGroup();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.radWarehBizType = new DevExpress.XtraEditors.RadioGroup();
+            this.gpLight2 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
+            this.gpDeviceGate2 = new DevExpress.XtraEditors.GroupControl();
             this.btnCloseSecondGate = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenSecondGate = new DevExpress.XtraEditors.SimpleButton();
+            this.gpLight1 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.gpDeviceGate1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnCloseFirstGate = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOpenFirstGate = new DevExpress.XtraEditors.SimpleButton();
             this.plDevice2 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gaugeControl1 = new DevExpress.XtraGauges.Win.GaugeControl();
@@ -100,7 +106,6 @@
             this.lblWeight1 = new DevExpress.XtraEditors.LabelControl();
             this.timerStateSync = new System.Windows.Forms.Timer(this.components);
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             ((System.ComponentModel.ISupportInitialize)(this.imgListLarger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightDetail)).BeginInit();
             this.gpWeightDetail.SuspendLayout();
@@ -111,16 +116,28 @@
             this.plMainWeight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).BeginInit();
+            this.splitContainerControl2.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel2)).BeginInit();
+            this.splitContainerControl2.Panel2.SuspendLayout();
+            this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpQuickAction)).BeginInit();
             this.gpQuickAction.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plLeft)).BeginInit();
             this.plLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeight)).BeginInit();
             this.gpWeight.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceAction)).BeginInit();
-            this.gpDeviceAction.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gpLight2)).BeginInit();
+            this.gpLight2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceGate2)).BeginInit();
+            this.gpDeviceGate2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gpLight1)).BeginInit();
+            this.gpLight1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceGate1)).BeginInit();
+            this.gpDeviceGate1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.plDevice2)).BeginInit();
             this.plDevice2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -141,12 +158,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
             this.splitContainerControl1.Panel2.SuspendLayout();
             this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).BeginInit();
-            this.splitContainerControl2.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel2)).BeginInit();
-            this.splitContainerControl2.Panel2.SuspendLayout();
-            this.splitContainerControl2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListLarger
@@ -235,6 +246,26 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(260, 385);
             this.panelControl1.TabIndex = 54;
+            // 
+            // splitContainerControl2
+            // 
+            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControl2.Horizontal = false;
+            this.splitContainerControl2.Location = new System.Drawing.Point(2, 2);
+            this.splitContainerControl2.Name = "splitContainerControl2";
+            // 
+            // splitContainerControl2.Panel1
+            // 
+            this.splitContainerControl2.Panel1.Controls.Add(this.gpQuickAction);
+            this.splitContainerControl2.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControl2.Panel2
+            // 
+            this.splitContainerControl2.Panel2.Controls.Add(this.gpLog);
+            this.splitContainerControl2.Panel2.Text = "Panel2";
+            this.splitContainerControl2.Size = new System.Drawing.Size(256, 381);
+            this.splitContainerControl2.SplitterPosition = 125;
+            this.splitContainerControl2.TabIndex = 41;
             // 
             // gpQuickAction
             // 
@@ -339,51 +370,6 @@
             this.btnSave.Text = "保存";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // rgWeightProcess
-            // 
-            this.rgWeightProcess.EditValue = "Two";
-            this.rgWeightProcess.Location = new System.Drawing.Point(161, 129);
-            this.rgWeightProcess.Name = "rgWeightProcess";
-            this.rgWeightProcess.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.rgWeightProcess.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rgWeightProcess.Properties.Appearance.Options.UseBackColor = true;
-            this.rgWeightProcess.Properties.Appearance.Options.UseFont = true;
-            this.rgWeightProcess.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("One", "一次计量"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Two", "二次计量")});
-            this.rgWeightProcess.Properties.Padding = new System.Windows.Forms.Padding(15, 4, 4, 4);
-            this.rgWeightProcess.Size = new System.Drawing.Size(195, 25);
-            this.rgWeightProcess.TabIndex = 32;
-            this.rgWeightProcess.SelectedIndexChanged += new System.EventHandler(this.rgWeightProcess_SelectedIndexChanged);
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.ImageOptions.ImageIndex = 8;
-            this.simpleButton2.Location = new System.Drawing.Point(362, 129);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(103, 26);
-            this.simpleButton2.TabIndex = 20;
-            this.simpleButton2.Tag = "Weight";
-            this.simpleButton2.Text = "清空";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // radWarehBizType
-            // 
-            this.radWarehBizType.EditValue = "9";
-            this.radWarehBizType.Location = new System.Drawing.Point(4, 129);
-            this.radWarehBizType.Name = "radWarehBizType";
-            this.radWarehBizType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("RuKu", "入库", true, null, ""),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("ChuKu", "出库")});
-            this.radWarehBizType.Properties.NullText = "RuKu";
-            this.radWarehBizType.Properties.Padding = new System.Windows.Forms.Padding(15, 0, 4, 0);
-            this.radWarehBizType.Properties.Tag = "";
-            this.radWarehBizType.Size = new System.Drawing.Size(155, 26);
-            this.radWarehBizType.TabIndex = 50;
-            this.radWarehBizType.SelectedIndexChanged += new System.EventHandler(this.radWarehBizType_SelectedIndexChanged);
-            // 
             // plLeft
             // 
             this.plLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -429,7 +415,10 @@
             this.gpWeight.Controls.Add(this.rgWeightProcess);
             this.gpWeight.Controls.Add(this.simpleButton2);
             this.gpWeight.Controls.Add(this.radWarehBizType);
-            this.gpWeight.Controls.Add(this.gpDeviceAction);
+            this.gpWeight.Controls.Add(this.gpLight2);
+            this.gpWeight.Controls.Add(this.gpDeviceGate2);
+            this.gpWeight.Controls.Add(this.gpLight1);
+            this.gpWeight.Controls.Add(this.gpDeviceGate1);
             this.gpWeight.Controls.Add(this.plDevice2);
             this.gpWeight.Controls.Add(this.plWeightDevice);
             this.gpWeight.Controls.Add(this.lblWeight1);
@@ -441,108 +430,246 @@
             this.gpWeight.TabIndex = 42;
             this.gpWeight.Text = "电子过磅区";
             // 
-            // gpDeviceAction
+            // rgWeightProcess
             // 
-            this.gpDeviceAction.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.gpDeviceAction.Appearance.Options.UseFont = true;
-            this.gpDeviceAction.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
-            this.gpDeviceAction.AppearanceCaption.Options.UseFont = true;
-            this.gpDeviceAction.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.gpDeviceAction.CaptionLocation = DevExpress.Utils.Locations.Right;
-            this.gpDeviceAction.Controls.Add(this.btnLightFirstGroup);
-            this.gpDeviceAction.Controls.Add(this.btnLightSecondGroup);
-            this.gpDeviceAction.Controls.Add(this.btnCloseFirstGate);
-            this.gpDeviceAction.Controls.Add(this.btnOpenSecondGate);
-            this.gpDeviceAction.Controls.Add(this.btnOpenFirstGate);
-            this.gpDeviceAction.Controls.Add(this.btnCloseSecondGate);
-            this.gpDeviceAction.Location = new System.Drawing.Point(1031, 10);
-            this.gpDeviceAction.Name = "gpDeviceAction";
-            this.gpDeviceAction.ShowCaption = false;
-            this.gpDeviceAction.Size = new System.Drawing.Size(166, 115);
-            this.gpDeviceAction.TabIndex = 43;
-            this.gpDeviceAction.Text = "硬件操作";
+            this.rgWeightProcess.EditValue = "Two";
+            this.rgWeightProcess.Location = new System.Drawing.Point(161, 129);
+            this.rgWeightProcess.Name = "rgWeightProcess";
+            this.rgWeightProcess.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.rgWeightProcess.Properties.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.rgWeightProcess.Properties.Appearance.Options.UseBackColor = true;
+            this.rgWeightProcess.Properties.Appearance.Options.UseFont = true;
+            this.rgWeightProcess.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("One", "一次计量"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Two", "二次计量")});
+            this.rgWeightProcess.Properties.Padding = new System.Windows.Forms.Padding(15, 4, 4, 4);
+            this.rgWeightProcess.Size = new System.Drawing.Size(195, 25);
+            this.rgWeightProcess.TabIndex = 32;
+            this.rgWeightProcess.SelectedIndexChanged += new System.EventHandler(this.rgWeightProcess_SelectedIndexChanged);
             // 
-            // btnLightFirstGroup
+            // simpleButton2
             // 
-            this.btnLightFirstGroup.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLightFirstGroup.Appearance.Options.UseFont = true;
-            this.btnLightFirstGroup.ImageOptions.ImageList = this.imgListLarger;
-            this.btnLightFirstGroup.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnLightFirstGroup.Location = new System.Drawing.Point(4, 78);
-            this.btnLightFirstGroup.Name = "btnLightFirstGroup";
-            this.btnLightFirstGroup.Size = new System.Drawing.Size(79, 32);
-            this.btnLightFirstGroup.TabIndex = 0;
-            this.btnLightFirstGroup.Tag = "FirstGroupLight";
-            this.btnLightFirstGroup.Text = "第1组灯";
-            this.btnLightFirstGroup.Click += new System.EventHandler(this.btnLightFirstGroup_Click);
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.ImageOptions.ImageIndex = 8;
+            this.simpleButton2.Location = new System.Drawing.Point(362, 129);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(103, 26);
+            this.simpleButton2.TabIndex = 20;
+            this.simpleButton2.Tag = "Weight";
+            this.simpleButton2.Text = "清空";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
-            // btnLightSecondGroup
+            // radWarehBizType
             // 
-            this.btnLightSecondGroup.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLightSecondGroup.Appearance.Options.UseFont = true;
-            this.btnLightSecondGroup.ImageOptions.ImageIndex = 20;
-            this.btnLightSecondGroup.ImageOptions.ImageList = this.imgListLarger;
-            this.btnLightSecondGroup.Location = new System.Drawing.Point(83, 78);
-            this.btnLightSecondGroup.Name = "btnLightSecondGroup";
-            this.btnLightSecondGroup.Size = new System.Drawing.Size(79, 32);
-            this.btnLightSecondGroup.TabIndex = 1;
-            this.btnLightSecondGroup.Tag = "SecondGroupRedLight";
-            this.btnLightSecondGroup.Text = "第2组灯";
-            this.btnLightSecondGroup.Click += new System.EventHandler(this.btnLightSecondGroup_Click);
+            this.radWarehBizType.EditValue = "9";
+            this.radWarehBizType.Location = new System.Drawing.Point(4, 129);
+            this.radWarehBizType.Name = "radWarehBizType";
+            this.radWarehBizType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("RuKu", "入库", true, null, ""),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("ChuKu", "出库")});
+            this.radWarehBizType.Properties.NullText = "RuKu";
+            this.radWarehBizType.Properties.Padding = new System.Windows.Forms.Padding(15, 0, 4, 0);
+            this.radWarehBizType.Properties.Tag = "";
+            this.radWarehBizType.Size = new System.Drawing.Size(155, 26);
+            this.radWarehBizType.TabIndex = 50;
+            this.radWarehBizType.SelectedIndexChanged += new System.EventHandler(this.radWarehBizType_SelectedIndexChanged);
             // 
-            // btnCloseFirstGate
+            // gpLight2
             // 
-            this.btnCloseFirstGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCloseFirstGate.Appearance.Options.UseFont = true;
-            this.btnCloseFirstGate.ImageOptions.ImageList = this.imgListLarger;
-            this.btnCloseFirstGate.Location = new System.Drawing.Point(83, 6);
-            this.btnCloseFirstGate.Name = "btnCloseFirstGate";
-            this.btnCloseFirstGate.Size = new System.Drawing.Size(79, 32);
-            this.btnCloseFirstGate.TabIndex = 3;
-            this.btnCloseFirstGate.Tag = "CloseFirst";
-            this.btnCloseFirstGate.Text = "落1#杆";
-            this.btnCloseFirstGate.Click += new System.EventHandler(this.btnCloseFirstGate_Click);
+            this.gpLight2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpLight2.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpLight2.Appearance.Options.UseFont = true;
+            this.gpLight2.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpLight2.AppearanceCaption.Options.UseFont = true;
+            this.gpLight2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gpLight2.CaptionLocation = DevExpress.Utils.Locations.Right;
+            this.gpLight2.Controls.Add(this.simpleButton5);
+            this.gpLight2.Controls.Add(this.simpleButton6);
+            this.gpLight2.Location = new System.Drawing.Point(1157, 10);
+            this.gpLight2.Name = "gpLight2";
+            this.gpLight2.ShowCaption = false;
+            this.gpLight2.Size = new System.Drawing.Size(49, 86);
+            this.gpLight2.TabIndex = 43;
             // 
-            // btnOpenSecondGate
+            // simpleButton5
             // 
-            this.btnOpenSecondGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOpenSecondGate.Appearance.Options.UseFont = true;
-            this.btnOpenSecondGate.ImageOptions.ImageList = this.imgListLarger;
-            this.btnOpenSecondGate.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnOpenSecondGate.Location = new System.Drawing.Point(4, 41);
-            this.btnOpenSecondGate.Name = "btnOpenSecondGate";
-            this.btnOpenSecondGate.Size = new System.Drawing.Size(79, 32);
-            this.btnOpenSecondGate.TabIndex = 2;
-            this.btnOpenSecondGate.Tag = "OpenSecond";
-            this.btnOpenSecondGate.Text = "起2#杆";
-            this.btnOpenSecondGate.Click += new System.EventHandler(this.btnOpenSecondGate_Click);
+            this.simpleButton5.Appearance.BackColor = System.Drawing.Color.Red;
+            this.simpleButton5.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton5.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.simpleButton5.Appearance.Options.UseBackColor = true;
+            this.simpleButton5.Appearance.Options.UseFont = true;
+            this.simpleButton5.Appearance.Options.UseForeColor = true;
+            this.simpleButton5.Location = new System.Drawing.Point(3, 42);
+            this.simpleButton5.Name = "simpleButton5";
+            this.simpleButton5.Size = new System.Drawing.Size(38, 32);
+            this.simpleButton5.TabIndex = 3;
+            this.simpleButton5.Tag = "CloseSecond";
+            this.simpleButton5.Text = "红灯";
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
-            // btnOpenFirstGate
+            // simpleButton6
             // 
-            this.btnOpenFirstGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOpenFirstGate.Appearance.Options.UseFont = true;
-            this.btnOpenFirstGate.ImageOptions.ImageList = this.imgListLarger;
-            this.btnOpenFirstGate.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
-            this.btnOpenFirstGate.Location = new System.Drawing.Point(4, 6);
-            this.btnOpenFirstGate.Name = "btnOpenFirstGate";
-            this.btnOpenFirstGate.Size = new System.Drawing.Size(79, 32);
-            this.btnOpenFirstGate.TabIndex = 2;
-            this.btnOpenFirstGate.Tag = "OpenFirst";
-            this.btnOpenFirstGate.Text = "起1#杆";
-            this.btnOpenFirstGate.Click += new System.EventHandler(this.btnOpenFirstGate_Click);
+            this.simpleButton6.Appearance.BackColor = System.Drawing.Color.Green;
+            this.simpleButton6.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton6.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.simpleButton6.Appearance.Options.UseBackColor = true;
+            this.simpleButton6.Appearance.Options.UseFont = true;
+            this.simpleButton6.Appearance.Options.UseForeColor = true;
+            this.simpleButton6.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.simpleButton6.Location = new System.Drawing.Point(3, 7);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(38, 32);
+            this.simpleButton6.TabIndex = 2;
+            this.simpleButton6.Tag = "OpenSecond";
+            this.simpleButton6.Text = "绿灯";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
+            // 
+            // gpDeviceGate2
+            // 
+            this.gpDeviceGate2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpDeviceGate2.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpDeviceGate2.Appearance.Options.UseFont = true;
+            this.gpDeviceGate2.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpDeviceGate2.AppearanceCaption.Options.UseFont = true;
+            this.gpDeviceGate2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gpDeviceGate2.CaptionLocation = DevExpress.Utils.Locations.Right;
+            this.gpDeviceGate2.Controls.Add(this.btnCloseSecondGate);
+            this.gpDeviceGate2.Controls.Add(this.btnOpenSecondGate);
+            this.gpDeviceGate2.Location = new System.Drawing.Point(1102, 10);
+            this.gpDeviceGate2.Name = "gpDeviceGate2";
+            this.gpDeviceGate2.ShowCaption = false;
+            this.gpDeviceGate2.Size = new System.Drawing.Size(49, 86);
+            this.gpDeviceGate2.TabIndex = 43;
             // 
             // btnCloseSecondGate
             // 
+            this.btnCloseSecondGate.Appearance.BackColor = System.Drawing.Color.Red;
             this.btnCloseSecondGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCloseSecondGate.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCloseSecondGate.Appearance.Options.UseBackColor = true;
             this.btnCloseSecondGate.Appearance.Options.UseFont = true;
+            this.btnCloseSecondGate.Appearance.Options.UseForeColor = true;
             this.btnCloseSecondGate.ImageOptions.ImageList = this.imgListLarger;
-            this.btnCloseSecondGate.Location = new System.Drawing.Point(83, 41);
+            this.btnCloseSecondGate.Location = new System.Drawing.Point(3, 42);
             this.btnCloseSecondGate.Name = "btnCloseSecondGate";
-            this.btnCloseSecondGate.Size = new System.Drawing.Size(79, 32);
+            this.btnCloseSecondGate.Size = new System.Drawing.Size(38, 32);
             this.btnCloseSecondGate.TabIndex = 3;
             this.btnCloseSecondGate.Tag = "CloseSecond";
-            this.btnCloseSecondGate.Text = "落2#杆";
+            this.btnCloseSecondGate.Text = "关闸";
             this.btnCloseSecondGate.Click += new System.EventHandler(this.btnCloseSecondGate_Click);
+            // 
+            // btnOpenSecondGate
+            // 
+            this.btnOpenSecondGate.Appearance.BackColor = System.Drawing.Color.Green;
+            this.btnOpenSecondGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenSecondGate.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnOpenSecondGate.Appearance.Options.UseBackColor = true;
+            this.btnOpenSecondGate.Appearance.Options.UseFont = true;
+            this.btnOpenSecondGate.Appearance.Options.UseForeColor = true;
+            this.btnOpenSecondGate.ImageOptions.ImageList = this.imgListLarger;
+            this.btnOpenSecondGate.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnOpenSecondGate.Location = new System.Drawing.Point(3, 7);
+            this.btnOpenSecondGate.Name = "btnOpenSecondGate";
+            this.btnOpenSecondGate.Size = new System.Drawing.Size(38, 32);
+            this.btnOpenSecondGate.TabIndex = 2;
+            this.btnOpenSecondGate.Tag = "OpenSecond";
+            this.btnOpenSecondGate.Text = "开闸";
+            this.btnOpenSecondGate.Click += new System.EventHandler(this.btnOpenSecondGate_Click);
+            // 
+            // gpLight1
+            // 
+            this.gpLight1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpLight1.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpLight1.Appearance.Options.UseFont = true;
+            this.gpLight1.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpLight1.AppearanceCaption.Options.UseFont = true;
+            this.gpLight1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gpLight1.CaptionLocation = DevExpress.Utils.Locations.Right;
+            this.gpLight1.Controls.Add(this.simpleButton3);
+            this.gpLight1.Controls.Add(this.simpleButton4);
+            this.gpLight1.Location = new System.Drawing.Point(998, 10);
+            this.gpLight1.Name = "gpLight1";
+            this.gpLight1.ShowCaption = false;
+            this.gpLight1.Size = new System.Drawing.Size(46, 86);
+            this.gpLight1.TabIndex = 43;
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Appearance.BackColor = System.Drawing.Color.Red;
+            this.simpleButton3.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton3.Appearance.Options.UseBackColor = true;
+            this.simpleButton3.Appearance.Options.UseFont = true;
+            this.simpleButton3.Location = new System.Drawing.Point(5, 42);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(38, 32);
+            this.simpleButton3.TabIndex = 3;
+            this.simpleButton3.Tag = "CloseFirst";
+            this.simpleButton3.Text = "红灯";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.Appearance.BackColor = System.Drawing.Color.Green;
+            this.simpleButton4.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton4.Appearance.Options.UseBackColor = true;
+            this.simpleButton4.Appearance.Options.UseFont = true;
+            this.simpleButton4.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.simpleButton4.Location = new System.Drawing.Point(5, 7);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(38, 32);
+            this.simpleButton4.TabIndex = 2;
+            this.simpleButton4.Tag = "OpenFirst";
+            this.simpleButton4.Text = "绿灯";
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
+            // gpDeviceGate1
+            // 
+            this.gpDeviceGate1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpDeviceGate1.Appearance.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpDeviceGate1.Appearance.Options.UseFont = true;
+            this.gpDeviceGate1.AppearanceCaption.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
+            this.gpDeviceGate1.AppearanceCaption.Options.UseFont = true;
+            this.gpDeviceGate1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gpDeviceGate1.CaptionLocation = DevExpress.Utils.Locations.Right;
+            this.gpDeviceGate1.Controls.Add(this.btnCloseFirstGate);
+            this.gpDeviceGate1.Controls.Add(this.btnOpenFirstGate);
+            this.gpDeviceGate1.Location = new System.Drawing.Point(1050, 10);
+            this.gpDeviceGate1.Name = "gpDeviceGate1";
+            this.gpDeviceGate1.ShowCaption = false;
+            this.gpDeviceGate1.Size = new System.Drawing.Size(46, 86);
+            this.gpDeviceGate1.TabIndex = 43;
+            // 
+            // btnCloseFirstGate
+            // 
+            this.btnCloseFirstGate.Appearance.BackColor = System.Drawing.Color.Red;
+            this.btnCloseFirstGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCloseFirstGate.Appearance.Options.UseBackColor = true;
+            this.btnCloseFirstGate.Appearance.Options.UseFont = true;
+            this.btnCloseFirstGate.ImageOptions.ImageList = this.imgListLarger;
+            this.btnCloseFirstGate.Location = new System.Drawing.Point(5, 42);
+            this.btnCloseFirstGate.Name = "btnCloseFirstGate";
+            this.btnCloseFirstGate.Size = new System.Drawing.Size(38, 32);
+            this.btnCloseFirstGate.TabIndex = 3;
+            this.btnCloseFirstGate.Tag = "CloseFirst";
+            this.btnCloseFirstGate.Text = "关闸";
+            this.btnCloseFirstGate.Click += new System.EventHandler(this.btnCloseFirstGate_Click);
+            // 
+            // btnOpenFirstGate
+            // 
+            this.btnOpenFirstGate.Appearance.BackColor = System.Drawing.Color.Green;
+            this.btnOpenFirstGate.Appearance.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOpenFirstGate.Appearance.Options.UseBackColor = true;
+            this.btnOpenFirstGate.Appearance.Options.UseFont = true;
+            this.btnOpenFirstGate.ImageOptions.ImageList = this.imgListLarger;
+            this.btnOpenFirstGate.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleLeft;
+            this.btnOpenFirstGate.Location = new System.Drawing.Point(5, 7);
+            this.btnOpenFirstGate.Name = "btnOpenFirstGate";
+            this.btnOpenFirstGate.Size = new System.Drawing.Size(38, 32);
+            this.btnOpenFirstGate.TabIndex = 2;
+            this.btnOpenFirstGate.Tag = "OpenFirst";
+            this.btnOpenFirstGate.Text = "开闸";
+            this.btnOpenFirstGate.Click += new System.EventHandler(this.btnOpenFirstGate_Click);
             // 
             // plDevice2
             // 
@@ -591,16 +718,16 @@
             this.stateWeightStable2.Name = "stateIndicatorComponent1";
             this.stateWeightStable2.Size = new System.Drawing.SizeF(200F, 200F);
             this.stateWeightStable2.StateIndex = 1;
-            indicatorState49.Name = "State1";
-            indicatorState49.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
-            indicatorState50.Name = "State2";
-            indicatorState50.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
-            indicatorState51.Name = "State3";
-            indicatorState51.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
+            indicatorState1.Name = "State1";
+            indicatorState1.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
+            indicatorState2.Name = "State2";
+            indicatorState2.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
+            indicatorState3.Name = "State3";
+            indicatorState3.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
             this.stateWeightStable2.States.AddRange(new DevExpress.XtraGauges.Core.Model.IIndicatorState[] {
-            indicatorState49,
-            indicatorState50,
-            indicatorState51});
+            indicatorState1,
+            indicatorState2,
+            indicatorState3});
             // 
             // gaugeControl2
             // 
@@ -627,16 +754,16 @@
             this.stateLight2.Name = "stateIndicatorComponent1";
             this.stateLight2.Size = new System.Drawing.SizeF(200F, 200F);
             this.stateLight2.StateIndex = 1;
-            indicatorState52.Name = "State1";
-            indicatorState52.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
-            indicatorState53.Name = "State2";
-            indicatorState53.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
-            indicatorState54.Name = "State3";
-            indicatorState54.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
+            indicatorState4.Name = "State1";
+            indicatorState4.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
+            indicatorState5.Name = "State2";
+            indicatorState5.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
+            indicatorState6.Name = "State3";
+            indicatorState6.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
             this.stateLight2.States.AddRange(new DevExpress.XtraGauges.Core.Model.IIndicatorState[] {
-            indicatorState52,
-            indicatorState53,
-            indicatorState54});
+            indicatorState4,
+            indicatorState5,
+            indicatorState6});
             // 
             // labelControl3
             // 
@@ -734,16 +861,16 @@
             this.stateWeightStable1.Name = "stateIndicatorComponent1";
             this.stateWeightStable1.Size = new System.Drawing.SizeF(200F, 200F);
             this.stateWeightStable1.StateIndex = 1;
-            indicatorState55.Name = "State1";
-            indicatorState55.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
-            indicatorState56.Name = "State2";
-            indicatorState56.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
-            indicatorState57.Name = "State3";
-            indicatorState57.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
+            indicatorState7.Name = "State1";
+            indicatorState7.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
+            indicatorState8.Name = "State2";
+            indicatorState8.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
+            indicatorState9.Name = "State3";
+            indicatorState9.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
             this.stateWeightStable1.States.AddRange(new DevExpress.XtraGauges.Core.Model.IIndicatorState[] {
-            indicatorState55,
-            indicatorState56,
-            indicatorState57});
+            indicatorState7,
+            indicatorState8,
+            indicatorState9});
             // 
             // gaugeDevice
             // 
@@ -770,16 +897,16 @@
             this.stateLight1.Name = "stateIndicatorComponent1";
             this.stateLight1.Size = new System.Drawing.SizeF(200F, 200F);
             this.stateLight1.StateIndex = 1;
-            indicatorState58.Name = "State1";
-            indicatorState58.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
-            indicatorState59.Name = "State2";
-            indicatorState59.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
-            indicatorState60.Name = "State3";
-            indicatorState60.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
+            indicatorState10.Name = "State1";
+            indicatorState10.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight1;
+            indicatorState11.Name = "State2";
+            indicatorState11.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight2;
+            indicatorState12.Name = "State3";
+            indicatorState12.ShapeType = DevExpress.XtraGauges.Core.Model.StateIndicatorShapeType.ElectricLight4;
             this.stateLight1.States.AddRange(new DevExpress.XtraGauges.Core.Model.IIndicatorState[] {
-            indicatorState58,
-            indicatorState59,
-            indicatorState60});
+            indicatorState10,
+            indicatorState11,
+            indicatorState12});
             // 
             // lblWeightType
             // 
@@ -877,26 +1004,6 @@
             this.splitContainerControl1.SplitterPosition = 389;
             this.splitContainerControl1.TabIndex = 53;
             // 
-            // splitContainerControl2
-            // 
-            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl2.Horizontal = false;
-            this.splitContainerControl2.Location = new System.Drawing.Point(2, 2);
-            this.splitContainerControl2.Name = "splitContainerControl2";
-            // 
-            // splitContainerControl2.Panel1
-            // 
-            this.splitContainerControl2.Panel1.Controls.Add(this.gpQuickAction);
-            this.splitContainerControl2.Panel1.Text = "Panel1";
-            // 
-            // splitContainerControl2.Panel2
-            // 
-            this.splitContainerControl2.Panel2.Controls.Add(this.gpLog);
-            this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(256, 381);
-            this.splitContainerControl2.SplitterPosition = 125;
-            this.splitContainerControl2.TabIndex = 41;
-            // 
             // FrmWeight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -921,16 +1028,28 @@
             this.plMainWeight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).EndInit();
+            this.splitContainerControl2.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel2)).EndInit();
+            this.splitContainerControl2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
+            this.splitContainerControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpQuickAction)).EndInit();
             this.gpQuickAction.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plLeft)).EndInit();
             this.plLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpWeight)).EndInit();
             this.gpWeight.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceAction)).EndInit();
-            this.gpDeviceAction.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gpLight2)).EndInit();
+            this.gpLight2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceGate2)).EndInit();
+            this.gpDeviceGate2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gpLight1)).EndInit();
+            this.gpLight1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gpDeviceGate1)).EndInit();
+            this.gpDeviceGate1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.plDevice2)).EndInit();
             this.plDevice2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -953,12 +1072,6 @@
             this.splitContainerControl1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).EndInit();
-            this.splitContainerControl2.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel2)).EndInit();
-            this.splitContainerControl2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
-            this.splitContainerControl2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         } 
@@ -999,9 +1112,7 @@
         private Uc.MainWeightList searchList;
         private DevExpress.XtraEditors.GroupControl gpLog;
         private DevExpress.XtraEditors.MemoEdit memLog;
-        private DevExpress.XtraEditors.GroupControl gpDeviceAction;
-        private DevExpress.XtraEditors.SimpleButton btnLightFirstGroup;
-        private DevExpress.XtraEditors.SimpleButton btnLightSecondGroup;
+        private DevExpress.XtraEditors.GroupControl gpDeviceGate1;
         private DevExpress.XtraEditors.SimpleButton btnCloseFirstGate;
         private DevExpress.XtraEditors.SimpleButton btnOpenSecondGate;
         private DevExpress.XtraEditors.SimpleButton btnOpenFirstGate;
@@ -1024,5 +1135,12 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
+        private DevExpress.XtraEditors.GroupControl gpDeviceGate2;
+        private DevExpress.XtraEditors.GroupControl gpLight2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
+        private DevExpress.XtraEditors.GroupControl gpLight1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
     }
 }

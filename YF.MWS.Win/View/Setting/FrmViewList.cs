@@ -15,15 +15,16 @@ using YF.MWS.Db;
 using YF.MWS.Metadata;
 using YF.MWS.Metadata.Query;
 using YF.MWS.SQliteService;
-using YF.MWS.Win.Util;
 using YF.MWS.Win.View.UI;
 using YF.Utility;
 using YF.MWS.Metadata.Dto;
 using YF.MWS.Win.Uc;
 using YF.Utility.Log;
 using YF.MWS.SQliteService.Remote;
+using YF.MWS.Win.View.Master;
+using DevExpress.XtraEditors.Repository;
 
-namespace YF.MWS.Win.View.Master
+namespace YF.MWS.Win.View
 {
     public partial class FrmViewList : BaseForm
     {
@@ -41,8 +42,11 @@ namespace YF.MWS.Win.View.Master
             InitializeComponent();
         }
 
-        private void FrmViewList_Load(object sender, EventArgs e)
-        {
+        private void FrmViewList_Load(object sender, EventArgs e) {
+            repositoryItemCheckEdit1.ValueChecked = 1;
+            repositoryItemCheckEdit1.ValueUnchecked = 0;
+            repositoryItemCheckEdit2.ValueChecked = 1;
+            repositoryItemCheckEdit2.ValueUnchecked = 3;
             BindData();
         }
 
@@ -303,22 +307,22 @@ namespace YF.MWS.Win.View.Master
         }
 
         private void gvViewDetail_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e) {
-            if (e.Column.FieldName == "Show1" || e.Column.FieldName == "Show2") {
-                switch(e.DisplayText) {
-                    case "0":
-                        e.DisplayText = "否";
-                        break;
-                    case "1":
-                        e.DisplayText = "是";
-                        break;
-                }
-            }
-            if (e.Column.FieldName == "RowState") {
-                if (e.Value.ToInt() == 3) {
-                    e.DisplayText = "隐藏";
-                } else {
-                    e.DisplayText = "显示";
-                }
+        }
+
+        private void gvViewDetail_CellValueChanged(object sender, CellValueChangedEventArgs e) {
+            SWeightViewDtl dtl = (SWeightViewDtl)gvViewDetail.GetRow(e.RowHandle);
+            if (e.Column.FieldName == "Show2") {
+                dtl.Show2 = e.Value.ToInt();
+                viewService.saveWeightViewDtlShow2(dtl);
+            } else if (e.Column.FieldName=="RowState") {
+                dtl.RowState = e.Value.ToInt();
+                viewService.saveWeightViewDtlRowState(dtl);
+            }else if (e.Column.FieldName=="ColIndex") {
+                dtl.ColIndex = e.Value.ToInt();
+                viewService.saveWeightViewDtlColIndex(dtl);
+            }else if (e.Column.FieldName=="RowIndex") {
+                dtl.RowIndex = e.Value.ToInt();
+                viewService.saveWeightViewDtlRowIndex(dtl);
             }
         }
     }

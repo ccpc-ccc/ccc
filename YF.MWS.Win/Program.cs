@@ -37,15 +37,16 @@ namespace YF.MWS.Win
     static class Program
     {
         public delegate void MyDelegate(int number);
-        private static bool hasRegistered = false;
         private static bool isExpired = false;
+        private static DateTime expireDate = DateTime.Now;//加密狗过期时间
         //private static string PID = "ADDB5E67";
         private static string KeyPath;
         private static bool hasShowDialog = false;
         private static bool startBackupDb = false;
         private static bool expiredOnLine = false;
         private static bool hasRequested = false;
-        private static string videoAppName = "磅房视频";
+        private static string _readL = "BE56E057";
+        private static string _readH = "F20F883E";
         public static SClient SClient { get; private set; }
         /// <summary>
         /// 加密狗PID
@@ -121,7 +122,7 @@ namespace YF.MWS.Win
                 masterService = new MasterService();
                 SplashScreenManager.ShowForm(typeof(FrmSplashScreen), true, true);
                 bool isConnected = false;
-                InitRegisterMode();
+                //InitRegisterMode();
                 isConnected = CheckDbConfig();
                 if (!isConnected)
                 {
@@ -134,7 +135,6 @@ namespace YF.MWS.Win
                     using (FrmRegister frmRegister = new FrmRegister()) {
                         frmRegister.IsExpired = isExpired;
                         if (frmRegister.ShowDialog() == DialogResult.OK) {
-                            hasRegistered = true;
                             isExpired = frmRegister.IsExpired;
                             InitApplication();
                         }
@@ -208,120 +208,31 @@ namespace YF.MWS.Win
             }
         }
 
-        private static void InitClient(IClientService clientService, SWeightView view)
-        {
-            SysCfg cfg = CfgUtil.GetCfg();
-            WebWeightService.ServerUrl= AppSetting.GetValue("EcsServer");
-            AppRunVersion runVersion = AppRunVersion.Corp;
-            if (cfg != null) 
-            {
-                if(cfg.Video != null)
-                    videoAppName = cfg.Video.VideoAppName;
-                if(cfg.Weight != null)
-                    startBackupDb = cfg.Weight.StartBackupDb;
-                if (cfg.Launch != null)
-                    runVersion = cfg.Launch.RunVersion;
-                if(cfg.Transfer != null&&cfg.Transfer.isOpen) {
-                    ReturnEntity client = WebWeightService.Login(cfg.Transfer.CompanyCode,cfg.Transfer.MachineCode,cfg.Transfer.RegisterCode);
-                    if (client != null) WebWeightService.Token = client.Token;
-                }
-            }
-            CurrentClient.Instance.VersionCode = AppSetting.GetValue("versionCode").ToEnum<VersionCodeType>();
-            CurrentClient.Instance.CurrentVersion = AppSetting.GetValue("version").ToEnum<VersionType>();
-            CurrentClient.Instance.CompanyName = AppSetting.GetValue("corpName");
-            CfgUtil.SetAppRunVersion(runVersion);
-            if (view != null)
-            {
-                CurrentClient.Instance.ViewId = view.Id;
-                CurrentClient.Instance.SubjectId = view.SubjectId;
-            }
-        }
 
-        private static bool ValidateSoftWithSoftdogOnly(IClientService clientService,SClient client) 
+        private static bool ValidateSoftWithSoftdogOnly() 
         {
-            bool isValidated = false;
             //初始化我们的操作加密锁的类
             et99 = new SoftKeyPWD();
+            string outstring = "";
             //这个用于判断系统中是否存在着加密锁。不需要是指定的加密锁,
             if (et99.FindPort(0, ref KeyPath) != 0)
             {
-                //MessageBox.Show("未找到加密锁,请插入加密锁后，再进行操作。");
-                //Application.Exit();
                 return false;
             }
-           /* string pid = PID;
-            bool isSuccess = et99.FindDevice(pid);
-            if (isSuccess)
-            {
-                isSuccess = et99.OpenDevice(pid, 1);
-                if (isSuccess)
-                {
-                    isSuccess = et99.VerifyUser("ffffffffffffffff", YF.Utility.Metadata.ET99Role.SuperUser);
-                    if (isSuccess)
-                    {
-                        string version = et99.ReadData(0, 8);
-                        CurrentClient.Instance.VersionFunc = version;
-                        string lastUsedDate;
-                        int usedTimes=1;
-                        hasRegistered = true;
-                        lastUsedDate = Encrypt.DecryptDES(et99.ReadData(8, 24), CurrentClient.Instance.EncryptKey);
-                        string expiredDate = Encrypt.DecryptDES(et99.ReadData(32, 24), CurrentClient.Instance.EncryptKey);
-                        if (YF.MWS.Util.Utility.CompareDate(expiredDate, lastUsedDate) ==1)
-                        {
-                            isExpired = true;
-                        }
-                        usedTimes = Encrypt.DecryptDES(et99.ReadData(56, 12), CurrentClient.Instance.EncryptKey).ToInt();
-                        int totalTimes = Encrypt.DecryptDES(et99.ReadData(68, 12), CurrentClient.Instance.EncryptKey).ToInt();
-                        string oldSN = et99.ReadData(80, 16);
-                        string sn = et99.GetSN();
-                        oldSN = oldSN.Replace("?", "");
-                        if (!string.IsNullOrEmpty(oldSN) &&!string.IsNullOrEmpty(sn) &&sn != oldSN) 
-                        {
-                            isExpired = true;
-                        }
-                        if (usedTimes > totalTimes)
-                        {
-                            isExpired = true;
-                        }
-                        int currentDate = DateTime.Now.ToString("yyyyMMdd").ToInt();
-                        if (currentDate > lastUsedDate.ToInt())
-                        {
-                            lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
-                            usedTimes += 1;
-                        }
-                        et99.WriteData(Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey), 8);
-                        et99.WriteData(Encrypt.EncryptDES(usedTimes.ToString(), CurrentClient.Instance.EncryptKey), 56);
-                        et99PID = pid;
-                        Logger.Info(string.Format("lastUsedDate:{0};expiredDate:{1};usedTimes:{2};totalTimes:{3};oldSN:{4};sn:{5}", 
-                                            lastUsedDate, expiredDate, usedTimes, totalTimes,oldSN,sn));
-                        
-                        isValidated = true;
-                    }
-                }
+            int ret = et99.YReadString(ref outstring, 0, 56, _readH, _readL, KeyPath);
+            if (ret != 0) return false;
+            if (outstring.Length != 56)  return false;
+            string auth = outstring.Substring(0, 8);
+            string date = outstring.Substring(32, 24);
+            date = Encrypt.DecryptDES(date, CurrentClient.Instance.EncryptKey);
+            DateTime now = DateTime.Now.ToString("yyyyMMdd").ToDate("yyyyMMdd");
+            expireDate = date.ToDate("yyyyMMdd");
+            if ((expireDate - now).Days < 0) {
+                MessageBox.Show("加密狗无效，请联系供货商");
+                return false;
             }
-            */if (isValidated) 
-            {
-                CurrentClient.Instance.RegType = RegisterMode.SoftdogOnly;
-                if (CurrentClient.Instance.CurrentVersion == VersionType.Probation)
-                {
-                    AppConfigUtil.SetConfigValue("version", VersionType.Official.ToString());
-                }
-                CurrentClient.Instance.CurrentVersion = VersionType.Official;
-            }
-            if (isValidated) 
-            {
-                AuthCfg cfg = CfgUtil.GetAuthFromVersion(CurrentClient.Instance.VersionFunc,new AuthCfg());
-                string authCode = CfgUtil.GetAuthCode(cfg);
-                if (client == null)
-                {
-                    clientService.Add(CurrentClient.Instance.MachineCode, authCode);
-                }
-                else 
-                {
-                    //clientService.UpdateAuthCode(CurrentClient.Instance.MachineCode, authCode);
-                }
-            }
-            return isValidated;
+            CurrentClient.Instance.AutoCfg = Encrypt.EncryptDES(auth, CurrentClient.Instance.EncryptKey);
+            return true;
         }
         /// <summary>
         /// 软件验证
@@ -339,7 +250,6 @@ namespace YF.MWS.Win
                         backDir = cfg.Weight.BackupDir;
                     }
                 }
-                hasRegistered = false;
                 isExpired = false;
                 IClientService clientService = new ClientService();
                 IWeightViewService viewService = new WeightViewService();
@@ -347,20 +257,27 @@ namespace YF.MWS.Win
                 SWeightView view = viewService.GetDefaultView(ViewType.Weight);
                 string machineCode = SoftValidator.GetMachineCode();
                 CurrentClient.Instance.MachineCode = machineCode;
-                SClient = clientService.RegisterProbation(machineCode,"","");
+                string use = AppSetting.GetValue("use");
+                string autoCode = "10011111";
+                if (use == "all") {
+                    autoCode = "11111111";
+                }
+                SClient = clientService.RegisterProbation(machineCode,"CS智能称重客户端", autoCode);
                 if (SClient != null)
                 {
+                //string autoCfg = Encrypt.DecryptDES(SClient.AuthCode, CurrentClient.Instance.EncryptKey);
                     CurrentUser.Instance.ClientId = SClient.Id;
                     CurrentUser.Instance.ClientName = SClient.ClientName;
                     CurrentClient.Instance.VerifyCode = SClient.VerifyCode;
+                    CurrentClient.Instance.AutoCfg = SClient.AuthCode;
                 }
-                InitClient(clientService, view);
                 bool isValidated = false;
-                PlcUtil.InitCfg(SClient);
                 //优先验证无文件类型的加密狗
-                isValidated = ValidateSoftWithSoftdogOnly(clientService, SClient);
+                isValidated = ValidateSoftWithSoftdogOnly();
                 if (isValidated) {
-                    hasRegistered = true;
+                    CurrentClient.Instance.CurrentVersion = VersionType.Official;
+                    CurrentClient.Instance.RegType = RegisterMode.Softdog;
+                    SClient.RegisterType = "softdog";
                     timerApp = new System.Windows.Forms.Timer();
                     timerApp.Interval = 10000;
                     timerApp.Tick += timerApp_Tick;
@@ -368,12 +285,20 @@ namespace YF.MWS.Win
                 } else {
                     int days= ResidueDays();
                     isExpired = true;
+                    CurrentClient.Instance.ResidualDays = days;
                     if (days < 0) return false;
                 if (SClient.RegisterType == "none") {
-                    SClient.AuthCode= AppSetting.GetValue("use");
-                    hasRegistered = false;
+                        CurrentClient.Instance.CurrentVersion = VersionType.Probation;
                     MessageBox.Show($"当前使用的为试用版，剩余{days}天后到期，请尽快联系代理商家注册");
-                }
+                    } else {
+                        CurrentClient.Instance.CurrentVersion = VersionType.Official;
+                        if (SClient.RegisterType == "file") {
+                            CurrentClient.Instance.RegType = RegisterMode.File;
+                        } else {
+                            CurrentClient.Instance.RegType = RegisterMode.Softdog;
+                        }
+                    }
+                    WebWeightService.ServerUrl = AppSetting.GetValue("EcsServer");
                 }
                 return true;
             }
@@ -388,29 +313,24 @@ namespace YF.MWS.Win
             DateTime expire = Encrypt.DecryptDES(SClient.ExpireCode, CurrentClient.Instance.EncryptKey).ToDate("yyyyMMdd");
             return (expire - date).Days;
         }
-        /// <summary>
-        /// 检测加密狗连接电脑状态
-        /// </summary>
-        private static void CheckSoftdogConnectState() 
-        {
-            /*if (CurrentClient.Instance.CurrentVersion == VersionType.Official && CurrentClient.Instance.RegType!= RegisterMode.File) 
-            {
-                bool isSuccess = et99.FindDevice(et99PID);
-                if (!isSuccess)
-                {
-                    if (!hasShowDialog)
-                    {
-                        hasShowDialog = true;
-                        MessageDxUtil.ShowTips("没有检测到加密狗设备，请检查！");
-                        Application.Exit();
+
+        private static void timerApp_Tick(object sender, EventArgs e) {
+            if (CurrentClient.Instance.CurrentVersion == VersionType.Official && CurrentClient.Instance.RegType != RegisterMode.File) {
+                if (et99.FindPort(0, ref KeyPath) != 0) {
+                    timerApp.Stop();
+                    MessageDxUtil.ShowTips("没有检测到加密狗设备，请检查！");
+                    Application.Exit();
+                } else {
+                    if (DateTime.Now.Hour > 8 && DateTime.Now.Hour < 20) {
+                        DateTime now = DateTime.Now.ToString("yyyyMMdd").ToDate("yyyyMMdd");
+                        if ((expireDate - now).Days < 0) {
+                            timerApp.Stop();
+                            MessageBox.Show("加密狗无效，请联系供货商");
+                            Application.Exit();
+                        }
                     }
                 }
-            }*/
-        }
-
-        private static void timerApp_Tick(object sender, EventArgs e)
-        {
-            CheckSoftdogConnectState();
+            }
         }
 
         public static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
@@ -437,8 +357,6 @@ namespace YF.MWS.Win
             {
                 if (masterService != null && startBackupDb)
                     masterService.DataBackup(backDir);
-                string processName = "MWS.Video";
-                ProcessUtil.KillProcess(processName, videoAppName);
                 if (et99 != null)
                 {
                     //关闭加密狗设备

@@ -885,7 +885,7 @@
             this.barItemPayCfg.ImageOptions.ImageUri.Uri = "outlook%20inspired/employeetasklist";
             this.barItemPayCfg.Name = "barItemPayCfg";
             this.barItemPayCfg.SearchTags = "p4_3";
-            this.barItemPayCfg.Tag = "Master.FrmViewList";
+            this.barItemPayCfg.Tag = "FrmViewList";
             // 
             // barItemSoftware
             // 

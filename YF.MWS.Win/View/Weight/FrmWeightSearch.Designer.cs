@@ -44,6 +44,7 @@
             this.barItemInvaild = new DevExpress.XtraBars.BarButtonItem();
             this.barItemRecover = new DevExpress.XtraBars.BarButtonItem();
             this.barItemExport = new DevExpress.XtraBars.BarButtonItem();
+            this.barItemImport = new DevExpress.XtraBars.BarButtonItem();
             this.barItemPreviewWeight = new DevExpress.XtraBars.BarButtonItem();
             this.barItemRePrintWeight = new DevExpress.XtraBars.BarButtonItem();
             this.barSubItemPrint = new DevExpress.XtraBars.BarSubItem();
@@ -53,7 +54,6 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
-            this.barItemImport = new DevExpress.XtraBars.BarButtonItem();
             this.barItemBatchPrint = new DevExpress.XtraBars.BarButtonItem();
             this.barItemExportWithGv = new DevExpress.XtraBars.BarButtonItem();
             this.gpSearchCondition = new DevExpress.XtraEditors.GroupControl();
@@ -75,6 +75,9 @@
             this.rgRecordType = new DevExpress.XtraEditors.RadioGroup();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
             this.gpSearchResult = new DevExpress.XtraEditors.GroupControl();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.lbTotalMoney = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.lbTotalSuttleWeight = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -85,9 +88,6 @@
             this.ucPage = new YF.MWS.Win.Uc.UcPage();
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
             this.ofdFileImport = new System.Windows.Forms.OpenFileDialog();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.lbTotalMoney = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchCondition)).BeginInit();
@@ -107,14 +107,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgRecordType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchResult)).BeginInit();
             this.gpSearchResult.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager
@@ -220,7 +220,7 @@
             // 
             // barItemModify
             // 
-            this.barItemModify.Caption = "结算";
+            this.barItemModify.Caption = "修改";
             this.barItemModify.Id = 19;
             this.barItemModify.ImageOptions.ImageIndex = 13;
             this.barItemModify.Name = "barItemModify";
@@ -257,6 +257,16 @@
             this.barItemExport.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.barItemExport.Tag = "Export";
             this.barItemExport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemExport_ItemClick);
+            // 
+            // barItemImport
+            // 
+            this.barItemImport.Caption = "导入";
+            this.barItemImport.Id = 14;
+            this.barItemImport.ImageOptions.ImageIndex = 15;
+            this.barItemImport.Name = "barItemImport";
+            this.barItemImport.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barItemImport.Tag = "Import";
+            this.barItemImport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemImport_ItemClick);
             // 
             // barItemPreviewWeight
             // 
@@ -351,16 +361,6 @@
             this.imgListSmall.Images.SetKeyName(16, "export_16x16.png");
             this.imgListSmall.Images.SetKeyName(17, "add_16x16.png");
             this.imgListSmall.Images.SetKeyName(18, "search_16x16.png");
-            // 
-            // barItemImport
-            // 
-            this.barItemImport.Caption = "导入";
-            this.barItemImport.Id = 14;
-            this.barItemImport.ImageOptions.ImageIndex = 15;
-            this.barItemImport.Name = "barItemImport";
-            this.barItemImport.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barItemImport.Tag = "Import";
-            this.barItemImport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemImport_ItemClick);
             // 
             // barItemBatchPrint
             // 
@@ -610,6 +610,32 @@
             this.gpSearchResult.TabIndex = 6;
             this.gpSearchResult.Text = "查询结果";
             // 
+            // panelControl2
+            // 
+            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelControl2.Controls.Add(this.lbTotalMoney);
+            this.panelControl2.Controls.Add(this.labelControl6);
+            this.panelControl2.Location = new System.Drawing.Point(623, 738);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(201, 29);
+            this.panelControl2.TabIndex = 15;
+            // 
+            // lbTotalMoney
+            // 
+            this.lbTotalMoney.Location = new System.Drawing.Point(52, 8);
+            this.lbTotalMoney.Name = "lbTotalMoney";
+            this.lbTotalMoney.Size = new System.Drawing.Size(12, 14);
+            this.lbTotalMoney.TabIndex = 0;
+            this.lbTotalMoney.Text = "   ";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Location = new System.Drawing.Point(5, 6);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(48, 14);
+            this.labelControl6.TabIndex = 0;
+            this.labelControl6.Text = "总金额：";
+            // 
             // panelControl1
             // 
             this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -693,32 +719,6 @@
             // 
             this.sfdFileSave.Filter = "Excel 文件|*.xls";
             // 
-            // panelControl2
-            // 
-            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelControl2.Controls.Add(this.lbTotalMoney);
-            this.panelControl2.Controls.Add(this.labelControl6);
-            this.panelControl2.Location = new System.Drawing.Point(623, 738);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(201, 29);
-            this.panelControl2.TabIndex = 15;
-            // 
-            // lbTotalMoney
-            // 
-            this.lbTotalMoney.Location = new System.Drawing.Point(52, 8);
-            this.lbTotalMoney.Name = "lbTotalMoney";
-            this.lbTotalMoney.Size = new System.Drawing.Size(12, 14);
-            this.lbTotalMoney.TabIndex = 0;
-            this.lbTotalMoney.Text = "   ";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Location = new System.Drawing.Point(5, 6);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(48, 14);
-            this.labelControl6.TabIndex = 0;
-            this.labelControl6.Text = "总金额：";
-            // 
             // FrmWeightSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -758,6 +758,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgRecordType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchResult)).EndInit();
             this.gpSearchResult.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
@@ -765,9 +768,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

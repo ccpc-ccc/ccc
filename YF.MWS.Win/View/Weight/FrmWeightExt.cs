@@ -187,7 +187,7 @@ namespace YF.MWS.Win.View.Weight
             return isCanRest;
         }
 
-        private bool CanPrint(BWeight weight) 
+        public bool CanPrint(BWeight weight) 
         {
             bool canPrint = true;
             if (startPrintCountLimit && weight != null && weight.PrintCount >= maxPrintCount)

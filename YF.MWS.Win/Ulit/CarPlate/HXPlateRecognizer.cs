@@ -239,7 +239,14 @@ namespace YF.MWS.Win.Util.CarPlate
                 Logger.WriteException(ex);
             }
         }
-
+        public bool CloseGate() {
+            if(ptrSDK == IntPtr.Zero) return false;
+            return HXSDK.ICE_IPCSDK_ControlAlarmOut(ptrSDK,1)>0;
+        }
+        public bool OpenGate() {
+            if(ptrSDK == IntPtr.Zero) return false;
+            return HXSDK.ICE_IPCSDK_ControlAlarmOut(ptrSDK,2)>0;
+        }
         public void Release() 
         {
             try

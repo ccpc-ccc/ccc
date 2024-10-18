@@ -29,6 +29,7 @@ namespace YF.MWS.Client.DataService.Interface
         /// 获取所有的字段列表
         /// </summary>
         List<SWeightViewDtl> GetAllDetailList(string viewId);
+        List<SWeightViewDtl> GetAllShowDetailList(string viewId);
         /// <summary>
         /// 获取正常显示的字段列表
         /// </summary>
@@ -50,5 +51,9 @@ namespace YF.MWS.Client.DataService.Interface
         /// 保存界面设置
         /// </summary>
         bool saveWeightView(SWeightView sWeight, List<SWeightViewDtl> dtls);
+        void saveWeightViewDtlShow2(SWeightViewDtl dtl);
+        void saveWeightViewDtlRowState(SWeightViewDtl dtl);
+        void saveWeightViewDtlColIndex(SWeightViewDtl dtl);
+        void saveWeightViewDtlRowIndex(SWeightViewDtl dtl);
     }
 }

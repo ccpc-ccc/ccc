@@ -19,7 +19,7 @@ using YF.MWS.BaseMetadata;
 using System.Threading.Tasks;
 using YF.MWS.CacheService;
 
-namespace YF.MWS.Win.View.Master
+namespace YF.MWS.Win.View
 {
     public partial class FrmViewShow : BaseForm
     {

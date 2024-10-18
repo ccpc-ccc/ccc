@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace YF.MWS.Db
     /// Author:yafyr
     /// Date:2014-11-11
     /// </summary>
+    [SugarTable("S_WeightViewDtl")]
     public class SWeightViewDtl : BaseEntity
     {
         public virtual string ViewId { get; set; }
@@ -70,6 +72,14 @@ namespace YF.MWS.Db
         /// 默认值
         /// </summary>
         public virtual string t1 { get; set; }
+        /// <summary>
+        /// 列序号
+        /// </summary>
+        public virtual int ColIndex { get; set; }
+        /// <summary>
+        /// 行序号
+        /// </summary>
+        public virtual int RowIndex { get; set; }
         public override string ToString()
         {
             return ControlName;

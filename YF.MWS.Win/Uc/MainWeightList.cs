@@ -30,6 +30,7 @@ using YF.MWS.Win.View.UI;
 using DevExpress.Data;
 using DevExpress.XtraGrid;
 using DevExpress.XtraExport.Helpers;
+using YF.MWS.Win.View.Extend;
 
 namespace YF.MWS.Win.Uc
 {
@@ -59,7 +60,7 @@ namespace YF.MWS.Win.Uc
         /// 是否显示治超模式
         /// </summary>
         public bool ShowOverWeightMode { get; set; }
-
+        public FrmWeight frmWeight { get; set; }
         public IWeightService WeightService
         {
             get { return weightService; }
@@ -231,6 +232,10 @@ namespace YF.MWS.Win.Uc
                 result = new WeightQueryResult();
             gvWeight.Columns.Clear();
             gcWeight.DataSource = result.Weight;
+            if (File.Exists(layoutXmlPath))
+            {
+                gvWeight.RestoreLayoutFromXml(layoutXmlPath);
+            }
 
             if (chkWeight == null)
                 chkWeight = new GridCheckMarksSelection(gvWeight);
@@ -259,6 +264,24 @@ namespace YF.MWS.Win.Uc
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
                 //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
+            fieldName = "GrossWeight";
+            if (DxHelper.ContainsField(gvWeight, fieldName))
+            {
+                gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+            }
+            fieldName = "TareWeight";
+            if (DxHelper.ContainsField(gvWeight, fieldName))
+            {
+                gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+            }
+            fieldName = "SuttleWeight";
+            if (DxHelper.ContainsField(gvWeight, fieldName))
+            {
+                gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+            }
             //gvWeight.GridControl.ForceInitialize();
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
@@ -266,51 +289,6 @@ namespace YF.MWS.Win.Uc
             //gvWeight.OptionsView.ColumnAutoWidth = true;
             gvWeight.BestFitColumns();
             gvWeight.FocusedRowHandle = -1;
-            if (File.Exists(layoutXmlPath))
-            {
-                gvWeight.RestoreLayoutFromXml(layoutXmlPath);
-            }
-            /* gvWeight.OptionsView.ShowFooter = true;
-             gvWeight.Columns.ColumnByFieldName("GrossWeight").SummaryItem.SummaryType = SummaryItemType.Custom;
-             gvWeight.CustomSummaryCalculate += (c, e) => {
-                 if (e.Item != null && (e.Item as SummaryItem) != null) {
-                     GridSummaryItem item =e.Item as GridSummaryItem;
-                     if (item.FieldName == "GrossWeight") {
-                         if (e.SummaryProcess == CustomSummaryProcess.Finalize) {
-                             e.TotalValue = 1200;
-                         }
-                     }
-                 }
-                 //e.IsTotalSummary
-             };*/
-            getTotal();
-            gvWeight.OptionsView.ShowFooter = false;
-        }
-        private void getTotal() {
-            decimal total = 0;
-            decimal totalMoney = 0;
-            for (int i = 0; i < gvWeight.RowCount; i++) {
-                DataRow row = gvWeight.GetDataRow(i);
-                if(row.Table.isColumns(new string[]{ "UnitMoney", "d2", "SuttleWeight", "WarehBizType" })) {
-                if (row["WarehBizType"].ToString() == "入库"){
-                    if (row["d2"].ToDecimal() == 0) {
-                        total += row["SuttleWeight"].ToDecimal();
-                    } else {
-                        total += row["d2"].ToDecimal();
-                    }
-                        totalMoney += row["UnitMoney"].ToDecimal();
-                } else if(row["WarehBizType"].ToString() == "出库") {
-                    if (row["d2"].ToDecimal() == 0) {
-                        total -= row["SuttleWeight"].ToDecimal();
-                    } else {
-                        total -= row["d2"].ToDecimal();
-                    }
-                        totalMoney -= row["UnitMoney"].ToDecimal();
-                }
-                }
-                lbTotalSuttleWeight.Text = total.ToString();
-                lbTotalMoney.Text = totalMoney.ToString();
-            }
         }
         private void MainWeightList_Load(object sender, EventArgs e)
         {
@@ -325,6 +303,7 @@ namespace YF.MWS.Win.Uc
             }
             //ActiveControl = btnSearch;
             AddEvent();
+            gcWeight.ContextMenuStrip = this.contextMenuStrip2;
         }
 
         private void AddEvent()
@@ -459,6 +438,60 @@ namespace YF.MWS.Win.Uc
             if(frm.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 LoadData();
                 gcWeight.Refresh();
+            }
+        }
+
+        private void 补录ToolStripMenuItem_Click(object sender, EventArgs e) {
+            using (FrmWeightDetail frmDetail = new FrmWeightDetail()) {
+                if (frmDetail.ShowDialog() == DialogResult.OK) {
+                    this.Search();
+                }
+            }
+        }
+
+        private void 修改ToolStripMenuItem_Click(object sender, EventArgs e) {
+            DataRow listWeight = gvWeight.GetFocusedDataRow();
+            if (listWeight == null) {
+                MessageDxUtil.ShowError("请选择数据");
+                return;
+            }
+            using (FrmWeightDetail frmDetail = new FrmWeightDetail()) {
+                frmDetail.RecId = listWeight["Id"].ToObjectString();
+                if (frmDetail.ShowDialog() == DialogResult.OK) {
+                    Search();
+                }
+            }
+        }
+
+        private void 作废ToolStripMenuItem_Click(object sender, EventArgs e) {
+            DataRow row = gvWeight.GetFocusedDataRow();
+            if (row == null) {
+                MessageDxUtil.ShowWarning("请选择要作废的磅单！");
+            } else {
+                string weightId;
+                string weightNo = string.Empty;
+                    weightId = row["Id"].ToObjectString();
+                    weightNo = row["WeightNo"].ToObjectString();
+                    bool isUpdated = weightService.UpdateWeight(weightId, RowState.Delete);
+                    if (isUpdated) {
+                    string desc = string.Format("作废磅单号:{0}", weightNo);
+                        logService.Add(LogActionType.Weight, weightId, weightNo, desc);
+                    }
+                MessageDxUtil.ShowTips("磅单作废成功!");
+                Search();
+            }
+        }
+
+        private void 打印ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (this.frmWeight == null) return;
+            if (string.IsNullOrEmpty(this.CurrentWeightId)) {
+                MessageDxUtil.ShowWarning("请选择要打印的磅单");
+                return;
+            }
+            BWeight weight = weightService.Get(this.CurrentWeightId);
+            bool canPrint = frmWeight.CanPrint(weight);
+            if (canPrint) {
+                frmWeight.Print(this.CurrentWeightId);
             }
         }
     }

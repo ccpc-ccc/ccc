@@ -127,16 +127,7 @@ namespace YF.MWS.Win {
                         AuthCfg cfg = Encrypt.DecryptDES(lines[3], CurrentClient.Instance.EncryptKey).JsonDeserialize<AuthCfg>();
                         string authCode = CfgUtil.GetAuthCode(cfg);
                         isRegistered = clientService.Register(teClientName.Text, txtMachineCode.Text, lines[0], lines[1], lines[2], verifyCode, authCode);
-                        if (isRegistered) {
-                            WriteAuthCfg(lines[3], verifyCode);
-                            SClient client = clientService.Get(machineCode);
-                            if (client != null) {
-                                client.ExpireDate = DateTime.Now.AddDays(7);
-                                webClientService.Save(client);
-                            }
-                            isExpired = false;
-                        }
-                            MessageDxUtil.ShowTips("恭喜您:软件注册成功.");
+                         MessageDxUtil.ShowTips("恭喜您:软件注册成功.");
                     } else {
                             lblNote.Text = "软件注册失败,请联系软件销售商.";
                         lblNote.Text += "\r\n"+AppSetting.GetValue("note");

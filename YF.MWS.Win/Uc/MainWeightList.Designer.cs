@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWeightList));
             this.pcHeader = new DevExpress.XtraEditors.PanelControl();
             this.txtCar = new DevExpress.XtraEditors.TextEdit();
@@ -41,29 +42,25 @@
             this.lblRange = new DevExpress.XtraEditors.LabelControl();
             this.combFinishState = new DevExpress.XtraEditors.ComboBoxEdit();
             this.teStartDate = new DevExpress.XtraEditors.TimeEdit();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.lbTotalSuttleWeight = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.lbTotalMoney = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.补录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.combFinishState.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pcHeader
@@ -77,7 +74,7 @@
             // txtCar
             // 
             this.txtCar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCar.Location = new System.Drawing.Point(694, 13);
+            this.txtCar.Location = new System.Drawing.Point(397, 10);
             this.txtCar.Name = "txtCar";
             this.txtCar.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCar.Properties.Appearance.Options.UseFont = true;
@@ -90,7 +87,7 @@
             this.btnViewPhoto.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnViewPhoto.Appearance.Options.UseFont = true;
             this.btnViewPhoto.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.photo_16x16;
-            this.btnViewPhoto.Location = new System.Drawing.Point(1237, 8);
+            this.btnViewPhoto.Location = new System.Drawing.Point(1237, 2);
             this.btnViewPhoto.Name = "btnViewPhoto";
             this.btnViewPhoto.Size = new System.Drawing.Size(91, 25);
             this.btnViewPhoto.TabIndex = 95;
@@ -102,7 +99,7 @@
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(652, 16);
+            this.labelControl1.Location = new System.Drawing.Point(355, 13);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(36, 12);
             this.labelControl1.TabIndex = 93;
@@ -113,7 +110,7 @@
             this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTitle.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitle.Appearance.Options.UseFont = true;
-            this.lblTitle.Location = new System.Drawing.Point(302, 16);
+            this.lblTitle.Location = new System.Drawing.Point(5, 13);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(48, 12);
             this.lblTitle.TabIndex = 93;
@@ -125,7 +122,7 @@
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(1336, 8);
+            this.simpleButton1.Location = new System.Drawing.Point(1336, 2);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 25);
             this.simpleButton1.TabIndex = 90;
@@ -138,7 +135,7 @@
             this.btnExportExcel.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportExcel.Appearance.Options.UseFont = true;
             this.btnExportExcel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
-            this.btnExportExcel.Location = new System.Drawing.Point(931, 10);
+            this.btnExportExcel.Location = new System.Drawing.Point(634, 7);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 25);
             this.btnExportExcel.TabIndex = 90;
@@ -151,7 +148,7 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
-            this.btnSearch.Location = new System.Drawing.Point(833, 10);
+            this.btnSearch.Location = new System.Drawing.Point(536, 7);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 25);
             this.btnSearch.TabIndex = 89;
@@ -162,7 +159,7 @@
             // 
             this.teEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teEndDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teEndDate.Location = new System.Drawing.Point(471, 12);
+            this.teEndDate.Location = new System.Drawing.Point(174, 9);
             this.teEndDate.Name = "teEndDate";
             this.teEndDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teEndDate.Properties.Appearance.Options.UseFont = true;
@@ -181,7 +178,7 @@
             this.lblRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblRange.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRange.Appearance.Options.UseFont = true;
-            this.lblRange.Location = new System.Drawing.Point(453, 16);
+            this.lblRange.Location = new System.Drawing.Point(156, 13);
             this.lblRange.Name = "lblRange";
             this.lblRange.Size = new System.Drawing.Size(12, 12);
             this.lblRange.TabIndex = 87;
@@ -191,7 +188,7 @@
             // 
             this.combFinishState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.combFinishState.EditValue = "所有磅单";
-            this.combFinishState.Location = new System.Drawing.Point(566, 13);
+            this.combFinishState.Location = new System.Drawing.Point(269, 10);
             this.combFinishState.Name = "combFinishState";
             this.combFinishState.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.combFinishState.Properties.Appearance.Options.UseFont = true;
@@ -208,7 +205,7 @@
             // 
             this.teStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teStartDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teStartDate.Location = new System.Drawing.Point(356, 12);
+            this.teStartDate.Location = new System.Drawing.Point(59, 9);
             this.teStartDate.Name = "teStartDate";
             this.teStartDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teStartDate.Properties.Appearance.Options.UseFont = true;
@@ -222,70 +219,16 @@
             this.teStartDate.Size = new System.Drawing.Size(91, 20);
             this.teStartDate.TabIndex = 63;
             // 
-            // panelControl1
-            // 
-            this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelControl1.Controls.Add(this.lbTotalSuttleWeight);
-            this.panelControl1.Controls.Add(this.labelControl2);
-            this.panelControl1.Location = new System.Drawing.Point(3, 8);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(136, 29);
-            this.panelControl1.TabIndex = 14;
-            // 
-            // lbTotalSuttleWeight
-            // 
-            this.lbTotalSuttleWeight.Location = new System.Drawing.Point(52, 8);
-            this.lbTotalSuttleWeight.Name = "lbTotalSuttleWeight";
-            this.lbTotalSuttleWeight.Size = new System.Drawing.Size(12, 14);
-            this.lbTotalSuttleWeight.TabIndex = 0;
-            this.lbTotalSuttleWeight.Text = "   ";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(5, 6);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 14);
-            this.labelControl2.TabIndex = 0;
-            this.labelControl2.Text = "总重量：";
-            // 
             // sfdFileSave
             // 
             this.sfdFileSave.Filter = "Excel 文件|*.xls";
             // 
-            // panelControl2
-            // 
-            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelControl2.Controls.Add(this.lbTotalMoney);
-            this.panelControl2.Controls.Add(this.labelControl4);
-            this.panelControl2.Location = new System.Drawing.Point(145, 8);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(136, 29);
-            this.panelControl2.TabIndex = 14;
-            // 
-            // lbTotalMoney
-            // 
-            this.lbTotalMoney.Location = new System.Drawing.Point(52, 8);
-            this.lbTotalMoney.Name = "lbTotalMoney";
-            this.lbTotalMoney.Size = new System.Drawing.Size(12, 14);
-            this.lbTotalMoney.TabIndex = 0;
-            this.lbTotalMoney.Text = "   ";
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Location = new System.Drawing.Point(5, 6);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(48, 14);
-            this.labelControl4.TabIndex = 0;
-            this.labelControl4.Text = "总金额：";
-            // 
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.panelControl1);
             this.panelControl3.Controls.Add(this.btnViewPhoto);
             this.panelControl3.Controls.Add(this.txtCar);
             this.panelControl3.Controls.Add(this.simpleButton1);
-            this.panelControl3.Controls.Add(this.panelControl2);
             this.panelControl3.Controls.Add(this.lblRange);
             this.panelControl3.Controls.Add(this.labelControl1);
             this.panelControl3.Controls.Add(this.teEndDate);
@@ -295,19 +238,20 @@
             this.panelControl3.Controls.Add(this.btnExportExcel);
             this.panelControl3.Controls.Add(this.teStartDate);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl3.Location = new System.Drawing.Point(0, 278);
+            this.panelControl3.Location = new System.Drawing.Point(0, 284);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1414, 42);
+            this.panelControl3.Size = new System.Drawing.Size(1414, 36);
             this.panelControl3.TabIndex = 97;
             // 
             // gcWeight
             // 
             this.gcWeight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gcWeight.EmbeddedNavigator.ContextMenuStrip = this.contextMenuStrip2;
             this.gcWeight.Location = new System.Drawing.Point(0, 3);
             this.gcWeight.MainView = this.gvWeight;
             this.gcWeight.Margin = new System.Windows.Forms.Padding(0);
             this.gcWeight.Name = "gcWeight";
-            this.gcWeight.Size = new System.Drawing.Size(1414, 275);
+            this.gcWeight.Size = new System.Drawing.Size(1414, 281);
             this.gcWeight.TabIndex = 98;
             this.gcWeight.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvWeight});
@@ -374,9 +318,48 @@
             this.gvWeight.Name = "gvWeight";
             this.gvWeight.OptionsBehavior.Editable = false;
             this.gvWeight.OptionsBehavior.ReadOnly = true;
+            this.gvWeight.OptionsView.ShowFooter = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             this.gvWeight.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvWeight_RowClick);
             this.gvWeight.DoubleClick += new System.EventHandler(this.gvWeight_DoubleClick);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.补录ToolStripMenuItem,
+            this.修改ToolStripMenuItem,
+            this.作废ToolStripMenuItem,
+            this.打印ToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 114);
+            // 
+            // 补录ToolStripMenuItem
+            // 
+            this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
+            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.补录ToolStripMenuItem.Text = "补录";
+            this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // 打印ToolStripMenuItem
+            // 
+            this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
+            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.打印ToolStripMenuItem.Text = "打印";
+            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
+            // 
+            // 作废ToolStripMenuItem
+            // 
+            this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
+            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.作废ToolStripMenuItem.Text = "作废";
+            this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
             // 
             // MainWeightList
             // 
@@ -394,17 +377,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.combFinishState.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -423,15 +401,14 @@
         private DevExpress.XtraEditors.SimpleButton btnViewPhoto;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtCar;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.LabelControl lbTotalSuttleWeight;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.LabelControl lbTotalMoney;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraGrid.GridControl gcWeight;
         private DevExpress.XtraGrid.Views.Grid.GridView gvWeight;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem 补录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 作废ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打印ToolStripMenuItem;
     }
 }

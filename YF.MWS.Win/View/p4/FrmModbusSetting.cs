@@ -67,10 +67,8 @@ namespace YF.MWS.Win.View.Master {
                 chkStartModBus.Checked = cfg.Weight.StartModBus;
                 txtModbusIP.Text = cfg.NobodyWeight.ModbusIP;
                 txtModbusPort.Text = cfg.NobodyWeight.ModbusPort.ToString();
-                rgCloseGateMode.EditValue = cfg.NobodyWeight.CloseGate.ToString();
+                rgCloseGateMode.EditValue = cfg.NobodyWeight.GateControl;
                 teFunSixCloseTime.Text = cfg.NobodyWeight.FunSixCloseTime.ToString();
-                rgOpenSingleGateMode.EditValue = cfg.NobodyWeight.OpenSingleGate.ToString();
-                rgBoundGate.EditValue = cfg.NobodyWeight.BoundGate.ToString();
                 chkStartTrafficLight.Checked = cfg.NobodyWeight.StartTrafficLight;
                 chkBoundGate.Checked = cfg.NobodyWeight.StartBoundGate;
                 chkInfrared.Checked = cfg.NobodyWeight.StartInfrared;
@@ -100,14 +98,13 @@ namespace YF.MWS.Win.View.Master {
             cfg.Weight.ModBusCommMode = DeviceCommMode.Network;
             cfg.NobodyWeight.ModbusIP = txtModbusIP.Text;
             cfg.NobodyWeight.ModbusPort = txtModbusPort.Text.ToInt();
-            cfg.NobodyWeight.BoundGate = rgBoundGate.EditValue.ToEnum<BoundGateType>();
             cfg.NobodyWeight.StartTrafficLight = chkStartTrafficLight.Checked;
             cfg.NobodyWeight.StartBoundGate = chkBoundGate.Checked;
             cfg.NobodyWeight.StartInfrared = chkInfrared.Checked;
-            cfg.NobodyWeight.CloseGate = rgCloseGateMode.EditValue.ToEnum<CloseGateMode>();
-            cfg.NobodyWeight.OpenSingleGate = rgOpenSingleGateMode.EditValue.ToEnum<OpenSingleGateMode>();
+            cfg.NobodyWeight.GateControl = rgCloseGateMode.EditValue.ToString();
             cfg.NobodyWeight.FunSixCloseTime = teFunSixCloseTime.Text.ToInt();
             cfg.NobodyWeight.InfraredWeight = txtInfraredWeight.Text.ToDecimal();
+            
             CfgUtil.SaveCfg(cfg);
         }
 

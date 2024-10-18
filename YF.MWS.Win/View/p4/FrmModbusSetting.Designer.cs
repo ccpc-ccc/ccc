@@ -44,12 +44,8 @@
             this.txtModbusIP = new DevExpress.XtraEditors.TextEdit();
             this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
             this.gpBoundGateCfg = new DevExpress.XtraEditors.GroupControl();
-            this.rgBoundGate = new DevExpress.XtraEditors.RadioGroup();
-            this.lblBoundGate = new DevExpress.XtraEditors.LabelControl();
             this.chkBoundGate = new DevExpress.XtraEditors.CheckEdit();
-            this.lblOpenSingleGateMode = new DevExpress.XtraEditors.LabelControl();
             this.lblFunSixCloseTime = new DevExpress.XtraEditors.LabelControl();
-            this.rgOpenSingleGateMode = new DevExpress.XtraEditors.RadioGroup();
             this.rgCloseGateMode = new DevExpress.XtraEditors.RadioGroup();
             this.teFunSixCloseTime = new DevExpress.XtraEditors.TextEdit();
             this.lblFunSixCloseTimeUnit = new DevExpress.XtraEditors.LabelControl();
@@ -72,9 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtModbusIP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpBoundGateCfg)).BeginInit();
             this.gpBoundGateCfg.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rgBoundGate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBoundGate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rgOpenSingleGateMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgCloseGateMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPLCCfg)).BeginInit();
@@ -234,12 +228,8 @@
             // 
             // gpBoundGateCfg
             // 
-            this.gpBoundGateCfg.Controls.Add(this.rgBoundGate);
-            this.gpBoundGateCfg.Controls.Add(this.lblBoundGate);
             this.gpBoundGateCfg.Controls.Add(this.chkBoundGate);
-            this.gpBoundGateCfg.Controls.Add(this.lblOpenSingleGateMode);
             this.gpBoundGateCfg.Controls.Add(this.lblFunSixCloseTime);
-            this.gpBoundGateCfg.Controls.Add(this.rgOpenSingleGateMode);
             this.gpBoundGateCfg.Controls.Add(this.rgCloseGateMode);
             this.gpBoundGateCfg.Controls.Add(this.teFunSixCloseTime);
             this.gpBoundGateCfg.Controls.Add(this.lblFunSixCloseTimeUnit);
@@ -250,27 +240,6 @@
             this.gpBoundGateCfg.TabIndex = 129;
             this.gpBoundGateCfg.Text = "道闸设置";
             // 
-            // rgBoundGate
-            // 
-            this.rgBoundGate.EditValue = "SingleGate";
-            this.rgBoundGate.Location = new System.Drawing.Point(134, 71);
-            this.rgBoundGate.Name = "rgBoundGate";
-            this.rgBoundGate.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.rgBoundGate.Properties.Appearance.Options.UseBackColor = true;
-            this.rgBoundGate.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("SingleGate", "单道闸"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("DoubleGate", "双道闸")});
-            this.rgBoundGate.Size = new System.Drawing.Size(227, 30);
-            this.rgBoundGate.TabIndex = 1;
-            // 
-            // lblBoundGate
-            // 
-            this.lblBoundGate.Location = new System.Drawing.Point(17, 77);
-            this.lblBoundGate.Name = "lblBoundGate";
-            this.lblBoundGate.Size = new System.Drawing.Size(60, 14);
-            this.lblBoundGate.TabIndex = 25;
-            this.lblBoundGate.Text = "道闸类别：";
-            // 
             // chkBoundGate
             // 
             this.chkBoundGate.Location = new System.Drawing.Point(136, 37);
@@ -278,14 +247,6 @@
             this.chkBoundGate.Properties.Caption = "启用道闸";
             this.chkBoundGate.Size = new System.Drawing.Size(75, 20);
             this.chkBoundGate.TabIndex = 5;
-            // 
-            // lblOpenSingleGateMode
-            // 
-            this.lblOpenSingleGateMode.Location = new System.Drawing.Point(17, 115);
-            this.lblOpenSingleGateMode.Name = "lblOpenSingleGateMode";
-            this.lblOpenSingleGateMode.Size = new System.Drawing.Size(96, 14);
-            this.lblOpenSingleGateMode.TabIndex = 27;
-            this.lblOpenSingleGateMode.Text = "单道闸开启时点：";
             // 
             // lblFunSixCloseTime
             // 
@@ -295,23 +256,9 @@
             this.lblFunSixCloseTime.TabIndex = 77;
             this.lblFunSixCloseTime.Text = "闭合时间：";
             // 
-            // rgOpenSingleGateMode
-            // 
-            this.rgOpenSingleGateMode.EditValue = "CarNoRecognize";
-            this.rgOpenSingleGateMode.Location = new System.Drawing.Point(134, 112);
-            this.rgOpenSingleGateMode.Name = "rgOpenSingleGateMode";
-            this.rgOpenSingleGateMode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.rgOpenSingleGateMode.Properties.Appearance.Options.UseBackColor = true;
-            this.rgOpenSingleGateMode.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("CarNoRecognize", "车牌识别"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("WeightSave", "重量保存"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("CardRead", "刷卡")});
-            this.rgOpenSingleGateMode.Size = new System.Drawing.Size(224, 30);
-            this.rgOpenSingleGateMode.TabIndex = 24;
-            // 
             // rgCloseGateMode
             // 
-            this.rgCloseGateMode.EditValue = "SenseCoil";
+            this.rgCloseGateMode.EditValue = "Modbus";
             this.rgCloseGateMode.Location = new System.Drawing.Point(134, 163);
             this.rgCloseGateMode.Name = "rgCloseGateMode";
             this.rgCloseGateMode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -341,7 +288,7 @@
             // 
             // lblCloseGateMode
             // 
-            this.lblCloseGateMode.Location = new System.Drawing.Point(17, 169);
+            this.lblCloseGateMode.Location = new System.Drawing.Point(68, 171);
             this.lblCloseGateMode.Name = "lblCloseGateMode";
             this.lblCloseGateMode.Size = new System.Drawing.Size(60, 14);
             this.lblCloseGateMode.TabIndex = 26;
@@ -440,9 +387,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpBoundGateCfg)).EndInit();
             this.gpBoundGateCfg.ResumeLayout(false);
             this.gpBoundGateCfg.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rgBoundGate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkBoundGate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rgOpenSingleGateMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgCloseGateMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teFunSixCloseTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPLCCfg)).EndInit();
@@ -467,11 +412,7 @@
         private DevExpress.XtraEditors.TextEdit txtModbusIP;
         private DevExpress.XtraEditors.LabelControl labelControl24;
         private DevExpress.XtraEditors.GroupControl gpBoundGateCfg;
-        private DevExpress.XtraEditors.RadioGroup rgBoundGate;
-        private DevExpress.XtraEditors.LabelControl lblBoundGate;
         private DevExpress.XtraEditors.CheckEdit chkBoundGate;
-        private DevExpress.XtraEditors.LabelControl lblOpenSingleGateMode;
-        private DevExpress.XtraEditors.RadioGroup rgOpenSingleGateMode;
         private DevExpress.XtraEditors.RadioGroup rgCloseGateMode;
         private DevExpress.XtraEditors.LabelControl lblCloseGateMode;
         private DevExpress.XtraEditors.GroupControl gpPLCCfg;

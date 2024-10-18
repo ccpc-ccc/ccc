@@ -45,6 +45,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.teTest = new DevExpress.XtraEditors.TextEdit();
             this.gpBasic = new DevExpress.XtraEditors.GroupControl();
+            this.chkStartVoicePrompt = new DevExpress.XtraEditors.CheckEdit();
             this.rgBroadcastWeightType = new DevExpress.XtraEditors.RadioGroup();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
             this.lblUnloadWeight = new DevExpress.XtraEditors.LabelControl();
@@ -73,7 +74,6 @@
             this.teReadCardSuccess = new DevExpress.XtraEditors.TextEdit();
             this.lblOverWeight = new DevExpress.XtraEditors.LabelControl();
             this.teOverWeight = new DevExpress.XtraEditors.TextEdit();
-            this.chkStartVoicePrompt = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
@@ -82,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.teTest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpBasic)).BeginInit();
             this.gpBasic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartVoicePrompt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgBroadcastWeightType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).BeginInit();
             this.pcMain.SuspendLayout();
@@ -98,7 +99,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.teWeightUnStable.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teReadCardSuccess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teOverWeight.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartVoicePrompt.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -131,7 +131,7 @@
             // 
             this.btnItemSave.Caption = "保存";
             this.btnItemSave.Id = 1;
-            this.btnItemSave.ImageIndex = 0;
+            this.btnItemSave.ImageOptions.ImageIndex = 0;
             this.btnItemSave.Name = "btnItemSave";
             this.btnItemSave.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnItemSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnItemSave_ItemClick);
@@ -140,7 +140,7 @@
             // 
             this.btnItemClose.Caption = "关闭";
             this.btnItemClose.Id = 7;
-            this.btnItemClose.ImageIndex = 1;
+            this.btnItemClose.ImageOptions.ImageIndex = 1;
             this.btnItemClose.Name = "btnItemClose";
             this.btnItemClose.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnItemClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnItemClose_ItemClick);
@@ -150,28 +150,32 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(941, 31);
+            this.barDockControlTop.Manager = this.barManager;
+            this.barDockControlTop.Size = new System.Drawing.Size(941, 24);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 499);
+            this.barDockControlBottom.Manager = this.barManager;
             this.barDockControlBottom.Size = new System.Drawing.Size(941, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 31);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 468);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
+            this.barDockControlLeft.Manager = this.barManager;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 475);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(941, 31);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 468);
+            this.barDockControlRight.Location = new System.Drawing.Point(941, 24);
+            this.barDockControlRight.Manager = this.barManager;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 475);
             // 
             // imgListSmall
             // 
@@ -197,7 +201,7 @@
             // 
             // btnTest
             // 
-            this.btnTest.Location = new System.Drawing.Point(145, 67);
+            this.btnTest.Location = new System.Drawing.Point(605, 40);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(75, 23);
             this.btnTest.TabIndex = 26;
@@ -225,11 +229,20 @@
             this.gpBasic.Controls.Add(this.chkStartVoicePrompt);
             this.gpBasic.Controls.Add(this.rgBroadcastWeightType);
             this.gpBasic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gpBasic.Location = new System.Drawing.Point(0, 31);
+            this.gpBasic.Location = new System.Drawing.Point(0, 24);
             this.gpBasic.Name = "gpBasic";
             this.gpBasic.Size = new System.Drawing.Size(941, 82);
             this.gpBasic.TabIndex = 27;
             this.gpBasic.Text = "语音设置";
+            // 
+            // chkStartVoicePrompt
+            // 
+            this.chkStartVoicePrompt.Location = new System.Drawing.Point(135, 40);
+            this.chkStartVoicePrompt.MenuManager = this.barManager;
+            this.chkStartVoicePrompt.Name = "chkStartVoicePrompt";
+            this.chkStartVoicePrompt.Properties.Caption = "启用语音提示";
+            this.chkStartVoicePrompt.Size = new System.Drawing.Size(103, 20);
+            this.chkStartVoicePrompt.TabIndex = 92;
             // 
             // rgBroadcastWeightType
             // 
@@ -275,7 +288,7 @@
             this.pcMain.Controls.Add(this.lblOverWeight);
             this.pcMain.Controls.Add(this.teOverWeight);
             this.pcMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pcMain.Location = new System.Drawing.Point(0, 113);
+            this.pcMain.Location = new System.Drawing.Point(0, 106);
             this.pcMain.Name = "pcMain";
             this.pcMain.Size = new System.Drawing.Size(941, 275);
             this.pcMain.TabIndex = 28;
@@ -488,15 +501,6 @@
             this.teOverWeight.Size = new System.Drawing.Size(289, 20);
             this.teOverWeight.TabIndex = 0;
             // 
-            // chkStartVoicePrompt
-            // 
-            this.chkStartVoicePrompt.Location = new System.Drawing.Point(135, 40);
-            this.chkStartVoicePrompt.MenuManager = this.barManager;
-            this.chkStartVoicePrompt.Name = "chkStartVoicePrompt";
-            this.chkStartVoicePrompt.Properties.Caption = "启用语音提示";
-            this.chkStartVoicePrompt.Size = new System.Drawing.Size(103, 19);
-            this.chkStartVoicePrompt.TabIndex = 92;
-            // 
             // FrmVoiceSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -524,6 +528,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.teTest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpBasic)).EndInit();
             this.gpBasic.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartVoicePrompt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgBroadcastWeightType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).EndInit();
             this.pcMain.ResumeLayout(false);
@@ -541,8 +546,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.teWeightUnStable.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teReadCardSuccess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teOverWeight.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartVoicePrompt.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

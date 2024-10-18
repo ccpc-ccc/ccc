@@ -121,7 +121,7 @@ namespace YF.MWS.Win {
                 barStaticItemRegsiterType.Caption = string.Format("注册方式:{0}", EnumUtil.GetEnumDescription(CurrentClient.Instance.RegType));
             } else {
                 barStaticItemRegsiterType.Caption = "注册方式:试用版";
-                barStaticItemVersion.Caption = string.Format("试用版(剩余使用天数:{0}天) 当前版本:{1} 软件版本号:{2}", CurrentClient.Instance.AvailableTimes, dbVersion, Application.ProductVersion);
+                barStaticItemVersion.Caption = string.Format("试用版(剩余使用天数:{0}天) 当前版本:{1} 软件版本号:{2}", CurrentClient.Instance.ResidualDays, dbVersion, Application.ProductVersion);
             }
             //ShowDockPanel(false);
         }

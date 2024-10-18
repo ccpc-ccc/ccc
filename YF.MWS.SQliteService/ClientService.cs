@@ -237,11 +237,15 @@ namespace YF.MWS.SQliteService
                     ExpireCode = expireCode,
                     CurrentDate = CurrentDate,
                     RegisterDate = DateTime.Now,
-                    AuthCode = authCode,
+                    AuthCode = Encrypt.EncryptDES(authCode, CurrentClient.Instance.EncryptKey),
                     ClientName = clientName
                 };
                 save(client,"S_Client");
                 //isRegistered = Register(clientName, machineCode, registerCode, expireCode, totalTimes, verifyCode,"1");
+            } else {
+                if (client.RegisterType == "none") {
+                    client.AuthCode = Encrypt.EncryptDES(authCode, CurrentClient.Instance.EncryptKey);
+                }
             }
             return client;
         }

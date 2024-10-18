@@ -42,7 +42,6 @@ namespace YF.MWS.Win.View.Weight
     /// </summary>
     public partial class FrmWeight
     {
-        private Uc.VideoControl videoContainer;
         private ICustomerService customerService = new CustomerService();
         private IStatementService statementSerivice = new StatementService();
         private ITaskService taskService = new TaskService();
@@ -82,9 +81,9 @@ namespace YF.MWS.Win.View.Weight
         private WComboBoxEdit wbPayBizType;
         private WeightProcessTriggerType weightProcessTrigger = WeightProcessTriggerType.CarRecognition;
         /// <summary>
-        /// 当前落匝方式
+        /// 道闸控制方式 modbus控制箱 car 车牌识别控制
         /// </summary>
-        private CloseGateMode currentCloseGateMode = CloseGateMode.SenseCoil;
+        private string currentGateControl = "Modbus";
         //private Db.Server.ServerEntity serverWeight = null;
 
         /// <summary>
@@ -134,10 +133,6 @@ namespace YF.MWS.Win.View.Weight
         /// 启用红绿灯
         /// </summary>
         private bool startTrafficLight = false;
-        /// <summary>
-        /// 当前道闸类型
-        /// </summary>
-        private BoundGateType currentBoundGateType = BoundGateType.DoubleGate;
         private CarLimitScopeType currentLimitScope = CarLimitScopeType.None;
         private string currentCarNo = string.Empty;
         private bool isCarRecognitionOutputVideo = false;
@@ -177,10 +172,6 @@ namespace YF.MWS.Win.View.Weight
         /// 车牌是否输出到大屏幕
         /// </summary>
         private bool isCarNoOutputScreen = false;
-        /// <summary>
-        /// 单道闸开启时点
-        /// </summary>
-        private OpenSingleGateMode openSingleGateMode = OpenSingleGateMode.WeightSave;
         /// <summary>
         /// 启用道闸
         /// </summary>
@@ -574,14 +565,16 @@ namespace YF.MWS.Win.View.Weight
                 {
                     startSaveWithManualFirst = Cfg.NobodyWeight.StartSaveWithManualFirst;
                     startSaveWithManualSecond = Cfg.NobodyWeight.StartSaveWithManualSecond;
-                    currentCloseGateMode = Cfg.NobodyWeight.CloseGate;
-                    openSingleGateMode = Cfg.NobodyWeight.OpenSingleGate;
+                    currentGateControl = Cfg.NobodyWeight.GateControl;
                     startTrafficLight = Cfg.NobodyWeight.StartTrafficLight;
-                    currentBoundGateType = Cfg.NobodyWeight.BoundGate;
                     startBoundGate = Cfg.NobodyWeight.StartBoundGate;
                     startInfrared = Cfg.NobodyWeight.StartInfrared;
                     returnZeroWeightValue = UnitUtil.GetValue("Ton", currentDeviceCfg.SUnit, Cfg.NobodyWeight.MaxReturnZeroWeightValue);
                 }
+                gpDeviceGate1.Visible = Cfg.NobodyWeight.StartBoundGate;
+                gpDeviceGate2.Visible = Cfg.NobodyWeight.StartBoundGate;
+                gpLight1.Visible = Cfg.NobodyWeight.StartTrafficLight;
+                gpLight2.Visible = Cfg.NobodyWeight.StartTrafficLight;
             }
             /*if (CurrentClient.Instance.IsSimulateWeight)
             {
@@ -628,7 +621,7 @@ namespace YF.MWS.Win.View.Weight
                             string userName = Cfg.CarNoRecognition.UserName1;
                             string password = Cfg.CarNoRecognition.Password1;
                             dhRecognizerLeft = new DHCarPlateUtil(ip, port, userName, password);
-                            dhRecognizerLeft.DeviceReconnected += Recognizer_DeviceReconnected;
+                            //dhRecognizerLeft.DeviceReconnected += Recognizer_DeviceReconnected;
                             dhRecognizerLeft.No = 1;
                             dhRecognizerLeft.RecognizePlate = new DHCarPlateUtil.RecognizePlateDelegate(DHRecognizePlate);
                             if (!string.IsNullOrEmpty(Cfg.CarNoRecognition.IP2))
@@ -639,7 +632,7 @@ namespace YF.MWS.Win.View.Weight
                                 password = Cfg.CarNoRecognition.Password2;
                                 dhRecognizerRight = new DHCarPlateUtil(ip, port, userName, password);
                                 dhRecognizerRight.RecognizePlate = new DHCarPlateUtil.RecognizePlateDelegate(DHRecognizePlate);
-                                dhRecognizerRight.DeviceReconnected += Recognizer_DeviceReconnected;
+                                //dhRecognizerRight.DeviceReconnected += Recognizer_DeviceReconnected;
                                 dhRecognizerRight.No = 2;
                             }
                         }
@@ -650,7 +643,7 @@ namespace YF.MWS.Win.View.Weight
                             string userName = Cfg.CarNoRecognition.UserName1;
                             string password = Cfg.CarNoRecognition.Password1;
 
-                            hxRecognizerLeft = new HXPlateRecognizer(ip, isCarRecognitionOutputVideo,GetPictureBoxFromVideoControl(1));
+                            hxRecognizerLeft = new HXPlateRecognizer(ip, isCarRecognitionOutputVideo,null);
                             hxRecognizerLeft.RecognizePlate = new HXPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                             if(hxRecognizerLeft.LoginSuccess)
                                 ShowWeightStateTip("成功连接1#车牌识别仪");
@@ -662,7 +655,7 @@ namespace YF.MWS.Win.View.Weight
                                 port = (UInt16)Cfg.CarNoRecognition.Port2;
                                 userName = Cfg.CarNoRecognition.UserName2;
                                 password = Cfg.CarNoRecognition.Password2;
-                                hxRecognizerRight = new HXPlateRecognizer(ip, isCarRecognitionOutputVideo, GetPictureBoxFromVideoControl(2));
+                                hxRecognizerRight = new HXPlateRecognizer(ip, isCarRecognitionOutputVideo, null);
                                 hxRecognizerRight.RecognizePlate = new HXPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                                 if (hxRecognizerRight.LoginSuccess)
                                     ShowWeightStateTip("成功连接2#车牌识别仪");
@@ -677,7 +670,7 @@ namespace YF.MWS.Win.View.Weight
                             string userName = Cfg.CarNoRecognition.UserName1;
                             string password = Cfg.CarNoRecognition.Password1;
 
-                            qyRecognizerLeft = new QianYiPlateRecognizer(ip, GetPictureBoxFromVideoControl(1));
+                            qyRecognizerLeft = new QianYiPlateRecognizer(ip, null);
                             qyRecognizerLeft.RecognizePlate = new QianYiPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                             if (qyRecognizerLeft.LoginSuccess)
                                 ShowWeightStateTip("成功连接QY1#车牌识别仪");
@@ -689,7 +682,7 @@ namespace YF.MWS.Win.View.Weight
                                 port = (UInt16)Cfg.CarNoRecognition.Port2;
                                 userName = Cfg.CarNoRecognition.UserName2;
                                 password = Cfg.CarNoRecognition.Password2;
-                                qyRecognizerRight = new QianYiPlateRecognizer(ip, GetPictureBoxFromVideoControl(2));
+                                qyRecognizerRight = new QianYiPlateRecognizer(ip, null);
                                 qyRecognizerRight.RecognizePlate = new QianYiPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                                 if (qyRecognizerRight.LoginSuccess)
                                     ShowWeightStateTip("成功连接QY2#车牌识别仪");
@@ -703,7 +696,7 @@ namespace YF.MWS.Win.View.Weight
                             UInt16 port = (UInt16)Cfg.CarNoRecognition.Port1;
                             string userName = Cfg.CarNoRecognition.UserName1;
                             string password = Cfg.CarNoRecognition.Password1;
-                            vzRecognizerLeft = new VzCarPlateRecognizer(ip, port, userName, password, isCarRecognitionOutputVideo, GetPictureBoxFromVideoControl(1));
+                            vzRecognizerLeft = new VzCarPlateRecognizer(ip, port, userName, password, isCarRecognitionOutputVideo, null);
                             vzRecognizerLeft.RecognizePlate = new VzCarPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                             if (vzRecognizerLeft.IsSuccess)
                             {
@@ -715,7 +708,7 @@ namespace YF.MWS.Win.View.Weight
                                 port = (UInt16)Cfg.CarNoRecognition.Port2;
                                 userName = Cfg.CarNoRecognition.UserName2;
                                 password = Cfg.CarNoRecognition.Password2;
-                                vzRecognizerRight = new VzCarPlateRecognizer(ip, port, userName, password, isCarRecognitionOutputVideo, GetPictureBoxFromVideoControl(2));
+                                vzRecognizerRight = new VzCarPlateRecognizer(ip, port, userName, password, isCarRecognitionOutputVideo, null);
                                 vzRecognizerRight.RecognizePlate = new VzCarPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                                 if (vzRecognizerRight.IsSuccess)
                                 {
@@ -729,7 +722,7 @@ namespace YF.MWS.Win.View.Weight
                             UInt16 port = (UInt16)Cfg.CarNoRecognition.Port1;
                             string userName = Cfg.CarNoRecognition.UserName1;
                             string password = Cfg.CarNoRecognition.Password1;
-                            hkRecognizerLeft = new HKCarPlateRecognizer(ip, 1, port, userName, password, isCarRecognitionOutputVideo, GetPictureBoxFromVideoControl(1));
+                            hkRecognizerLeft = new HKCarPlateRecognizer(ip, 1, port, userName, password, isCarRecognitionOutputVideo, null);
                             hkRecognizerLeft.RecognizePlate = new HKCarPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                             if (!string.IsNullOrEmpty(Cfg.CarNoRecognition.IP2))
                             {
@@ -737,7 +730,7 @@ namespace YF.MWS.Win.View.Weight
                                 port = (UInt16)Cfg.CarNoRecognition.Port2;
                                 userName = Cfg.CarNoRecognition.UserName2;
                                 password = Cfg.CarNoRecognition.Password2;
-                                hkRecognizerRight = new HKCarPlateRecognizer(ip, 2, port, userName, password, isCarRecognitionOutputVideo, GetPictureBoxFromVideoControl(2));
+                                hkRecognizerRight = new HKCarPlateRecognizer(ip, 2, port, userName, password, isCarRecognitionOutputVideo, null);
                                 hkRecognizerRight.RecognizePlate = new HKCarPlateRecognizer.RecognizePlateDelegate(CarRecognize);
                             }
                         }
@@ -770,12 +763,9 @@ namespace YF.MWS.Win.View.Weight
                             //初始化1#高清车牌识别仪
                             this.gqRecognizerLeft = new GQUtil();
                             this.gqRecognizerLeft.RecognizePlate = new GQUtil.RecognizePlateDelegate(this.GQRecognizePlate);
-                            if ((Cfg.MeasureFun == "Nobody" && Cfg.NobodyWeight.BoundGate == BoundGateType.DoubleGate) || Cfg.MeasureFun == "People")
-                            {
                                 //初始化2#高清车牌识别仪
                                 this.gqRecognizerRight = new GQUtil();
                                 this.gqRecognizerRight.RecognizePlate = new GQUtil.RecognizePlateDelegate(this.GQRecognizePlate);
-                            }
                         }
                         else if (Cfg.CarNoRecognition.Recognition == "ASB_NEW")
                         {
@@ -784,8 +774,6 @@ namespace YF.MWS.Win.View.Weight
                             string ip = Cfg.CarNoRecognition.IP1;
                             this.asbNewRecognizerLeft = new ASBNewUtil(ip);
                             this.asbNewRecognizerLeft.RecognizePlate = new ASBNewUtil.RecognizePlateDelegate(this.ASBRecognizePlate);
-                            if ((Cfg.MeasureFun == "Nobody" && Cfg.NobodyWeight.BoundGate == BoundGateType.DoubleGate) || Cfg.MeasureFun == "People")
-                            {
                                 //初始化2#高清车牌识别仪
                                 ip = Cfg.CarNoRecognition.IP2;
                                 if (!string.IsNullOrEmpty(ip))
@@ -793,7 +781,6 @@ namespace YF.MWS.Win.View.Weight
                                     this.asbNewRecognizerRight = new ASBNewUtil(ip);
                                     this.asbNewRecognizerRight.RecognizePlate = new ASBNewUtil.RecognizePlateDelegate(this.ASBRecognizePlate);
                                 }
-                            }
                         }
                     }
                     catch (Exception ex)
@@ -915,15 +902,11 @@ namespace YF.MWS.Win.View.Weight
                     {
                         string message = string.Empty;
                         //红灯灭绿灯亮
-                        ChangeLight(1, false);
-                        ChangeLight(2, false);
-                        if (currentBoundGateType == BoundGateType.DoubleGate  && startBoundGate&& openSingleGateMode== OpenSingleGateMode.CarNoRecognize)
-                        {
-                            message = string.Format("正在开启{0}#道闸", readerNo);
+                        GreeServerLight(readerNo);
+                        message = string.Format("正在开启{0}#道闸", readerNo);
                             ShowWeightStateTip(string.Format("正在开启{0}#道闸",readerNo));
                             //1#车牌识别仪识别车牌
                             this.OpenServerGate(this.readerNo);
-                        }
                         Logger.Write("车牌识别后起闸情况:" + message);
                     }
                     #endregion
@@ -933,11 +916,6 @@ namespace YF.MWS.Win.View.Weight
             {
                 Logger.WriteException(ex);
             }
-        }
-
-        private void Recognizer_DeviceReconnected(object sender, DeviceReconnectedEventArgs e)
-        {
-            SetDHRecognition(e.No);
         }
 
         private void InitCardReader() 
@@ -964,145 +942,10 @@ namespace YF.MWS.Win.View.Weight
 
         private void InitAllDevice()
         {
-            SetVideoControl();
             InitScreen();
             InitPort();
             InitCardReader();
             InitCarRecognition();
-        }
-
-        /// <summary>
-        /// 改变单道闸模式下的红绿灯
-        /// </summary>
-        /// <param name="openRed"></param>
-        private void ChangeSingleLight(bool openRed)
-        {
-            if (modbusLeft == null) return;
-            if (openRed)
-            {
-                //红灯亮、绿灯灭
-                this.modbusLeft.SendControl(5, 0, 1);
-                this.modbusLeft.SendControl(5, 1, 0);
-            }
-            else
-            {
-                //红灯灭、绿灯亮
-                this.modbusLeft.SendControl(5, 0, 0);
-                this.modbusLeft.SendControl(5, 1, 1);
-            }
-        }
-
-        /// <summary>
-        /// 改变绿灯
-        /// </summary>
-        /// <param name="no"></param>
-        /// <param name="open"></param>
-        private void ChangeGreenLight(int no, bool open) 
-        {
-            if (modbusLeft == null) return;
-            if (!startTrafficLight)
-                return;
-            if (!open)
-            {
-                if (no == 1)
-                {
-                    //1#道闸绿灯灭
-                    this.modbusLeft.SendControl(5, 1, 0);
-                }
-                else
-                {
-                    //2#道闸绿灯灭
-                    this.modbusLeft.SendControl(5, 5, 0);
-                }
-            }
-            else
-            {
-                if (no == 1)
-                {
-                    //1#道闸绿灯亮
-                    this.modbusLeft.SendControl(5, 1, 1);
-                }
-                else
-                {
-                    //2#道闸绿灯亮
-                    this.modbusLeft.SendControl(5, 5, 1);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 改变红灯
-        /// </summary>
-        /// <param name="no"></param>
-        /// <param name="open"></param>
-        private void ChangeRedLight(int no, bool open)
-        {
-            if (modbusLeft == null)
-                return;
-            if (open)
-            {
-                if (no == 1)
-                {
-                    //1#道闸红灯亮
-                    this.modbusLeft.SendControl(5, 0, 1);
-                }
-                else
-                {
-                    //2#道闸红灯亮
-                    this.modbusLeft.SendControl(5, 4, 1);
-                }
-            }
-            else
-            {
-                if (no == 1)
-                {
-                    //1#道闸红灯灭
-                    this.modbusLeft.SendControl(5, 0, 0);
-                }
-                else
-                {
-                    //2#道闸红灯灭
-                    this.modbusLeft.SendControl(5, 4, 0);
-                }
-            }
-        }
-
-        private void ChangeLight(int no, bool openRed) 
-        {
-            if (modbusLeft == null)
-                return;
-            if (!startTrafficLight)
-                return;
-            if (openRed)
-            {
-                if (no == 1)
-                {
-                    //1#道闸红灯亮、绿灯灭
-                    this.modbusLeft.SendControl(5, 0, 1);
-                    this.modbusLeft.SendControl(5, 1, 0);
-                }
-                else 
-                {
-                    //2#道闸红灯亮、绿灯灭
-                    this.modbusLeft.SendControl(5, 4, 1);
-                    this.modbusLeft.SendControl(5, 5, 0);
-                }
-            }
-            else 
-            {
-                if (no == 1)
-                {
-                    //1#道闸红灯灭、绿灯亮
-                    this.modbusLeft.SendControl(5, 0, 0);
-                    this.modbusLeft.SendControl(5, 1, 1);
-                }
-                else
-                {
-                    //2#道闸红灯灭、绿灯亮--相对方向的道闸
-                    this.modbusLeft.SendControl(5, 4, 0);
-                    this.modbusLeft.SendControl(5, 5, 1);
-                }
-            }
         }
 
         private bool IsNeedOpenGateWhenSaved() 
@@ -1315,43 +1158,12 @@ namespace YF.MWS.Win.View.Weight
                     //    return;
                     //}
                     isOpen = true;
-                    //初始启动称重恢复默认状态
-                    if (Cfg.NobodyWeight.BoundGate == BoundGateType.SingleGate)
-                    {
                         if (startTrafficLight)
                         {
                             //红灯亮、绿灯灭
-                            this.modbusLeft.SendControl(5, 0, 1);
-                            this.modbusLeft.SendControl(5, 1, 0);
+                            RedServerLight(1);
+                            RedServerLight(2);
                         }
-                        if (Cfg.NobodyWeight.StartBoundGate)
-                        {
-                            //落杠
-                            /*this.modbusLeft.SendControl(5, 2, 0);
-                            this.modbusLeft.SendControl(5, 3, 1);*/
-                        }
-                    }
-                    else
-                    {
-                        if (startTrafficLight)
-                        {
-                            //红灯亮、绿灯灭
-                            //this.modbusLeft.SendControl(5, 0, 1);
-                            //this.modbusLeft.SendControl(5, 1, 0);
-                            //this.modbusLeft.SendControl(5, 4, 1);
-                            //this.modbusLeft.SendControl(5, 5, 0);
-                            ChangeRedLight(1, true);
-                            ChangeRedLight(2, true);
-                        }
-                        if (Cfg.NobodyWeight.StartBoundGate)
-                        {
-                            //落杠
-                            /*this.modbusLeft.SendControl(5, 2, 0);
-                            this.modbusLeft.SendControl(5, 3, 1);
-                            this.modbusLeft.SendControl(5, 6, 0);
-                            this.modbusLeft.SendControl(5, 7, 1);*/
-                        }
-                    }
                     Logger.Write("打开控制器成功.");
                     ShowWeightStateTip("连接PLC控制箱成功");
                 }
@@ -1361,6 +1173,12 @@ namespace YF.MWS.Win.View.Weight
                     ShowWeightStateTip("连接PLC控制箱失败");
                 }
             }
+                       /* if (Cfg.NobodyWeight.StartBoundGate)
+                        {
+                            //落杠
+                            CloseServerGate(1);
+                            CloseServerGate(2);
+                        }*/
             ShowControlBoxState(isOpen);
             }
         }
@@ -1421,21 +1239,6 @@ namespace YF.MWS.Win.View.Weight
             {
                 if (this.modbusLeft.IsOpen)
                 {
-                    //恢复控制器为默认状态
-                    if (Cfg.NobodyWeight.BoundGate == BoundGateType.SingleGate)
-                    {
-                        //红灯亮、绿灯灭
-                        this.modbusLeft.SendControl(5, 0, 1);
-                        this.modbusLeft.SendControl(5, 1, 0);
-                        //落杠
-                        if (Cfg.NobodyWeight.StartBoundGate)
-                        {
-                           // this.modbusLeft.SendControl(5, 2, 0);
-                           // this.modbusLeft.SendControl(5, 3, 1);
-                        }
-                    }
-                    else
-                    {
                         //红灯亮、绿灯灭
                         this.modbusLeft.SendControl(5, 0, 1);
                         this.modbusLeft.SendControl(5, 1, 0);
@@ -1449,7 +1252,6 @@ namespace YF.MWS.Win.View.Weight
                             this.modbusLeft.SendControl(5, 6, 0);
                             this.modbusLeft.SendControl(5, 7, 1);*/
                         }
-                    }
                     this.modbusLeft.ClosePort();
                     this.modbusLeft.CloseServer();
                 }
@@ -1701,18 +1503,48 @@ namespace YF.MWS.Win.View.Weight
         }
         #region 道闸操作
         private async void OpenServerGate(int no) {
-            if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
+            if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2 - 1;
                await this.modbusLeft.SendData(no, 3);
+            }else if (Cfg.NobodyWeight.GateControl == "Car") {
+                if (no==1&&this.hxRecognizerLeft!=null) {
+                bool isOk= hxRecognizerLeft.OpenGate();
+                }else if (no==2&&this.hxRecognizerRight!=null) {
+                    bool isOk = hxRecognizerRight.OpenGate();
+                }
             }
         }
         private async void CloseServerGate(int no) {
-            if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
+            if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2;
                await this.modbusLeft.SendData(no, 3);
+            }else if (Cfg.NobodyWeight.GateControl == "Car") {
+                if (no == 1 && this.hxRecognizerLeft != null) {
+                    bool isOk = hxRecognizerLeft.CloseGate();
+                } else if (no == 2 && this.hxRecognizerRight != null) {
+                    bool isOk = hxRecognizerRight.CloseGate();
+                }
             }
         }
         #endregion
+        #region 红绿灯
+        #endregion
+        private async void GreeServerLight(int no) {
+            if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
+                no = no * 2 + 1;
+               await this.modbusLeft.SendData(no+1, -1);
+                Thread.Sleep(100);
+               await this.modbusLeft.SendData(no, 0);
+            }
+        }
+        private async void RedServerLight(int no) {
+            if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
+                no = no * 2+1;
+                await this.modbusLeft.SendData(no, -1);
+                Thread.Sleep(100);
+                await this.modbusLeft.SendData(no + 1, 0);
+            }
+        }
 
         private void AsyncCapturePhoto(WeightCapture wc)
         {

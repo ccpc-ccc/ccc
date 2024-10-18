@@ -234,7 +234,7 @@ namespace YF.MWS.Win.Uc
                 CurrentViewId = view.Id;
             }
             layGroup.Clear();
-            List<SWeightViewDtl> lstDtl = viewService.GetDetailList(view.Id);
+            List<SWeightViewDtl> lstDtl = viewService.GetAllShowDetailList(view.Id);
             List<LayoutControlItem> lstItem = new List<LayoutControlItem>();
             LayoutControlItem item = null;
             SWeightViewDtl detail = null;
@@ -247,31 +247,29 @@ namespace YF.MWS.Win.Uc
                 columnsCount = 3;
             }
             int width = layGroup.Width;
-            int rows = lstDtl.Count / columnsCount;
+            int rows = 0;
             int remainder = lstDtl.Count % columnsCount;
             int height = 24;
             bool isReadonly=false;
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < lstDtl.Count; i++)
             {
-                for (int j = 0; j < columnsCount; j++)
-                {
-                    detail = lstDtl[i * columnsCount + j];
+                    detail = lstDtl[i];
                     ctlType = detail.ControlType.ToEnum<ControlType>();
                     field = GetControl(detail.FullName);
                     if (field != null)
                     {
                         item = new LayoutControlItem();
-                        item.Location = new Point(j * width / columnsCount, i * height);
+                        item.Location = new Point((detail.ColIndex-1)* (width / columnsCount), (detail.RowIndex-1) * height);
                         item.Size = new Size(width / columnsCount, height);
                         item.Control = field as Control;
+                        //item.Visibility = detail.RowState != 3?DevExpress.XtraLayout.Utils.LayoutVisibility.Always:DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                         if (!string.IsNullOrEmpty(detail.ActionName))
                         {
                             item.Control.Tag = detail.ActionName;
                         }
                         item.Text = detail.Caption;
-                        lstItem.Add(item);
-                        
-                        field.ParentLocation = new Point(j * width / columnsCount, i * height);
+                        if(detail.RowState != 3) lstItem.Add(item);
+                        field.ParentLocation = new Point((detail.ColIndex - 1) * (width / columnsCount), (detail.RowIndex - 1) * height);
                         field.FieldName = detail.FieldName;
                         field.AutoCalcNo = detail.AutoCalcNo;
                         field.ControlName = detail.ControlName;
@@ -313,74 +311,6 @@ namespace YF.MWS.Win.Uc
                             SetValidationRule(field, detail.ErrorText);
                         }
                     }
-                }
-            }
-            for (int k = 0; k < remainder; k++)
-            {
-                detail = lstDtl[rows * columnsCount + k];
-                ctlType = detail.ControlType.ToEnum<ControlType>();
-                field = GetControl(detail.FullName);
-                if (field != null)
-                {
-                    item = new LayoutControlItem();
-                    item.Location = new Point(k * width / columnsCount, rows * height);
-                    item.Size = new Size(width / columnsCount, height);
-                    item.Control = field as Control;
-                    item.Text = detail.Caption;
-                    
-                    lstItem.Add(item);
-                    field.ParentLocation = item.Location;
-                    field.FieldName = detail.FieldName;
-                    field.AutoCalcNo = detail.AutoCalcNo;
-                    field.ControlName = detail.ControlName;
-                    field.Expression = detail.Expression;
-                    field.ActionName = detail.ActionName;
-                    field.t1 = detail.t1;
-                    field.DecimalDigits=detail.DecimalDigits;
-                    field.IsRequired = detail.IsRequired == 1 ? true : false;
-                    field.StartAutoSave = detail.AutoSaveState == BoolValueType.True ? true : false;
-                    field.StartStay = detail.StayState == BoolValueType.True ? true : false;
-                    field.ErrorTipText = detail.ErrorText;
-                    isReadonly = detail.Readonly == 1 ? true : false;
-                    if (isReadonly) 
-                    {
-                        field.SetReadonly();
-                    }
-                    //field.WeightVauleChanged += WeightVauleChanged;
-                    field.InitData();
-                    //lstField.Add(field);
-                    if (!string.IsNullOrEmpty(field.Expression))
-                    {
-                        calField = CalculateUtil.GetCalculateField(field.ControlName, field.Expression, field.AutoCalcNo);
-                        if (calField != null)
-                        {
-                            lstCalculateField.Add(calField);
-                        }
-                    }
-                    if (ctlType == ControlType.Extend)
-                    {
-                        extendFields[detail.ControlId] = field;
-                    }
-                    if (ctlType == ControlType.Standard)
-                    {
-                        cardFields[detail.ControlId] = field;
-                        fields[detail.FieldName] = field;
-                    }
-                    if (detail.IsRequired == 1)
-                    {
-                        SetValidationRule(field, detail.ErrorText);
-                    }
-                    field.WeightVauleChanged += WeightVauleChanged;
-                    lstField.Add(field);
-                    if (ctlType == ControlType.Extend)
-                    {
-                        extendFields[detail.ControlId] = field;
-                    }
-                    if (ctlType == ControlType.Standard)
-                    {
-                        fields[detail.FieldName] = field;
-                    }
-                }
             }
             layGroup.Items.AddRange(lstItem.ToArray());
             layControl.EndUpdate();

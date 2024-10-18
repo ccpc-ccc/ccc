@@ -349,9 +349,9 @@ namespace YF.MWS.Win
             }
         }
         public async Task InitServer(string ip,int port) {
-            this._socket=new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try {
-               await this._socket.ConnectAsync(ip, port);
+                this._socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                await this._socket.ConnectAsync(ip, port);
                 if (this.Connected != null) this.Connected(true);
             } catch (Exception ex) {
                 Logger.WriteException(ex);

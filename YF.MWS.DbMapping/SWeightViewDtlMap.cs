@@ -42,6 +42,8 @@ namespace YF.MWS.DbMapping
             Map(m => m.Show2); 
             Map(m => m.Show3); 
             Map(m => m.t1); 
+            Map(m => m.ColIndex); 
+            Map(m => m.RowIndex); 
         }
     }
 }
