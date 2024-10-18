@@ -86,13 +86,9 @@ namespace YF.MWS.Win.View.Weight {
             }
         }
         private Task ShowWeightInfo(int deviceNo, double value) {
-                value=WeightUtil.GetMinWeight(value, Cfg.Device);
-            string unit = RetCode.UnitFile(Cfg.Device.SUnit);
-            if (lblWeight1 != null && lblWeight1.IsHandleCreated) {
                     this.BeginInvoke(new Action(() => {
-                        this.lblWeight1.Text = value.ToString(this.Cfg.Device.ShowFormat);
+                        txtWeight.Text = value.ToString();
                     }));
-                }
             return Task.CompletedTask;
         }
 
@@ -122,8 +118,39 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void simpleButton2_Click(object sender, EventArgs e) {
+            if (this.serialPort != null && this.serialPort.SerlPort.IsOpen) this.serialPort.ClosePort();
             FrmDeviceSetting frmDeviceSetting = new FrmDeviceSetting();
             frmDeviceSetting.ShowDialog();
+            Cfg = CfgUtil.GetCfg();
+            InitPort();
+        }
+
+        private void simpleButton2_Click_1(object sender, EventArgs e) {
+            Calculate();
+        }
+        private void Calculate() {
+            if (cmbSymbol.Text == "+") {
+                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() + textEdit2.Text.ToDecimal(),2).ToString();
+            } else if (cmbSymbol.Text == "-") {
+                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() - textEdit2.Text.ToDecimal(), 2).ToString();
+            }else if (cmbSymbol.Text == "*") {
+                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() * textEdit2.Text.ToDecimal(), 2).ToString();
+            } else if (cmbSymbol.Text == "/") {
+                if (textEdit2.Text.ToDecimal() == 0) {
+                    txtResult.Text = "0";
+                    return;
+                }
+                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() / textEdit2.Text.ToDecimal(), 2).ToString();
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e) {
+            FrmRegister frm = new FrmRegister();
+            frm.ShowDialog();
+        }
+
+        private void txtWeight_EditValueChanged(object sender, EventArgs e) {
+            Calculate();
         }
     }
 }

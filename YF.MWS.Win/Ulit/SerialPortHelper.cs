@@ -133,54 +133,6 @@ namespace YF.MWS.Win
             }
         }
 
-        public bool HasReceiveData()
-        {
-            bool isReceived = true;
-            DateTime now = DateTime.Now;
-            TimeSpan ts = now - lastReceiveTime;
-            if (ts.TotalSeconds >= timeOut)
-            {
-                isReceived = false;
-            }
-            return isReceived;
-        }
-
-        public bool IsNormal()
-        {
-            bool isOpen = false;
-            try
-            {
-                if (serlPort != null && serlPort.IsOpen)
-                {
-                    isOpen = true;
-                }
-                if (isOpen)
-                {
-                    DateTime now = DateTime.Now;
-                    TimeSpan ts = now - lastReceiveTime;
-                    if (ts.TotalSeconds >= timeOut)
-                    {
-                        isOpen = false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException(ex);
-            }
-            return isOpen;
-        }
-
-        /// <summary>
-        /// 设置串口
-        /// </summary>
-        /// <param name="portName">串口名称</param>
-        public void SetPortName(string portName)
-        {
-            if (this.serlPort != null)
-                this.serlPort.PortName = portName;
-        }
-
         /// <summary>
         /// 设置波特率
         /// </summary>
@@ -215,10 +167,10 @@ namespace YF.MWS.Win
         /// 设置奇偶校验
         /// </summary>
         /// <param name="parity">奇偶校验</param>
-        public void SetParity(string parity)
+        public void SetParity(Parity parity)
         {
             if (this.serlPort != null)
-                this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), parity, true);
+                this.serlPort.Parity = parity;
         }
 
         /// <summary>
@@ -267,6 +219,8 @@ namespace YF.MWS.Win
         {
             if (byteReceived != null && byteReceived.Length > 0)
             {
+                GetWithTP(byteReceived);
+                return;
                 if (deviceVersion == "XK3196B")
                 {
                     GetWithXK3196B(byteReceived);
@@ -439,6 +393,32 @@ namespace YF.MWS.Win
                 weightData = weightData.Replace(" ", "").Replace("kg", "").Replace("+", "").Replace("\r\n", "");
                 //Logger.Write("GetWithXK3102DS:" + weightData);
                 double weight = Convert.ToDouble(weightData);
+                if (this.OnShowWeight != null)
+                    this.OnShowWeight(DeviceNo, weight);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteException(ex);
+            }
+        }
+        public void GetWithTP(byte[] byteFrame) 
+        {
+            try
+            {
+                if (byteFrame == null || byteFrame.Length < 9)
+                    return;
+                string data = System.Text.Encoding.ASCII.GetString(byteFrame).ToLower().Replace(" ","");
+                string weightData = "";
+                string[] ds= data.Split('\r');
+                foreach (string s in ds) {
+                    if (s.Length > 2) {
+                        weightData = s;
+                        break;
+                    }
+                }
+                if (string.IsNullOrEmpty(weightData)) return;
+                weightData=weightData.Replace("k", "").Replace("g", "");
+                double weight = (double)(weightData.ToDecimal());
                 if (this.OnShowWeight != null)
                     this.OnShowWeight(DeviceNo, weight);
             }
