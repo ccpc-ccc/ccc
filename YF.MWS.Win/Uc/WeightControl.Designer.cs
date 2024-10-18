@@ -225,6 +225,7 @@
             this.gvWeight.Name = "gvWeight";
             this.gvWeight.OptionsBehavior.Editable = false;
             this.gvWeight.OptionsBehavior.ReadOnly = true;
+            this.gvWeight.OptionsView.ShowFooter = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             // 
             // ColMaterialName
@@ -290,7 +291,7 @@
             // 
             // simpleButton3
             // 
-            this.simpleButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.simpleButton3.Location = new System.Drawing.Point(3, 412);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(75, 23);

@@ -374,10 +374,13 @@ namespace YF.MWS.Win
                     isExpired = true;
                     if (days < 0) return false;
                 if (SClient.RegisterType == "none") {
+                        CurrentClient.Instance.CurrentVersion = VersionType.Probation;
                     SClient.AuthCode= AppSetting.GetValue("use");
                     hasRegistered = false;
                     MessageBox.Show($"当前使用的为试用版，剩余{days}天后到期，请尽快联系代理商家注册");
-                }
+                    } else {
+                        CurrentClient.Instance.CurrentVersion = VersionType.Official;
+                    }
                 }
                 return true;
             }

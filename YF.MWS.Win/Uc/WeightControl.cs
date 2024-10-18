@@ -8,6 +8,7 @@ using DevExpress.XtraReports.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
@@ -74,6 +75,10 @@ namespace YF.MWS.Win.Uc
             _dataList.Columns.Add("Weight");
             _dataList.Columns.Add("CreateTime");
             gvWeight.Columns["CreateTime"].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
+            gvWeight.Columns["Weight"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gvWeight.Columns["Weight"].SummaryItem.DisplayFormat = "{0}";
+            gvWeight.Columns["MaterialName"].SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Count;
+            gvWeight.Columns["MaterialName"].SummaryItem.DisplayFormat = "{0}";
             connect();
             }
         }
@@ -105,7 +110,8 @@ namespace YF.MWS.Win.Uc
             }
             BWeight model = new BWeight() {
                 SuttleWeight = weight,
-                CompanyId = Index.ToString()
+                CompanyId = Index.ToString(),
+                Id=Guid.NewGuid().ToString("N")
             };
             if(sMaterial!=null)model.MaterialId = sMaterial.Id;
             weightService.save(model, Program._cfg.Device[Index].SettlementTime);
@@ -142,25 +148,45 @@ namespace YF.MWS.Win.Uc
             DeviceCfg device = Program._cfg.Device[Index];
             if (this.IsDisposed) return;
                 try {
+                if (this._socket != null) {
+                    Logger.Write("重复连接");
+                    return;
+                }
                 this._socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                this._socket.ReceiveTimeout = 3000;
+                this._socket.SendTimeout = 3000;
                 this._socket.Connect(device.ServerIP, device.ServerPort);
+                Logger.Write("网络连接成功");
                 byte[] bytes = new byte[48];
                 while (true) {
                     Thread.Sleep(100);
-                    if (this._socket == null || !this._socket.Connected) return;
-                    int received = this._socket.Receive(bytes);
-                    this._connectTime = 0;
-                this.Invoke(new Action(() => {
-                    this.lbConnected.Text = "已连接";
-                    this.lbConnected.ForeColor = Color.Green;
-                }));
-                        byte[] data= new byte[received];
+                    if (this._socket == null || !this._socket.Connected) {
+                    Logger.Write("当前连接已失效");
+                        Connect();
+                        return;
+                    }
+                    try {
+                        int received = this._socket.Receive(bytes);
+                        this.Invoke(new Action(() => {
+                            this.lbConnected.Text = "已连接";
+                            this.lbConnected.ForeColor = Color.Green;
+                        }));
+                        byte[] data = new byte[received];
+                       if(data.Length>10) this._connectTime = 0;
                         Array.Copy(bytes, data, received);
-                   string str= data.ToHexStr(false,true);
-                    //Logger.Write("data " +str);
+                        string str = data.ToHexStr(false, true);
                         AnalyWeight(data);
                     if (bytes.Contains(_startByte)) {
+                       Logger.Write("保存重量："+this._weight+"\r\n data " + str);
                         saveWeight(this._weight);
+                    }
+                    } catch (Exception ex) {
+                        Logger.Write("数据错误："+ex.Message);
+                        if (this._socket == null) {
+                           if(!this.isRelease) Connect();
+                           else Process.GetCurrentProcess().Kill();
+                            return;
+                        }
                     }
                 }
             } catch (Exception ex) {
@@ -170,6 +196,8 @@ namespace YF.MWS.Win.Uc
                     this.lbConnected.Text = "连接失败";
                     this.lbConnected.ForeColor = Color.Red;
                 }));
+                    this._socket.Close();
+                    this._socket = null;
                 Thread.Sleep(5000);
                 Connect();
                 }
@@ -184,11 +212,17 @@ namespace YF.MWS.Win.Uc
             });
             return this._weight;
         }
+        private bool closing=false;
         private void timer1_Tick(object sender, EventArgs e) {
            if(_connectTime<10) _connectTime++;
             else if(_connectTime==10) {
                 if (this._socket != null && this._socket.Connected) {
+                    this.Invoke(new Action(() => {
+                        this.lbConnected.Text = "已断开";
+                        this.lbConnected.ForeColor = Color.Red;
+                    }));
                     this._socket.Close();
+                    this._socket = null;
                 }
                 _connectTime++;
             }
@@ -197,6 +231,7 @@ namespace YF.MWS.Win.Uc
             this.isRelease = true;
             if (this._socket != null && this._socket.Connected) {
                 this._socket.Close();
+                this._socket = null;
             }
         }
 

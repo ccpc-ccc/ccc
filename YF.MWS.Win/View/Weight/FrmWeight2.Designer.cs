@@ -30,6 +30,7 @@
         {
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tbPlan = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRegister = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // simpleButton1
@@ -61,16 +62,26 @@
             this.tbPlan.Size = new System.Drawing.Size(1490, 609);
             this.tbPlan.TabIndex = 2;
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRegister.Location = new System.Drawing.Point(1405, 620);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnRegister.TabIndex = 1;
+            this.btnRegister.Text = "软件注册";
+            this.btnRegister.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
             // FrmWeight2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1492, 648);
             this.Controls.Add(this.tbPlan);
+            this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.simpleButton1);
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FrmWeight2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "称重操作";
@@ -84,5 +95,6 @@
         #endregion
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.TableLayoutPanel tbPlan;
+        private DevExpress.XtraEditors.SimpleButton btnRegister;
     }
 }

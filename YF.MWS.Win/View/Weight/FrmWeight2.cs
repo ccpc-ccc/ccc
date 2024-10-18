@@ -76,10 +76,16 @@ namespace YF.MWS.Win.View.Weight {
                 tbPlan.Controls.Add(weight, i, 0);
             }
             Program._cfg.Device = lstDevice;
+            this.btnRegister.Visible = CurrentClient.Instance.CurrentVersion == VersionType.Probation;
         }
 
         private void simpleButton1_Click(object sender, EventArgs e) {
             FrmWeightSearch frm = new FrmWeightSearch(-1);
+            frm.ShowDialog();
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e) {
+            FrmRegister frm = new FrmRegister();
             frm.ShowDialog();
         }
     }
