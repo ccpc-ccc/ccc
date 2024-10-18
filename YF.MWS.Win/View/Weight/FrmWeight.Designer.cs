@@ -120,6 +120,7 @@
             // 
             // textEdit2
             // 
+            this.textEdit2.EditValue = "150";
             this.textEdit2.Location = new System.Drawing.Point(200, 51);
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -180,6 +181,7 @@
             this.KeyPreview = true;
             this.Name = "FrmWeight";
             this.Text = "称重操作";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmWeight_FormClosed);
             this.Load += new System.EventHandler(this.FrmWeight_Load);
             this.SizeChanged += new System.EventHandler(this.FrmWeight_SizeChanged);

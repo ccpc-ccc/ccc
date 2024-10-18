@@ -41,6 +41,7 @@ using System.Collections;
 using System.Diagnostics;
 using YF.Utility.Data;
 using YF.MWS.Win.View.Master;
+using DevExpress.XtraSplashScreen;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeight : BaseForm {
@@ -57,7 +58,8 @@ namespace YF.MWS.Win.View.Weight {
         private void FrmWeight_Load(object sender, EventArgs e) {
             try {
                 this.FrmMain=GetMain();
-                if(FrmMain!=null)Program.frmViewVideoDevice = Program.frmViewVideoDevice;
+                SplashScreenManager.CloseForm();
+                if (FrmMain!=null)Program.frmViewVideoDevice = Program.frmViewVideoDevice;
                 InitPort();
                 currentDeviceCfg = this.Cfg.Device;
             } catch (Exception ex) {
@@ -140,7 +142,7 @@ namespace YF.MWS.Win.View.Weight {
                     txtResult.Text = "0";
                     return;
                 }
-                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() / textEdit2.Text.ToDecimal(), 2).ToString();
+                txtResult.Text = Math.Round(txtWeight.Text.ToDecimal() / textEdit2.Text.ToDecimal(), 3).ToString();
             }
         }
 
