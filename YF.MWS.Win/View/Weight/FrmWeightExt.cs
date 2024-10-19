@@ -148,7 +148,11 @@ namespace YF.MWS.Win.View.Weight
                         {
                             ShowWeightStateTip(string.Format("正在自动打印磅单({0})", weight.WeightNo));
                             weightService.UpdatePrint(weight.Id);
+                            //if (weight.WarehBizType == "ChuKu") {
                                 PrintUtil.PrintWeightReport(currentViewId, weight.Id, DocumentType.Weight, reportService, null, weightPrinterName);
+                         //   }else if (weight.WarehBizType == "RuKu") {
+                          //      PrintUtil.PrintWeightReport(currentViewId, weight.Id, DocumentType.Measure, reportService, null, weightPrinterName);
+                           // }
                             if (appendPrintTemp)
                             {
                                 PrintUtil.PrintWeightReport(currentViewId, weight.Id, DocumentType.TemporaryWeight, reportService, null, weightTempPrinterName);
@@ -856,8 +860,6 @@ namespace YF.MWS.Win.View.Weight
             }
             if(currentDeviceCfg==Cfg.Device1)
             ShowWeightStableState(isWeightStatble, stateWeightStable1);
-            if (currentDeviceCfg == Cfg.Device2)
-                ShowWeightStableState(isWeightStatble, stateWeightStable2);
             return isWeightStatble;
         }
 
@@ -1140,15 +1142,15 @@ namespace YF.MWS.Win.View.Weight
                     car.Id = YF.MWS.Util.Utility.GetGuid();
                     car.CarNo = weight.CarNo;
                     car.CarType = "A1";
-                    car.Tare = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
+                    car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
                     carService.Save(car);
                     CarCacher.Remove();
                 }
                 else 
                 {
-                    if (car.Tare == 0) 
+                    if (car.TareWeight == 0) 
                     {
-                        car.Tare = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
+                        car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
                         carService.Save(car);
                     }
                 }

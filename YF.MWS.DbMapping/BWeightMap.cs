@@ -66,7 +66,9 @@ namespace YF.MWS.DbMapping
             Map(m => m.ChargeType);
             Map(m => m.CreaterId).Not.Update();
             Map(m => m.RowState);
-            Map(m => m.CreateTime).Not.Update();
+            Map(m => m.CreateTime);
+            Map(m => m.TareTime);
+            Map(m => m.GrossTime);
             Map(m => m.UpdaterId);
             Map(m => m.UpdateTime);
             Map(m => m.SyncState);

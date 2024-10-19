@@ -583,9 +583,6 @@ namespace YF.MWS.Win {
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e) {
-            if (fWeight == null) return;
-            SysCfg cfg = CfgUtil.GetCfg();
-            fWeight.setDevice2(!cfg.Device2.StartDevice);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e) {

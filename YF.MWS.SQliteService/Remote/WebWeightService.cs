@@ -249,6 +249,7 @@ namespace YF.MWS.SQliteService.Remote
                 jz=weight.SuttleWeight
             };
             string url = CurrentClient.Instance.ServerUrl+ "/ext/weight/saveEnterWeightData";
+            Logger.Write("称重数据上传： "+ serverWeight.JsonSerialize());
             ServerReturnEntity entity = WebBaseService.sendServerPost(url, serverWeight, CurrentClient.Instance.ServerToken);
             return entity;
         }

@@ -346,7 +346,7 @@ namespace YF.MWS.SQliteService
         public bool CustomerExist(CustomerType type,string customerName, string customerId)
         {
             bool isExist = false;
-            string sql = string.Format("select count(CustomerId) from S_Customer where CustomerType='{0}' and CustomerName='{1}' and Id!='{2}' ", type.ToString(), customerName, customerId);
+            string sql = string.Format("select count(Id) from S_Customer where CustomerType='{0}' and CustomerName='{1}' and Id!='{2}' ", type.ToString(), customerName, customerId);
             int rows = 0;
             if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
             {
@@ -484,18 +484,8 @@ namespace YF.MWS.SQliteService
 
         public List<SCustomer> GetCustomerList(CustomerType customerType)
         {
-            string sql;
-            sql = string.Format("select * from S_Customer where CustomerType='{0}' and RowState!={1}", customerType.ToString(), (int)RowState.Delete);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            return TableHelper.TableToList<SCustomer>(dt);
+            string sql = string.Format("select * from S_Customer where CustomerType='{0}' and RowState!={1}", customerType.ToString(), (int)RowState.Delete);
+            return base.getList<SCustomer>(sql);
         }
 
         public DataTable GetCustomerByCustomerType(CustomerType customerType)

@@ -133,9 +133,8 @@ namespace YF.MWS.Win
 
         public static void PrintWeightReport(string viewId, string weightId, DocumentType type, IReportService reportService, Hashtable parameters,int printCount, string printerName = null)
         {
-            DataSet dsReport = new DataSet();
-            SReportTemplate template = reportService.GetDefaultTemplate(DocumentType.Weight);
-            dsReport = reportService.GetWeight(viewId, weightId);
+            DataSet dsReport = reportService.GetWeight(viewId, weightId);
+            SReportTemplate template = reportService.GetDefaultTemplate(type);
             string reportFilePath = string.Empty;
             if (template != null)
             {

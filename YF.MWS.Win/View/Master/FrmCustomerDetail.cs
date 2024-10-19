@@ -110,13 +110,6 @@ namespace YF.MWS.Win.View.Master
                             FrmMain.LoadCustomer(customer.CustomerType.ToEnum<CustomerType>());
                         }
                     }
-                    if (isSaved && startAutoUpload)
-                    {
-                        CustomerCacher.UpdateCustomer(customer.Id);
-                        isSaved = webCustomerService.Save(customer);
-                        if (isSaved)
-                            masterService.UpdateCustomerSyncState((int)SyncState.Synced, customer.Id);
-                    }
                     CustomerCacher.Remove();
                     MessageDxUtil.ShowTips("成功保存客户信息");
                     this.DialogResult = DialogResult.OK;

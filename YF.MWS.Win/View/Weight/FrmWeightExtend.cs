@@ -1212,10 +1212,9 @@ namespace YF.MWS.Win.View.Weight
         /// </summary>
         private void InitPort()
         {
-            InitPort(this.serialPort1,1, Cfg.Device1);
-            InitPort(this.serialPort2,2, Cfg.Device2);
+            InitPort(ref this.serialPort1,1, Cfg.Device1);
         }
-        private void InitPort(SerialPortHelper serialPort,int deviceNo,DeviceCfg deviceCfg) {
+        private void InitPort(ref SerialPortHelper serialPort,int deviceNo,DeviceCfg deviceCfg) {
             try {
                 if (deviceCfg.StartDevice) {
                     serialPort = new SerialPortHelper(deviceNo, deviceCfg);
@@ -1600,7 +1599,7 @@ namespace YF.MWS.Win.View.Weight
                 if (currentWeightProcess == WeightProcess.One || autoLoadTareWeight)
                 {
                     if(weTareWeight != null)
-                        weTareWeight.Text = UnitUtil.GetValue("ton", currentDeviceCfg.SUnit, car.Tare).ToString();
+                        weTareWeight.Text = UnitUtil.GetValue("ton", currentDeviceCfg.SUnit, car.TareWeight).ToString();
                 }
                 if (weDriverName != null && !string.IsNullOrEmpty(car.DriverName))
                 {
@@ -1734,6 +1733,7 @@ namespace YF.MWS.Win.View.Weight
             ClearWeightControl();
             CreateNewWeight();
             mainWeight.Clear(completelyClear);
+            currentState = "";
         }
 
         /// <summary>
@@ -1795,6 +1795,10 @@ namespace YF.MWS.Win.View.Weight
                 if (mainWeight.ValidateChildren() && ValidateForm())
                 {
                     AsyncCapturePhoto(GetWeightCapture(currentWeightId));
+                    if (currentState == "") {
+                        ShowWeightStateTip("请先取重");
+                        return;
+                    }
                     Save();
                 }
             }

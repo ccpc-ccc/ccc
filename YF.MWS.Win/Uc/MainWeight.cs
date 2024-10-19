@@ -623,14 +623,6 @@ namespace YF.MWS.Win.Uc
                         fields[key].SaveInputItem();
                     }
                 }
-                foreach (string key in extendFields.Keys)
-                {
-                    field = extendFields[key];
-                    if (field != null && field.StartAutoSave)
-                    {
-                        fields[key].SaveInputItem();
-                    }
-                }
             }
             catch (Exception ex)
             {

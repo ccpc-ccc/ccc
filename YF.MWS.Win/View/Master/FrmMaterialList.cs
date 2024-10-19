@@ -65,7 +65,7 @@ namespace YF.MWS.Win.View.Master
                 //获取物资编号
                 if (this.gvMaterial.FocusedRowHandle >= 0)
                 {
-                    frmDetail.MaterialId = this.gvMaterial.GetRowCellValue(this.gvMaterial.FocusedRowHandle, "MaterialId").ToString();
+                    frmDetail.MaterialId = this.gvMaterial.GetRowCellValue(this.gvMaterial.FocusedRowHandle, "Id").ToString();
                 }
 
                 if (frmDetail.ShowDialog() == DialogResult.OK)

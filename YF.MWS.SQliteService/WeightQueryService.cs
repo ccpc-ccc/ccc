@@ -117,7 +117,7 @@ namespace YF.MWS.SQliteService
             return condition;
         }
         #endregion
-        private string WeightFiles = @"a.ViewId, a.Id, a.WeightNo, a.MeasureType, a.RowState, a.CardNo, a.FinishState,a.QcState, a.CreateTime, a.FinishTime,a.WaybillNo,
+        private string WeightFiles = @"a.ViewId, a.Id, a.WeightNo, a.MeasureType, a.RowState, a.CardNo, a.FinishState,a.QcState, a.CreateTime, a.FinishTime,a.WaybillNo,a.TareTime,a.GrossTime,
             a.CarNo as CarId, a.DriverName, a.QcNo,a.MaterialAmount,a.AdditionalTime,a.GrossWeight, a.MeasureUnit, a.CustomCharge,a.OrderSource,a.TareWeight, a.SuttleWeight, 
             a.WeighterName,a.d1,a.d2,a.d3,a.PayType,a.UnitMoney,a.ImpurityWeight,a.MaxWeight,a.NetWeight,a.UnitPrice,a.RegularCharge,a.Remark,a.MaterialModel,a.WarehBizType as WarehBizType,a.AxleCount,
             a.CustomerBalance,a.PrintCount";
@@ -577,8 +577,7 @@ namespace YF.MWS.SQliteService
             if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                 sql = string.Format(@"select {4},c.WarehName as WarehId,b.MaterialName as MaterialId,
                                                   d.CustomerName as CustomerId,e.CustomerName as DeliveryId,f.CustomerName as ReceiverId,g.CustomerName as TransferId,
-                                                  j.CustomerName as ManufacturerId,k.CustomerName as SupplierId,m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName
+                                                  j.CustomerName as ManufacturerId,k.CustomerName as SupplierId
                                                  from B_Weight a  left join S_Material b on a.MaterialId=b.Id 
                                                  left join S_Wareh c on a.WarehId=c.Id
                                                  left join S_Customer d on a.CustomerId=d.Id 
@@ -587,16 +586,13 @@ namespace YF.MWS.SQliteService
                                                  left join S_Customer g on a.TransferId=g.Id 
                                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                                  left join S_Customer k on a.SupplierId=k.Id 
-                                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={2} 
-                                                left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={3} 
                                                  where 1=1 {0} order by a.FinishTime desc limit 0,{1}",
                                                  condtion, topN, (int)WeightType.Tare, (int)WeightType.Gross, WeightFiles);
                 dtWeight = sqliteDb.ExecuteDataTable(sql);
             } else {
                 sql = string.Format(@"select top {0} {4},c.WarehName as WarehId,b.MaterialName as MaterialId,
                                                   d.CustomerName as CustomerId,e.CustomerName as DeliveryId,f.CustomerName as ReceiverId,g.CustomerName as TransferId,
-                                                  j.CustomerName as ManufacturerId,k.CustomerName as SupplierId,m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName 
+                                                  j.CustomerName as ManufacturerId,k.CustomerName as SupplierId
                                                  from B_Weight a  left join S_Material b on a.MaterialId=b.Id 
                                                  left join S_Wareh c on a.WarehId=c.Id
                                                  left join S_Customer d on a.CustomerId=d.Id 
@@ -605,8 +601,6 @@ namespace YF.MWS.SQliteService
                                                  left join S_Customer g on a.TransferId=g.Id 
                                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                                  left join S_Customer k on a.SupplierId=k.Id 
-                                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={2} 
-                                                 left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={3} 
                                                  left join S_Client o on a.MachineCode=o.MachineCode 
                                                  left join S_Client p on a.TareMachineCode=p.MachineCode 
                                                  where 1=1 {1} order by a.FinishTime desc",
@@ -753,8 +747,6 @@ namespace YF.MWS.SQliteService
                                  k.ClientName,l.ClientName as TareClientName,
                                  f.CustomerName as ReceiverId,g.CustomerName as SupplierId,h.CustomerName as TransferId,
                                 b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId,
-                                m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName
                                 from(select a.* from B_Weight a  where 1=1 {0} order by a.FinishTime desc limit {1},{2})a  
                                 left join S_Material b on a.MaterialId=b.Id 
                                  left join S_Wareh c on a.WarehId=c.Id
@@ -766,8 +758,6 @@ namespace YF.MWS.SQliteService
                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                  left join S_Client k on a.MachineCode=k.MachineCode 
                                  left join S_Client l on a.TareMachineCode=l.MachineCode 
-                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={3} 
-                                 left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={4} 
                                  order by a.FinishTime desc", condition, startIndex * qc.PageSize, qc.PageSize, (int)WeightType.Tare, (int)WeightType.Gross, WeightFiles);
                     dtWeight = sqliteDb.ExecuteDataTable(sql);
                 }
@@ -778,9 +768,7 @@ namespace YF.MWS.SQliteService
                     sql = string.Format(@"select {5},
                                  k.ClientName,l.ClientName as TareClientName,
                                  f.CustomerName as ReceiverId,g.CustomerName as SupplierId,h.CustomerName as TransferId,
-                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId,
-                                m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName 
+                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId
                                 from(select * from(select row_number() over(order by a.FinishTime desc) RN,a.*
                                  from B_Weight a  where 1=1  {0} order by a.FinishTime desc)a where RN>{1} and RN<={2})a 
                                 left join S_Material b on a.MaterialId=b.Id 
@@ -793,8 +781,6 @@ namespace YF.MWS.SQliteService
                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                  left join S_Client k on a.MachineCode=k.MachineCode 
                                  left join S_Client l on a.TareMachineCode=l.MachineCode 
-                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={3} 
-                                 left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={4} 
                                  order by a.FinishTime desc ", condition, startIndex, endIndex, (int)WeightType.Tare, (int)WeightType.Gross,WeightFiles);
                     dtWeight = service.GetDataTable(sql);
                 }
@@ -807,9 +793,7 @@ namespace YF.MWS.SQliteService
                     sql = string.Format(@"select {4},
                                  k.ClientName,l.ClientName as TareClientName,
                                  f.CustomerName as ReceiverId,g.CustomerName as SupplierId,h.CustomerName as TransferId,
-                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId,
-                                m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName
+                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId
                                 from(select a.* from B_Weight a where 1=1 {0} order by a.FinishTime desc) a  
                                 left join S_Material b on a.MaterialId=b.Id 
                                  left join S_Wareh c on a.WarehId=c.Id
@@ -821,8 +805,6 @@ namespace YF.MWS.SQliteService
                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                  left join S_Client k on a.MachineCode=k.MachineCode 
                                  left join S_Client l on a.TareMachineCode=l.MachineCode 
-                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={1} 
-                                 left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={2} 
                                  where 1=1 {3} order by a.FinishTime desc", condition, (int)WeightType.Tare, (int)WeightType.Gross, payCondition,WeightFiles);
                 }
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver)
@@ -830,9 +812,7 @@ namespace YF.MWS.SQliteService
                     sql = string.Format(@"select {4},
                                  k.ClientName,l.ClientName as TareClientName,
                                  f.CustomerName as ReceiverId,g.CustomerName as SupplierId,h.CustomerName as TransferId,
-                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId,
-                                m.WeightTime  as TareTime,m.WeighterName as TareWeighterName,
-                                n.WeightTime  as GrossTime,n.WeighterName as GrossWeighterName
+                                b.MaterialName as MaterialId,c.WarehName as WarehId, d.CustomerName as CustomerId,e.CustomerName as DeliveryId,j.CustomerName as ManufacturerId
                                 from(select a.* from B_Weight a  where 1=1 {0})a 
                                 left join S_Material b on a.MaterialId=b.Id 
                                  left join S_Wareh c on a.WarehId=c.Id
@@ -844,8 +824,6 @@ namespace YF.MWS.SQliteService
                                  left join S_Customer j on a.ManufacturerId=j.Id 
                                  left join S_Client k on a.MachineCode=k.MachineCode 
                                  left join S_Client l on a.TareMachineCode=l.MachineCode 
-                                 left join B_WeightDetail m on a.Id=m.WeightId and m.WeightType={1} 
-                                 left join B_WeightDetail n on a.Id=n.WeightId and n.WeightType={2} 
                                  where 1=1 {3} order by a.FinishTime desc", condition, (int)WeightType.Tare, (int)WeightType.Gross, payCondition,WeightFiles);
                 }
                 dtWeight = GetTable(sql);

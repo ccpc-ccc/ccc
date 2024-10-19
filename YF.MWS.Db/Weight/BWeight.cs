@@ -163,6 +163,14 @@ namespace YF.MWS.Db
         /// </summary>
         public virtual DateTime FinishTime { get; set; }
         /// <summary>
+        /// 皮重时间
+        /// </summary>
+        public virtual DateTime TareTime { get; set; }
+        /// <summary>
+        /// 毛重时间
+        /// </summary>
+        public virtual DateTime GrossTime { get; set; }
+        /// <summary>
         /// 收费单价
         /// </summary>
         public virtual decimal UnitCharge { get; set; }

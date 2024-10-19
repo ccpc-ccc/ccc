@@ -20,7 +20,7 @@ namespace YF.MWS.DbMapping
             Map(m => m.DriverName);
             Map(m => m.LimitWeight);
             Map(m => m.RowState); 
-            Map(m => m.Tare);
+            Map(m => m.TareWeight);
             Map(m => m.Unit);
             Map(m => m.LimitState);
             Map(m => m.UpdaterId);

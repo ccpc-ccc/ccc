@@ -121,12 +121,11 @@ namespace YF.MWS.Util {
         /// <param name="lstSql"></param>
         /// <returns></returns>
         public int ExecuteNonQuery(List<string> lstSql) {
-            int result = 0;
             if (db == null) return -1;
             foreach (string sql in lstSql) {
                 db.Ado.ExecuteCommand(sql);
             }
-            return result;
+            return 1;
         }
 
         /// <summary>
@@ -136,8 +135,7 @@ namespace YF.MWS.Util {
         /// <param name="commandParameters">传入的参数</param>
         /// <returns></returns>
         public object ExecuteScalar(string cmdText, params object[] p) {
-            if (db == null) return null;
-            DataTable dt = db.Ado.GetDataTable(cmdText, p);
+            DataTable dt = ExecuteDataTable(cmdText, p);
             if (dt == null || dt.Rows.Count == 0) return null;
             return dt.Rows[0][0];
         }

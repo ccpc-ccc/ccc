@@ -47,7 +47,7 @@ namespace YF.MWS.Db
         /// <summary>
         /// 车辆皮重
         /// </summary>
-        public virtual decimal Tare { get; set; }
+        public virtual decimal TareWeight { get; set; }
         /// <summary>
         /// 单位
         /// </summary>

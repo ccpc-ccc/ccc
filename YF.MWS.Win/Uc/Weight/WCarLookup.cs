@@ -94,7 +94,7 @@ namespace YF.MWS.Win.Uc.Weight
                     if (!string.IsNullOrEmpty(driverName))
                         car.DriverName = car.DriverName;
                 }
-                car.Tare = tareWeight;
+                car.TareWeight = tareWeight;
                 carService.Save(car);
                 cars = carService.GetList();
                 InitData();

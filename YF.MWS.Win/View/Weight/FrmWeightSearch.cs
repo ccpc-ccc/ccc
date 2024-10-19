@@ -425,7 +425,7 @@ namespace YF.MWS.Win.View.Weight {
             if (gvWeight.GetFocusedRow() == null) {
                 MessageDxUtil.ShowWarning("请选择要重印的磅单!");
             }
-            string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToString();
+            string weightId = gvWeight.GetFocusedRowCellValue("Id").ToString();
             string viewId = gvWeight.GetFocusedRowCellValue("ViewId").ToString();
 
             Print(weightId, viewId);
@@ -527,7 +527,7 @@ namespace YF.MWS.Win.View.Weight {
                 WeightUpdate update = new WeightUpdate();
                 update.RowState = RowState.Delete;
                 foreach (DataRow row in listWeight) {
-                    weightId = row["WeightId"].ToObjectString();
+                    weightId = row["Id"].ToObjectString();
                     weightNo = row["WeightNo"].ToObjectString();
                     bool isUpdated = weightService.UpdateWeight(weightId, RowState.Delete);
                     if (isUpdated) {
@@ -588,7 +588,7 @@ namespace YF.MWS.Win.View.Weight {
                     string weightNo = string.Empty;
                     string desc;
                     foreach (DataRow row in listWeight) {
-                        weightId = row["WeightId"].ToObjectString();
+                        weightId = row["Id"].ToObjectString();
                         weightNo = row["WeightNo"].ToObjectString();
                         BWeight weight = weightService.Get(weightId);
                         bool isDeleted = weightService.DeleteWeight(weight);
@@ -610,31 +610,14 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void barItemModify_ItemClick(object sender, ItemClickEventArgs e) {
-            List<DataRow> listWeight = chkWeight.GetSelectedDataRow();
-            if (listWeight.Count <= 0) {
+            DataRow listWeight = gvWeight.GetFocusedDataRow();
+            if (listWeight==null) {
                 MessageDxUtil.ShowError("请选择数据");
                 return;
             }
-            DataTable dt = new DataTable();
-            foreach(DataColumn column in ((DataTable)gcWeight.DataSource).Columns) {
-                DataColumn col = new DataColumn() {
-                    ColumnName= column.ColumnName,
-                    Caption = column.Caption,
-                    DataType = column.DataType
-                };
-                dt.Columns.Add(col);
-            }
-            foreach (DataRow dr in listWeight)
-            {
-                if (dr["PayType"].ToString() == "已结算") {
-                    MessageDxUtil.ShowError("存在已结算的数据");
-                    return;
-                }
-                dt.Rows.Add(dr.ItemArray);
-            }
-            using (FrmWeightDetail2 frmDetail = new FrmWeightDetail2()) {
+            using (FrmWeightDetail frmDetail = new FrmWeightDetail()) {
                 frmDetail.IsSearchEdit = true;
-                frmDetail.Dt = dt;
+                frmDetail.RecId = listWeight["Id"].ToString();
                 if (frmDetail.ShowDialog() == DialogResult.OK) {
                     Search();
                 }
@@ -708,7 +691,7 @@ namespace YF.MWS.Win.View.Weight {
 
         private void barItemLog_ItemClick(object sender, ItemClickEventArgs e) {
             if (gvWeight.GetFocusedRow() != null) {
-                string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToString();
+                string weightId = gvWeight.GetFocusedRowCellValue("Id").ToString();
                 FrmRecLogList frmLog = new FrmRecLogList();
                 frmLog.RecId = weightId;
                 frmLog.ShowDialog();
@@ -721,7 +704,7 @@ namespace YF.MWS.Win.View.Weight {
                 MessageDxUtil.ShowWarning("请选择要重印的磅单！");
             } else {
                 foreach (DataRow row in listWeight) {
-                    string weightId = row["WeightId"].ToObjectString();
+                    string weightId = row["Id"].ToObjectString();
                     string viewId = row["ViewId"].ToObjectString();
                     Print(weightId, viewId, true);
                 }
@@ -733,13 +716,15 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void gvWeight_CustomColumnDisplayText_1(object sender, CustomColumnDisplayTextEventArgs e) {
-            if (e.Column.FieldName == "PayType") {
+            if (e.Column.FieldName == "SyncState") {
                 switch (e.Value.ToString()) {
-                    case "Settled":
-                        e.DisplayText = "已结算";
+                    case "1":
+                        e.DisplayText = "已同步";
                         break;
-                    case "UnSettled":
-                        e.DisplayText = "未结算";
+                    case "0":
+                    case "":
+                    case null:
+                        e.DisplayText = "未同步";
                         break;
                 }
             }

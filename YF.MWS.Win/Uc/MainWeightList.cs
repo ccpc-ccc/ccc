@@ -30,12 +30,14 @@ using YF.MWS.Win.View.UI;
 using DevExpress.Data;
 using DevExpress.XtraGrid;
 using DevExpress.XtraExport.Helpers;
+using YF.MWS.Db.Server;
 
 namespace YF.MWS.Win.Uc
 {
     public partial class MainWeightList : UserControl
     {
         private IWeightService weightService;
+        private IWebWeightService webWeightService=new WebWeightService();
         private ILogService logService = new LogService();
         private IWeightQueryService weightQueryService;
         private IWeightViewService viewService = new WeightViewService();
@@ -116,7 +118,7 @@ namespace YF.MWS.Win.Uc
             {
                 if (gvWeight.GetFocusedDataRow() != null)
                 {
-                    return gvWeight.GetFocusedRowCellValue("WeightId").ToObjectString();
+                    return gvWeight.GetFocusedRowCellValue("Id").ToObjectString();
                 }
                 else 
                 {
@@ -128,6 +130,7 @@ namespace YF.MWS.Win.Uc
         public MainWeightList()
         {
             InitializeComponent();
+            gcWeight.ContextMenuStrip = this.contextMenuStrip1;
             //gvWeight.HorzScrollVisibilly = true;
         }
 
@@ -459,6 +462,37 @@ namespace YF.MWS.Win.Uc
             if(frm.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 LoadData();
                 gcWeight.Refresh();
+            }
+        }
+
+        private void gvWeight_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e) {
+            if (e.Column.FieldName == "SyncState") {
+                switch (e.Value.ToString()) {
+                    case "1":
+                        e.DisplayText = "已同步";
+                        break;
+                    case "0":
+                    case "":
+                    case null:
+                        e.DisplayText = "未同步";
+                        break;
+                }
+            }
+        }
+
+        private void 上传数据ToolStripMenuItem_Click(object sender, EventArgs e) {
+            string weightId = gvWeight.GetFocusedRowCellValue("Id").ToObjectString();
+            if (string.IsNullOrEmpty(weightId)) {
+                MessageBox.Show("请选择需要上传的数据");
+                return;
+            }
+            ServerReturnEntity entity = webWeightService.serverSaveEnterWeightData(weightId);
+            if (entity == null) {
+                MessageBox.Show("上传数据失败");
+            } else if (entity.success) {
+                MessageBox.Show("上传数据成功");
+            } else {
+                MessageBox.Show(entity.msg);
             }
         }
     }

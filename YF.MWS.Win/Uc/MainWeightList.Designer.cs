@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWeightList));
             this.pcHeader = new DevExpress.XtraEditors.PanelControl();
             this.txtCar = new DevExpress.XtraEditors.TextEdit();
@@ -51,6 +52,8 @@
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.上传数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
@@ -64,6 +67,7 @@
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pcHeader
@@ -376,7 +380,22 @@
             this.gvWeight.OptionsBehavior.ReadOnly = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             this.gvWeight.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvWeight_RowClick);
+            this.gvWeight.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvWeight_CustomColumnDisplayText);
             this.gvWeight.DoubleClick += new System.EventHandler(this.gvWeight_DoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.上传数据ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            // 
+            // 上传数据ToolStripMenuItem
+            // 
+            this.上传数据ToolStripMenuItem.Name = "上传数据ToolStripMenuItem";
+            this.上传数据ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.上传数据ToolStripMenuItem.Text = "上传数据";
+            this.上传数据ToolStripMenuItem.Click += new System.EventHandler(this.上传数据ToolStripMenuItem_Click);
             // 
             // MainWeightList
             // 
@@ -405,6 +424,7 @@
             this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -433,5 +453,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraGrid.GridControl gcWeight;
         private DevExpress.XtraGrid.Views.Grid.GridView gvWeight;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 上传数据ToolStripMenuItem;
     }
 }

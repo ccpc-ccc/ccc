@@ -84,7 +84,7 @@ namespace YF.MWS.Win.View.Master
                             CarType = dr[1].ToObjectString(),
                             DriverName = dr[2].ToObjectString(),
                             LimitWeight = dr[3].ToDecimal(),
-                            Tare = dr[4].ToDecimal()
+                            TareWeight = dr[4].ToDecimal()
                         });
                     }
                     ImportMode mode = rgImportMode.EditValue.ToEnum<ImportMode>();
