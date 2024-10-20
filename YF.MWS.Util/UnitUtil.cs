@@ -23,6 +23,10 @@ namespace YF.MWS.Util
         {
             return GetValue(device.SUnit,device.DUnit,sourceValue);
         }
+        /// <summary>
+        /// 单位换算值 sunit:原单位,dunit:目标单位,sourceValue:原来的数值
+        /// </summary>
+        /// <returns>换算后的数值</returns>
         public static decimal GetValue(string sunit,string dunit,decimal sourceValue) 
         {
             decimal val = sourceValue;

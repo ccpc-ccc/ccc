@@ -273,6 +273,8 @@ namespace YF.MWS.Win.Uc
             //ActiveControl = btnSearch;
             AddEvent();
             gcWeight.ContextMenuStrip = this.contextMenuStrip2;
+            gvWeight.Appearance.Row.Font = CfgUtil.GetFont();
+            gvWeight.Appearance.HeaderPanel.Font= CfgUtil.GetFont();
         }
 
         private void AddEvent()

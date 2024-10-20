@@ -17,10 +17,8 @@ using YF.MWS.Metadata.Dto;
 
 namespace YF.MWS.SQliteService
 {
-    public class CarService : ICarService
+    public class CarService : BaseService, ICarService
     {
-        private SqliteDb sqliteDb = new SqliteDb();
-        private IService service = null;
         
         public CarService()
         {
@@ -231,22 +229,8 @@ namespace YF.MWS.SQliteService
         public SCar GetByCarNo(string carNo)
         {
             SCar car = null;
-            string sql;
-            sql = string.Format(@"select * from S_Car where CarNo='{0}'", carNo);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                car = TableHelper.RowToEntity<SCar>(dt.Rows[0]);
-            }
-            return car;
+            string sql = string.Format(@"select * from S_Car where CarNo='{0}'", carNo);
+            return base.getModel<SCar>(sql);
         }
 
         public SCar Get(string carId, string cardNo)

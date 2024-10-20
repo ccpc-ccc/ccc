@@ -231,7 +231,7 @@ namespace YF.MWS.Win
                 MessageBox.Show("加密狗无效，请联系供货商");
                 return false;
             }
-            CurrentClient.Instance.AutoCfg = Encrypt.EncryptDES(auth, CurrentClient.Instance.EncryptKey);
+            CurrentClient.Instance.AutoCfg = CfgUtil.GetAuthFromAuthCode(auth);
             return true;
         }
         /// <summary>
@@ -258,10 +258,10 @@ namespace YF.MWS.Win
                 string machineCode = SoftValidator.GetMachineCode();
                 CurrentClient.Instance.MachineCode = machineCode;
                 string use = AppSetting.GetValue("use");
-                string autoCode = "10011111";
+                string autoCode = "10000111";
                 if (use == "all") {
                     autoCode = "11111111";
-                }
+                } else if (use == "car") autoCode = "10001111";
                 SClient = clientService.RegisterProbation(machineCode,"CS智能称重客户端", autoCode);
                 if (SClient != null)
                 {
@@ -269,7 +269,7 @@ namespace YF.MWS.Win
                     CurrentUser.Instance.ClientId = SClient.Id;
                     CurrentUser.Instance.ClientName = SClient.ClientName;
                     CurrentClient.Instance.VerifyCode = SClient.VerifyCode;
-                    CurrentClient.Instance.AutoCfg = SClient.AuthCode;
+                    CurrentClient.Instance.AutoCfg = CfgUtil.GetAuthFromAuthCode(Encrypt.DecryptDES(SClient.AuthCode, CurrentClient.Instance.EncryptKey));
                 }
                 bool isValidated = false;
                 //优先验证无文件类型的加密狗

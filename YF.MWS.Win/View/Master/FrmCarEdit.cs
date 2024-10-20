@@ -16,6 +16,7 @@ using YF.MWS.Db;
 using YF.Utility.Log;
 using YF.Utility;
 using YF.MWS.CacheService;
+using YF.MWS.Win.Uc.Weight;
 
 namespace YF.MWS.Win.View.Master
 {
@@ -23,6 +24,7 @@ namespace YF.MWS.Win.View.Master
     {
         private ICarService carService = new CarService();
         private ISeqNoService seqNoService = new SeqNoService();
+        WTextEdit teCarNo;
         private SCar car;
         private bool isAdd = true;
         private string carNo;
@@ -48,13 +50,14 @@ namespace YF.MWS.Win.View.Master
             Save();
         }
 
-        private void FrmCarEdit_Load(object sender, EventArgs e)
-        {
-                BindData();
+        private void FrmCarEdit_Load(object sender, EventArgs e) {
+            teCarNo = mainWeight1.FindControl<WTextEdit>("CarNo");
+            BindData();
         }
 
         private bool ValidateForm()
         {
+            if (teCarNo == null) return true;
             bool isValidated = true;
             if (teCarNo.Text.Length == 0)
             {
@@ -62,17 +65,6 @@ namespace YF.MWS.Win.View.Master
                 teCarNo.ErrorIconAlignment = ErrorIconAlignment.MiddleRight;
                 isValidated = false;
             }
-            //if (combCarType.EditValue==null)
-            //{
-            //    combCarType.ErrorText = "请选择车辆类型";
-            //    combCarType.ErrorIconAlignment = ErrorIconAlignment.MiddleRight;
-            //    isValidated = false;
-            //}
-            //if (teTare.Text.ToDecimal() <= 0) 
-            //{
-            //    teTare.ErrorText = "请输入皮重";
-            //    isValidated = false;
-            //}
             return isValidated;
         }
 
@@ -87,7 +79,8 @@ namespace YF.MWS.Win.View.Master
                         car = new SCar();
                         car.Id = YF.MWS.Util.Utility.GetGuid();
                     }
-                    FormHelper.ControlToEntity<SCar>(this, ref car);
+                    mainWeight1.SaveInputItem();
+                    mainWeight1.ControlToEntity<SCar>(ref car);
                     car.CarType = DxHelper.GetCode(combCarType);
                     car.LimitState = chkLimitState.Checked ? 1 : 0;
                     car.CarNo = teCarNo.Text.Trim().Replace(" ", "");
@@ -133,6 +126,7 @@ namespace YF.MWS.Win.View.Master
                     DxHelper.BindComboBoxEdit(combCarType, SysCode.CarType, car.CarType);
                     FormHelper.BindControl<SCar>(this, car);
                     chkLimitState.Checked = car.LimitState == 1 ? true : false;
+                    mainWeight1.BindControl<SCar>(car);
                 }
                 else 
                 {

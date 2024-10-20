@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace YF.MWS.Metadata
@@ -95,21 +96,6 @@ namespace YF.MWS.Metadata
     }
 
     /// <summary>
-    /// 加载视频程序类别
-    /// </summary>
-    public enum LoadVideoAppType 
-    {
-        /// <summary>
-        /// 外部程序
-        /// </summary>
-        Exterior,
-        /// <summary>
-        /// 内部程序
-        /// </summary>
-        Inside
-    }
-
-    /// <summary>
     /// 搜索输入控件类别
     /// </summary>
     public enum SearchControlType 
@@ -188,11 +174,18 @@ namespace YF.MWS.Metadata
         /// <summary>
         /// 称重
         /// </summary>
+        [Description("称重界面")]
         Weight,
         /// <summary>
         /// 计量
         /// </summary>
-        Measure
+        [Description("其它界面")]
+        Measure,
+        /// <summary>
+        /// 车辆套表
+        /// </summary>
+        [Description("车辆套表")]
+        Car
     }
 
     /// <summary>
@@ -1022,6 +1015,41 @@ namespace YF.MWS.Metadata
         week, 
         month, 
         year   
+    }
+    /// <summary>
+    /// 停止位
+    /// </summary>
+    public enum StopBits {
+        [Description("无")]
+        None,
+        [Description("1")]
+        One,
+        [Description("2")]
+        Two,
+        [Description("1.5")]
+        OnePointFive
+    }
+    /// <summary>
+    /// 校验位
+    /// </summary>
+    public enum Parity {
+        [Description("无")]
+        None,
+        [Description("奇校验")]
+        Odd,
+        [Description("偶校验")]
+        Even,
+        [Description("奇偶校验")]
+        Mark,
+        [Description("外校验")]
+        Space
+    }
+    public static class EnumExtensions {
+        public static string toDescription(this System.Enum value) {
+            FieldInfo field = value.GetType().GetField(value.ToString());
+            DescriptionAttribute attribute = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+            return attribute == null ? value.ToString() : attribute.Description;
+        }
     }
 }
 

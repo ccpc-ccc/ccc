@@ -55,9 +55,9 @@ namespace YF.MWS.Metadata.Cfg
         public bool StartWeightProcessCfg { get; set; }
 
         /// <summary>
-        /// 自动登录
+        /// 启用车辆套表
         /// </summary>
-        public bool AutoLogin { get; set; }
+        public bool CarTemp { get; set; }
 
         /// <summary>
         /// 无人值守磅单流程触发方式

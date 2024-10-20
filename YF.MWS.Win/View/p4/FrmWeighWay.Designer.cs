@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWeighWay));
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
@@ -41,10 +41,7 @@
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.gpMeasureCfg = new DevExpress.XtraEditors.GroupControl();
-            this.rbNobody = new System.Windows.Forms.RadioButton();
-            this.rbPeople = new System.Windows.Forms.RadioButton();
-            this.gpPeople = new DevExpress.XtraEditors.GroupControl();
-            this.chkPeopleInfrared = new DevExpress.XtraEditors.CheckEdit();
+            this.rgWeightType = new DevExpress.XtraEditors.RadioGroup();
             this.gpNobody = new DevExpress.XtraEditors.GroupControl();
             this.gpWeightProcessCfg = new DevExpress.XtraEditors.GroupControl();
             this.chkStartSaveWithManualSecond = new DevExpress.XtraEditors.CheckEdit();
@@ -61,8 +58,6 @@
             this.lblAutoOutTime = new DevExpress.XtraEditors.LabelControl();
             this.gpWeightStableCfg = new DevExpress.XtraEditors.GroupControl();
             this.spSamplingCount = new DevExpress.XtraEditors.SpinEdit();
-            this.lblSampingInterval = new DevExpress.XtraEditors.LabelControl();
-            this.teSampingInterval = new DevExpress.XtraEditors.TextEdit();
             this.lblSamplingCount = new DevExpress.XtraEditors.LabelControl();
             this.lblMinCredibleWeight = new DevExpress.XtraEditors.LabelControl();
             this.teMinCredibleWeight = new DevExpress.XtraEditors.TextEdit();
@@ -84,7 +79,6 @@
             this.chkStartAutoInvalid = new DevExpress.XtraEditors.CheckEdit();
             this.lblStartAutoInvalidAfter = new DevExpress.XtraEditors.LabelControl();
             this.teUnfinishedTimeOut = new DevExpress.XtraEditors.TextEdit();
-            this.gpWeightLimitCfg = new DevExpress.XtraEditors.GroupControl();
             this.chkStartCustomerBalanceLimit = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartValidateCarWithCard = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartPlan = new DevExpress.XtraEditors.CheckEdit();
@@ -97,9 +91,9 @@
             this.gpOperationCfg = new DevExpress.XtraEditors.GroupControl();
             this.chkShareWeight = new DevExpress.XtraEditors.CheckEdit();
             this.chkGrossTareTransform = new DevExpress.XtraEditors.CheckEdit();
-            this.chkShowShortCut = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartDoubleClickUnfinished = new DevExpress.XtraEditors.CheckEdit();
             this.chkSaveFormData = new DevExpress.XtraEditors.CheckEdit();
+            this.chkCarTemp = new DevExpress.XtraEditors.CheckEdit();
             this.chkWeightProcessCfg = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartInputItemAutoSave = new DevExpress.XtraEditors.CheckEdit();
             this.gpWeightNoGenerateMode = new DevExpress.XtraEditors.GroupControl();
@@ -125,9 +119,7 @@
             this.xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpMeasureCfg)).BeginInit();
             this.gpMeasureCfg.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gpPeople)).BeginInit();
-            this.gpPeople.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkPeopleInfrared.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rgWeightType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpNobody)).BeginInit();
             this.gpNobody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessCfg)).BeginInit();
@@ -141,7 +133,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightStableCfg)).BeginInit();
             this.gpWeightStableCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teSampingInterval.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessTriggerType)).BeginInit();
@@ -158,8 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkAutoReset.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartAutoInvalid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teUnfinishedTimeOut.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gpWeightLimitCfg)).BeginInit();
-            this.gpWeightLimitCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).BeginInit();
@@ -173,9 +162,9 @@
             this.gpOperationCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkGrossTareTransform.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkShowShortCut.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartDoubleClickUnfinished.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkSaveFormData.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCarTemp.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkWeightProcessCfg.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartInputItemAutoSave.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightNoGenerateMode)).BeginInit();
@@ -210,15 +199,16 @@
             this.plMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plMain.Location = new System.Drawing.Point(0, 0);
             this.plMain.Name = "plMain";
-            this.plMain.Size = new System.Drawing.Size(1177, 627);
+            this.plMain.Size = new System.Drawing.Size(944, 538);
             this.plMain.TabIndex = 11;
             // 
             // xtraTabControl1
             // 
-            this.xtraTabControl1.Location = new System.Drawing.Point(12, 6);
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1163, 596);
+            this.xtraTabControl1.Size = new System.Drawing.Size(940, 534);
             this.xtraTabControl1.TabIndex = 10;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -228,10 +218,9 @@
             // 
             this.xtraTabPage1.Controls.Add(this.simpleButton2);
             this.xtraTabPage1.Controls.Add(this.gpMeasureCfg);
-            this.xtraTabPage1.Controls.Add(this.gpPeople);
             this.xtraTabPage1.Controls.Add(this.gpNobody);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1161, 570);
+            this.xtraTabPage1.Size = new System.Drawing.Size(938, 508);
             this.xtraTabPage1.Text = "过磅方式设置";
             // 
             // simpleButton2
@@ -245,63 +234,30 @@
             // 
             // gpMeasureCfg
             // 
-            this.gpMeasureCfg.Controls.Add(this.rbNobody);
-            this.gpMeasureCfg.Controls.Add(this.rbPeople);
+            this.gpMeasureCfg.Controls.Add(this.rgWeightType);
             this.gpMeasureCfg.Location = new System.Drawing.Point(13, 28);
             this.gpMeasureCfg.Name = "gpMeasureCfg";
             this.gpMeasureCfg.Size = new System.Drawing.Size(104, 166);
             this.gpMeasureCfg.TabIndex = 7;
             this.gpMeasureCfg.Text = "计重方式";
             // 
-            // rbNobody
+            // rgWeightType
             // 
-            this.rbNobody.AutoSize = true;
-            this.rbNobody.Location = new System.Drawing.Point(14, 87);
-            this.rbNobody.Name = "rbNobody";
-            this.rbNobody.Size = new System.Drawing.Size(73, 18);
-            this.rbNobody.TabIndex = 2;
-            this.rbNobody.Tag = "Nobody";
-            this.rbNobody.Text = "无人值守";
-            this.rbNobody.UseVisualStyleBackColor = true;
-            this.rbNobody.CheckedChanged += new System.EventHandler(this.rbNobody_CheckedChanged);
-            // 
-            // rbPeople
-            // 
-            this.rbPeople.AutoSize = true;
-            this.rbPeople.Checked = true;
-            this.rbPeople.Location = new System.Drawing.Point(14, 52);
-            this.rbPeople.Name = "rbPeople";
-            this.rbPeople.Size = new System.Drawing.Size(73, 18);
-            this.rbPeople.TabIndex = 1;
-            this.rbPeople.TabStop = true;
-            this.rbPeople.Tag = "People";
-            this.rbPeople.Text = "人工称重";
-            this.rbPeople.UseVisualStyleBackColor = true;
-            this.rbPeople.CheckedChanged += new System.EventHandler(this.rbPeople_CheckedChanged);
-            // 
-            // gpPeople
-            // 
-            this.gpPeople.Controls.Add(this.chkPeopleInfrared);
-            this.gpPeople.Location = new System.Drawing.Point(131, 28);
-            this.gpPeople.Name = "gpPeople";
-            this.gpPeople.Size = new System.Drawing.Size(626, 60);
-            this.gpPeople.TabIndex = 9;
-            this.gpPeople.Text = "人工称重设置";
-            // 
-            // chkPeopleInfrared
-            // 
-            this.chkPeopleInfrared.Location = new System.Drawing.Point(24, 29);
-            this.chkPeopleInfrared.Name = "chkPeopleInfrared";
-            this.chkPeopleInfrared.Properties.Caption = "启用红外对射";
-            this.chkPeopleInfrared.Size = new System.Drawing.Size(102, 20);
-            this.chkPeopleInfrared.TabIndex = 16;
+            this.rgWeightType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rgWeightType.Location = new System.Drawing.Point(2, 23);
+            this.rgWeightType.Name = "rgWeightType";
+            this.rgWeightType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("People", "人工称重"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Nobody", "无人值守")});
+            this.rgWeightType.Size = new System.Drawing.Size(100, 141);
+            this.rgWeightType.TabIndex = 152;
             // 
             // gpNobody
             // 
             this.gpNobody.Controls.Add(this.gpWeightProcessCfg);
             this.gpNobody.Controls.Add(this.gpWeightStableCfg);
             this.gpNobody.Controls.Add(this.gpWeightProcessTriggerType);
-            this.gpNobody.Location = new System.Drawing.Point(131, 97);
+            this.gpNobody.Location = new System.Drawing.Point(123, 28);
             this.gpNobody.Name = "gpNobody";
             this.gpNobody.Size = new System.Drawing.Size(626, 452);
             this.gpNobody.TabIndex = 8;
@@ -426,8 +382,6 @@
             // gpWeightStableCfg
             // 
             this.gpWeightStableCfg.Controls.Add(this.spSamplingCount);
-            this.gpWeightStableCfg.Controls.Add(this.lblSampingInterval);
-            this.gpWeightStableCfg.Controls.Add(this.teSampingInterval);
             this.gpWeightStableCfg.Controls.Add(this.lblSamplingCount);
             this.gpWeightStableCfg.Controls.Add(this.lblMinCredibleWeight);
             this.gpWeightStableCfg.Controls.Add(this.teMinCredibleWeight);
@@ -462,23 +416,6 @@
             0});
             this.spSamplingCount.Size = new System.Drawing.Size(76, 20);
             this.spSamplingCount.TabIndex = 101;
-            // 
-            // lblSampingInterval
-            // 
-            this.lblSampingInterval.Location = new System.Drawing.Point(315, 84);
-            this.lblSampingInterval.Name = "lblSampingInterval";
-            this.lblSampingInterval.Size = new System.Drawing.Size(74, 14);
-            this.lblSampingInterval.TabIndex = 100;
-            this.lblSampingInterval.Text = "采样间隔(秒):";
-            // 
-            // teSampingInterval
-            // 
-            this.teSampingInterval.EditValue = "";
-            this.teSampingInterval.Location = new System.Drawing.Point(404, 81);
-            this.teSampingInterval.Name = "teSampingInterval";
-            this.teSampingInterval.Size = new System.Drawing.Size(76, 20);
-            this.teSampingInterval.TabIndex = 99;
-            this.teSampingInterval.Tag = "WeightDuration";
             // 
             // lblSamplingCount
             // 
@@ -554,7 +491,6 @@
             this.xtraTabPage2.Controls.Add(this.simpleButton1);
             this.xtraTabPage2.Controls.Add(this.gpRunCfg);
             this.xtraTabPage2.Controls.Add(this.gpTaskCfg);
-            this.xtraTabPage2.Controls.Add(this.gpWeightLimitCfg);
             this.xtraTabPage2.Controls.Add(this.gpDataCfg);
             this.xtraTabPage2.Controls.Add(this.gpOperationCfg);
             this.xtraTabPage2.Controls.Add(this.gpWeightNoGenerateMode);
@@ -563,12 +499,12 @@
             this.xtraTabPage2.Controls.Add(this.gpWeightProcess);
             this.xtraTabPage2.Controls.Add(this.gpLoadUnfinishWeightCfg);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1161, 570);
+            this.xtraTabPage2.Size = new System.Drawing.Size(938, 508);
             this.xtraTabPage2.Text = "称重设置";
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(777, 441);
+            this.simpleButton1.Location = new System.Drawing.Point(240, 463);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(75, 23);
             this.simpleButton1.TabIndex = 150;
@@ -579,9 +515,9 @@
             // 
             this.gpRunCfg.Controls.Add(this.chkAutoLogin);
             this.gpRunCfg.Controls.Add(this.chkAutoRun);
-            this.gpRunCfg.Location = new System.Drawing.Point(931, 284);
+            this.gpRunCfg.Location = new System.Drawing.Point(628, 394);
             this.gpRunCfg.Name = "gpRunCfg";
-            this.gpRunCfg.Size = new System.Drawing.Size(227, 104);
+            this.gpRunCfg.Size = new System.Drawing.Size(292, 104);
             this.gpRunCfg.TabIndex = 149;
             this.gpRunCfg.Text = "运行相关设置";
             // 
@@ -613,7 +549,7 @@
             this.gpTaskCfg.Controls.Add(this.chkStartAutoInvalid);
             this.gpTaskCfg.Controls.Add(this.lblStartAutoInvalidAfter);
             this.gpTaskCfg.Controls.Add(this.teUnfinishedTimeOut);
-            this.gpTaskCfg.Location = new System.Drawing.Point(3, 304);
+            this.gpTaskCfg.Location = new System.Drawing.Point(3, 180);
             this.gpTaskCfg.Name = "gpTaskCfg";
             this.gpTaskCfg.Size = new System.Drawing.Size(604, 114);
             this.gpTaskCfg.TabIndex = 148;
@@ -683,20 +619,9 @@
             this.teUnfinishedTimeOut.Size = new System.Drawing.Size(62, 20);
             this.teUnfinishedTimeOut.TabIndex = 130;
             // 
-            // gpWeightLimitCfg
-            // 
-            this.gpWeightLimitCfg.Controls.Add(this.chkStartCustomerBalanceLimit);
-            this.gpWeightLimitCfg.Controls.Add(this.chkStartValidateCarWithCard);
-            this.gpWeightLimitCfg.Controls.Add(this.chkStartPlan);
-            this.gpWeightLimitCfg.Location = new System.Drawing.Point(3, 184);
-            this.gpWeightLimitCfg.Name = "gpWeightLimitCfg";
-            this.gpWeightLimitCfg.Size = new System.Drawing.Size(604, 109);
-            this.gpWeightLimitCfg.TabIndex = 147;
-            this.gpWeightLimitCfg.Text = "过磅限制条件设置";
-            // 
             // chkStartCustomerBalanceLimit
             // 
-            this.chkStartCustomerBalanceLimit.Location = new System.Drawing.Point(23, 41);
+            this.chkStartCustomerBalanceLimit.Location = new System.Drawing.Point(181, 100);
             this.chkStartCustomerBalanceLimit.Name = "chkStartCustomerBalanceLimit";
             this.chkStartCustomerBalanceLimit.Properties.Caption = "启用客户余额限制";
             this.chkStartCustomerBalanceLimit.Size = new System.Drawing.Size(122, 20);
@@ -704,7 +629,7 @@
             // 
             // chkStartValidateCarWithCard
             // 
-            this.chkStartValidateCarWithCard.Location = new System.Drawing.Point(182, 41);
+            this.chkStartValidateCarWithCard.Location = new System.Drawing.Point(412, 100);
             this.chkStartValidateCarWithCard.Name = "chkStartValidateCarWithCard";
             this.chkStartValidateCarWithCard.Properties.Caption = "启用IC卡验证车牌号";
             this.chkStartValidateCarWithCard.Size = new System.Drawing.Size(130, 20);
@@ -713,7 +638,7 @@
             // 
             // chkStartPlan
             // 
-            this.chkStartPlan.Location = new System.Drawing.Point(412, 41);
+            this.chkStartPlan.Location = new System.Drawing.Point(23, 133);
             this.chkStartPlan.Name = "chkStartPlan";
             this.chkStartPlan.Properties.Caption = "启用计划单限制功能";
             this.chkStartPlan.Size = new System.Drawing.Size(130, 20);
@@ -727,7 +652,7 @@
             this.gpDataCfg.Controls.Add(this.chkLoadImageWithRemote);
             this.gpDataCfg.Controls.Add(this.chkStartWeighterDataFilter);
             this.gpDataCfg.Controls.Add(this.chkStartBackupDb);
-            this.gpDataCfg.Location = new System.Drawing.Point(3, 431);
+            this.gpDataCfg.Location = new System.Drawing.Point(3, 307);
             this.gpDataCfg.Name = "gpDataCfg";
             this.gpDataCfg.Size = new System.Drawing.Size(604, 135);
             this.gpDataCfg.TabIndex = 146;
@@ -748,11 +673,11 @@
             this.btnSelectBackupDbDirectory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.btnSelectBackupDbDirectory.Size = new System.Drawing.Size(306, 20);
-            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
-            toolTipTitleItem1.Text = "提示";
+            toolTipTitleItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
+            toolTipTitleItem2.Text = "提示";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "如果是网络版数据库，则需要确保此目录存在于安装数据库的那台电脑上。";
-            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipTitleItem2);
             superToolTip1.Items.Add(toolTipItem1);
             this.btnSelectBackupDbDirectory.SuperTip = superToolTip1;
             this.btnSelectBackupDbDirectory.TabIndex = 135;
@@ -786,11 +711,14 @@
             // 
             // gpOperationCfg
             // 
+            this.gpOperationCfg.Controls.Add(this.chkStartPlan);
+            this.gpOperationCfg.Controls.Add(this.chkStartValidateCarWithCard);
+            this.gpOperationCfg.Controls.Add(this.chkStartCustomerBalanceLimit);
             this.gpOperationCfg.Controls.Add(this.chkShareWeight);
             this.gpOperationCfg.Controls.Add(this.chkGrossTareTransform);
-            this.gpOperationCfg.Controls.Add(this.chkShowShortCut);
             this.gpOperationCfg.Controls.Add(this.chkStartDoubleClickUnfinished);
             this.gpOperationCfg.Controls.Add(this.chkSaveFormData);
+            this.gpOperationCfg.Controls.Add(this.chkCarTemp);
             this.gpOperationCfg.Controls.Add(this.chkWeightProcessCfg);
             this.gpOperationCfg.Controls.Add(this.chkStartInputItemAutoSave);
             this.gpOperationCfg.Location = new System.Drawing.Point(3, 3);
@@ -801,7 +729,7 @@
             // 
             // chkShareWeight
             // 
-            this.chkShareWeight.Location = new System.Drawing.Point(23, 107);
+            this.chkShareWeight.Location = new System.Drawing.Point(23, 100);
             this.chkShareWeight.Name = "chkShareWeight";
             this.chkShareWeight.Properties.Caption = "共享磅单";
             this.chkShareWeight.Size = new System.Drawing.Size(86, 20);
@@ -816,18 +744,9 @@
             this.chkGrossTareTransform.Size = new System.Drawing.Size(122, 20);
             this.chkGrossTareTransform.TabIndex = 88;
             // 
-            // chkShowShortCut
-            // 
-            this.chkShowShortCut.Location = new System.Drawing.Point(412, 36);
-            this.chkShowShortCut.Name = "chkShowShortCut";
-            this.chkShowShortCut.Properties.Caption = "显示硬件操作区";
-            this.chkShowShortCut.Size = new System.Drawing.Size(122, 20);
-            this.chkShowShortCut.TabIndex = 89;
-            this.chkShowShortCut.Tag = "ShowShortCut";
-            // 
             // chkStartDoubleClickUnfinished
             // 
-            this.chkStartDoubleClickUnfinished.Location = new System.Drawing.Point(412, 68);
+            this.chkStartDoubleClickUnfinished.Location = new System.Drawing.Point(412, 36);
             this.chkStartDoubleClickUnfinished.Name = "chkStartDoubleClickUnfinished";
             this.chkStartDoubleClickUnfinished.Properties.Caption = "启用双击加载未完成磅单";
             this.chkStartDoubleClickUnfinished.Size = new System.Drawing.Size(155, 20);
@@ -841,6 +760,14 @@
             this.chkSaveFormData.Properties.Caption = "启用磅单信息驻留";
             this.chkSaveFormData.Size = new System.Drawing.Size(130, 20);
             this.chkSaveFormData.TabIndex = 93;
+            // 
+            // chkCarTemp
+            // 
+            this.chkCarTemp.Location = new System.Drawing.Point(412, 68);
+            this.chkCarTemp.Name = "chkCarTemp";
+            this.chkCarTemp.Properties.Caption = "启用车辆套表";
+            this.chkCarTemp.Size = new System.Drawing.Size(130, 20);
+            this.chkCarTemp.TabIndex = 101;
             // 
             // chkWeightProcessCfg
             // 
@@ -869,9 +796,9 @@
             // 
             this.gpWeightNoGenerateMode.Controls.Add(this.chkGenerateWeightNoByRand);
             this.gpWeightNoGenerateMode.Controls.Add(this.rgWeightNoGenerateMode);
-            this.gpWeightNoGenerateMode.Location = new System.Drawing.Point(931, 130);
+            this.gpWeightNoGenerateMode.Location = new System.Drawing.Point(777, 130);
             this.gpWeightNoGenerateMode.Name = "gpWeightNoGenerateMode";
-            this.gpWeightNoGenerateMode.Size = new System.Drawing.Size(227, 133);
+            this.gpWeightNoGenerateMode.Size = new System.Drawing.Size(145, 133);
             this.gpWeightNoGenerateMode.TabIndex = 143;
             this.gpWeightNoGenerateMode.Text = "磅单号生成方式";
             // 
@@ -885,8 +812,11 @@
             // 
             // rgWeightNoGenerateMode
             // 
+            this.rgWeightNoGenerateMode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.rgWeightNoGenerateMode.EditValue = "Unfinished";
-            this.rgWeightNoGenerateMode.Location = new System.Drawing.Point(15, 66);
+            this.rgWeightNoGenerateMode.Location = new System.Drawing.Point(0, 66);
             this.rgWeightNoGenerateMode.Name = "rgWeightNoGenerateMode";
             this.rgWeightNoGenerateMode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rgWeightNoGenerateMode.Properties.Appearance.Options.UseBackColor = true;
@@ -894,22 +824,23 @@
             this.rgWeightNoGenerateMode.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Unfinished", "第一次过磅生成"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Finished", "磅单完成时生成")});
-            this.rgWeightNoGenerateMode.Size = new System.Drawing.Size(154, 55);
+            this.rgWeightNoGenerateMode.Size = new System.Drawing.Size(145, 67);
             this.rgWeightNoGenerateMode.TabIndex = 1;
             // 
             // gpMeasureProcessMode
             // 
             this.gpMeasureProcessMode.Controls.Add(this.rgMeasureProcessMode);
-            this.gpMeasureProcessMode.Location = new System.Drawing.Point(931, 8);
+            this.gpMeasureProcessMode.Location = new System.Drawing.Point(777, 8);
             this.gpMeasureProcessMode.Name = "gpMeasureProcessMode";
-            this.gpMeasureProcessMode.Size = new System.Drawing.Size(227, 109);
+            this.gpMeasureProcessMode.Size = new System.Drawing.Size(145, 109);
             this.gpMeasureProcessMode.TabIndex = 142;
             this.gpMeasureProcessMode.Text = "计量方式";
             // 
             // rgMeasureProcessMode
             // 
+            this.rgMeasureProcessMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rgMeasureProcessMode.EditValue = "FirstGross";
-            this.rgMeasureProcessMode.Location = new System.Drawing.Point(15, 32);
+            this.rgMeasureProcessMode.Location = new System.Drawing.Point(2, 23);
             this.rgMeasureProcessMode.Name = "rgMeasureProcessMode";
             this.rgMeasureProcessMode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.rgMeasureProcessMode.Properties.Appearance.Options.UseBackColor = true;
@@ -917,7 +848,7 @@
             this.rgMeasureProcessMode.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("FirstGross", "先毛重后皮重"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("FirstTare", "先皮重后毛重")});
-            this.rgMeasureProcessMode.Size = new System.Drawing.Size(154, 64);
+            this.rgMeasureProcessMode.Size = new System.Drawing.Size(141, 84);
             this.rgMeasureProcessMode.TabIndex = 1;
             // 
             // gpOverWeight
@@ -957,7 +888,7 @@
             // 
             // chkStartOverWeight
             // 
-            this.chkStartOverWeight.Location = new System.Drawing.Point(100, 36);
+            this.chkStartOverWeight.Location = new System.Drawing.Point(36, 33);
             this.chkStartOverWeight.Name = "chkStartOverWeight";
             this.chkStartOverWeight.Properties.Caption = "启用超限";
             this.chkStartOverWeight.Size = new System.Drawing.Size(87, 20);
@@ -968,7 +899,7 @@
             this.gpWeightProcess.Controls.Add(this.rgWeightProcess);
             this.gpWeightProcess.Location = new System.Drawing.Point(626, 8);
             this.gpWeightProcess.Name = "gpWeightProcess";
-            this.gpWeightProcess.Size = new System.Drawing.Size(292, 109);
+            this.gpWeightProcess.Size = new System.Drawing.Size(144, 109);
             this.gpWeightProcess.TabIndex = 141;
             this.gpWeightProcess.Text = "计量方式";
             // 
@@ -984,7 +915,7 @@
             this.rgWeightProcess.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("One", "一次计量"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Two", "二次计量")});
-            this.rgWeightProcess.Size = new System.Drawing.Size(288, 84);
+            this.rgWeightProcess.Size = new System.Drawing.Size(140, 84);
             this.rgWeightProcess.TabIndex = 1;
             // 
             // gpLoadUnfinishWeightCfg
@@ -992,7 +923,7 @@
             this.gpLoadUnfinishWeightCfg.Controls.Add(this.rgLoadUnfinishWeight);
             this.gpLoadUnfinishWeightCfg.Location = new System.Drawing.Point(626, 130);
             this.gpLoadUnfinishWeightCfg.Name = "gpLoadUnfinishWeightCfg";
-            this.gpLoadUnfinishWeightCfg.Size = new System.Drawing.Size(292, 149);
+            this.gpLoadUnfinishWeightCfg.Size = new System.Drawing.Size(146, 149);
             this.gpLoadUnfinishWeightCfg.TabIndex = 140;
             this.gpLoadUnfinishWeightCfg.Text = "加载未完成磅单";
             // 
@@ -1010,7 +941,7 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem("CarNo", "依据车牌号"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("CardNo", "依据卡号"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("CarNoOrCardNo", "依据车牌号或卡号")});
-            this.rgLoadUnfinishWeight.Size = new System.Drawing.Size(288, 124);
+            this.rgLoadUnfinishWeight.Size = new System.Drawing.Size(142, 124);
             this.rgLoadUnfinishWeight.TabIndex = 65;
             // 
             // folderOpen
@@ -1021,7 +952,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 627);
+            this.ClientSize = new System.Drawing.Size(944, 538);
             this.Controls.Add(this.plMain);
             this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
             this.MaximizeBox = false;
@@ -1038,10 +969,7 @@
             this.xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpMeasureCfg)).EndInit();
             this.gpMeasureCfg.ResumeLayout(false);
-            this.gpMeasureCfg.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gpPeople)).EndInit();
-            this.gpPeople.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chkPeopleInfrared.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rgWeightType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpNobody)).EndInit();
             this.gpNobody.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessCfg)).EndInit();
@@ -1057,7 +985,6 @@
             this.gpWeightStableCfg.ResumeLayout(false);
             this.gpWeightStableCfg.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teSampingInterval.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessTriggerType)).EndInit();
@@ -1075,8 +1002,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkAutoReset.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartAutoInvalid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teUnfinishedTimeOut.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gpWeightLimitCfg)).EndInit();
-            this.gpWeightLimitCfg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).EndInit();
@@ -1091,9 +1016,9 @@
             this.gpOperationCfg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkGrossTareTransform.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkShowShortCut.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartDoubleClickUnfinished.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkSaveFormData.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCarTemp.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkWeightProcessCfg.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartInputItemAutoSave.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightNoGenerateMode)).EndInit();
@@ -1120,8 +1045,6 @@
 
         #endregion
         private DevExpress.XtraEditors.PanelControl plMain;
-        private DevExpress.XtraEditors.GroupControl gpPeople;
-        private DevExpress.XtraEditors.CheckEdit chkPeopleInfrared;
         private DevExpress.XtraEditors.GroupControl gpNobody;
         private DevExpress.XtraEditors.GroupControl gpWeightProcessCfg;
         private DevExpress.XtraEditors.TextEdit txtOutWeight;
@@ -1136,8 +1059,6 @@
         private DevExpress.XtraEditors.LabelControl lblAutoOutTime;
         private DevExpress.XtraEditors.GroupControl gpWeightStableCfg;
         private DevExpress.XtraEditors.SpinEdit spSamplingCount;
-        private DevExpress.XtraEditors.LabelControl lblSampingInterval;
-        private DevExpress.XtraEditors.TextEdit teSampingInterval;
         private DevExpress.XtraEditors.LabelControl lblSamplingCount;
         private DevExpress.XtraEditors.LabelControl lblMinCredibleWeight;
         private DevExpress.XtraEditors.TextEdit teMinCredibleWeight;
@@ -1146,8 +1067,6 @@
         private DevExpress.XtraEditors.GroupControl gpWeightProcessTriggerType;
         private DevExpress.XtraEditors.RadioGroup rgWeightProcessTriggerType;
         private DevExpress.XtraEditors.GroupControl gpMeasureCfg;
-        private System.Windows.Forms.RadioButton rbNobody;
-        private System.Windows.Forms.RadioButton rbPeople;
         private DevExpress.Utils.ImageCollection imgListSmall;
         private DevExpress.XtraEditors.CheckEdit chkStartSaveWithManualFirst;
         private DevExpress.XtraEditors.CheckEdit chkStartSaveWithManualSecond;
@@ -1156,7 +1075,6 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraEditors.GroupControl gpRunCfg;
         private DevExpress.XtraEditors.CheckEdit chkAutoLogin;
-        private DevExpress.XtraEditors.CheckEdit chkAutoRun;
         private DevExpress.XtraEditors.GroupControl gpTaskCfg;
         private DevExpress.XtraEditors.LabelControl lblIdleMinutesAfter;
         private DevExpress.XtraEditors.LabelControl lblIdleMinutesBefore;
@@ -1166,7 +1084,6 @@
         private DevExpress.XtraEditors.CheckEdit chkStartAutoInvalid;
         private DevExpress.XtraEditors.LabelControl lblStartAutoInvalidAfter;
         private DevExpress.XtraEditors.TextEdit teUnfinishedTimeOut;
-        private DevExpress.XtraEditors.GroupControl gpWeightLimitCfg;
         private DevExpress.XtraEditors.CheckEdit chkStartCustomerBalanceLimit;
         private DevExpress.XtraEditors.CheckEdit chkStartValidateCarWithCard;
         private DevExpress.XtraEditors.CheckEdit chkStartPlan;
@@ -1179,7 +1096,6 @@
         private DevExpress.XtraEditors.GroupControl gpOperationCfg;
         private DevExpress.XtraEditors.CheckEdit chkShareWeight;
         private DevExpress.XtraEditors.CheckEdit chkGrossTareTransform;
-        private DevExpress.XtraEditors.CheckEdit chkShowShortCut;
         private DevExpress.XtraEditors.CheckEdit chkStartDoubleClickUnfinished;
         private DevExpress.XtraEditors.CheckEdit chkSaveFormData;
         private DevExpress.XtraEditors.CheckEdit chkWeightProcessCfg;
@@ -1201,5 +1117,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.FolderBrowserDialog folderOpen;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.RadioGroup rgWeightType;
+        private DevExpress.XtraEditors.CheckEdit chkCarTemp;
+        private DevExpress.XtraEditors.CheckEdit chkAutoRun;
     }
 }

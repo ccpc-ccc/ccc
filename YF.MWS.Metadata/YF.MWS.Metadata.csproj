@@ -94,7 +94,6 @@
     <Compile Include="Cfg\NobodyWeightCfg.cs" />
     <Compile Include="Cfg\OverWeightCfg.cs" />
     <Compile Include="Cfg\PageCfg.cs" />
-    <Compile Include="Cfg\PeopleWeightCfg.cs" />
     <Compile Include="Cfg\FormCfg.cs" />
     <Compile Include="Cfg\PlcCfg.cs" />
     <Compile Include="Cfg\QrCodeCfg.cs" />
@@ -208,7 +207,6 @@
     <Compile Include="Query\QCard.cs" />
     <Compile Include="Query\QueryCondition.cs" />
     <Compile Include="Query\QWeight.cs" />
-    <Compile Include="Query\QWeightAttribute.cs" />
     <Compile Include="Query\QWeightView.cs" />
     <Compile Include="Query\SyncWeight.cs" />
     <Compile Include="Query\TopWeightQuery.cs" />

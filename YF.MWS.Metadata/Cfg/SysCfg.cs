@@ -32,7 +32,6 @@ namespace YF.MWS.Metadata.Cfg
         /// 2号仪表配置
         /// </summary>
         public DeviceCfg Device2 { get; set; }
-        public PeopleWeightCfg PeopleWeight { get; set; }
         /// <summary>
         /// 二维码设置
         /// </summary>
@@ -94,7 +93,6 @@ namespace YF.MWS.Metadata.Cfg
             CarNoRecognition = new CarNoRecognitionCfg(); 
             OverWeight = new OverWeightCfg();
             NobodyWeight = new NobodyWeightCfg();
-            PeopleWeight = new PeopleWeightCfg();
             Weight = new WeightCfg();
             FinanceSettle = new FinanceSettleCfg();
             WeightSearch = new WeightSearchCfg();

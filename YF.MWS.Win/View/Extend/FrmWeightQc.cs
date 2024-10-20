@@ -68,12 +68,6 @@ namespace YF.MWS.Win.View.Extend
 
         private void BindWeight(BWeight weight) 
         {
-            List<BWeightAttribute> lstAttr = weightExtService.GetAttributeList(weightId);
-            BWeightAttribute attr = lstAttr.Find(c => c.FieldName == "PackageType");
-            if (attr != null)
-            {
-                DxHelper.BindComboBoxEdit(combPackageType, "PackageType", attr.AttributeValue);
-            }
             FormHelper.BindControl<BWeight>(this, weight);
             lookupCar.CurrentValue = weight.CarId;
             lookupCar.Text = weight.CarNo;
@@ -96,21 +90,6 @@ namespace YF.MWS.Win.View.Extend
             weReceiverId.CurrentValue = weightQc.ReceiverId;
             weDeliveryId.CurrentValue = weightQc.DeliveryId;
             //weWeightNo.CurrentValue = weightQc.WeightId;
-        }
-
-        private void BindPrimaryAmount() 
-        {
-            string weightId = weWeightNo.CurrentValue.ToObjectString();
-            List<BWeightAttribute> lstWeightAttr = weightExtService.GetAttributeList(weightId);
-            if (lstWeightAttr == null || lstWeightAttr.Count == 0) 
-            {
-                return;
-            }
-            BWeightAttribute attr = lstWeightAttr.Find(c => !string.IsNullOrEmpty(c.FieldName) && c.FieldName.ToUpper() == "PrimaryAmount".ToUpper());
-            if (attr != null) 
-            {
-                tePrimaryAmount.Text = attr.AttributeValue;
-            }
         }
 
         private void LoadData() 
@@ -174,7 +153,6 @@ namespace YF.MWS.Win.View.Extend
                 wLookupQcNo.Enabled = false;
                 weWeightNo.Enabled = false;
             }
-            BindPrimaryAmount();
         }
 
         private void Print() 
@@ -264,7 +242,6 @@ namespace YF.MWS.Win.View.Extend
                     return;
                 }
                 BindWeight(weight);
-                BindPrimaryAmount();
             }
         }
 

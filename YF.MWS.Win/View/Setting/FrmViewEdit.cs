@@ -97,14 +97,14 @@ namespace YF.MWS.Win.View
             List<LookupField> lstField = new List<LookupField>();
             lstField.Add(new LookupField() { FieldName = "SubjectName", Caption = "名称" });
             SearchLookupUtil.BindData(lookupSubject, lstSubject, "SubjectId", "SubjectName", lstField);
-            DxHelper.BindComboBoxEdit(comboViewType, SysCode.ViewType, null);
+            DxHelper.BindComboBoxEdit<ViewType>(comboViewType, "");
             if (!string.IsNullOrEmpty(RecId)) 
             {
                 view = viewService.GetView(RecId);
                 FormHelper.BindControl<SWeightView>(this, view);
                 lookupSubject.EditValue = view.SubjectId;
                 lookupSubject.Enabled = false;
-                DxHelper.BindComboBoxEdit(comboViewType, SysCode.ViewType, view.ViewType);
+                DxHelper.BindComboBoxEdit<ViewType>(comboViewType, view.ViewType);
             }
         }
     }

@@ -39,6 +39,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.raType = new DevExpress.XtraEditors.RadioGroup();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.label4 = new System.Windows.Forms.Label();
             this.dateDongle = new DevExpress.XtraEditors.TimeEdit();
@@ -49,7 +50,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtFilePath = new DevExpress.XtraEditors.TextEdit();
             this.label8 = new System.Windows.Forms.Label();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -148,6 +148,7 @@
             this.raFileType.Name = "raFileType";
             this.raFileType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("car", "车牌识别"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
             this.raFileType.Size = new System.Drawing.Size(269, 27);
             this.raFileType.TabIndex = 73;
@@ -180,9 +181,19 @@
             this.raType.Name = "raType";
             this.raType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("manual", "普通版"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("car", "车牌识别"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("all", "无人值守")});
             this.raType.Size = new System.Drawing.Size(269, 27);
             this.raType.TabIndex = 71;
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Location = new System.Drawing.Point(195, 189);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(86, 36);
+            this.simpleButton3.TabIndex = 66;
+            this.simpleButton3.Text = "读取加密狗";
+            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // simpleButton1
             // 
@@ -282,15 +293,6 @@
             this.label8.Size = new System.Drawing.Size(55, 14);
             this.label8.TabIndex = 5;
             this.label8.Text = "文件路径";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(195, 189);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(86, 36);
-            this.simpleButton3.TabIndex = 66;
-            this.simpleButton3.Text = "读取加密狗";
-            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
             // 
             // FrmMain
             // 

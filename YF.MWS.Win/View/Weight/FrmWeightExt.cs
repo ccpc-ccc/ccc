@@ -472,16 +472,6 @@ namespace YF.MWS.Win.View.Weight
             return isSimple;
         }
 
-        private bool FinishPadInput()
-        {
-            bool isFinished = true;
-            if (startPad && !finishPadInput)
-            {
-                isFinished = false;
-            }
-            return isFinished;
-        }
-
         private string GetCarNo(string carNo) 
         {
             carNo = carNo.Trim().Replace(" ","");
@@ -794,22 +784,6 @@ namespace YF.MWS.Win.View.Weight
         }
 
         /// <summary>
-        /// 判断当前时间是否是有效的采样时间
-        /// </summary>
-        /// <param name="dtNow"></param>
-        /// <param name="dtLastSampling"></param>
-        /// <returns></returns>
-        private bool IsEffectiveSamplingTime(DateTime dtNow, DateTime dtLastSampling)
-        {
-            bool isSampling = false;
-            if ((decimal)DateUtil.SecondsDiff(dtLastSampling, dtNow) >= sampingInterval)
-            {
-                isSampling = true;
-            }
-            return isSampling;
-        }
-
-        /// <summary>
         /// 重量是否稳定
         /// </summary>
         /// <returns></returns>
@@ -868,7 +842,7 @@ namespace YF.MWS.Win.View.Weight
         private bool ValidateInfrared() 
         {
             bool isValidated = true;
-            decimal currentWeight = GetCurrentWeight();
+            //decimal currentWeight = GetCurrentWeight();
             if (startInfrared && modbusLeft != null)
             {
                 isValidated = modbusLeft.ValidateInfrared();
@@ -888,8 +862,6 @@ namespace YF.MWS.Win.View.Weight
                         }
                         isNoteCheckCar = true;
                     }
-                    //this.isStable = false;
-                    isValidated = false;
                 }
             }
             return isValidated;
@@ -898,13 +870,10 @@ namespace YF.MWS.Win.View.Weight
         /// <summary>
         /// 自动保存重量
         /// </summary>
-        private void AutoWeightSave(decimal weight) 
+        private void AutoWeightSave() 
         {
-            if (isAutoSaving)
-                return;
             lock (autoSaveLockObj)
             {
-                isAutoSaving = true;
                 try
                 {
                     ShowWeightStateTip("开始自动保存磅单");
@@ -913,7 +882,7 @@ namespace YF.MWS.Win.View.Weight
                     if (currentWeighWay == WeightWay.Nobody)
                     {
                         //转换重量数字为文字形式
-                        DigitConvertUtil digitConverter = new DigitConvertUtil((double)weight);
+                        DigitConvertUtil digitConverter = new DigitConvertUtil((double)currentStableWeight);
                         if (startVoice && voiceCfg.BroadcastWeight == BroadcastWeightType.SuttleWeight)
                         {
                             if (weSuttleWeight != null) 
@@ -933,10 +902,8 @@ namespace YF.MWS.Win.View.Weight
                                 voice = string.Format(voiceCfg.SecondWeight, digitConverter.ConvertToString());
                             }
                         }
-                        ShowWeightStateTip("正在保存磅单,请稍后");
-                        
                         //保存称重截图
-                        AsyncCapturePhoto(GetWeightCapture(currentWeightId, weight));
+                        AsyncCapturePhoto(GetWeightCapture(currentWeightId, currentStableWeight));
                         bool isSaved = Save();
                         if (startVoice && speecher != null && isSaved)
                         {
@@ -945,17 +912,12 @@ namespace YF.MWS.Win.View.Weight
                         
                         if (isSaved)
                         {
-                            bool needWait = NeedWaitConfirmPay();
-                            if (!needWait)
-                               HandleGateAfterSave();
+                            //bool needWait = NeedWaitConfirmPay();
+                           // if (!needWait) 
+                                HandleGateAfterSave();
                             ShowWeightStateTip("等待地磅重量归零,下次过磅准备");
                             //启动车辆驶出地磅检测定时器
                             this.timerOut.Start();
-                            
-                            //ThreadPool.QueueUserWorkItem(new WaitCallback((object source) =>
-                            //{
-                            //    Func();
-                            //}));
                         }
                     }
                 }
@@ -963,7 +925,6 @@ namespace YF.MWS.Win.View.Weight
                 {
                     Logger.WriteException(ex);
                 }
-                isAutoSaving = false;
             }
         }
 
@@ -1140,15 +1101,15 @@ namespace YF.MWS.Win.View.Weight
                     car.Id = YF.MWS.Util.Utility.GetGuid();
                     car.CarNo = weight.CarNo;
                     car.CarType = "A1";
-                    car.Tare = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
+                    car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
                     carService.Save(car);
                     CarCacher.Remove();
                 }
                 else 
                 {
-                    if (car.Tare == 0) 
+                    if (car.TareWeight == 0) 
                     {
-                        car.Tare = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
+                        car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
                         carService.Save(car);
                     }
                 }
@@ -1159,7 +1120,7 @@ namespace YF.MWS.Win.View.Weight
         {
             mainWeight.SaveInputItem();
             if (wlookupCustomer != null && !wlookupCustomer.StartAutoSave)
-                CustomerUtil.AutoSaveCustomer(masterService, seqNoService, mainWeight, lstAttr);
+                CustomerUtil.AutoSaveCustomer(masterService, seqNoService, mainWeight);
         }
 
         #region 设备状态显示灯

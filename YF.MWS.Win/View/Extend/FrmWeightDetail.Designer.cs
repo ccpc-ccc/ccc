@@ -205,7 +205,7 @@
             this.mainWeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainWeight.FrmWeight = null;
             this.mainWeight.Location = new System.Drawing.Point(0, 0);
-            this.mainWeight.LstAttribute = null;
+            //this.mainWeight.LstAttribute = null;
             this.mainWeight.Margin = new System.Windows.Forms.Padding(4);
             this.mainWeight.Name = "mainWeight";
             this.mainWeight.Size = new System.Drawing.Size(925, 388);

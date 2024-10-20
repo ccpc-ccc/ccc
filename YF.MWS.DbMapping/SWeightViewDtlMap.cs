@@ -31,8 +31,8 @@ namespace YF.MWS.DbMapping
             Map(m => m.IsRequired);
             Map(m => m.Readonly);
             Map(m => m.OrderNo);
-            Map(m => m.AutoSaveState).CustomType(typeof(BoolValueType));
-            Map(m => m.StayState).CustomType(typeof(BoolValueType));
+            Map(m => m.AutoSaveState);
+            Map(m => m.StayState);
             Map(m => m.RowState);
             Map(m => m.SyncState);
             Map(m => m.UpdaterId);

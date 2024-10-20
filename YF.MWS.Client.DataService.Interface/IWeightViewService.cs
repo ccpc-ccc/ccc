@@ -55,5 +55,15 @@ namespace YF.MWS.Client.DataService.Interface
         void saveWeightViewDtlRowState(SWeightViewDtl dtl);
         void saveWeightViewDtlColIndex(SWeightViewDtl dtl);
         void saveWeightViewDtlRowIndex(SWeightViewDtl dtl);
+        /// <summary>
+        /// 修改自动保存
+        /// </summary>
+        /// <param name="dtl"></param>
+        void saveWeightViewDtlAutoSaveState(SWeightViewDtl dtl);
+        /// <summary>
+        /// 修改驻留状态
+        /// </summary>
+        /// <param name="dtl"></param>
+        void saveWeightViewDtlStayState(SWeightViewDtl dtl);
     }
 }

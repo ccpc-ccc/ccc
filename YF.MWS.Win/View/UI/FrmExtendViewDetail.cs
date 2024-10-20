@@ -87,11 +87,11 @@ namespace YF.MWS.Win.View.UI
                 detail.Readonly = chkReadonly.Checked ? 1 : 0;
                 detail.ControlType = ctrlType.ToString();
                 detail.ActionName = teActionName.Text;
-                detail.StayState = chkStartStay.Checked ? BoolValueType.True : BoolValueType.False;
-                detail.AutoSaveState = chkStartAutoSave.Checked ? BoolValueType.True : BoolValueType.False;
+                detail.StayState = chkStartStay.Checked ? 1 : 0;
+                detail.AutoSaveState = chkStartAutoSave.Checked ? 1 : 0;
                 bool canStay = CanStartStay(detail.FieldName);
                 if (!canStay)
-                    detail.StayState = BoolValueType.False;
+                    detail.StayState = 0;
                 viewService.SaveViewDetail(detail);
                 MessageDxUtil.ShowTips("成功保存界面扩展控件信息.");
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -117,8 +117,8 @@ namespace YF.MWS.Win.View.UI
                 lookupControl.EditValue = detail.ControlId;
                 chkIsRequired.Checked = detail.IsRequired == 1 ? true : false;
                 chkReadonly.Checked = detail.Readonly == 1 ? true : false;
-                chkStartAutoSave.Checked = detail.AutoSaveState == BoolValueType.True ? true : false;
-                chkStartStay.Checked = detail.StayState == BoolValueType.True ? true : false;
+                chkStartAutoSave.Checked = detail.AutoSaveState == 1;
+                chkStartStay.Checked = detail.StayState ==1;
             }
         }
 

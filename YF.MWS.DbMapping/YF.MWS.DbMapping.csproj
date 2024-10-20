@@ -57,7 +57,6 @@
     <Compile Include="BPlanCardMap.cs" />
     <Compile Include="BPlanMap.cs" />
     <Compile Include="BTrialAccountMap.cs" />
-    <Compile Include="BWeightAttributeMap.cs" />
     <Compile Include="BWeightConfirmMap.cs" />
     <Compile Include="BWeightDetailMap.cs" />
     <Compile Include="BWeightExtMap.cs" />

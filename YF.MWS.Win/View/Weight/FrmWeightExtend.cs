@@ -148,11 +148,6 @@ namespace YF.MWS.Win.View.Weight
         /// 采样重量个数
         /// </summary>
         public int samplingCount = 0;
-        private DateTime currentSamplingTime=DateTime.Now;
-        /// <summary>
-        /// 采样时间间隔(秒)
-        /// </summary>
-        public decimal sampingInterval;
         /// <summary>
         /// 是否正在自动保存磅单
         /// </summary>
@@ -550,11 +545,10 @@ namespace YF.MWS.Win.View.Weight
                 if (Cfg.WeightStable != null) 
                 {
                     minCredibleWeight = Cfg.WeightStable.MinCredibleWeight;
-                    minCredibleWeight = UnitUtil.GetValue("Kg", currentDeviceCfg.SUnit, minCredibleWeight);
+                    minCredibleWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Kg", minCredibleWeight);
                     weightDeviation = Cfg.WeightStable.WeightDeviation;
-                    weightDeviation = UnitUtil.GetValue("Kg", currentDeviceCfg.SUnit, weightDeviation);
+                    weightDeviation = UnitUtil.GetValue(currentDeviceCfg.SUnit,"Kg",  weightDeviation);
                     samplingCount = Cfg.WeightStable.SamplingCount;
-                    sampingInterval = Cfg.WeightStable.SampingInterval;
                 }
                 if (Cfg.CarNo != null) 
                 {
@@ -799,8 +793,6 @@ namespace YF.MWS.Win.View.Weight
         {
             try
             {
-                //Logger.Write(string.Format("Trigger Car RecCondition:{0},Weight:{1},MinWeightValue:{2},CarNo:{3},HasGetCarNo:{4},DeviceNo:{5},IP:{6}",
-                //                   currentRecCondition, leftWeightValue, minWeightValue, resInfo.Num.Trim(), hasGetCarNo,resInfo.DeviceID,resInfo.IP));
                 if (hasGetCarNo)
                 {
                     if (speecher != null) 
@@ -811,7 +803,7 @@ namespace YF.MWS.Win.View.Weight
                     return;
                 }
 
-                if (currentRecCondition == CarNoRecCondition.WeightGeZero)
+               /* if (currentRecCondition == CarNoRecCondition.WeightGeZero)
                 {
                     if (leftWeightValue <= minWeightValue)
                     {
@@ -826,11 +818,11 @@ namespace YF.MWS.Win.View.Weight
                         ShowWeightStateTip(string.Format("当前重量未归零车牌不能被识别"));
                         return;
                     }
-                }
-
+                }*/
                 string strIP = resInfo.IP;
                 string strPlate = resInfo.Num.TrimEnd('\0');
                 strPlate = GetCarNo(strPlate);
+                txtCar.Text = strPlate;
                 if (!string.IsNullOrEmpty(strPlate))
                 {
                     ShowWeightStateTip("车牌("+strPlate+")已经识别");
@@ -839,7 +831,7 @@ namespace YF.MWS.Win.View.Weight
                     {
                         hasReadCard = true;
                     }
-                    bool isValidated = ValidateCarNo(strPlate);
+                    /*bool isValidated = ValidateCarNo(strPlate);
                     if (!isValidated)
                     {
                         hasGetCarNo = false;
@@ -863,7 +855,7 @@ namespace YF.MWS.Win.View.Weight
                             ShowWeightStateTip("车牌(" + strPlate + ")被限制称重");
                             return;
                         }
-                    }
+                    }*/
                     SendReturnZero(SendReturnZeroProcessType.CarRecognized);
                     //ClearWeightControl();
                     currentCarNo = strPlate;
@@ -896,7 +888,6 @@ namespace YF.MWS.Win.View.Weight
                     {
                         speecher.Speak(voiceCfg.CarRecognition);
                     }
-
                     #region WeightWay.Nobody
                     //if (currentWeighWay == WeightWay.Nobody)
                     {
@@ -904,10 +895,8 @@ namespace YF.MWS.Win.View.Weight
                         //红灯灭绿灯亮
                         GreeServerLight(readerNo);
                         message = string.Format("正在开启{0}#道闸", readerNo);
-                            ShowWeightStateTip(string.Format("正在开启{0}#道闸",readerNo));
                             //1#车牌识别仪识别车牌
                             this.OpenServerGate(this.readerNo);
-                        Logger.Write("车牌识别后起闸情况:" + message);
                     }
                     #endregion
                 }
@@ -1183,23 +1172,6 @@ namespace YF.MWS.Win.View.Weight
             }
         }
 
-        public void InputFromPad(string carNo,string materialId,string customerId) 
-        {
-            if (wlookCar != null) 
-            {
-                wlookCar.Text = carNo;
-            }
-            if (weMaterial != null) 
-            {
-                weMaterial.CurrentValue = materialId;
-            }
-            if (!string.IsNullOrEmpty(customerId) && wlookupCustomer != null) 
-            {
-                wlookupCustomer.CurrentValue = customerId;
-            }
-            finishPadInput = true;
-            returnZero = true;
-        }
 
         private bool CanOpenEntranceGate(SCar car)
         {
@@ -1396,17 +1368,14 @@ namespace YF.MWS.Win.View.Weight
 
         private void LoadCar(string carNo)
         {
-            SCar car = CarCacher.GetWithCarNo(carNo);
+            SCar car = carService.GetByCarNo(carNo);
             if (car != null)
             {
+          if(Cfg.Weight.CarTemp)  mainWeight.BindControl<SCar>(car);
                 if (currentWeightProcess == WeightProcess.One || autoLoadTareWeight)
                 {
                     if(weTareWeight != null)
-                        weTareWeight.Text = UnitUtil.GetValue("ton", currentDeviceCfg.SUnit, car.Tare).ToString();
-                }
-                if (weDriverName != null && !string.IsNullOrEmpty(car.DriverName))
-                {
-                    weDriverName.CurrentValue = car.DriverName;
+                        weTareWeight.Text = UnitUtil.GetValue("ton", currentDeviceCfg.SUnit, car.TareWeight).ToString();
                 }
             }
         }
@@ -1444,13 +1413,13 @@ namespace YF.MWS.Win.View.Weight
         private bool LoadUnFinishWeightWithCarNo(string carNo) 
         {
             bool hasLoaded = false;
+            hasLoadUnFinishWeight = true;
             if (loadUnfinishWeight == LoadUnfinishWeightType.CarNo || (loadUnfinishWeight== LoadUnfinishWeightType.CarNoOrCardNo && !hasLoadUnFinishWeight))
             {
                 //获取磅单信息
                 currentWeight = weightService.GetUnFinishedByCarNo(carNo);
                 if (currentWeight != null)
                 {
-                    hasLoadUnFinishWeight = true;
                     LoadWeight(currentWeight, false);
                     isNewWeight = false;
                     currentWeightId = currentWeight.Id;
@@ -1466,18 +1435,18 @@ namespace YF.MWS.Win.View.Weight
                         hasLoaded = true;
                     }
                 }
-                   // hasGetCarNo = true; //车牌是否识别
             }
             if (!hasLoaded) 
             {
                 LoadCar(carNo);
-                BPlanCard card = cardService.GetByCarNo(carNo);
+                /*BPlanCard card = cardService.GetByCarNo(carNo);
                 if (card != null)
                 {
                     List<BCardPreset> lstPreset = CardCacher.GetPresetList(card.Id);
                     mainWeight.BindCardView(card, lstPreset);
-                }
+                }*/
             }
+            isNewWeight = !hasLoaded;
             return hasLoaded;
         }
 
@@ -1503,28 +1472,33 @@ namespace YF.MWS.Win.View.Weight
         }
         #region 道闸操作
         private async void OpenServerGate(int no) {
+            bool isOk = false;
             if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2 - 1;
                await this.modbusLeft.SendData(no, 3);
-            }else if (Cfg.NobodyWeight.GateControl == "Car") {
+                isOk = true;
+            } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no==1&&this.hxRecognizerLeft!=null) {
-                bool isOk= hxRecognizerLeft.OpenGate();
+                 isOk = hxRecognizerLeft.OpenGate();
                 }else if (no==2&&this.hxRecognizerRight!=null) {
-                    bool isOk = hxRecognizerRight.OpenGate();
+                  isOk = hxRecognizerRight.OpenGate();
                 }
             }
+            if(isOk)ShowWeightStateTip(string.Format("正在开启{0}#道闸", no));
         }
         private async void CloseServerGate(int no) {
-            if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
+            bool isOk = false;
+            if (Cfg.NobodyWeight.GateControl == "Modbus" && this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2;
-               await this.modbusLeft.SendData(no, 3);
-            }else if (Cfg.NobodyWeight.GateControl == "Car") {
+                await this.modbusLeft.SendData(no, 3);
+            } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no == 1 && this.hxRecognizerLeft != null) {
-                    bool isOk = hxRecognizerLeft.CloseGate();
+                      isOk = hxRecognizerLeft.CloseGate();
                 } else if (no == 2 && this.hxRecognizerRight != null) {
-                    bool isOk = hxRecognizerRight.CloseGate();
+                     isOk = hxRecognizerRight.CloseGate();
                 }
-            }
+            } else { return; }
+           if(isOk) ShowWeightStateTip(string.Format("正在关闭{0}#道闸", no));
         }
         #endregion
         #region 红绿灯
@@ -1589,37 +1563,16 @@ namespace YF.MWS.Win.View.Weight
                 needSetWeight = false;
             }
             decimal weight = GetCurrentWeight();
-            if (weight > 0 && needSetWeight && currentWeighWay== WeightWay.Nobody)
-            {
-                if (isNewWeight)
-                {
-                    if(processMode== MeasureProcessMode.FirstGross)
-                        AutoSetWeight(WeightType.Gross, weight);
-                    else
-                        AutoSetWeight(WeightType.Tare, weight);
-                }
-                else
-                {
-                    if (processMode == MeasureProcessMode.FirstGross)
-                       AutoSetWeight(WeightType.Tare, weight);
-                    else
-                       AutoSetWeight(WeightType.Gross, weight);
-                }
-            }
             if (tareWeight > 0 && grossWeight > 0 && tareWeight > grossWeight && !needSetWeight)
             {
                 TareGrossTransform();
             }
             if (currentWeighWay == WeightWay.Nobody)
             {
-                if (weight == 0) 
-                {
-                    weight = grossWeight - tareWeight;
-                }
                 bool isValidated = ValidateForm() && mainWeight.ValidateChildren();
                 if (isValidated)
                 {
-                    AutoWeightSave(weight);
+                    AutoWeightSave();
                 }
             }
             else

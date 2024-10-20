@@ -41,16 +41,19 @@ namespace YF.MWS.Db
 
         public virtual int OrderNo { get; set; }
         /// <summary>
-        /// 驻留状态
+        /// 驻留状态 0不驻留 1驻留
         /// </summary>
-        public virtual BoolValueType StayState { get; set; }
+        public virtual int StayState { get; set; }
         /// <summary>
         /// 自动保存状态
         /// </summary>
-        public virtual BoolValueType AutoSaveState { get; set; }
+        public virtual int AutoSaveState { get; set; }
         public virtual string Caption { get; set; }
         public virtual string ErrorText { get; set; }
         public virtual int Readonly { get; set; }
+        /// <summary>
+        /// 是否必填项
+        /// </summary>
         public virtual int IsRequired { get; set; }
         /// <summary>
         /// 同步状态

@@ -14,7 +14,6 @@ using YF.Utility.Log;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.BaseMetadata;
 using YF.Data.NHProvider;
-using FluentData;
 using YF.Utility.Language;
 using static System.Windows.Forms.AxHost;
 
@@ -158,31 +157,6 @@ namespace YF.MWS.SQliteService
             sql = string.Format(@"delete from B_WeightDetail where WeightId='{0}' and WeightType={1}", weightId, (int)type);
             lstSql.Add(sql);
             return sql;
-        }
-
-        private void SaveAttribute(string weightId, List<BWeightAttribute> lst)
-        {
-            if (lst != null && lst.Count > 0)
-            {
-                List<string> lstSql = new List<string>();
-                lstSql.Add(string.Format("delete from B_WeightAttribute where WeightId='{0}'", weightId)); 
-                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-                {
-                    foreach (BWeightAttribute attr in lst)
-                    {
-                        lstSql.Add(SqliteSqlUtil.GetSaveSql<BWeightAttribute>(attr, "B_WeightAttribute"));
-                    }
-                    sqliteDb.ExecuteNonQuery(lstSql);
-                }
-                else 
-                {
-                    service.ExecuteNonQuery(lstSql);
-                    foreach (BWeightAttribute attr in lst)
-                    {
-                        service.Save<BWeightAttribute>(attr,attr.AttributeId);
-                    }
-                }
-            }
         }
 
         #endregion 
@@ -650,27 +624,6 @@ namespace YF.MWS.SQliteService
             return weight;
         }
 
-        public List<BWeightAttribute> GetAttributeList(string weightId)
-        {
-            List<BWeightAttribute> lst = new List<BWeightAttribute>();
-            string sql;
-            sql = string.Format("select * from B_WeightAttribute where WeightId='{0}'", weightId);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                lst = TableHelper.TableToList<BWeightAttribute>(dt);
-            }
-            return lst;
-        }
-
         public List<QDriver> GetDriverList()
         {
             List<QDriver> lstDriver = new List<QDriver>();
@@ -830,19 +783,13 @@ namespace YF.MWS.SQliteService
             {
                 sql = string.Format(@"select * from B_Weight where LOWER(CarNo) = LOWER('{0}') and FinishState=0 and RowState!='{1}' 
                              order by CreateTime desc limit 0,1", carNo, (int)RowState.Delete);
-                dt = sqliteDb.ExecuteDataTable(sql);
             }
             else 
             {
                 sql = string.Format(@"select top 1 * from B_Weight where CarNo = '{0}' and FinishState=0 and RowState!='{1}' 
                              order by CreateTime desc", carNo, (int)RowState.Delete);
-                dt = service.GetDataTable(sql);
             }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                weight = TableHelper.RowToEntity<BWeight>(dt.Rows[0]);
-            }
-            return weight;
+            return base.getModel<BWeight>(sql);
         }
 
         public bool ImportNew(DataTable dtWeight,SysCfg cfg) 

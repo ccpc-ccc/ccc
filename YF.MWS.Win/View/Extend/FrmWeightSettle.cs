@@ -31,7 +31,6 @@ namespace YF.MWS.Win.View.Extend
         private IWeightViewService viewService = new WeightViewService();
         private IAttributeService attributeService = new AttributeService();
         private IWeightExtService weightExtService = new WeightExtService();
-        List<BWeightAttribute> lstAttr=new List<BWeightAttribute>();
         private BWeightExt weightExt;
 
         private WNumbericEdit weTareWeight;
@@ -82,7 +81,6 @@ namespace YF.MWS.Win.View.Extend
 
         private void InitControl()
         {
-            lstAttr = attributeService.GetWeightAttributeList(RecId);
 
             weTareWeight = mainWeight.FindControl<WNumbericEdit>("TareWeight");
             weGrossWeight = mainWeight.FindControl<WNumbericEdit>("GrossWeight");
@@ -101,18 +99,6 @@ namespace YF.MWS.Win.View.Extend
             wlookupSupplier = mainWeight.FindControl<WLookupSearchEdit>("SupplierId");
             wlookCar = mainWeight.FindControl<WCarLookup>("CarId");
             weWeighterName = mainWeight.FindControl<WTextEdit>("WeighterName");
-
-            weExtPayAmount = mainWeight.FindExtendControl<WNumbericEdit>("PayAmount", lstAttr);
-            weExtDeducCharge = mainWeight.FindExtendControl<WNumbericEdit>("DeducCharge", lstAttr);
-            weExtRealCharge = mainWeight.FindExtendControl<WNumbericEdit>("RealCharge", lstAttr);
-            weExtTransportPrice = mainWeight.FindExtendControl<WNumbericEdit>("TransportPrice", lstAttr);
-            weExtTransportCharge = mainWeight.FindExtendControl<WNumbericEdit>("TransportCharge", lstAttr);
-            weExtDebit = mainWeight.FindExtendControl<WNumbericEdit>("Debit", lstAttr);
-            weExtDebitWeight = mainWeight.FindExtendControl<WNumbericEdit>("DebitWeight", lstAttr);
-            weExtDeduction = mainWeight.FindExtendControl<WNumbericEdit>("Deduction", lstAttr);
-            weExtRealTransportCharge = mainWeight.FindExtendControl<WNumbericEdit>("RealTransportCharge", lstAttr);
-            weExtSettlementAmount = mainWeight.FindExtendControl<WNumbericEdit>("SettlementAmount", lstAttr);
-            weExtPrimaryAmount = mainWeight.FindExtendControl<WNumbericEdit>("PrimaryAmount", lstAttr);
         }
 
         private void InitData() 
@@ -347,7 +333,6 @@ namespace YF.MWS.Win.View.Extend
                     MessageDxUtil.ShowWarning("加载磅单时发生未知错误,请重试.");
                     return;
                 } 
-                mainWeight.BindExtendControl(lstAttr,false);
                 mainWeight.BindControl<BWeight>(weight,false);
                 if (wlookCar != null)
                 {

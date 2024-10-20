@@ -69,7 +69,7 @@ namespace YF.MWS.Metadata
         /// <summary>
         /// 版本权限
         /// </summary>
-        public string AutoCfg { get; set; }
+        public AuthCfg AutoCfg { get; set; }
         /// <summary>
         /// 剩余天数
         /// </summary>

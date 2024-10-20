@@ -214,7 +214,6 @@
             this.mainWeight.CurrentViewType = YF.MWS.Metadata.ViewType.Weight;
             this.mainWeight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainWeight.Location = new System.Drawing.Point(0, 0);
-            this.mainWeight.LstAttribute = ((System.Collections.Generic.List<YF.MWS.Db.SAttribute>)(resources.GetObject("mainWeight.LstAttribute")));
             this.mainWeight.Name = "mainWeight";
             this.mainWeight.Size = new System.Drawing.Size(809, 400);
             this.mainWeight.TabIndex = 0;

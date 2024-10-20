@@ -285,6 +285,11 @@ namespace YF.MWS.Win
                         DateEdit de = (DateEdit)c;
                         SetPropertyValue<T>(de.EditValue.ToObjectString(), lstProperty, de.Tag.ToObjectString(), ref t);
                     }
+                    if (c.GetType().Name == "WCustomerEdit")
+                    {
+                        WCustomerEdit de = (WCustomerEdit)c;
+                        SetPropertyValue<T>(de.EditValue.ToObjectString(), lstProperty, de.Tag.ToObjectString(), ref t);
+                    }
                     //GridLookUpEdit
                     if (c.HasChildren)
                     {

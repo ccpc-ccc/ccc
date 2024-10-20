@@ -37,8 +37,8 @@ namespace YF.MWS.Win.Uc.Weight
             this.Properties.Buttons[0].Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.DropDown;
             this.Properties.Buttons[0].ToolTip = "下拉选择车牌";
             this.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton() { Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis,ToolTip="窗口选择车牌" });
-            this.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton() { Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, ToolTip="手动触发车牌识别" });
-            this.Properties.Buttons[2].Image =  YF.MWS.Win.Properties.Resources.camera_16x16;
+            //this.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton() { Kind = DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, ToolTip="手动触发车牌识别" });
+            //this.Properties.Buttons[2].Image =  YF.MWS.Win.Properties.Resources.camera_16x16;
             this.Properties.AutoComplete = false;
         }
         
@@ -94,7 +94,7 @@ namespace YF.MWS.Win.Uc.Weight
                     if (!string.IsNullOrEmpty(driverName))
                         car.DriverName = car.DriverName;
                 }
-                car.Tare = tareWeight;
+                car.TareWeight = tareWeight;
                 carService.Save(car);
                 cars = carService.GetList();
                 InitData();

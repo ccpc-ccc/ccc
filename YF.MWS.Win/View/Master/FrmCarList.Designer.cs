@@ -245,8 +245,6 @@
             this.gvCar.GridControl = this.gcCar;
             this.gvCar.Name = "gvCar";
             this.gvCar.NewItemRowText = "点此添加数据";
-            this.gvCar.OptionsFind.AlwaysVisible = true;
-            this.gvCar.OptionsFind.FindMode = DevExpress.XtraEditors.FindMode.Always;
             this.gvCar.OptionsView.ShowGroupPanel = false;
             this.gvCar.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colCarNo, DevExpress.Data.ColumnSortOrder.Ascending)});

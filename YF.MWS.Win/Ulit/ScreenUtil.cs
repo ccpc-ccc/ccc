@@ -66,8 +66,8 @@ namespace YF.MWS.Win
             this.serlPort.PortName = IniUtility.GetIniKeyValue(section, "Port", "COM1");
             this.serlPort.BaudRate = Convert.ToInt32(IniUtility.GetIniKeyValue(section, "BaundRate", "9600"));
             this.serlPort.DataBits = Convert.ToInt32(IniUtility.GetIniKeyValue(section, "DataBit", "8"));
-            this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), IniUtility.GetIniKeyValue(section, "StopBit", "One"), true);
-            this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), IniUtility.GetIniKeyValue(section, "Parity", "None"), true);
+            this.serlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), IniUtility.GetIniKeyValue(section, "StopBit", "One"), true);
+            this.serlPort.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), IniUtility.GetIniKeyValue(section, "Parity", "None"), true);
 
             this.serlPort.DataReceived += new SerialDataReceivedEventHandler(this.SerlPort_DataReceived);
         }
@@ -109,7 +109,7 @@ namespace YF.MWS.Win
         public void SetStopBits(string stopBits)
         {
             if (this.serlPort != null)
-                this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits, true);
+                this.serlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), stopBits, true);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace YF.MWS.Win
         public void SetParity(string parity)
         {
             if (this.serlPort != null)
-                this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), parity, true);
+                this.serlPort.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), parity, true);
         }
 
         /// <summary>

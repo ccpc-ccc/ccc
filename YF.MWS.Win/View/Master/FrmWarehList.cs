@@ -80,9 +80,9 @@ namespace YF.MWS.Win.View.Master
                 string message;
                 if (isDelete)
                 {
-                    webCompanyService.DeleteWareh(wareh.Id);
                     message = "成功删除仓库信息.";
                     MessageDxUtil.ShowTips(message);
+                    BindData();
                 }
                 else 
                 {

@@ -198,12 +198,6 @@
     <Compile Include="FrmRegister.Designer.cs">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmRepair.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmRepair.Designer.cs">
-      <DependentUpon>FrmRepair.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -823,17 +817,11 @@
     <Compile Include="View\Master\FrmReadCard.Designer.cs">
       <DependentUpon>FrmReadCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmScreenCfg.cs">
+    <Compile Include="View\p4\FrmScreenCfg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Master\FrmScreenCfg.Designer.cs">
+    <Compile Include="View\p4\FrmScreenCfg.Designer.cs">
       <DependentUpon>FrmScreenCfg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Master\FrmScreenSetting.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmScreenSetting.Designer.cs">
-      <DependentUpon>FrmScreenSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Master\FrmSeqNoCfgEdit.cs">
       <SubType>Form</SubType>
@@ -990,12 +978,6 @@
     </Compile>
     <Compile Include="View\Setting\FrmCarRecgonizer.Designer.cs">
       <DependentUpon>FrmCarRecgonizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Setting\FrmFont.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Setting\FrmFont.Designer.cs">
-      <DependentUpon>FrmFont.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Setting\FrmIdCardCfg.cs">
       <SubType>Form</SubType>
@@ -1273,9 +1255,6 @@
     <EmbeddedResource Include="FrmRegister.resx">
       <DependentUpon>FrmRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmRepair.resx">
-      <DependentUpon>FrmRepair.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -1531,11 +1510,8 @@
     <EmbeddedResource Include="View\Master\FrmReadCard.resx">
       <DependentUpon>FrmReadCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmScreenCfg.resx">
+    <EmbeddedResource Include="View\p4\FrmScreenCfg.resx">
       <DependentUpon>FrmScreenCfg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmScreenSetting.resx">
-      <DependentUpon>FrmScreenSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmSeqNoCfgEdit.resx">
       <DependentUpon>FrmSeqNoCfgEdit.cs</DependentUpon>
@@ -1614,9 +1590,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Setting\FrmCarRecgonizer.resx">
       <DependentUpon>FrmCarRecgonizer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Setting\FrmFont.resx">
-      <DependentUpon>FrmFont.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Setting\FrmIdCardCfg.resx">
       <DependentUpon>FrmIdCardCfg.cs</DependentUpon>

@@ -100,7 +100,7 @@ namespace YF.MWS.Win {
             SClient client = clientService.Get(machineCode);
             if (client != null) {
                 if (!string.IsNullOrEmpty(client.ExpireCode)) {
-                    string expiredDate = YF.Utility.Security.Encrypt.DecryptDES(client.ExpireCode, CurrentClient.Instance.EncryptKey);
+                    string expiredDate = DateTime.Now.ToString("yyyyMMdd");
                     int expDate = YF.Utility.Security.Encrypt.DecryptDES(lines[1], CurrentClient.Instance.EncryptKey).ToInt();
                     if (expDate < expiredDate.ToInt()) {
                             MessageDxUtil.ShowWarning("注册文件无效,请联系软件供应商.");

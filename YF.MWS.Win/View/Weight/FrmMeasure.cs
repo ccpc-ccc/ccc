@@ -231,7 +231,6 @@ namespace YF.MWS.Win.View.Weight
                     MessageDxUtil.ShowWarning("加载磅单时发生未知错误,请重试.");
                     return;
                 }
-                List<BWeightAttribute> lstAttr = attributeService.GetWeightAttributeList(RecId);
                 if (isSearchEdit)
                 {
                     OrderSource boundSource = weight.OrderSource.ToEnum<OrderSource>();
@@ -241,7 +240,6 @@ namespace YF.MWS.Win.View.Weight
                     }
                     mainWeight.BoundSource = boundSource;
                 }
-                mainWeight.BindExtendControl(lstAttr);
                 mainWeight.BindControl<BWeight>(weight);
                 deFinishTime.DateTime = weight.FinishTime;
                 if (wlookCar != null)

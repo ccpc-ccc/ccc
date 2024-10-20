@@ -14,7 +14,6 @@ namespace YF.MWS.Client.DataService.Interface
     {
         DataTable GetAddList(DateTime dtStart, DateTime dtEnd, OrderSource source,string viewId);
         DataSet GetMeasureSearch(string viewId, string condition, string conditionTareTime, string conditionGrossTime, List<QueryCondition> lstExtendCondition);
-        List<BWeightAttribute> GetAttributeList(string weightId);
         BWeightExt Get(string weightId);
         bool Save(BWeightExt weightExt);
     }

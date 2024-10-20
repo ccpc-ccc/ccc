@@ -38,8 +38,6 @@ namespace YF.MWS.Client.DataService.Interface
         /// <returns></returns>
         int GetCurrentDateCount(); 
 
-        List<BWeightAttribute> GetAttributeList(string weightId);
-
         BWeightDetail GetDetail(string weightId, WeightType type);
 
         List<QDriver> GetDriverList();

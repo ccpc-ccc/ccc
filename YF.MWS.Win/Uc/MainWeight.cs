@@ -31,7 +31,6 @@ namespace YF.MWS.Win.Uc
     {
         private Dictionary<string, IField> fields = new Dictionary<string, IField>();
         private Dictionary<string, IField> cardFields = new Dictionary<string, IField>();
-        private Dictionary<string, IField> extendFields = new Dictionary<string, IField>();
         private List<IField> lstField = new List<IField>();
         private List<CalculateField> lstCalculateField = new List<CalculateField>();
         private List<Control> lstValidateControl = new List<Control>();
@@ -44,15 +43,8 @@ namespace YF.MWS.Win.Uc
         private FontCfg fontCfg=new FontCfg();
         public string CurrentSubjectId;
         public string CurrentViewId;
-        private List<SAttribute> lstAttribute = new List<SAttribute>();
 
         public FrmWeight FrmWeight { get; set; }
-
-        public List<SAttribute> LstAttribute
-        {
-            get { return lstAttribute; }
-            set { lstAttribute = value; }
-        }
         /// <summary>
         /// 软件称重计量单位
         /// </summary>
@@ -146,20 +138,6 @@ namespace YF.MWS.Win.Uc
                                 isValidated = false;
                                 return isValidated;
                             }
-                        }
-                    }
-                }
-                foreach (string key in extendFields.Keys)
-                {
-                    field = extendFields[key];
-                    if (field != null && field.IsRequired)
-                    {
-                        if (field.CurrentValue == null || field.CurrentValue.ToString().Length == 0)
-                        {
-                            if (FrmWeight != null)
-                                FrmWeight.ShowWeightStateTip(field.ErrorTipText);
-                            isValidated = false;
-                            return isValidated;
                         }
                     }
                 }
@@ -276,8 +254,8 @@ namespace YF.MWS.Win.Uc
                         field.t1=detail.t1;
                         field.Expression = detail.Expression;
                         field.ActionName = detail.ActionName;
-                        field.StartAutoSave = detail.AutoSaveState == BoolValueType.True ? true : false;
-                        field.StartStay = detail.StayState == BoolValueType.True ? true : false;
+                        field.StartAutoSave = detail.AutoSaveState == 1;
+                        field.StartStay = detail.StayState==1;
                         isReadonly = detail.Readonly == 1 ? true : false;
                         field.DecimalDigits = detail.DecimalDigits;
                         if (isReadonly) 
@@ -294,10 +272,6 @@ namespace YF.MWS.Win.Uc
                             {
                                 lstCalculateField.Add(calField);
                             }
-                        }
-                        if (ctlType == ControlType.Extend)
-                        { 
-                            extendFields[detail.ControlId] = field;
                         }
                         if (ctlType == ControlType.Standard)
                         {
@@ -425,39 +399,6 @@ namespace YF.MWS.Win.Uc
             }
         } 
 
-        public T FindExtendControl<T>(string fieldName, List<SAttribute> lstAttr) where T : class
-        {
-            SAttribute attr = lstAttr.Find(a => a.FieldName == fieldName);
-            if (attr != null)
-            {
-                foreach (string key in extendFields.Keys)
-                {
-                    if (key == attr.Id)
-                    {
-                        return extendFields[key] as T;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public T FindExtendControl<T>(string fieldName, List<BWeightAttribute> lstAttr) where T : class
-        {
-            BWeightAttribute attr;
-            attr = lstAttr.Find(a => a.FieldName == fieldName);
-            if (attr != null)
-            {
-                foreach (string key in extendFields.Keys)
-                {
-                    if (key == attr.AttributeId)
-                    {
-                        return extendFields[key] as T;
-                    }
-                }
-            }
-            return null;
-        }
-
         private IField GetControl(string fullName)
         {
             IField field = null;
@@ -518,17 +459,6 @@ namespace YF.MWS.Win.Uc
                                 field.Clear();*/
                         }
                     }
-                    foreach (string key in extendFields.Keys)
-                    {
-                        field = extendFields[key];
-                        if (field != null) {
-                            if ((!completelyClear && !field.StartStay) || completelyClear) {
-                                field.Clear();
-                            }
-                            /*if (completelyClear)
-                                field.Clear();*/
-                        }
-                    }
                 }));
             }
             catch (Exception ex) 
@@ -548,14 +478,6 @@ namespace YF.MWS.Win.Uc
                 foreach (string key in fields.Keys)
                 {
                     field = fields[key];
-                    if (field != null && field.StartAutoSave)
-                    {
-                        fields[key].SaveInputItem();
-                    }
-                }
-                foreach (string key in extendFields.Keys)
-                {
-                    field = extendFields[key];
                     if (field != null && field.StartAutoSave)
                     {
                         fields[key].SaveInputItem();
@@ -607,14 +529,6 @@ namespace YF.MWS.Win.Uc
             if (lstPreset != null && lstPreset.Count > 0)
             {
                 BCardPreset preset;
-                foreach (string key in extendFields.Keys)
-                {
-                    preset = lstPreset.Find(c => c.ControlId == key);
-                    if (preset != null && !string.IsNullOrEmpty(preset.PresetValue) && preset.PresetValue.Length > 0)
-                    {
-                        extendFields[key].CurrentValue = preset.PresetValue;
-                    }
-                }
                 foreach (string key in cardFields.Keys)
                 {
                     preset = lstPreset.Find(c => c.ControlId == key);
@@ -710,65 +624,6 @@ namespace YF.MWS.Win.Uc
                 field.CurrentValue = obj;
                 field.SetEnabled(enabled);
             }
-        }
-
-        public void BindExtendControl(List<BWeightAttribute> lstAttr, List<string> lstExecutedField)
-        {
-            BWeightAttribute attr;
-            foreach (string key in extendFields.Keys)
-            {
-                attr = lstAttr.Find(c => c.AttributeId == key);
-                if (attr != null)
-                {
-                    if (lstExecutedField!=null && !lstExecutedField.Exists(c => c == attr.FieldName))
-                    {
-                        extendFields[key].CurrentValue = attr.AttributeValue;
-                    }
-                }
-            }
-        }
-
-        public void BindExtendControl(List<BWeightAttribute> lstAttr)
-        {
-            BWeightAttribute attr;
-            foreach (string key in extendFields.Keys)
-            {
-                attr = lstAttr.Find(c => c.AttributeId == key);
-                if (attr != null)
-                {
-                    extendFields[key].CurrentValue = attr.AttributeValue;
-                }
-            }
-        }
-
-        public void BindExtendControl(List<BWeightAttribute> lstAttr, bool enabled)
-        {
-            BWeightAttribute attr;
-            foreach (string key in extendFields.Keys)
-            {
-                attr = lstAttr.Find(c => c.AttributeId == key);
-                if (attr != null)
-                {
-                    extendFields[key].CurrentValue = attr.AttributeValue;
-                    extendFields[key].SetEnabled(enabled);
-                }
-            }
-        }
-
-        public List<BWeightAttribute> ExtendControlToList(string weightId)
-        {
-            List<BWeightAttribute> lstAttr = new List<BWeightAttribute>();
-            BWeightAttribute attr;
-            foreach (string key in extendFields.Keys)
-            {
-                attr = new BWeightAttribute();
-                attr.Id = YF.MWS.Util.Utility.GetGuid();
-                attr.WeightId = weightId;
-                attr.AttributeId = key;
-                attr.AttributeValue = extendFields[key].CurrentValue.ToObjectString();
-                lstAttr.Add(attr);
-            }
-            return lstAttr;
         }
 
         public void ControlToEntity<T>(ref T t)

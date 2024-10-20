@@ -22,6 +22,8 @@ using YF.Utility.Log;
 using YF.Utility.IO;
 using DevExpress.XtraPrinting;
 using YF.Utility.Metadata;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace YF.MWS.Win
 {
@@ -180,6 +182,26 @@ namespace YF.MWS.Win
             }
             return value;
         }
+        public static string GetEnumCode(this ComboBoxEdit combo)
+        {
+            string value = null;
+            if (combo.EditValue != null)
+            {
+                try
+                {
+                    var code = combo.EditValue as EnumItem;
+                    if (code != null)
+                    {
+                        value = code.ItemCode;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.WriteException(ex);
+                }
+            }
+            return value;
+        }
         public static string GetStrValue(this ComboBoxEdit combo)
         {
             string value = string.Empty;
@@ -202,7 +224,7 @@ namespace YF.MWS.Win
             }
             return value;
         }
-        public static void SetSelectItemValue(ComboBoxEdit combo, string value) {
+        public static void SetSelectItemValue(this ComboBoxEdit combo, string value) {
             try {
                 foreach(ListItem c in combo.Properties.Items) {
                     if (c.Value == value) {
@@ -221,7 +243,7 @@ namespace YF.MWS.Win
         /// <typeparam name="T">枚举类型</typeparam>
         /// <param name="combo"></param>
         /// <param name="seletedValue"></param>
-        public static void BindComboBoxEdit<T>(ComboBoxEdit combo, int seletedValue = -1)
+        public static void BindComboBoxEdit<T>(ComboBoxEdit combo, int seletedValue)
         {
             combo.Properties.Items.Clear();
             ComboBoxItemCollection coll = combo.Properties.Items;
@@ -256,7 +278,40 @@ namespace YF.MWS.Win
             coll.AddRange(lst.ToArray());
             coll.EndUpdate();
         }
-
+        public static void BindComboBoxEdit<T>(ComboBoxEdit combo, string seletedValue = "")
+        {
+            combo.Properties.Items.Clear();
+            ComboBoxItemCollection coll = combo.Properties.Items;
+            List<ListItem> lst = new List<ListItem>();
+            //lst.Add(new ListItem() { Text="全部",Value=-1 });
+            coll.BeginUpdate();
+            ListItem selectedItem = null;
+            List<EnumItem> items = Converter.ToEnumItemList<T>();
+            if (items != null && items.Count > 0) {
+                foreach (EnumItem item in items)
+                {
+                    lst.Add(new ListItem()
+                    {
+                        Text = item.ItemCaption,
+                        Value = item.ItemCode
+                    });
+                    if (item.ItemCode == seletedValue)
+                    {
+                        selectedItem = new ListItem()
+                        {
+                            Text = item.ItemCaption,
+                            Value = item.ItemCode
+                        };
+                    }
+                }
+            }
+            if (selectedItem != null)
+            {
+                combo.EditValue = selectedItem;
+            }
+            coll.AddRange(lst.ToArray());
+            coll.EndUpdate();
+        }
         public static void BindComboBoxEdit(ComboBoxEdit combo, DataTable dt, string textField, string seletedValue)
         {
             combo.Properties.Items.Clear();
@@ -321,27 +376,6 @@ namespace YF.MWS.Win
             combo.SelectedIndex = -1;
             if (selectedCode != null)
             {
-                combo.EditValue = selectedCode;
-            }
-        }
-        public static void BindComboBoxEdit<T>(ComboBoxEdit combo,object selectedValue)where T:Enum {
-            ListItem selectedCode = null;
-            ComboBoxItemCollection coll = combo.Properties.Items;
-            coll.BeginUpdate();
-            foreach (int eemun in Enum.GetValues(typeof(T))) {
-                string sName = Enum.GetName(typeof(T), eemun);//获取名称
-                ListItem temp = new ListItem() {
-                    Text = sName,
-                    Value = eemun.ToString()
-                };
-                coll.Add(temp);
-                if(selectedValue != null && selectedValue.ToString() == eemun.ToString()) {
-                    selectedCode = temp;
-                }
-            }
-            coll.EndUpdate();
-            combo.SelectedIndex = -1;
-            if (selectedCode != null) {
                 combo.EditValue = selectedCode;
             }
         }
@@ -698,12 +732,6 @@ namespace YF.MWS.Win
             }
         }
 
-        public static void CommitRow(TreeList tl)
-        {
-            tl.PostEditor();
-            tl.CloseEditor();
-            tl.EndCurrentEdit();
-        }
 
         /// <summary>
         /// 得到TreeList的选中node
@@ -730,118 +758,6 @@ namespace YF.MWS.Win
                     list.Add(node);
                     GetTreeListCheckedNodes(list, node.Nodes);
                 }
-            }
-        }
-
-        public static void SetTreeListColumn(DevExpress.XtraTreeList.Columns.TreeListColumnCollection Columns, List<ColumnProperty> cp, NameValueCollection Language)
-        {
-            try
-            {
-                //Verify verify = new Verify();
-                List<ColumnFilter> verifyGuidViewNumberLength = new List<ColumnFilter>();
-                foreach (var p in cp)
-                {
-                    if (Columns[p.FieldName] == null)
-                        continue;
-
-                    if (!string.IsNullOrEmpty(p.Caption))
-                        Columns[p.FieldName].Caption = p.Caption;
-                    else
-                    {
-                        if (Language != null)
-                        {
-                            //by xie fuhong on 2012/10/04
-                            if (!string.IsNullOrEmpty(p.LanguageKeyName))
-                            {
-                                Columns[p.FieldName].Caption = Language[p.LanguageKeyName];
-                                p.Caption = Language[p.LanguageKeyName];
-                            }
-                            else
-                            {
-                                Columns[p.FieldName].Caption = Language[p.FieldName];
-                                p.Caption = Language[p.FieldName];
-                            }
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(p.ColumnEditName))
-                        Columns[p.FieldName].ColumnEditName = p.ColumnEditName;
-                    p.SetLength(Columns);
-                    if (Columns[p.FieldName] == null) continue;
-                    //设置字段是否可读
-                    Columns[p.FieldName].OptionsColumn.ReadOnly = p.ReadOnly;
-                    Columns[p.FieldName].Visible = p.Visible;
-                    //if (p.FormatType != DevExpress.Utils.FormatType.None)
-                    //{
-                    //    Columns[p.FieldName].DisplayFormat.FormatType = p.FormatType;
-                    //    Columns[p.FieldName].DisplayFormat.FormatString = p.FormatString;
-                    //}
-
-                    //by xie fuhong on 2012/09/19
-                    if (p.IsShowFontBold)
-                    {
-                        Font f = Columns[p.FieldName].AppearanceHeader.Font;
-                        Columns[p.FieldName].AppearanceHeader.Font = new Font(f, FontStyle.Bold);
-                    }
-
-                    //by xie fuhong on 2012/09/19
-                    if (!p.AllowMove)
-                    {
-                        Columns[p.FieldName].OptionsColumn.AllowMove = false;
-                    }
-
-                    //by xie fuhong on 2012/10/04
-                    if (p.IsNotAllowMoveToCustomizationForm)
-                    {
-                        Columns[p.FieldName].OptionsColumn.AllowMoveToCustomizationForm = false;
-                    }
-
-                    //by xie fuhong on 2012/10/04
-                    if (p.IsNotShowInCustomizationForm)
-                    {
-                        Columns[p.FieldName].OptionsColumn.ShowInCustomizationForm = false;
-                    }
-
-                    //by xie fuhong on 2012/10/04
-                    if (p.IsAllowBestFitWidth)
-                    {
-                        Columns[p.FieldName].BestFit();
-                    }
-
-                    //设置数字类型的长度
-                    if (p.VerifyNumberLength != null)
-                    {
-                        ColumnFilter verifyNumber = new ColumnFilter()
-                        {
-                            Column = p.FieldName,
-                            DecimalLength = p.VerifyNumberLength.DecimalLength,
-                            Length = p.VerifyNumberLength.Length
-                        };
-                        verifyGuidViewNumberLength.Add(verifyNumber);
-                    }
-                    //设置停靠列
-                    Columns[p.FieldName].Fixed = p.TreeFixedStyle;
-                }
-                //var view = Columns.TreeList as DevExpress.XtraGrid.Views.Grid.GridView;
-                ////设置数字类型的长度
-                //if (verifyGuidViewNumberLength != null && verifyGuidViewNumberLength.Count > 0)
-                //    verify.VerifyGridDigitColumnsLength(view, verifyGuidViewNumberLength);
-
-                //view.RowCellStyle += (object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e) =>
-                //{
-                //    if (e.RowHandle >= 0)
-                //    {
-                //        var FieldName = from p in gcp where e.Column.FieldName == p.FieldName && p.NotNull == true select p.FieldName;
-                //        if (FieldName.Count() > 0)
-                //        {
-                //            e.Appearance.BackColor = Color.DeepSkyBlue;
-                //            e.Appearance.BackColor2 = Color.LightCyan;
-                //        }
-                //    }
-                //};              
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
             }
         }
 

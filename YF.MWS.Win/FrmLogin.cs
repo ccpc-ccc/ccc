@@ -169,7 +169,7 @@ namespace YF.MWS.Win
             SysCfg cfg = CfgUtil.GetCfg();
             if (cfg != null && cfg.Weight != null) 
             {
-                autoLogin = cfg.Weight.AutoLogin;
+                autoLogin = false; // cfg.Weight.AutoLogin;
             }
             if (changeUser)
                 autoLogin = false;

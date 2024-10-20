@@ -76,11 +76,8 @@ namespace YF.MWS.SQliteService
 
         public List<QWeightView> GetViewList()
         {
-            List<QWeightView> lstDetail = new List<QWeightView>();
             string sql = string.Format("select * from S_WeightView where RowState!={0} order by ViewName asc",(int)RowState.Delete);
-            DataTable dt = GetTable(sql);
-            lstDetail = TableHelper.TableToList<QWeightView>(dt);
-            return lstDetail;
+            return base.getList<QWeightView>(sql);
         }
 
         public SWeightViewDtl GetViewDetail(string detailId)
@@ -260,6 +257,14 @@ namespace YF.MWS.SQliteService
         }
         public void saveWeightViewDtlRowIndex(SWeightViewDtl dtl) {
             string sql = $"update S_WeightViewDtl set RowIndex={dtl.RowIndex} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
+        }
+        public void saveWeightViewDtlAutoSaveState(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set AutoSaveState={dtl.AutoSaveState} where Id='{dtl.Id}'";
+            base.ExecuteSql(sql);
+        }
+        public void saveWeightViewDtlStayState(SWeightViewDtl dtl) {
+            string sql = $"update S_WeightViewDtl set StayState={dtl.StayState} where Id='{dtl.Id}'";
             base.ExecuteSql(sql);
         }
         #endregion

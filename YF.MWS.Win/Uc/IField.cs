@@ -24,7 +24,7 @@ namespace YF.MWS.Win.Uc
         /// </summary>
         bool IsRequired { get; set; }
         /// <summary>
-        /// 启用驻留
+        /// 
         /// </summary>
         bool StartStay { get; set; }
         /// <summary>

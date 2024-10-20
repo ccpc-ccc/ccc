@@ -9,6 +9,5 @@ namespace YF.MWS.Metadata
     public class FormData
     {
         public BWeight Weight { get; set; }
-        public List<BWeightAttribute> LstAttr { get; set; }
     }
 }

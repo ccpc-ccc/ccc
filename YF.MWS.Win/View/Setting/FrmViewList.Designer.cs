@@ -57,19 +57,22 @@
             this.colControlName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFieldName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCaption = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colOrderNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colShow1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.colShow2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.ColRowIndex = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ColColIndex = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAutoSaveState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.colCreateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gpList = new DevExpress.XtraEditors.GroupControl();
             this.gcViewList = new DevExpress.XtraGrid.GridControl();
             this.gvViewList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colViewName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colViewTypeCaption = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStayState = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpViewDetail)).BeginInit();
@@ -81,10 +84,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvViewDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpList)).BeginInit();
             this.gpList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcViewList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit4)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -326,7 +331,9 @@
             this.gcViewDetail.Name = "gcViewDetail";
             this.gcViewDetail.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1,
-            this.repositoryItemCheckEdit2});
+            this.repositoryItemCheckEdit2,
+            this.repositoryItemCheckEdit3,
+            this.repositoryItemCheckEdit4});
             this.gcViewDetail.Size = new System.Drawing.Size(1041, 659);
             this.gcViewDetail.TabIndex = 25;
             this.gcViewDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -338,18 +345,17 @@
             this.colControlName,
             this.colFieldName,
             this.colCaption,
-            this.colOrderNo,
             this.colShow1,
             this.colShow2,
             this.ColRowIndex,
             this.ColColIndex,
+            this.colStayState,
+            this.colAutoSaveState,
             this.colCreateTime});
             this.gvViewDetail.GridControl = this.gcViewDetail;
             this.gvViewDetail.Name = "gvViewDetail";
             this.gvViewDetail.NewItemRowText = "点此添加数据";
             this.gvViewDetail.OptionsView.ShowGroupPanel = false;
-            this.gvViewDetail.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colOrderNo, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvViewDetail.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvViewDetail_CellValueChanged);
             this.gvViewDetail.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvViewDetail_CustomColumnDisplayText);
             // 
@@ -382,15 +388,6 @@
             this.colCaption.Visible = true;
             this.colCaption.VisibleIndex = 2;
             // 
-            // colOrderNo
-            // 
-            this.colOrderNo.Caption = "排序号";
-            this.colOrderNo.FieldName = "OrderNo";
-            this.colOrderNo.Name = "colOrderNo";
-            this.colOrderNo.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
-            this.colOrderNo.Visible = true;
-            this.colOrderNo.VisibleIndex = 3;
-            // 
             // colShow1
             // 
             this.colShow1.Caption = "界面显示";
@@ -398,7 +395,7 @@
             this.colShow1.FieldName = "RowState";
             this.colShow1.Name = "colShow1";
             this.colShow1.Visible = true;
-            this.colShow1.VisibleIndex = 7;
+            this.colShow1.VisibleIndex = 6;
             // 
             // repositoryItemCheckEdit2
             // 
@@ -413,7 +410,7 @@
             this.colShow2.FieldName = "Show2";
             this.colShow2.Name = "colShow2";
             this.colShow2.Visible = true;
-            this.colShow2.VisibleIndex = 6;
+            this.colShow2.VisibleIndex = 5;
             // 
             // repositoryItemCheckEdit1
             // 
@@ -431,7 +428,7 @@
             this.ColRowIndex.FieldName = "RowIndex";
             this.ColRowIndex.Name = "ColRowIndex";
             this.ColRowIndex.Visible = true;
-            this.ColRowIndex.VisibleIndex = 4;
+            this.ColRowIndex.VisibleIndex = 3;
             // 
             // ColColIndex
             // 
@@ -439,7 +436,21 @@
             this.ColColIndex.FieldName = "ColIndex";
             this.ColColIndex.Name = "ColColIndex";
             this.ColColIndex.Visible = true;
-            this.ColColIndex.VisibleIndex = 5;
+            this.ColColIndex.VisibleIndex = 4;
+            // 
+            // colAutoSaveState
+            // 
+            this.colAutoSaveState.Caption = "自动保存";
+            this.colAutoSaveState.ColumnEdit = this.repositoryItemCheckEdit3;
+            this.colAutoSaveState.FieldName = "AutoSaveState";
+            this.colAutoSaveState.Name = "colAutoSaveState";
+            this.colAutoSaveState.Visible = true;
+            this.colAutoSaveState.VisibleIndex = 8;
+            // 
+            // repositoryItemCheckEdit3
+            // 
+            this.repositoryItemCheckEdit3.AutoHeight = false;
+            this.repositoryItemCheckEdit3.Name = "repositoryItemCheckEdit3";
             // 
             // colCreateTime
             // 
@@ -450,7 +461,7 @@
             this.colCreateTime.Name = "colCreateTime";
             this.colCreateTime.OptionsFilter.AllowAutoFilter = false;
             this.colCreateTime.Visible = true;
-            this.colCreateTime.VisibleIndex = 8;
+            this.colCreateTime.VisibleIndex = 9;
             // 
             // gpList
             // 
@@ -506,6 +517,20 @@
             this.colViewTypeCaption.VisibleIndex = 1;
             this.colViewTypeCaption.Width = 45;
             // 
+            // colStayState
+            // 
+            this.colStayState.Caption = "信息驻留";
+            this.colStayState.ColumnEdit = this.repositoryItemCheckEdit4;
+            this.colStayState.FieldName = "StayState";
+            this.colStayState.Name = "colStayState";
+            this.colStayState.Visible = true;
+            this.colStayState.VisibleIndex = 7;
+            // 
+            // repositoryItemCheckEdit4
+            // 
+            this.repositoryItemCheckEdit4.AutoHeight = false;
+            this.repositoryItemCheckEdit4.Name = "repositoryItemCheckEdit4";
+            // 
             // FrmViewList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -532,10 +557,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvViewDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpList)).EndInit();
             this.gpList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcViewList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvViewList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,7 +597,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colControlName;
         private DevExpress.XtraGrid.Columns.GridColumn colFieldName;
         private DevExpress.XtraGrid.Columns.GridColumn colCaption;
-        private DevExpress.XtraGrid.Columns.GridColumn colOrderNo;
         private DevExpress.XtraGrid.Columns.GridColumn colCreateTime;
         private DevExpress.XtraBars.BarButtonItem barItemAddExtendControl;
         private DevExpress.XtraBars.BarButtonItem barItemCarViewSetting;
@@ -583,5 +609,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn ColColIndex;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn colAutoSaveState;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
+        private DevExpress.XtraGrid.Columns.GridColumn colStayState;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit4;
     }
 }

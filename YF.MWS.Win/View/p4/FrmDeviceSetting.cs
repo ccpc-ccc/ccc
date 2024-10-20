@@ -63,8 +63,8 @@ namespace YF.MWS.Win.View.Master {
             this.cmbCom1.EditValue = cfg.Device1.Port;
             cmbBaudRate1.Text = cfg.Device1.BaundRate;
             cmbDataBits1.Text = cfg.Device1.DataBit;
-            DxHelper.BindComboBoxEdit<StopBits>(cmbStopBits1, cfg.Device1.StopBit);
-            DxHelper.BindComboBoxEdit<Parity>(cmbParity1, cfg.Device1.Parity);
+            DxHelper.BindComboBoxEdit<Metadata.StopBits>(cmbStopBits1, cfg.Device1.StopBit);
+            DxHelper.BindComboBoxEdit<Metadata.Parity>(cmbParity1, cfg.Device1.Parity);
             if (cfg.Device1.DataFormat == "DEC") {
                 this.radioDigit1.SelectedIndex = 0;
             } else {
@@ -80,8 +80,8 @@ namespace YF.MWS.Win.View.Master {
             this.cmbCom1_2.EditValue = cfg.Device1.Port;
             cmbBaudRate1_2.Text = cfg.Device2.BaundRate;
             cmbDataBits1_2.Text = cfg.Device2.DataBit;
-            DxHelper.BindComboBoxEdit<StopBits>(cmbStopBits1_2, cfg.Device2.StopBit);
-            DxHelper.BindComboBoxEdit<Parity>(cmbParity1_2, cfg.Device2.Parity);
+            DxHelper.BindComboBoxEdit<Metadata.StopBits>(cmbStopBits1_2, cfg.Device2.StopBit);
+            DxHelper.BindComboBoxEdit<Metadata.Parity>(cmbParity1_2, cfg.Device2.Parity);
             if (cfg.Device2.DataFormat == "DEC") {
                 this.radioDigit1_2.SelectedIndex = 0;
             } else {
@@ -363,8 +363,8 @@ namespace YF.MWS.Win.View.Master {
                 this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
                 this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.Text.ToInt();
                 this.serialPort1.SerlPort.DataBits = cmbDataBits1.Text.ToInt();
-                this.serialPort1.SerlPort.StopBits = (StopBits)cmbStopBits1.GetStrValue().ToInt();
-                this.serialPort1.SetParity((Parity)cmbParity1.GetStrValue().ToInt());
+                this.serialPort1.SerlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits),cmbStopBits1.GetStrValue());
+                this.serialPort1.SetParity((System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity),cmbParity1.GetStrValue()));
                 this.serialPort1.OpenPort();
                 simpleButton2.Text = "断开";
             } else {
@@ -463,8 +463,8 @@ namespace YF.MWS.Win.View.Master {
                 this.serialPort2.SerlPort.PortName = cmbCom1_2.EditValue.ToString();
                 this.serialPort2.SerlPort.BaudRate = cmbBaudRate1_2.Text.ToInt();
                 this.serialPort2.SerlPort.DataBits = cmbDataBits1_2.Text.ToInt();
-                this.serialPort2.SerlPort.StopBits = (StopBits)cmbStopBits1_2.GetStrValue().ToInt();
-                this.serialPort2.SetParity((Parity)cmbParity1_2.GetStrValue().ToInt());
+                this.serialPort2.SerlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), cmbStopBits1_2.GetStrValue());
+                this.serialPort2.SetParity((System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity),cmbParity1_2.GetStrValue()));
                 this.serialPort2.OpenPort();
                 simpleButton8.Text = "断开";
             } else {

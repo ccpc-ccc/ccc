@@ -50,20 +50,6 @@ namespace YF.MWS.Win.View
             this.Close();
         }
 
-        private bool CanStartStay(string fieldName)
-        {
-            bool canStay = true;
-            if (!string.IsNullOrEmpty(fieldName))
-            {
-                if (fieldName.ToLower() == "GrossWeight".ToLower() || fieldName.ToLower() == "TareWeight".ToLower()
-                    || fieldName.ToLower() == "SuttleWeight".ToLower() || fieldName.ToLower() == "CarId".ToLower() || fieldName.ToLower() == "CardNo".ToLower())
-                {
-                    canStay = false;
-                }
-            }
-            return canStay;
-        }
-
         private void Save() 
         {
             try
@@ -80,14 +66,11 @@ namespace YF.MWS.Win.View
                 detail.Readonly = chkReadonly.Checked ? 1 : 0;
                 detail.ControlType = ctrlType.ToString();
                 detail.ActionName = teActionName.Text;
-                detail.StayState = chkStartStay.Checked ? BoolValueType.True : BoolValueType.False;
-                detail.AutoSaveState=chkStartAutoSave.Checked ? BoolValueType.True : BoolValueType.False;
+                detail.StayState = chkStartStay.Checked ? 1 : 0;
+                detail.AutoSaveState=chkStartAutoSave.Checked ? 1 : 0;
                 detail.RowState = chkRowState.Checked ? 2 : 3;
                 detail.Show2 = chkShow2.Checked ? 1 : 0;
                 detail.t1 = txtDefault.Text;
-                bool canStay = CanStartStay(detail.FieldName);
-                if (!canStay)
-                    detail.StayState = BoolValueType.False;
                 viewService.SaveViewDetail(detail);
                 MessageDxUtil.ShowTips("成功保存界面控件信息.");
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -113,8 +96,8 @@ namespace YF.MWS.Win.View
                 lookupControl.EditValue = detail.ControlId;
                 chkIsRequired.Checked = detail.IsRequired == 1 ? true : false;
                 chkReadonly.Checked = detail.Readonly == 1 ? true : false;
-                chkStartAutoSave.Checked = detail.AutoSaveState == BoolValueType.True ? true : false;
-                chkStartStay.Checked = detail.StayState == BoolValueType.True ? true : false;
+                chkStartAutoSave.Checked = detail.AutoSaveState == 1;
+                chkStartStay.Checked = detail.StayState == 1;
                 chkRowState.Checked=detail.RowState != 3 ? true :false;
                 chkShow2.Checked = detail.Show2 == 1 ? true : false;
                 txtDefault.Text = detail.t1;

@@ -136,12 +136,11 @@ namespace YF.MWS.Util {
         /// <param name="lstSql"></param>
         /// <returns></returns>
         public int ExecuteNonQuery(List<string> lstSql) {
-            int result = 0;
             if (db == null) return -1;
             foreach (string sql in lstSql) {
                 db.Ado.ExecuteCommand(sql);
             }
-            return result;
+            return 1;
         }
 
         /// <summary>

@@ -24,10 +24,5 @@ namespace YF.MWS.Metadata.Cfg
         /// 采样重量个数
         /// </summary>
         public int SamplingCount { get; set; }
-
-        /// <summary>
-        /// 采样时间间隔(秒)
-        /// </summary>
-        public decimal SampingInterval { get; set; }
     }
 }

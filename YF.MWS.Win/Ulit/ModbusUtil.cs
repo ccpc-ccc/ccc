@@ -85,8 +85,8 @@ namespace YF.MWS.Win
             this.serlPort.PortName = IniUtility.GetIniKeyValue(section, "Port", "COM1");
             this.serlPort.BaudRate = Convert.ToInt32(IniUtility.GetIniKeyValue(section, "BaundRate", "9600"));
             this.serlPort.DataBits = Convert.ToInt32(IniUtility.GetIniKeyValue(section, "DataBit", "8"));
-            this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), IniUtility.GetIniKeyValue(section, "StopBit", "One"), true);
-            this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), IniUtility.GetIniKeyValue(section, "Parity", "None"), true);
+            this.serlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), IniUtility.GetIniKeyValue(section, "StopBit", "One"), true);
+            this.serlPort.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), IniUtility.GetIniKeyValue(section, "Parity", "None"), true);
             //设置串口读写超时时间
             this.serlPort.ReadTimeout = 15000;
             this.serlPort.WriteTimeout = 15000;
@@ -120,26 +120,6 @@ namespace YF.MWS.Win
         {
             if (this.serlPort != null)
                 this.serlPort.DataBits = Convert.ToInt32(dataBits);
-        }
-
-        /// <summary>
-        /// 设置停止位
-        /// </summary>
-        /// <param name="stopBits">停止位</param>
-        public void SetStopBits(string stopBits)
-        {
-            if (this.serlPort != null)
-                this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits, true);
-        }
-
-        /// <summary>
-        /// 设置奇偶校验
-        /// </summary>
-        /// <param name="parity">奇偶校验</param>
-        public void SetParity(string parity)
-        {
-            if (this.serlPort != null)
-                this.serlPort.Parity = (Parity)Enum.Parse(typeof(Parity), parity, true);
         }
 
         /// <summary>

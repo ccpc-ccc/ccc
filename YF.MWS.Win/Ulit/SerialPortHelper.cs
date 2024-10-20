@@ -121,13 +121,13 @@ namespace YF.MWS.Win
             if (!string.IsNullOrEmpty(deviceCfg.BaundRate)) this.serlPort.BaudRate = Convert.ToInt32(deviceCfg.BaundRate);
             if (!string.IsNullOrEmpty(deviceCfg.DataBit)) this.serlPort.DataBits = Convert.ToInt32(deviceCfg.DataBit);
             if (!string.IsNullOrEmpty(deviceCfg.StopBit)) {
-                StopBits bits = StopBits.One;
+                System.IO.Ports.StopBits bits = System.IO.Ports.StopBits.One;
                 Enum.TryParse(deviceCfg.StopBit, out bits);
-                if (bits == StopBits.None) bits = StopBits.One;
+                if (bits == System.IO.Ports.StopBits.None) bits = System.IO.Ports.StopBits.One;
                 this.serlPort.StopBits = bits;
             }
             if (!string.IsNullOrEmpty(deviceCfg.Parity)) {
-                Parity bits = Parity.None;
+                System.IO.Ports.Parity bits = System.IO.Ports.Parity.None;
                 Enum.TryParse(deviceCfg.Parity, out bits);
                 this.serlPort.Parity = bits;
             }
@@ -208,14 +208,14 @@ namespace YF.MWS.Win
         public void SetStopBits(string stopBits)
         {
             if (this.serlPort != null)
-                this.serlPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBits, true);
+                this.serlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), stopBits, true);
         }
 
         /// <summary>
         /// 设置奇偶校验
         /// </summary>
         /// <param name="parity">奇偶校验</param>
-        public void SetParity(Parity parity) {
+        public void SetParity(System.IO.Ports.Parity parity) {
             if (this.serlPort != null)
                 this.serlPort.Parity = parity;
         }

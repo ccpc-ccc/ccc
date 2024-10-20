@@ -57,14 +57,17 @@
             this.gpQuickAction = new DevExpress.XtraEditors.GroupControl();
             this.btnSaveTare = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrint = new DevExpress.XtraEditors.SimpleButton();
-            this.btnPrintView = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnWeight = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.plLeft = new DevExpress.XtraEditors.PanelControl();
             this.mainWeight = new YF.MWS.Win.Uc.MainWeight();
             this.spWeightAction = new DevExpress.XtraEditors.SplitterControl();
             this.gpWeight = new DevExpress.XtraEditors.GroupControl();
+            this.plAutoWeight = new DevExpress.XtraEditors.PanelControl();
+            this.txtCar = new DevExpress.XtraEditors.TextEdit();
+            this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.rgWeightProcess = new DevExpress.XtraEditors.RadioGroup();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.radWarehBizType = new DevExpress.XtraEditors.RadioGroup();
@@ -128,6 +131,9 @@
             this.plLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeight)).BeginInit();
             this.gpWeight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plAutoWeight)).BeginInit();
+            this.plAutoWeight.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpLight2)).BeginInit();
@@ -180,6 +186,7 @@
             // 
             this.searchList.AutoScroll = true;
             this.searchList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchList.frmWeight = null;
             this.searchList.Location = new System.Drawing.Point(2, 2);
             this.searchList.Margin = new System.Windows.Forms.Padding(4);
             this.searchList.Name = "searchList";
@@ -195,7 +202,7 @@
             this.gpLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gpLog.Location = new System.Drawing.Point(0, 0);
             this.gpLog.Name = "gpLog";
-            this.gpLog.Size = new System.Drawing.Size(256, 246);
+            this.gpLog.Size = new System.Drawing.Size(256, 281);
             this.gpLog.TabIndex = 1;
             this.gpLog.Text = "实时称重日志";
             // 
@@ -204,7 +211,7 @@
             this.memLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memLog.Location = new System.Drawing.Point(2, 23);
             this.memLog.Name = "memLog";
-            this.memLog.Size = new System.Drawing.Size(252, 221);
+            this.memLog.Size = new System.Drawing.Size(252, 256);
             this.memLog.TabIndex = 0;
             // 
             // timerReader
@@ -264,7 +271,7 @@
             this.splitContainerControl2.Panel2.Controls.Add(this.gpLog);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(256, 381);
-            this.splitContainerControl2.SplitterPosition = 125;
+            this.splitContainerControl2.SplitterPosition = 90;
             this.splitContainerControl2.TabIndex = 41;
             // 
             // gpQuickAction
@@ -275,8 +282,6 @@
             this.gpQuickAction.CaptionLocation = DevExpress.Utils.Locations.Right;
             this.gpQuickAction.Controls.Add(this.btnSaveTare);
             this.gpQuickAction.Controls.Add(this.btnPrint);
-            this.gpQuickAction.Controls.Add(this.btnPrintView);
-            this.gpQuickAction.Controls.Add(this.simpleButton1);
             this.gpQuickAction.Controls.Add(this.btnWeight);
             this.gpQuickAction.Controls.Add(this.btnSave);
             this.gpQuickAction.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -284,7 +289,7 @@
             this.gpQuickAction.Name = "gpQuickAction";
             this.gpQuickAction.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.gpQuickAction.ShowCaption = false;
-            this.gpQuickAction.Size = new System.Drawing.Size(256, 125);
+            this.gpQuickAction.Size = new System.Drawing.Size(256, 90);
             this.gpQuickAction.TabIndex = 40;
             this.gpQuickAction.Text = "快捷操作区";
             // 
@@ -294,7 +299,7 @@
             this.btnSaveTare.Appearance.Options.UseFont = true;
             this.btnSaveTare.ImageOptions.ImageIndex = 35;
             this.btnSaveTare.ImageOptions.ImageList = this.imgListLarger;
-            this.btnSaveTare.Location = new System.Drawing.Point(13, 84);
+            this.btnSaveTare.Location = new System.Drawing.Point(9, 48);
             this.btnSaveTare.Name = "btnSaveTare";
             this.btnSaveTare.Size = new System.Drawing.Size(102, 34);
             this.btnSaveTare.TabIndex = 25;
@@ -307,7 +312,7 @@
             this.btnPrint.Appearance.Options.UseFont = true;
             this.btnPrint.ImageOptions.ImageIndex = 16;
             this.btnPrint.ImageOptions.ImageList = this.imgListLarger;
-            this.btnPrint.Location = new System.Drawing.Point(140, 44);
+            this.btnPrint.Location = new System.Drawing.Point(137, 8);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(103, 34);
             this.btnPrint.TabIndex = 22;
@@ -315,45 +320,18 @@
             this.btnPrint.Text = "打印";
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
-            // btnPrintView
-            // 
-            this.btnPrintView.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPrintView.Appearance.Options.UseFont = true;
-            this.btnPrintView.ImageOptions.ImageIndex = 15;
-            this.btnPrintView.ImageOptions.ImageList = this.imgListLarger;
-            this.btnPrintView.Location = new System.Drawing.Point(13, 44);
-            this.btnPrintView.Name = "btnPrintView";
-            this.btnPrintView.Size = new System.Drawing.Size(103, 34);
-            this.btnPrintView.TabIndex = 23;
-            this.btnPrintView.Tag = "Preview";
-            this.btnPrintView.Text = "预览";
-            this.btnPrintView.Click += new System.EventHandler(this.btnPrintView_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.ImageOptions.ImageIndex = 8;
-            this.simpleButton1.Location = new System.Drawing.Point(140, 4);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(103, 34);
-            this.simpleButton1.TabIndex = 20;
-            this.simpleButton1.Tag = "Weight";
-            this.simpleButton1.Text = "空车";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // btnWeight
             // 
             this.btnWeight.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnWeight.Appearance.Options.UseFont = true;
             this.btnWeight.ImageOptions.ImageIndex = 8;
             this.btnWeight.ImageOptions.ImageList = this.imgListLarger;
-            this.btnWeight.Location = new System.Drawing.Point(13, 4);
+            this.btnWeight.Location = new System.Drawing.Point(9, 8);
             this.btnWeight.Name = "btnWeight";
             this.btnWeight.Size = new System.Drawing.Size(103, 34);
             this.btnWeight.TabIndex = 20;
             this.btnWeight.Tag = "Weight";
-            this.btnWeight.Text = "重车";
+            this.btnWeight.Text = "取重";
             this.btnWeight.Click += new System.EventHandler(this.btnWeight_Click);
             // 
             // btnSave
@@ -362,7 +340,7 @@
             this.btnSave.Appearance.Options.UseFont = true;
             this.btnSave.ImageOptions.ImageIndex = 14;
             this.btnSave.ImageOptions.ImageList = this.imgListLarger;
-            this.btnSave.Location = new System.Drawing.Point(140, 84);
+            this.btnSave.Location = new System.Drawing.Point(137, 48);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(103, 34);
             this.btnSave.TabIndex = 21;
@@ -394,7 +372,6 @@
             this.mainWeight.CurrentViewType = YF.MWS.Metadata.ViewType.Weight;
             this.mainWeight.FrmWeight = null;
             this.mainWeight.Location = new System.Drawing.Point(4, 178);
-            this.mainWeight.LstAttribute = null;
             this.mainWeight.Margin = new System.Windows.Forms.Padding(4);
             this.mainWeight.Name = "mainWeight";
             this.mainWeight.Size = new System.Drawing.Size(1216, 203);
@@ -412,6 +389,7 @@
             // gpWeight
             // 
             this.gpWeight.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gpWeight.Controls.Add(this.plAutoWeight);
             this.gpWeight.Controls.Add(this.rgWeightProcess);
             this.gpWeight.Controls.Add(this.simpleButton2);
             this.gpWeight.Controls.Add(this.radWarehBizType);
@@ -429,6 +407,58 @@
             this.gpWeight.Size = new System.Drawing.Size(1221, 158);
             this.gpWeight.TabIndex = 42;
             this.gpWeight.Text = "电子过磅区";
+            // 
+            // plAutoWeight
+            // 
+            this.plAutoWeight.Controls.Add(this.txtCar);
+            this.plAutoWeight.Controls.Add(this.simpleButton7);
+            this.plAutoWeight.Controls.Add(this.simpleButton1);
+            this.plAutoWeight.Controls.Add(this.labelControl2);
+            this.plAutoWeight.Location = new System.Drawing.Point(478, 129);
+            this.plAutoWeight.Name = "plAutoWeight";
+            this.plAutoWeight.Size = new System.Drawing.Size(481, 29);
+            this.plAutoWeight.TabIndex = 51;
+            // 
+            // txtCar
+            // 
+            this.txtCar.Location = new System.Drawing.Point(50, 5);
+            this.txtCar.Name = "txtCar";
+            this.txtCar.Size = new System.Drawing.Size(100, 20);
+            this.txtCar.TabIndex = 0;
+            // 
+            // simpleButton7
+            // 
+            this.simpleButton7.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton7.Appearance.Options.UseFont = true;
+            this.simpleButton7.ImageOptions.ImageIndex = 8;
+            this.simpleButton7.Location = new System.Drawing.Point(211, 1);
+            this.simpleButton7.Name = "simpleButton7";
+            this.simpleButton7.Size = new System.Drawing.Size(49, 26);
+            this.simpleButton7.TabIndex = 20;
+            this.simpleButton7.Tag = "Weight";
+            this.simpleButton7.Text = "2#";
+            this.simpleButton7.Click += new System.EventHandler(this.simpleButton7_Click);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.simpleButton1.Appearance.Options.UseFont = true;
+            this.simpleButton1.ImageOptions.ImageIndex = 8;
+            this.simpleButton1.Location = new System.Drawing.Point(156, 1);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(49, 26);
+            this.simpleButton1.TabIndex = 20;
+            this.simpleButton1.Tag = "Weight";
+            this.simpleButton1.Text = "1#";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click_1);
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(5, 7);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.TabIndex = 1;
+            this.labelControl2.Text = "车牌号：";
             // 
             // rgWeightProcess
             // 
@@ -457,7 +487,7 @@
             this.simpleButton2.Size = new System.Drawing.Size(103, 26);
             this.simpleButton2.TabIndex = 20;
             this.simpleButton2.Tag = "Weight";
-            this.simpleButton2.Text = "清空";
+            this.simpleButton2.Text = "刷新";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // radWarehBizType
@@ -1040,6 +1070,10 @@
             this.plLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpWeight)).EndInit();
             this.gpWeight.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.plAutoWeight)).EndInit();
+            this.plAutoWeight.ResumeLayout(false);
+            this.plAutoWeight.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radWarehBizType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpLight2)).EndInit();
@@ -1089,7 +1123,6 @@
         private DevExpress.XtraEditors.GroupControl gpQuickAction;
         private DevExpress.XtraEditors.SimpleButton btnSaveTare;
         private DevExpress.XtraEditors.SimpleButton btnPrint;
-        private DevExpress.XtraEditors.SimpleButton btnPrintView;
         private DevExpress.XtraEditors.SimpleButton btnWeight;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.RadioGroup rgWeightProcess;
@@ -1119,7 +1152,6 @@
         private DevExpress.XtraEditors.SimpleButton btnCloseSecondGate;
         private DevExpress.XtraEditors.RadioGroup radWarehBizType;
         private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraGauges.Win.GaugeControl gaugeControl1;
         private DevExpress.XtraGauges.Win.Gauges.State.StateIndicatorGauge stateIndicatorGauge3;
@@ -1142,5 +1174,10 @@
         private DevExpress.XtraEditors.GroupControl gpLight1;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.PanelControl plAutoWeight;
+        private DevExpress.XtraEditors.TextEdit txtCar;
+        private DevExpress.XtraEditors.SimpleButton simpleButton7;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }

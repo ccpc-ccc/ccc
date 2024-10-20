@@ -59,7 +59,7 @@ namespace YF.MWS.Win.View.Weight {
         private int currentDate = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
         private LoginCfg loginCfg = null;
         private string loginCfgXml = Path.Combine(Application.StartupPath, "LoginCfg.xml");
-        private SCompany _company= null;
+        private BWeight tempWeight = null;
         /// <summary>
         /// 抓拍图片和视频文件信息
         /// </summary>
@@ -198,11 +198,6 @@ namespace YF.MWS.Win.View.Weight {
         private decimal leftWeightValue = 0;
 
         /// <summary>
-        /// 称重仪返回重量数据是否稳定
-        /// </summary>
-        private volatile bool isStable = false;
-
-        /// <summary>
         /// 最小差值
         /// </summary>
         private double minDValue = 0.1;
@@ -211,7 +206,6 @@ namespace YF.MWS.Win.View.Weight {
         /// 采样重量，用于判断重量是否稳定
         /// </summary>
         private List<double> lstWeightValue = new List<double>();
-        private List<SAttribute> lstAttr = new List<SAttribute>();
 
         /// <summary>
         /// 线程同步锁
@@ -330,7 +324,6 @@ namespace YF.MWS.Win.View.Weight {
         private WNumbericEdit weMaterialAmount;
         private WNumbericEdit wePickQty;
         private WTextEdit weWaybillNo;
-        private WTextEdit weIdAddress;
         private WTextEdit weDriverName;
         private WTextEdit weWeighterName;
         private WCustomerEdit weDeliver;
@@ -360,7 +353,7 @@ namespace YF.MWS.Win.View.Weight {
         private WNumbericEdit weD1;
         private WNumbericEdit weD2;
         /// <summary>
-        /// 是否有未完成的磅单
+        /// 是否正在过磅
         /// </summary>
         private bool hasLoadUnFinishWeight = false;
 
@@ -371,10 +364,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void InitControl() {
-            lstAttr = attributeService.GetAttributeList(mainWeight.CurrentSubjectId);
-            mainWeight.LstAttribute = lstAttr;
             mainWeight.FrmWeight = this;
-            weIdAddress = mainWeight.FindExtendControl<WTextEdit>("IdAddress", lstAttr);
             weWaybillNo = mainWeight.FindControl<WTextEdit>("WaybillNo");
             wePayType = mainWeight.FindControl<WComboBoxEdit>("PayType");
             weImpurityWeight = mainWeight.FindControl<WNumbericEdit>("ImpurityWeight");
@@ -401,12 +391,12 @@ namespace YF.MWS.Win.View.Weight {
             wlookupTransfer = mainWeight.FindControl<WCustomerEdit>("TransferId");
             wlookCar = mainWeight.FindControl<WCarLookup>("CarId");
             weWeighterName = mainWeight.FindControl<WTextEdit>("WeighterName");
-            wCardNo = mainWeight.FindExtendControl<WCardEdit>("CardNo", lstAttr);
-            wKougan = mainWeight.FindExtendControl<WNumbericEdit>("Kougan", lstAttr);
-            wRefuseType = mainWeight.FindExtendControl<WComboBoxTextEdit>("RefuseType", lstAttr);
-            weBillNo = mainWeight.FindExtendControl<WTextEdit>("BillNo", lstAttr);
-            wnRealWater = mainWeight.FindExtendControl<WNumbericEdit>("RealWater", lstAttr);
-            wePickQty = mainWeight.FindExtendControl<WNumbericEdit>("PickQty", lstAttr);
+            wCardNo = mainWeight.FindControl<WCardEdit>("CardNo");
+            wKougan = mainWeight.FindControl<WNumbericEdit>("Kougan");
+            wRefuseType = mainWeight.FindControl<WComboBoxTextEdit>("RefuseType");
+            weBillNo = mainWeight.FindControl<WTextEdit>("BillNo");
+            wnRealWater = mainWeight.FindControl<WNumbericEdit>("RealWater");
+            wePickQty = mainWeight.FindControl<WNumbericEdit>("PickQty");
             wCustomerBalance = mainWeight.FindControl<WNumbericEdit>("CustomerBalance");
             weRealCharge = mainWeight.FindControl<WNumbericEdit>("RealCharge");
             weD1 = mainWeight.FindControl<WNumbericEdit>("d1");
@@ -428,12 +418,10 @@ namespace YF.MWS.Win.View.Weight {
             buttons.Add(btnOpenSecondGate);
             buttons.Add(btnCloseFirstGate);
             buttons.Add(btnCloseSecondGate);
-            buttons.Add(btnPrintView);
             List<BarSubItem> subItems = new List<BarSubItem>();
             RoleUtil.SetButton(buttons, LstModule);
             RoleUtil.SetBarItem(lstItem, LstModule);
             RoleUtil.SetBarSubItem(subItems, LstModule);
-            canPreview = RoleUtil.HasPermission(btnPrintView, LstModule);
             canManualPrint = RoleUtil.HasPermission(btnPrint, LstModule);
             if (!canManualPrint)
                 btnPrint.Enabled = false;
@@ -506,7 +494,8 @@ namespace YF.MWS.Win.View.Weight {
             if (weDeliver.CurrentValue.ToObjectString().Length == 0) {
                 return;
             }
-            CustomerUtil.LoadCustomer(weDeliver.CurrentValue.ToObjectString(), CustomerType.Delivery, masterService, mainWeight, lstAttr);
+                return;
+            CustomerUtil.LoadCustomer(weDeliver.CurrentValue.ToObjectString(), CustomerType.Delivery, masterService, mainWeight);
             }catch(Exception ex) {
                 Logger.WriteException(ex);
             }
@@ -589,20 +578,6 @@ namespace YF.MWS.Win.View.Weight {
                 residentUnitPrice = weUnitPrice.Text.ToDecimal();
                 firstInitedUnitPrice = false;
             }
-            if (weD2 != null&&weUnitMoney!=null) {
-                if (weD2.Text.ToDecimal() > 0) {
-                weUnitMoney.Text = (weD2.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-                } else if (weSuttleWeight != null && weUnitMoney != null) {
-                    weUnitMoney.Text = (weSuttleWeight.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-                }
-            } else if (weSuttleWeight != null&&weUnitMoney!=null) {
-                weUnitMoney.Text = (weSuttleWeight.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-            }
-        }
-
-        private void OpenForm(string tag) {
-            FrmMain frmMain = (FrmMain)ParentForm;
-            frmMain.BarItemClick(tag);
         }
 
         private void weBillNo_TextChanged(object sender, EventArgs e) {
@@ -623,7 +598,8 @@ namespace YF.MWS.Win.View.Weight {
             if (wlookupCustomer.CurrentValue == null || wlookupCustomer.CurrentValue.ToObjectString().Length == 0) {
                 return;
             }
-            CustomerUtil.LoadCustomer(wlookupCustomer.CurrentValue.ToObjectString(), CustomerType.Customer, masterService, mainWeight, lstAttr);
+            return;
+            CustomerUtil.LoadCustomer(wlookupCustomer.CurrentValue.ToObjectString(), CustomerType.Customer, masterService, mainWeight);
             SetUnitPrice();
         }
 
@@ -726,29 +702,25 @@ namespace YF.MWS.Win.View.Weight {
         /// </summary>
         /// <param name="manual"></param>
         private void TareGrossTransform() {
-            if (startGrossTareTransform) {
+            if (startGrossTareTransform&&weGrossWeight!=null&&weTareWeight!=null) {
                 decimal tare = currentTareWeight;
                 if (oldGrossWeight > 0) //将毛重还原为上次过毛重的重量
                 {
-                    if (weGrossWeight != null) {
                         decimal currentWeight = weGrossWeight.Text.ToDecimal();
                         if (currentWeight != oldGrossWeight) {
                                 this.BeginInvoke(new Action(() => {
                                     weGrossWeight.Text = oldGrossWeight.ToString();
                                 }));
                         }
-                    }
                 }
                 if (oldTareWeight > 0) //将皮重还原为上次过皮重的重量
                 {
-                    if (weTareWeight != null) {
                         decimal currentWeight = weTareWeight.Text.ToDecimal();
                         if (currentWeight != oldTareWeight) {
                                 this.BeginInvoke(new Action(() => {
                                     weTareWeight.Text = oldTareWeight.ToString();
                                 }));
                         }
-                    }
                 }
                 decimal gross = 0;
                 if (processMode == MeasureProcessMode.FirstGross) {
@@ -788,7 +760,6 @@ namespace YF.MWS.Win.View.Weight {
             //gpMainWeight.AutoScroll = true;
             searchList.WeightService = weightService;
             searchList.WeightQueryService = weightQueryService;
-            _company = companyService.GetCompany(CurrentUser.Instance.CompanyId);
         }
 
         private void FrmWeight_Load(object sender, EventArgs e) {
@@ -833,12 +804,13 @@ namespace YF.MWS.Win.View.Weight {
                         timerOut.Interval = (int)(1000 * autoOutTime);
                         timerOut.Elapsed += TimerOut_Elapsed;
                     }
+                    plAutoWeight.Visible = Cfg.StartCarNoRecognition;
                     this.plDevice2.Visible = Cfg.Device2.StartDevice;
                     InitControl();
 
                     InitRoleControl();
 
-                    LoadWeight();
+                    //LoadWeight();
                     InitDeviceNo();
 
                     if ((printPhoto && autoPrintWeight) || startAutoReset || payCode == PayCodeType.Static) {
@@ -949,35 +921,42 @@ namespace YF.MWS.Win.View.Weight {
             hasGetCarNo = false;
             isReadingCard = false;
             paySuccess = true;
+            isAutoSaving = false;
             needGetPayState = false;
-            New();
+            New(!Cfg.Weight.SaveFormData);
         }
 
 
         private bool CanAutoSave() {
             bool canSave = true;
-            if (isNewWeight && startSaveWithManualFirst)
+            if (isNewWeight && startSaveWithManualFirst) {
+                ShowWeightStateTip("请手动保存重量");
                 canSave = false;
-            if (!isNewWeight && startSaveWithManualSecond)
+            }
+            if (!isNewWeight && startSaveWithManualSecond) {
+                ShowWeightStateTip("请手动保存重量");
                 canSave = false;
+            }
             return canSave;
         }
-
+        private DateTime? stableTime = null;
         /// <summary>
         /// 比较返回的重量数据，判断是否稳定
         /// </summary>
         private void CompareWeightValue() {
-            bool isFinished = FinishPadInput();
-            bool isStartTimer = StartWeightWeightTimer();
+            bool isStartWeightTimer = StartWeightWeightTimer();
             bool isWeightStable = IsWeightStable();
-            bool canSave = CanAutoSave();
-            Logger.Info(string.Format("isWeightStable:{0},isStartTimer:{1},isFinished:{2},returnZero:{3},isAutoSaving:{4}",
-                                                         isWeightStable, isStartTimer, isFinished, returnZero, isAutoSaving));
-            if (isAutoSaving)
-                return;
-            if (isWeightStable && isStartTimer && isFinished && returnZero && currentStableWeight > minCredibleWeight) {
-                bool isValidateInfrared = ValidateInfrared();
-                if (isValidateInfrared) {
+            //Logger.Info(string.Format("isWeightStable:{0},isStartTimer:{1},isFinished:{2},returnZero:{3},isAutoSaving:{4}",
+            //                                             isWeightStable, isStartTimer, isFinished, returnZero, isAutoSaving));
+            if (isAutoSaving) return;
+            if (isWeightStable) {
+                if (stableTime == null) ShowWeightStateTip($"当前重量稳定为{currentStableWeight}");
+                stableTime = DateTime.Now;
+            } else {
+                stableTime = null;
+            }
+                bool isValidateInfrared = ValidateInfrared();//检查红外遮挡情况
+            if (isWeightStable && currentStableWeight > minCredibleWeight&& isStartWeightTimer&& isValidateInfrared) {
                     if (isNewWeight) {
                         if (processMode == MeasureProcessMode.FirstGross) {
                             AutoSetWeight(WeightType.Gross, currentStableWeight);
@@ -991,16 +970,12 @@ namespace YF.MWS.Win.View.Weight {
                             AutoSetWeight(WeightType.Gross, currentStableWeight);
                         }
                     }
+                    isAutoSaving = true;
                     bool isValidated = ValidateForm() && mainWeight.ValidateChildren();
-                    if (isValidated && canSave) {
-                        //Logger.Write("Enter auto save");
-                        isStable = true;
-                        //BeginInvoke(new Action(() =>
-                        //{
-                        AutoWeightSave(currentStableWeight);
-                        //}));
+                bool canSave = CanAutoSave();
+                if (canSave && isValidated) {
+                        AutoWeightSave();
                     }
-                }
             }
         }
 
@@ -1014,10 +989,6 @@ namespace YF.MWS.Win.View.Weight {
         }
         private Task ShowWeightInfo1(double value) {
                 value=WeightUtil.GetMinWeight(value, Cfg.Device1);
-            if (((_company.ChargeType==1&&_company.OverNumber<=0)||(_company.ChargeType == 2 && _company.OverTime<=DateTime.Now))&&value>20)
-            {
-                return Task.CompletedTask;
-            }
             string unit = RetCode.UnitFile(Cfg.Device1.SUnit);
                 string waterMark = string.Format("{0}重量：{1}{2}", this.wlookCar == null || string.IsNullOrEmpty(this.wlookCar.Text) ? "" : "车牌：" + this.wlookCar.Text + " ", value.ToString(this.Cfg.Device1.ShowFormat), unit);
                 if (startVideo) {
@@ -1057,43 +1028,13 @@ namespace YF.MWS.Win.View.Weight {
 
                 //无人职守
                 if (Cfg.MeasureFun == "Nobody"&&currentDeviceCfg==Cfg.Device1) {
-                    if (value > 0) {
-                        bool state = false;
-                        bool isStartWeightTimer = StartWeightWeightTimer();
-                            state = value.ToDecimal() >= this.minWeightValue && isStartWeightTimer;
-                            if (state && !this.isBounding) {
-                                this.isBounding = true;
-                                //1#红灯亮、绿灯灭
-                                if (this.readerNo == 1) {
-                                    // ChangeLight(1, true,"show-weight");
-                                } else {
-                                    // ChangeLight(2, true, "show-weight");
-                                }
-                            }
-                        if (state) {
+                    if (value > 0&& value.ToDecimal() >= minCredibleWeight) {
                             //新的判断重量稳定的方法
-                            if (!isStable) {
-                                DateTime dtTmp = DateTime.Now;
-                                if (lstWeightValue.Count == 0) {
-                                    currentSamplingTime = DateTime.Now;
-                                    lstWeightValue.Add(value);
-                                } else if (lstWeightValue.Count < samplingCount) {
-                                    if (IsEffectiveSamplingTime(dtTmp, currentSamplingTime)) {
-                                        currentSamplingTime = dtTmp;
-                                        lstWeightValue.Add(value);
-                                    }
-                                } else {
-                                    if (IsEffectiveSamplingTime(dtTmp, currentSamplingTime)) {
-                                        currentSamplingTime = dtTmp;
+                            if (lstWeightValue.Count >= samplingCount) {
                                         lstWeightValue.RemoveAt(0);
-                                        lstWeightValue.Add(value);
-                                    }
                                 }
-                            }
-                        }
-                        if (!isStable) {
+                                    lstWeightValue.Add(value);
                             CompareWeightValue();
-                        }
                     }
 
             }
@@ -1102,10 +1043,6 @@ namespace YF.MWS.Win.View.Weight {
         private Task ShowWeightInfo2(double value) {
                 value=WeightUtil.GetMinWeight(value, Cfg.Device2);
                 string unit = RetCode.UnitFile(Cfg.Device2.SUnit);
-            if (((_company.ChargeType == 1 && _company.OverNumber <= 0) || (_company.ChargeType == 2 && _company.OverTime <= DateTime.Now)) && value > 20) {
-                return Task.CompletedTask;
-            }
-
             string waterMark = string.Format("{0}重量：{1}{2}", this.wlookCar == null || string.IsNullOrEmpty(this.wlookCar.Text) ? "" : "车牌：" + this.wlookCar.Text + " ", value.ToString(this.Cfg.Device2.ShowFormat), unit);
                 if (startVideo) {
                     if (string.IsNullOrEmpty(currentWaterMark)) {
@@ -1142,47 +1079,15 @@ namespace YF.MWS.Win.View.Weight {
                     }
                 }
 
-                //无人职守
-                if (Cfg.MeasureFun == "Nobody"&&currentDeviceCfg==Cfg.Device2) {
-                    if (value > 0) {
-                        bool state = false;
-                        bool isStartWeightTimer = StartWeightWeightTimer();
-                            state = value.ToDecimal() >= this.minWeightValue && isStartWeightTimer;
-                            if (state && !this.isBounding) {
-                                this.isBounding = true;
-                                //1#红灯亮、绿灯灭
-                                if (this.readerNo == 1) {
-                                    // ChangeLight(1, true,"show-weight");
-                                } else {
-                                    // ChangeLight(2, true, "show-weight");
-                                }
-                            }
-                        if (state) {
-                            //新的判断重量稳定的方法
-                            if (!isStable) {
-                                DateTime dtTmp = DateTime.Now;
-                                if (lstWeightValue.Count == 0) {
-                                    currentSamplingTime = DateTime.Now;
-                                    lstWeightValue.Add(value);
-                                } else if (lstWeightValue.Count < samplingCount) {
-                                    if (IsEffectiveSamplingTime(dtTmp, currentSamplingTime)) {
-                                        currentSamplingTime = dtTmp;
-                                        lstWeightValue.Add(value);
-                                    }
-                                } else {
-                                    if (IsEffectiveSamplingTime(dtTmp, currentSamplingTime)) {
-                                        currentSamplingTime = dtTmp;
-                                        lstWeightValue.RemoveAt(0);
-                                        lstWeightValue.Add(value);
-                                    }
-                                }
-                            }
-                        }
-                        if (!isStable) {
-                            CompareWeightValue();
-                        }
+            //无人职守
+            if (Cfg.MeasureFun == "Nobody" && currentDeviceCfg == Cfg.Device2) {
+                if (value > 0 && value.ToDecimal() >= minCredibleWeight) {
+                    if (lstWeightValue.Count >= samplingCount) {
+                        lstWeightValue.RemoveAt(0);
                     }
-
+                    lstWeightValue.Add(value);
+                    CompareWeightValue();
+                }
             }
             return Task.CompletedTask;
         }
@@ -1311,11 +1216,6 @@ namespace YF.MWS.Win.View.Weight {
                     }
                 }
             }
-            if (Cfg != null && Cfg.MeasureFun == "People") {
-                if (Cfg.PeopleWeight.StartInfrared && modbusLeft != null) {
-                    ReleaseModBus();
-                }
-            }
             //无人职守
             if (Cfg != null && Cfg.MeasureFun == "Nobody") {
                 ReleaseModBus();
@@ -1327,21 +1227,6 @@ namespace YF.MWS.Win.View.Weight {
             }
             ReleaseIdCardReader();
             ReleaseCarPlate();
-        }
-
-        /// <summary>
-        /// 新建磅单
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnItemAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            hasReadCard = false;
-            hasGetCarNo = false;
-            returnZero = true;
-            isReadingCard = false;
-            paySuccess = true;
-            New(true);
-            ShowWeightStateTip("准备就绪");
         }
 
 
@@ -1667,8 +1552,6 @@ namespace YF.MWS.Win.View.Weight {
                                 weWaybillNo.CurrentValue = info.IdNo;
                             if (weDriverName != null)
                                 weDriverName.CurrentValue = info.FullName;
-                            if (weIdAddress != null)
-                                weIdAddress.CurrentValue = info.Address;
                         }));
                     }
                 }
@@ -1777,41 +1660,8 @@ namespace YF.MWS.Win.View.Weight {
             currentTareWeight = 0;
             oldTareWeight = 0;
             oldGrossWeight = 0;
+            tempWeight = null;
             currentGrossWeight = 0;
-        }
-
-        /// <summary>
-        /// 加载数据
-        /// </summary>
-        private void LoadWeight() {
-            searchList.LoadData();
-            //searchList.LoadData();
-            if (!saveFormData) {
-                return;
-            }
-            FormData data = CfgUtil.GetFormData();
-            if (data != null && data.Weight != null) {
-                if (data.LstAttr != null) {
-                    mainWeight.BindExtendControl(data.LstAttr);
-                }
-                mainWeight.BindControl<BWeight>(data.Weight);
-                if (weGrossWeight != null) {
-                    weGrossWeight.Text = "0.00";
-                }
-                if (weTareWeight != null) {
-                    weTareWeight.Text = "0.00";
-                }
-                if (weNetWeight != null) {
-                    weNetWeight.Text = "0.00";
-                }
-                if (weSuttleWeight != null) {
-                    weSuttleWeight.Text = "0.00";
-                }
-                if (wlookCar != null) {
-                    wlookCar.EditValue = null;
-                    wlookCar.CurrentValue = null;
-                }
-            }
         }
 
         private void LoadWeight(string weightId) {
@@ -1902,7 +1752,6 @@ namespace YF.MWS.Win.View.Weight {
         private void ClearWeightControl() {      
             this.lstWeightValue.Clear();
             this.isNoteCheckCar = false;
-            this.isStable = false;
             this.checkCarCount = 0;
             currentPlan = null;
             currentWeight = null;
@@ -1910,7 +1759,6 @@ namespace YF.MWS.Win.View.Weight {
             refusePay = false;
             finishPadInput = false;
             hasLoadUnFinishWeight = false;
-            isAutoSaving = false;
             grossTareTransformed = false;
             hasGetIdCardNo = false;
             processMode = oldProcessMode;
@@ -1947,15 +1795,6 @@ namespace YF.MWS.Win.View.Weight {
         public bool Save() {
             bool isSaved = false;
             try {
-                if(_company != null) {
-                    if (_company.ChargeType == 1&&_company.OverNumber<=0) {
-                        ShowWeightStateTip("称重次数已用完！");
-                        return false;
-                    }else if (_company.ChargeType == 2&&_company.OverTime<=DateTime.Now) {
-                        ShowWeightStateTip("称重时间已过期！");
-                        return false;
-                    }
-                }
                 bool isNew = false;
                 decimal weight = GetCurrentWeight();
                 OrderSource source = OrderSource.Weight;
@@ -2049,12 +1888,6 @@ namespace YF.MWS.Win.View.Weight {
                 if (isSaved && currentWeighWay == WeightWay.Nobody) {
                     returnZero = false;
                 }
-                if (isSaved && currentWeight.FinishState == 1) {
-                    if(_company!=null&&_company.ChargeType==1) {
-                    companyService.upOverNumber(CurrentUser.Instance.CompanyId);
-                        _company.OverNumber -= 1;
-                    }
-                }
                 BPay pay = null;
                 if (isSaved && startWeightPay) {
                     if (currentWeight.RegularCharge <= 0) {
@@ -2120,7 +1953,7 @@ namespace YF.MWS.Win.View.Weight {
                     MessageDxUtil.ShowError("保存磅单信息时发生未知错误,请重试.");
                 }
             } finally {
-                New();
+                New(!Cfg.Weight.SaveFormData);
             }
             return isSaved;
         }
@@ -2148,8 +1981,39 @@ namespace YF.MWS.Win.View.Weight {
 
         private void btnWeight_Click(object sender, EventArgs e) {
             decimal weight = GetCurrentWeight();
-            if (weGrossWeight != null) {
-                weGrossWeight.Text = weight.ToString();
+            setMainWeight(weight);
+        }
+        private void setMainWeight(decimal weight) {
+            if (tempWeight == null) tempWeight = new BWeight();
+            //第一次毛重
+            if (Cfg.Weight.ProcessMode == 0) {
+                if (weGrossWeight != null && weGrossWeight.Text.ToDecimal() <= 0) {
+                    weGrossWeight.Text = weight.ToString();
+                    tempWeight.GrossTime = DateTime.Now;
+                    tempWeight.GrossWeight = weight;
+                    tempWeight.FinishState = 0;
+                    tempWeight.MeasureType = "gross";
+                } else if (weTareWeight != null) {
+                    weTareWeight.Text = weight.ToString();
+                    tempWeight.TareTime = DateTime.Now;
+                    tempWeight.TareWeight = weight;
+                    tempWeight.FinishState = 1;
+                    tempWeight.MeasureType = "tare";
+                }
+            } else if (Cfg.Weight.ProcessMode ==MeasureProcessMode.FirstTare) { //第一次皮重时
+                if (weTareWeight != null&&weTareWeight.Text.ToDecimal() <= 0) {
+                    weTareWeight.Text = weight.ToString();
+                    tempWeight.TareTime = DateTime.Now;
+                    tempWeight.TareWeight = weight;
+                    tempWeight.FinishState = 0;
+                    tempWeight.MeasureType = "tare";
+                } else if(weGrossWeight!=null){
+                    weGrossWeight.Text = weight.ToString();
+                    tempWeight.GrossTime = DateTime.Now;
+                    tempWeight.GrossWeight = weight;
+                    tempWeight.FinishState = 1;
+                    tempWeight.MeasureType = "gross";
+                }
             }
         }
         private void FrmWeight_KeyDown(object sender, KeyEventArgs e) {
@@ -2160,15 +2024,11 @@ namespace YF.MWS.Win.View.Weight {
                         btnWeight.PerformClick();
                     }
                 }
-                if (e.KeyCode == Keys.W) {
-                    e.Handled = true;
-                    btnPrintView.PerformClick();
-                }
             }
         }
 
         private void InitDeviceNo() {
-            WTextEdit wDeviceNo = mainWeight.FindExtendControl<WTextEdit>("DeviceNo", lstAttr);
+            WTextEdit wDeviceNo = mainWeight.FindControl<WTextEdit>("DeviceNo");
             if (wDeviceNo != null) {
                 wDeviceNo.Text = string.Format("{0}号", currentDeviceNo);
             }
@@ -2313,14 +2173,14 @@ namespace YF.MWS.Win.View.Weight {
             bool isSaved = false;
             if (car != null) {
                 if (MessageDxUtil.ShowYesNoAndTips(string.Format("当前车辆已有皮重,确实要替换为{0}吨吗?", tareWeight)) == DialogResult.Yes) {
-                    car.Tare = tareWeight;
+                    car.TareWeight = tareWeight;
                     isSaved = carService.Save(car);
                 }
             } else {
                 car = new SCar();
                 car.Id = YF.MWS.Util.Utility.GetGuid();
                 car.CarNo = carNo;
-                car.Tare = tareWeight;
+                car.TareWeight = tareWeight;
                 car.CarType = CarType.Out.ToString();
                 isSaved = carService.Save(car);
             }
@@ -2382,7 +2242,14 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void simpleButton2_Click(object sender, EventArgs e) {
-            New();
+            returnZero = true;//重量要归零，后面的磅单才能保存
+            hasReadCard = false;
+            hasGetCarNo = false;
+            isReadingCard = false;
+            isAutoSaving = false;
+            paySuccess = true;
+            needGetPayState = false;
+            New(true);
         }
 
         private void radWarehBizType_SelectedIndexChanged(object sender, EventArgs e) {
@@ -2405,6 +2272,44 @@ namespace YF.MWS.Win.View.Weight {
 
         private void simpleButton5_Click(object sender, EventArgs e) {
             RedServerLight(2);
+        }
+
+        private void simpleButton1_Click_1(object sender, EventArgs e) {
+            this.readerNo = 1;
+            if (string.IsNullOrEmpty(txtCar.Text)) {
+                bool isSuccess = false;
+                if (vzRecognizerLeft != null) {
+                    isSuccess = vzRecognizerLeft.ManualTrigger();
+                    ShowWeightStateTip(string.Format("手动触发1#车牌识别{0}", isSuccess ? "成功" : "失败"));
+                }
+                if (hxRecognizerLeft != null) {
+                    isSuccess = hxRecognizerLeft.ManualTrigger();
+                    ShowWeightStateTip(string.Format("手动触发1#车牌识别{0}", isSuccess ? "成功" : "失败"));
+                }
+            } else {
+            CarRecognize(new PlateInfo() {
+                Num=txtCar.Text.Trim()
+            });
+            }
+        }
+
+        private void simpleButton7_Click(object sender, EventArgs e) {
+            this.readerNo = 2;
+            if (string.IsNullOrEmpty(txtCar.Text)) {
+                bool isSuccess = false;
+                if (vzRecognizerRight != null) {
+                    isSuccess = vzRecognizerRight.ManualTrigger();
+                    ShowWeightStateTip(string.Format("手动触发2#车牌识别{0}", isSuccess ? "成功" : "失败"));
+                }
+                if (hxRecognizerRight != null) {
+                    isSuccess = hxRecognizerRight.ManualTrigger();
+                    ShowWeightStateTip(string.Format("手动触发2#车牌识别{0}", isSuccess ? "成功" : "失败"));
+                }
+            } else {
+            CarRecognize(new PlateInfo() {
+                Num=txtCar.Text.Trim()
+            });
+            }
         }
     }
 }

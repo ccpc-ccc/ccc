@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "加密狗", "..\加密狗\�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YF.MWS.Win.Test", "YF.MWS.Win.Test\YF.MWS.Win.Test.csproj", "{35EB17D1-27F7-47F8-9B4A-D576D2DF7605}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "龙旗大屏", "..\龙旗大屏\WindowsFormsApp1\龙旗大屏.csproj", "{82F3C133-2530-41A8-BB51-17764EE79284}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -235,6 +237,18 @@ Global
 		{35EB17D1-27F7-47F8-9B4A-D576D2DF7605}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{35EB17D1-27F7-47F8-9B4A-D576D2DF7605}.Release|x86.ActiveCfg = Release|Any CPU
 		{35EB17D1-27F7-47F8-9B4A-D576D2DF7605}.Release|x86.Build.0 = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Debug|x86.Build.0 = Debug|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|x86.ActiveCfg = Release|Any CPU
+		{82F3C133-2530-41A8-BB51-17764EE79284}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -256,6 +270,7 @@ Global
 		{64585A33-6131-471E-BB03-1A3FCEEF3557} = {21C06A29-2598-4C79-B18F-739657FCB5A9}
 		{1C901933-0444-4784-84C8-AAC9F35E0FB6} = {21C06A29-2598-4C79-B18F-739657FCB5A9}
 		{35EB17D1-27F7-47F8-9B4A-D576D2DF7605} = {21C06A29-2598-4C79-B18F-739657FCB5A9}
+		{82F3C133-2530-41A8-BB51-17764EE79284} = {21C06A29-2598-4C79-B18F-739657FCB5A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99A31E79-9EC7-4201-BD97-4499C276D6F0}

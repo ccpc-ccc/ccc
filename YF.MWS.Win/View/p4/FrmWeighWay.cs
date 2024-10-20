@@ -27,21 +27,11 @@ namespace YF.MWS.Win.View.Setting
         }
 
         private void FrmWeighWay_Load(object sender, EventArgs e) {
-            string use = AppSetting.GetValue("use");
             cfg = CfgUtil.GetCfg();
-            rbNobody.Visible = false;
-            gpNobody.Visible = false;
-            AuthCfg authCfg = CfgUtil.GetAuth();
-            if (authCfg.AutoWeight)
-            {
-                rbNobody.Visible = true;
-                gpNobody.Visible = true;
-            }
             if (cfg != null) 
             {
                 WeightCfg weight = cfg.Weight;
                 WeightStableCfg weightStable = cfg.WeightStable;
-                chkPeopleInfrared.Checked = cfg.PeopleWeight.StartInfrared;
                 txtMinWeight.Text = cfg.NobodyWeight.MinWeightValue.ToString();
                 txtAutoSaveTime.Text = cfg.NobodyWeight.AutoSaveTime.ToString();
                 txtOutWeight.Text = cfg.NobodyWeight.OutWeightValue.ToString();
@@ -52,19 +42,11 @@ namespace YF.MWS.Win.View.Setting
                 teWeightDeviation.Text = weightStable.WeightDeviation.ToString();
                 teMinCredibleWeight.Text = weightStable.MinCredibleWeight.ToString();
                 spSamplingCount.Value = weightStable.SamplingCount;
-                teSampingInterval.Text = weightStable.SampingInterval.ToString();
-                SetMeasureTypeChecked(cfg.MeasureFun);
-                if (cfg.MeasureFun.ToEnum<WeightWay>() == WeightWay.Nobody)
-                {
-                    gpNobody.Enabled = true;
-                }
-                else
-                {
-                    gpNobody.Enabled = false;
-                }
-            #region 称重设置
+                rgWeightType.EditValue=cfg.MeasureFun;
+                #region 称重设置
                 OverWeightCfg overWeight = cfg.OverWeight;
                 FormHelper.BindControl(plMain, weight);
+                chkCarTemp.Checked = weight.CarTemp;
                 chkStartOverWeight.Checked = overWeight.Start;
                 teMaxWeight.Text = overWeight.MaxWeight.ToString();
                 chkStartCustomerBalanceLimit.Checked = weight.StartCustomerBalanceLimit;
@@ -75,7 +57,6 @@ namespace YF.MWS.Win.View.Setting
                 rgLoadUnfinishWeight.EditValue = weight.LoadUnfinishWeight.ToString();
                 chkWeightProcessCfg.Checked = weight.StartWeightProcessCfg;
                 rgWeightProcess.EditValue = weight.Process.ToString();
-                chkGrossTareTransform.Checked = weight.GrossTareTransform;
                 chkAutoRun.Checked = weight.AutoRun;
                 chkAutoReset.Checked = weight.StartAutoReset;
                 teIdleMinutes.Text = weight.IdleMinutes.ToString();
@@ -88,58 +69,9 @@ namespace YF.MWS.Win.View.Setting
                 btnSelectBackupDbDirectory.Text = weight.BackupDir;
                 if (string.IsNullOrEmpty(btnSelectBackupDbDirectory.Text))
                     btnSelectBackupDbDirectory.Text = @"D:\MWS\DataBack";
-            #endregion
+                #endregion
             }
-            if (use != "all") {
-                this.xtraTabPage1.PageVisible = false;
-            }
-        }
-
-        private void rbPeople_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbPeople.Checked)
-            {
-                SetMeasureTypeChecked(rbPeople.Tag.ToString());
-                gpNobody.Enabled = false;
-            }
-        }
-
-        private void rbNobody_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbNobody.Checked)
-            {
-                SetMeasureTypeChecked(rbNobody.Tag.ToString());
-                gpNobody.Enabled = true;
-            }
-        }
-
-        private void SetMeasureTypeChecked(string currentCheckedType)
-        {
-            if (rbPeople.Tag.ToString() == currentCheckedType)
-            {
-                rbPeople.Checked = true;
-                rbNobody.Checked = false;
-            }
-            if (rbNobody.Tag.ToString() == currentCheckedType)
-            {
-                rbPeople.Checked = false;
-                rbNobody.Checked = true;
-            }
-        }
-
-        private void btnItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Save();
-        }
-
-        private string GetMeasureType()
-        {
-            string measureType = WeightWay.People.ToString();
-            if (rbNobody.Checked)
-            {
-                measureType = WeightWay.Nobody.ToString();
-            }
-            return measureType;
+            this.xtraTabPage1.PageVisible = CurrentClient.Instance.AutoCfg.AutoWeight;
         }
 
         private void Save() 
@@ -150,40 +82,18 @@ namespace YF.MWS.Win.View.Setting
                 if (cfg == null)
                     cfg = new SysCfg();
             }
-            cfg.MeasureFun = GetMeasureType();
-            WeightWay way = cfg.MeasureFun.ToEnum<WeightWay>();
-            if (way == WeightWay.Nobody)
-            {
-                if ((string.IsNullOrEmpty(txtMinWeight.Text.Trim()) || txtMinWeight.Text.Trim().ToDecimal() <= 0) || (string.IsNullOrEmpty(txtAutoSaveTime.Text.Trim()) || txtAutoSaveTime.Text.Trim().ToDecimal() <= 0))
-                {
-                    MessageDxUtil.ShowTips("无人职守模式必须设置起磅重量和自动保存时间！");
-                    return;
-                }
-                else
-                {
-                    cfg.NobodyWeight.MinWeightValue = txtMinWeight.Text.Trim().ToDecimal();
-                    cfg.NobodyWeight.AutoSaveTime = txtAutoSaveTime.Text.ToDecimal();
-                }
-                if ((string.IsNullOrEmpty(txtOutWeight.Text.Trim()) || txtOutWeight.Text.Trim().ToDecimal() <= 0) || (string.IsNullOrEmpty(txtAutoOutTime.Text.Trim()) || txtAutoOutTime.Text.Trim().ToDecimal() <= 0))
-                {
-                    MessageDxUtil.ShowTips("无人职守模式必须设置落杆重量和自动落杆时间！");
-                    return;
-                }
-                else
-                {
-                    cfg.NobodyWeight.OutWeightValue = txtOutWeight.Text.Trim().ToDecimal();
-                    cfg.NobodyWeight.AutoOutTime = txtAutoOutTime.Text.Trim().ToDecimal();
-                }
+            cfg.NobodyWeight.MinWeightValue = txtMinWeight.Text.Trim().ToDecimal();
+            cfg.NobodyWeight.AutoSaveTime = txtAutoSaveTime.Text.ToDecimal();
+            cfg.NobodyWeight.OutWeightValue = txtOutWeight.Text.Trim().ToDecimal();
+            cfg.NobodyWeight.AutoOutTime = txtAutoOutTime.Text.Trim().ToDecimal();
                 cfg.NobodyWeight.StartSaveWithManualFirst = chkStartSaveWithManualFirst.Checked;
                 cfg.NobodyWeight.StartSaveWithManualSecond = chkStartSaveWithManualSecond.Checked;
-            }
             cfg.Weight.WeightProcessTrigger = rgWeightProcessTriggerType.EditValue.ToEnum<WeightProcessTriggerType>();
-            cfg.PeopleWeight.StartInfrared = chkPeopleInfrared.Checked;
             WeightStableCfg weightStable = cfg.WeightStable;
             weightStable.WeightDeviation = teWeightDeviation.Text.ToDecimal();
             weightStable.MinCredibleWeight = teMinCredibleWeight.Text.ToDecimal();
             weightStable.SamplingCount = spSamplingCount.Value.ToInt();
-            weightStable.SampingInterval = teSampingInterval.Text.ToDecimal();
+            cfg.MeasureFun = rgWeightType.EditValue.ToString();
             CfgUtil.SaveCfg(cfg);
             MessageDxUtil.ShowTips("成功保存过磅方式设置信息");
         }
@@ -208,7 +118,7 @@ namespace YF.MWS.Win.View.Setting
             weight.StartCustomerBalanceLimit = chkStartCustomerBalanceLimit.Checked;
             weight.Process = rgWeightProcess.EditValue.ToEnum<WeightProcess>();
             weight.LoadUnfinishWeight = rgLoadUnfinishWeight.EditValue.ToEnum<LoadUnfinishWeightType>();
-            weight.AutoLogin = chkAutoLogin.Checked;
+            weight.CarTemp = chkCarTemp.Checked;
             weight.StartValidateCarWithCard = chkStartValidateCarWithCard.Checked;
             weight.AutoRun = chkAutoRun.Checked;
             weight.StartAutoReset = chkAutoReset.Checked;

@@ -14,34 +14,17 @@ using YF.Utility.Data;
 
 namespace YF.MWS.SQliteService
 {
-    public class WarehService : IWarehService
+    public class WarehService :BaseService, IWarehService
     {
-        private SqliteDb sqliteDb = new SqliteDb();
-        private IService service = null;
         
 
         public WarehService()
-        {
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver)
-            {
-                service = ServiceInitialization.DbService;
-                
-            }
-        }
+        { }
 
         public bool Delete(string warehId)
         {
-            bool isDeleted = false;
-            string sql = string.Format(@"update S_Wareh set  RowState={0} where Id = '{1}'", (int)RowState.Delete, warehId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                isDeleted = sqliteDb.ExecuteNonQuery(sql) > 0;
-            }
-            else
-            {
-                isDeleted = service.ExecuteNonQuery(sql);
-            }
-            return isDeleted;
+            string sql = $"delete from S_Wareh  where Id = '{warehId}'";
+            return base.ExecuteSql(sql);
         }
 
         public SWareh Get(string warehId)

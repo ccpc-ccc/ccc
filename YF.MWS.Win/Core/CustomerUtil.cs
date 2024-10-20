@@ -19,11 +19,11 @@ namespace YF.MWS.Win.Core
     {
         private static IMasterService masterService = new MasterService();
 
-        public static void AutoSaveCustomer(IMasterService masterService, ISeqNoService seqNoService, MainWeight mainWeight, List<SAttribute> lstAttr)
+        public static void AutoSaveCustomer(IMasterService masterService, ISeqNoService seqNoService, MainWeight mainWeight)
         {
             WCustomerEdit weCustomer = mainWeight.FindControl<WCustomerEdit>("CustomerId");
-            WTextEdit customerAddress = mainWeight.FindExtendControl<WTextEdit>("CustomerAddress", lstAttr);
-            WTextEdit customerIdCard = mainWeight.FindExtendControl<WTextEdit>("CustomerIdCard", lstAttr);
+            WTextEdit customerAddress = mainWeight.FindControl<WTextEdit>("CustomerAddress");
+            WTextEdit customerIdCard = mainWeight.FindControl<WTextEdit>("CustomerIdCard");
             if (weCustomer != null && customerAddress != null && customerIdCard != null)
             {
                 if (customerIdCard.Text.Trim().Length > 0 && weCustomer.Text.Trim().Length > 0)
@@ -51,7 +51,7 @@ namespace YF.MWS.Win.Core
             }
         }
 
-        public static void LoadCustomer(string customerId, CustomerType type, IMasterService masterService, MainWeight mainWeight, List<SAttribute> lstAttr)
+        public static void LoadCustomer(string customerId, CustomerType type, IMasterService masterService, MainWeight mainWeight)
         {
             SCustomer customer = masterService.GetCustomer(customerId);
             if (customer != null && !string.IsNullOrEmpty(customer.Id))
@@ -66,32 +66,32 @@ namespace YF.MWS.Win.Core
                             {
                                 customerBalance.CurrentValue = customer.BalanceAmount.ToString();
                             }
-                            WTextEdit customerCode = mainWeight.FindExtendControl<WTextEdit>("CustomerCode", lstAttr);
+                            WTextEdit customerCode = mainWeight.FindControl<WTextEdit>("CustomerCode");
                             if (customerCode != null)
                             {
                                 customerCode.CurrentValue = customer.CustomerCode;
                             }
-                            WTextEdit customerAddress = mainWeight.FindExtendControl<WTextEdit>("CustomerAddress", lstAttr);
+                            WTextEdit customerAddress = mainWeight.FindControl<WTextEdit>("CustomerAddress");
                             if (customerAddress != null)
                             {
                                 customerAddress.CurrentValue = customer.Addr;
                             }
-                            WTextEdit customerIdCard = mainWeight.FindExtendControl<WTextEdit>("CustomerIdCard", lstAttr);
+                            WTextEdit customerIdCard = mainWeight.FindControl<WTextEdit>("CustomerIdCard");
                             if (customerIdCard != null)
                             {
                                 customerIdCard.CurrentValue = customer.IdCard;
                             }
-                            WTextEdit customerAccount = mainWeight.FindExtendControl<WTextEdit>("CustomerAccount", lstAttr);
+                            WTextEdit customerAccount = mainWeight.FindControl<WTextEdit>("CustomerAccount");
                             if (customerAccount != null)
                             {
                                 customerAccount.CurrentValue = customer.Account;
                             }
-                            WTextEdit customerTel = mainWeight.FindExtendControl<WTextEdit>("CustomerTel", lstAttr);
+                            WTextEdit customerTel = mainWeight.FindControl<WTextEdit>("CustomerTel");
                             if (customerTel != null)
                             {
                                 customerTel.CurrentValue = customer.Tel;
                             }
-                            WTextEdit customerContacter = mainWeight.FindExtendControl<WTextEdit>("CustomerContacter", lstAttr);
+                            WTextEdit customerContacter = mainWeight.FindControl<WTextEdit>("CustomerContacter");
                             if (customerContacter != null)
                             {
                                 customerContacter.CurrentValue = customer.Contracter;
@@ -107,22 +107,22 @@ namespace YF.MWS.Win.Core
                     case CustomerType.Delivery:
                         #region deliver
                         {
-                            WTextEdit customerTel = mainWeight.FindExtendControl<WTextEdit>("shouliangdianhua", lstAttr);
+                            WTextEdit customerTel = mainWeight.FindControl<WTextEdit>("shouliangdianhua");
                             if (customerTel != null)
                             {
                                 customerTel.CurrentValue = customer.Tel;
                             }
-                            WTextEdit customerIdCard = mainWeight.FindExtendControl<WTextEdit>("shenfen", lstAttr);
+                            WTextEdit customerIdCard = mainWeight.FindControl<WTextEdit>("shenfen");
                             if (customerIdCard != null)
                             {
                                 customerIdCard.CurrentValue = customer.IdCard;
                             }
-                            WTextEdit customerBank = mainWeight.FindExtendControl<WTextEdit>("kaihuhag", lstAttr);
+                            WTextEdit customerBank = mainWeight.FindControl<WTextEdit>("kaihuhag");
                             if (customerBank != null)
                             {
                                 customerBank.CurrentValue = customer.Bank;
                             }
-                            WTextEdit customerAccount = mainWeight.FindExtendControl<WTextEdit>("yinghangzhanghao", lstAttr);
+                            WTextEdit customerAccount = mainWeight.FindControl<WTextEdit>("yinghangzhanghao");
                             if (customerAccount != null)
                             {
                                 customerAccount.CurrentValue = customer.Account;

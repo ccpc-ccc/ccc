@@ -48,7 +48,9 @@ namespace YF.MWS.Win.Uc
         {
             if (!DesignMode) {
                 Cfg = CfgUtil.GetCfg();
-                Auth=CfgUtil.GetAuthFromAuthCode(CurrentClient.Instance.AutoCfg);
+                Auth = CurrentClient.Instance.AutoCfg;
+                if (!this.Auth.AutoWeight) Cfg.MeasureFun = "People";
+                if (!this.Auth.CarNoRecognition) Cfg.StartCarNoRecognition = false;
                 var lst = UserCacher.GetModuleList(CurrentUser.Instance.Id);
                 string fullName = this.GetType().FullName;
                 if (lst != null && lst.Count > 0)

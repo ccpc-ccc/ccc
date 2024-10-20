@@ -68,7 +68,7 @@ namespace YF.MWS.Win
             {
                 return cfg;
             }
-            authCode = Encrypt.DecryptDES(authCode, CurrentClient.Instance.EncryptKey);
+            //authCode = Encrypt.DecryptDES(authCode, CurrentClient.Instance.EncryptKey);
                 if (authCode[0] == '1')
                 {
                     cfg.StartVideo = true;
@@ -104,47 +104,6 @@ namespace YF.MWS.Win
             return cfg;
         }
 
-        public static AuthCfg GetAuthFromVersion(string version, AuthCfg baseCfg)
-        {
-            AuthCfg cfg = new AuthCfg();
-            if (string.IsNullOrEmpty(version))
-            {
-                return cfg;
-            }
-                if (version[0] == '1' || baseCfg.StartVideo)
-                {
-                    cfg.StartVideo = true;
-                }
-                if (version[1] == '1' || baseCfg.ReadCard)
-                {
-                    cfg.ReadCard = true;
-                }
-                if ( version[2] == '1' || baseCfg.CarNoRecognition)
-                {
-                    cfg.CarNoRecognition = true;
-                }
-                if ( version[3] == '1' || baseCfg.StartOnline)
-                {
-                    cfg.StartOnline = true;
-                }
-                if ( version[4] == '1' || baseCfg.AutoWeight)
-                {
-                    cfg.AutoWeight = true;
-                }
-                if ( version[5] == '1' || baseCfg.StartScreen)
-                {
-                    cfg.StartScreen = true;
-                }
-                if ( version[6] == '1'|| baseCfg.StartFinance)
-                {
-                    cfg.StartFinance = true;
-                }
-                if ( version[7] == '1' || baseCfg.StartPad)
-                {
-                    cfg.StartPad = true;
-                }
-            return cfg;
-        }
 
         public static LoginCfg GetLoginCfg()
         {
@@ -174,7 +133,6 @@ namespace YF.MWS.Win
                 cfg.StartPad = true;
                 cfg.StartFinance = true;
                 cfg.StartScreen = true;
-
             return cfg;
         }
 
@@ -268,13 +226,12 @@ namespace YF.MWS.Win
 
         public static Font GetFont()
         {
-            FontCfg fontCfg = null;
-            fontCfg = GetFontCfg();
+            FontCfg fontCfg = GetFontCfg();
             if (fontCfg == null)
             {
                 fontCfg = new FontCfg();
             }
-            Font f = new Font(fontCfg.FamilyName, fontCfg.FontSize, fontCfg.Style, GraphicsUnit.Pixel);
+            Font f = new Font(fontCfg.FamilyName, fontCfg.FontSize, fontCfg.Style, GraphicsUnit.Point);
             return f;
         }
 

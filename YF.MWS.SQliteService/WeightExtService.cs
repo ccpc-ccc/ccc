@@ -60,29 +60,6 @@ namespace YF.MWS.SQliteService
 
         #region IWeightExtService 成员
 
-        public List<BWeightAttribute> GetAttributeList(string weightId)
-        {
-            List<BWeightAttribute> lst = new List<BWeightAttribute>();
-            string sql;
-            sql = string.Format(@"select b.AttributeName,b.FieldName,a.AttributeId,a.AttributeValue,a.Id,a.WeightId
-                                        from B_WeightAttribute a left join S_Attribute b  on a.AttributeId=b.Id
-                                       where a.WeightId='{0}'", weightId);
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                lst = TableHelper.TableToList<BWeightAttribute>(dt);
-            }
-            return lst;
-        }
-
 
         /// <summary>
         /// 获取补录磅单

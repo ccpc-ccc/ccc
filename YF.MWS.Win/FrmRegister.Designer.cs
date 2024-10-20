@@ -126,10 +126,13 @@
             // 
             this.lblNote.Appearance.ForeColor = System.Drawing.Color.Red;
             this.lblNote.Appearance.Options.UseForeColor = true;
+            this.lblNote.Appearance.Options.UseTextOptions = true;
+            this.lblNote.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblNote.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblNote.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.lblNote.Location = new System.Drawing.Point(142, 190);
+            this.lblNote.Location = new System.Drawing.Point(0, 179);
             this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(24, 14);
+            this.lblNote.Size = new System.Drawing.Size(514, 28);
             this.lblNote.TabIndex = 24;
             this.lblNote.Text = "提示";
             // 

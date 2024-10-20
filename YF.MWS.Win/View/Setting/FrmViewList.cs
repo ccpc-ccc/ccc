@@ -47,27 +47,13 @@ namespace YF.MWS.Win.View
             repositoryItemCheckEdit1.ValueUnchecked = 0;
             repositoryItemCheckEdit2.ValueChecked = 1;
             repositoryItemCheckEdit2.ValueUnchecked = 3;
+            repositoryItemCheckEdit3.ValueChecked = 1;
+            repositoryItemCheckEdit3.ValueUnchecked = 0;
+            repositoryItemCheckEdit4.ValueChecked = 1;
+            repositoryItemCheckEdit4.ValueUnchecked = 0;
             BindData();
         }
 
-        private string GetViewCaption(string viewType) 
-        {
-            string caption = string.Empty;
-            SCode code = null;
-            if (lstCode != null && lstCode.Count > 0)
-            {
-                code = lstCode.Find(c => c.ItemCode == viewType);
-                if (code != null)
-                {
-                    caption = code.ItemCaption;
-                }
-            }
-            if (string.IsNullOrEmpty(caption))
-            {
-                caption = viewType;
-            }
-            return caption;
-        }
 
         private int GetFocusRowIndex() 
         {
@@ -93,7 +79,7 @@ namespace YF.MWS.Win.View
             lstView = viewService.GetViewList();
             foreach (QWeightView view in lstView) 
             {
-                view.ViewTypeCaption = GetViewCaption(view.ViewType);
+                view.ViewTypeCaption = view.ViewType.ToEnum<ViewType>().toDescription();
             }
             gcViewList.DataSource = lstView;
             gcViewList.RefreshDataSource();
@@ -323,6 +309,12 @@ namespace YF.MWS.Win.View
             }else if (e.Column.FieldName=="RowIndex") {
                 dtl.RowIndex = e.Value.ToInt();
                 viewService.saveWeightViewDtlRowIndex(dtl);
+            }else if (e.Column.FieldName== "StayState") {
+                dtl.StayState =  e.Value.ToInt();
+                viewService.saveWeightViewDtlStayState(dtl);
+            }else if (e.Column.FieldName== "AutoSaveState") {
+                dtl.AutoSaveState =  e.Value.ToInt();
+                viewService.saveWeightViewDtlAutoSaveState(dtl);
             }
         }
     }

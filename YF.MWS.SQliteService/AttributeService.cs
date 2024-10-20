@@ -45,28 +45,6 @@ namespace YF.MWS.SQliteService
             return lstAttr;
         }
 
-        public List<BWeightAttribute> GetWeightAttributeList(string weightId)
-        {
-            List<BWeightAttribute> lstAttr = new List<BWeightAttribute>();
-            string sql;
-            sql = string.Format(@"select b.AttributeName,b.FieldName,a.AttributeId,a.AttributeValue,a.Id,a.WeightId
-                                        from B_WeightAttribute a left join S_Attribute b  on a.AttributeId=b.Id where a.WeightId='{0}'", weightId);
-            DataTable dt = null;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else
-            {
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                lstAttr = TableHelper.TableToList<BWeightAttribute>(dt);
-            }
-            return lstAttr;
-        }
-
         public SAttributeSubject GetSubject(string subjectId)
         {
             SAttributeSubject attr = null;
@@ -159,32 +137,6 @@ namespace YF.MWS.SQliteService
             {
                 return service.Save<SAttributeSubject>(subject, subject.Id);
             }
-        }
-
-        public bool SaveWeightAttribute(string weightId, List<BWeightAttribute> lstAttr) 
-        {
-            bool isSaved = false;
-            if (lstAttr == null || lstAttr.Count == 0) 
-            {
-                return isSaved;
-            }
-            List<string> lstSql=new List<string>();
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("delete from B_WeightAttribute where WeightId='{0}';", weightId);
-            lstSql.Add(sb.ToString());
-            foreach (BWeightAttribute attr in lstAttr) 
-            {
-               lstSql.Add(string.Format("{0};", SqliteSqlUtil.GetSaveSql<BWeightAttribute>(attr, "B_WeightAttribute")));
-            }
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                isSaved = sqliteDb.ExecuteNonQuery(lstSql) > 0;
-            }
-            else 
-            {
-                isSaved = service.ExecuteNonQuery(lstSql);
-            }
-            return isSaved;
         }
     }
 }

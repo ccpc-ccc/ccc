@@ -52,8 +52,12 @@ namespace YF.MWS.Win.Test
                 StartScreen= true,
                 StartVideo=true
             } ;
-            cfg.AutoWeight = raFileType.EditValue.ToString() == "all";
-            cfg.CarNoRecognition = raFileType.EditValue.ToString() == "all";
+            if (raFileType.EditValue.ToString() == "all") {
+            cfg.AutoWeight = true;
+            cfg.CarNoRecognition = true;
+            }else if (raFileType.EditValue.ToString() == "car") {
+            cfg.CarNoRecognition = true;
+            }
             string line3=Encrypt.EncryptDES(cfg.JsonSerialize(), CurrentClient.Instance.EncryptKey);
             string startDate = endDate.Time.ToString("yyyyMMdd");
             string line1 = Encrypt.EncryptDES(startDate, CurrentClient.Instance.EncryptKey);
@@ -91,7 +95,8 @@ namespace YF.MWS.Win.Test
                 MessageBox.Show("设置读密码错误。"); return;
             }
             string auth = "11111111";
-            if (raType.EditValue.ToString() == "manual") auth = "10001111";
+            if (raType.EditValue.ToString() == "manual") auth = "10000111";
+            else if (raType.EditValue.ToString() == "car") auth = "10001111";
              string lastUsedDate = DateTime.Now.ToString("yyyyMMdd");
             lastUsedDate=Encrypt.EncryptDES(lastUsedDate, CurrentClient.Instance.EncryptKey);
             auth += lastUsedDate;
@@ -141,6 +146,8 @@ namespace YF.MWS.Win.Test
             if (auth == "11111111") {
                 message="当前版本为：无人值守";
             } else if(auth == "10001111"){
+                message="当前版本为：车牌识别版";
+            } else if(auth == "10000111"){
                 message="当前版本为：普通版";
             }
             string date = outstring.Substring(32, 24);

@@ -8,8 +8,8 @@ namespace YF.MWS.Db
 {
     /// <summary>
     /// 称重界面视图
-    /// Author:yafyr
-    /// Date:2014-11-11
+    /// Author:闫孝感
+    /// Date:2024-11-11
     /// </summary>
     public class SWeightView:BaseEntity
     {
