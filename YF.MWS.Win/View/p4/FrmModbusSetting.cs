@@ -109,7 +109,7 @@ namespace YF.MWS.Win.View.Master {
         }
 
         private void btnSend2_Click(object sender, EventArgs e) {
-            byte[] byteFun, byteRet;
+            byte[] byteFun, byteRet=new byte[24];
                 if (socket == null || !socket.Connected) {
                     MessageBox.Show("请先连接网络设备");
                     return;
@@ -117,7 +117,13 @@ namespace YF.MWS.Win.View.Master {
                 try {
                     byteFun = txtSend2.Text.HexGetBytes();
                     socket.Send(byteFun);
-                    MessageBox.Show("发送成功！");
+                int r = socket.Receive(byteRet);
+                byte[] bn = new byte[r];
+                if (r > 0) {
+                    Array.Copy(byteRet, bn, r);
+                }
+                textBox1.Text += bn.ToHexStr(false,true) + "\r\n";
+                MessageBox.Show("发送成功！");
                 } catch (Exception ex) {
                     Logger.Write("发送数据到网络设备失败 "+ex.Message);
                     MessageBox.Show("发送失败");
@@ -131,6 +137,8 @@ namespace YF.MWS.Win.View.Master {
         private void simpleButton7_Click(object sender, EventArgs e) {
             if (simpleButton7.Text=="连接"){
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.ReceiveTimeout = 3000;
+                socket.SendTimeout = 3000;
                 simpleButton7.Text = "断开";
             try {
                 socket.Connect(txtModbusIP.Text, txtModbusPort.Text.ToInt());

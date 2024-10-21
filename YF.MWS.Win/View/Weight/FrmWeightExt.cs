@@ -40,77 +40,6 @@ namespace YF.MWS.Win.View.Weight
         /// </summary>
         private decimal residentUnitPrice = 0;
 
-        private void AddWeightConfirm(BWeight weight) 
-        {
-            BWeightConfirm confirm = new BWeightConfirm();
-            confirm.Id = weight.Id;
-            BPlanCard card = CardCacher.GetWithCardNo(cardService, weight.CardNo);
-            if (card != null)
-            {
-                confirm.CardId = card.Id;
-            }
-            confirm.CarNo = weight.CarNo;
-            confirm.GrossWeight = weight.GrossWeight;
-            confirm.TareWeight = weight.TareWeight;
-            confirm.UnitType = BaseMetadata.MeasureUnitType.Ton;
-            if (!string.IsNullOrEmpty(weight.MeasureUnit) && weight.MeasureUnit.ToLower() == "Kg".ToLower())
-                confirm.UnitType = BaseMetadata.MeasureUnitType.Kg;
-            confirm.CardNo = weight.CardNo;
-            confirm.CreateTime = DateTime.Now;
-            confirm.QcState = QcState.UnChecked;
-            confirm.WeightNo = weight.WeightNo;
-            confirm.MaterialId = weight.MaterialId;
-            Task.Factory.StartNew(new Action(() =>
-            {
-                weightProcessService.SaveConfirm(confirm);
-            }));
-        }
-
-        private void SyncWeightConfirm()
-        {
-            Task.Factory.StartNew(new Action(() =>
-            {
-                StringBuilder sb = new StringBuilder();
-                List<BWeightConfirm> confirms = webWeightProcessService.GetUnSyncConfirmList();
-                BatchUpdate update = new BatchUpdate();
-                bool isSaved = false;
-                if (confirms != null && confirms.Count > 0)
-                {
-                    sb.AppendFormat("ecs-unsync-count:" + confirms.Count);
-                    foreach (BWeightConfirm confirm in confirms)
-                    {
-                        confirm.SyncState = SyncState.Synced;
-                        isSaved = weightProcessService.SaveConfirm(confirm);
-                        weightService.UpdateQcState(confirm.Id, confirm.QcState,confirm.DeductWeight);
-                        if (isSaved)
-                            update.Ids.Add(confirm.Id);
-                    }
-                    webWeightProcessService.UpdateConfirmSyncState(update);
-                }
-                else
-                {
-                    sb.AppendFormat("ecs-unsync-count:0");
-                }
-                confirms = weightProcessService.GetUnSyncConfirmList();
-                if (confirms != null && confirms.Count > 0)
-                {
-                    sb.AppendFormat("\r\nclient-unsync-count:" + confirms.Count);
-                    foreach (BWeightConfirm confirm in confirms)
-                    {
-                        confirm.SyncState = SyncState.Synced;
-                        isSaved = webWeightProcessService.SaveConfirm(confirm);
-                        if (isSaved)
-                            update.Ids.Add(confirm.Id);
-                    }
-                    weightProcessService.UpdateConfirmSyncState(update);
-                }
-                else
-                {
-                    sb.AppendFormat("\r\nclient-unsync-count:0");
-                }
-                Logger.Info(sb.ToString());
-            }));
-        }
 
         private void AutoInvalidWeight() 
         {
@@ -663,29 +592,6 @@ namespace YF.MWS.Win.View.Weight
                     return isValidated;
                 }
             }
-            if (startAppWeightConfirm && !isNewWeight && currentWeight!=null) 
-            {
-                bool isConfirmed = true;
-                if (currentWeight.QcState != (int)QcState.Qualified)
-                {
-                    BWeightConfirm confirm = weightProcessService.GetConfirm(currentWeight.Id);
-                    if (confirm != null && confirm.QcState != QcState.Qualified)
-                    {
-                        isConfirmed = false;
-                        //confirm = webWeightService.GetConfirm(currentWeight.WeightId);
-                        if (confirm != null && confirm.QcState == QcState.Qualified)
-                        {
-                            isConfirmed = true;
-                        }
-                    }
-                    if (!isConfirmed)
-                    {
-                        isValidated = false;
-                        ShowWeightStateTip("磅单未在APP上审核");
-                        return isValidated;
-                    }
-                }
-            }
             if (startCustomerBalanceLimit)
             {
                 decimal amount = 0;
@@ -845,7 +751,7 @@ namespace YF.MWS.Win.View.Weight
             //decimal currentWeight = GetCurrentWeight();
             if (startInfrared && modbusLeft != null)
             {
-                isValidated = modbusLeft.ValidateInfrared();
+                isValidated = !modbusLeft.ValidateInfrared();
                 if (!isValidated)
                 {
                     ShowWeightStateTip("车未完全上磅不能保存磅单");
@@ -854,14 +760,11 @@ namespace YF.MWS.Win.View.Weight
                         MessageDxUtil.ShowWarning("车未完全上磅不能保存磅单.");
                     }
                     checkCarCount++;
-                    if (checkCarCount == 3 && !isNoteCheckCar)
-                    {
                         if (startVoice && speecher != null)
                         {
                             speecher.Speak(voiceCfg.CarStopFail);
                         }
                         isNoteCheckCar = true;
-                    }
                 }
             }
             return isValidated;

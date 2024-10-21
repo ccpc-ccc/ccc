@@ -150,7 +150,6 @@
     <Compile Include="Enum\CarNoOutMode.cs" />
     <Compile Include="Enum\FinaSettlement.cs" />
     <Compile Include="Enum\ImportMode.cs" />
-    <Compile Include="Enum\LedVersionType.cs" />
     <Compile Include="Enum\OpenSingleGateMode.cs" />
     <Compile Include="Enum\PayState.cs" />
     <Compile Include="Enum\PayType.cs" />

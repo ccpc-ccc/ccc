@@ -249,10 +249,6 @@ namespace YF.MWS.Win.View.Weight
         /// 当前识别仪类型
         /// </summary>
         private CarPlateRecognizerType currentCarPlateRecognizer = CarPlateRecognizerType.None;
-        /// <summary>
-        /// 启用APP磅单审核
-        /// </summary>
-        private bool startAppWeightConfirm = false;
         private string companyId = string.Empty;
         /// <summary>
         /// 是否启用毛皮重转换
@@ -517,7 +513,6 @@ namespace YF.MWS.Win.View.Weight
                         idleMinutes = 2;
                     processMode = Cfg.Weight.ProcessMode;
                     oldProcessMode = Cfg.Weight.ProcessMode;
-                    startAppWeightConfirm = Cfg.Weight.StartAppWeightConfirm;
                     startInputItemAutoSave = Cfg.Weight.StartInputItemAutoSave;
                     loadUnfinishWeight = Cfg.Weight.LoadUnfinishWeight;
                     startWeightProcessCfg = Cfg.Weight.StartWeightProcessCfg;
@@ -793,7 +788,7 @@ namespace YF.MWS.Win.View.Weight
         {
             try
             {
-                if (hasGetCarNo)
+                if (hasGetCarNo&&GetCurrentWeight()>0)
                 {
                     if (speecher != null) 
                     {
@@ -889,12 +884,10 @@ namespace YF.MWS.Win.View.Weight
                         speecher.Speak(voiceCfg.CarRecognition);
                     }
                     #region WeightWay.Nobody
-                    //if (currentWeighWay == WeightWay.Nobody)
+                    if (currentWeighWay == WeightWay.Nobody)
                     {
-                        string message = string.Empty;
                         //红灯灭绿灯亮
                         GreeServerLight(readerNo);
-                        message = string.Format("正在开启{0}#道闸", readerNo);
                             //1#车牌识别仪识别车牌
                             this.OpenServerGate(this.readerNo);
                     }
@@ -1475,7 +1468,8 @@ namespace YF.MWS.Win.View.Weight
             bool isOk = false;
             if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2 - 1;
-               await this.modbusLeft.SendData(no, 3);
+                int time = Cfg.NobodyWeight.FunSixCloseTime <= 0 ? 3 : Cfg.NobodyWeight.FunSixCloseTime;
+               await this.modbusLeft.SendData(no, time);
                 isOk = true;
             } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no==1&&this.hxRecognizerLeft!=null) {
@@ -1490,7 +1484,8 @@ namespace YF.MWS.Win.View.Weight
             bool isOk = false;
             if (Cfg.NobodyWeight.GateControl == "Modbus" && this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2;
-                await this.modbusLeft.SendData(no, 3);
+                int time = Cfg.NobodyWeight.FunSixCloseTime <= 0 ? 3 : Cfg.NobodyWeight.FunSixCloseTime;
+                await this.modbusLeft.SendData(no, time);
             } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no == 1 && this.hxRecognizerLeft != null) {
                       isOk = hxRecognizerLeft.CloseGate();

@@ -275,12 +275,6 @@ namespace YF.MWS.Win {
                         frmScreen.ShowDialog();
                         return;
                     }
-                    if (fullName == "YF.MWS.Win.View.Master.FrmScreenSetting") {
-                        FrmScreenSetting frmScreen = new FrmScreenSetting();
-                        frmScreen.ScreenNo = Convert.ToInt32(parameter);
-                        frmScreen.ShowDialog();
-                        return;
-                    }
                     Type type = Type.GetType(fullName);
                     Form form = (Form)type.Assembly.CreateInstance(fullName);
                     if (form == null)

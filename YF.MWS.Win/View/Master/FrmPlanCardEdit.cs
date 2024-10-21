@@ -30,7 +30,6 @@ namespace YF.MWS.Win.View.Master
     public partial class FrmPlanCardEdit : BaseForm
     {
         private WriteCardCfg writeCard;
-        private bool startAppCardRead = false;
         private bool isVirtualCard = false;
         /// <summary>
         /// 虚拟卡
@@ -78,10 +77,6 @@ namespace YF.MWS.Win.View.Master
                 {
                     writeCard = Cfg.WriteCard;
                 }
-                if (Cfg.Weight != null)
-                {
-                    startAppCardRead = Cfg.Weight.StartAppWeightConfirm;
-                }
             }
             ucCardEdit.IsVirtualCard = IsVirtualCard;
             combComShort.Items.Add("COM1");
@@ -89,7 +84,6 @@ namespace YF.MWS.Win.View.Master
             {
                 combComShort.Items.Add(item);
             }
-            ucCardEdit.StartAppCardRead = startAppCardRead;
             if (!string.IsNullOrEmpty(RecId))
             {
                 ucCardEdit.LoadCard(RecId);
@@ -127,7 +121,6 @@ namespace YF.MWS.Win.View.Master
             if (writeCard != null) 
             {
                 int port = int.Parse(portName.Substring(3, portName.Length - 3)) - 1;
-                ucCardEdit.SettingCard(port, writeCard.CardIdGenerate, writeCard.CardType, startAppCardRead);
                 bool isOpen = ucCardEdit.OpenPort();
                 if (isOpen)
                 {

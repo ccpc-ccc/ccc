@@ -59,17 +59,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rgLedVersionType = new DevExpress.XtraEditors.RadioGroup();
             this.chkStart = new DevExpress.XtraEditors.CheckEdit();
-            this.grpCom = new System.Windows.Forms.GroupBox();
-            this.cbbBaud = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbbCom = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.cbbpno = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbbModel = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbbComm = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpNet = new System.Windows.Forms.GroupBox();
             this.txtip = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -159,6 +152,8 @@
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.chkShowInWeightStable2 = new DevExpress.XtraEditors.CheckEdit();
             this.chkShowInCarNoRecognition2 = new DevExpress.XtraEditors.CheckEdit();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -178,7 +173,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgLedVersionType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStart.Properties)).BeginInit();
-            this.grpCom.SuspendLayout();
             this.grpNet.SuspendLayout();
             this.pageLedShowCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpShowInWeightStable)).BeginInit();
@@ -552,17 +546,14 @@
             // 
             this.groupBox1.Controls.Add(this.rgLedVersionType);
             this.groupBox1.Controls.Add(this.chkStart);
-            this.groupBox1.Controls.Add(this.grpCom);
             this.groupBox1.Controls.Add(this.cbbpno);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cbbModel);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.cbbComm);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.grpNet);
             this.groupBox1.Location = new System.Drawing.Point(20, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(770, 129);
+            this.groupBox1.Size = new System.Drawing.Size(770, 126);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "设置：";
@@ -570,85 +561,21 @@
             // rgLedVersionType
             // 
             this.rgLedVersionType.EditValue = "T3";
-            this.rgLedVersionType.Location = new System.Drawing.Point(651, 54);
+            this.rgLedVersionType.Location = new System.Drawing.Point(426, 65);
             this.rgLedVersionType.Name = "rgLedVersionType";
             this.rgLedVersionType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("T3", "旧版本(T3)"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("LQ", "龙旗"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("T4", "新版本(T4)")});
-            this.rgLedVersionType.Size = new System.Drawing.Size(92, 58);
+            this.rgLedVersionType.Size = new System.Drawing.Size(304, 37);
             this.rgLedVersionType.TabIndex = 21;
             // 
             // chkStart
             // 
-            this.chkStart.Location = new System.Drawing.Point(652, 23);
+            this.chkStart.Location = new System.Drawing.Point(426, 38);
             this.chkStart.Name = "chkStart";
             this.chkStart.Properties.Caption = "启用大屏幕";
             this.chkStart.Size = new System.Drawing.Size(91, 20);
             this.chkStart.TabIndex = 20;
-            // 
-            // grpCom
-            // 
-            this.grpCom.Controls.Add(this.cbbBaud);
-            this.grpCom.Controls.Add(this.label6);
-            this.grpCom.Controls.Add(this.cbbCom);
-            this.grpCom.Controls.Add(this.label5);
-            this.grpCom.Enabled = false;
-            this.grpCom.Location = new System.Drawing.Point(435, 18);
-            this.grpCom.Name = "grpCom";
-            this.grpCom.Size = new System.Drawing.Size(199, 100);
-            this.grpCom.TabIndex = 19;
-            this.grpCom.TabStop = false;
-            this.grpCom.Text = "串口参数";
-            // 
-            // cbbBaud
-            // 
-            this.cbbBaud.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbBaud.FormattingEnabled = true;
-            this.cbbBaud.Items.AddRange(new object[] {
-            "2400",
-            "9600",
-            "57600",
-            "115200"});
-            this.cbbBaud.Location = new System.Drawing.Point(98, 54);
-            this.cbbBaud.Name = "cbbBaud";
-            this.cbbBaud.Size = new System.Drawing.Size(75, 22);
-            this.cbbBaud.TabIndex = 18;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 14);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "波特率：";
-            // 
-            // cbbCom
-            // 
-            this.cbbCom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbCom.FormattingEnabled = true;
-            this.cbbCom.Items.AddRange(new object[] {
-            "COM1",
-            "COM2",
-            "COM3",
-            "COM4",
-            "COM5",
-            "COM6",
-            "COM7",
-            "COM8"});
-            this.cbbCom.Location = new System.Drawing.Point(98, 26);
-            this.cbbCom.Name = "cbbCom";
-            this.cbbCom.Size = new System.Drawing.Size(75, 22);
-            this.cbbCom.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 31);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 14);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "串口号：";
             // 
             // cbbpno
             // 
@@ -671,7 +598,7 @@
             "14",
             "15",
             "16"});
-            this.cbbpno.Location = new System.Drawing.Point(84, 97);
+            this.cbbpno.Location = new System.Drawing.Point(84, 78);
             this.cbbpno.Name = "cbbpno";
             this.cbbpno.Size = new System.Drawing.Size(107, 22);
             this.cbbpno.TabIndex = 5;
@@ -679,7 +606,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 103);
+            this.label3.Location = new System.Drawing.Point(9, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 14);
             this.label3.TabIndex = 4;
@@ -708,30 +635,10 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "卡型号：";
             // 
-            // cbbComm
-            // 
-            this.cbbComm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbComm.FormattingEnabled = true;
-            this.cbbComm.Items.AddRange(new object[] {
-            "网络通讯",
-            "串口通讯"});
-            this.cbbComm.Location = new System.Drawing.Point(84, 62);
-            this.cbbComm.Name = "cbbComm";
-            this.cbbComm.Size = new System.Drawing.Size(107, 22);
-            this.cbbComm.TabIndex = 1;
-            this.cbbComm.SelectedIndexChanged += new System.EventHandler(this.cbbComm_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 65);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 14);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "通讯模式：";
-            // 
             // grpNet
             // 
+            this.grpNet.Controls.Add(this.txtPort);
+            this.grpNet.Controls.Add(this.label5);
             this.grpNet.Controls.Add(this.txtip);
             this.grpNet.Controls.Add(this.label4);
             this.grpNet.Location = new System.Drawing.Point(217, 17);
@@ -743,7 +650,7 @@
             // 
             // txtip
             // 
-            this.txtip.Location = new System.Drawing.Point(59, 40);
+            this.txtip.Location = new System.Drawing.Point(59, 21);
             this.txtip.Name = "txtip";
             this.txtip.Size = new System.Drawing.Size(112, 22);
             this.txtip.TabIndex = 9;
@@ -752,7 +659,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 43);
+            this.label4.Location = new System.Drawing.Point(30, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(22, 14);
             this.label4.TabIndex = 8;
@@ -1680,6 +1587,22 @@
             this.chkShowInCarNoRecognition2.Size = new System.Drawing.Size(128, 20);
             this.chkShowInCarNoRecognition2.TabIndex = 76;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(17, 61);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 14);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "端口:";
+            // 
+            // txtPort
+            // 
+            this.txtPort.Location = new System.Drawing.Point(59, 58);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(112, 22);
+            this.txtPort.TabIndex = 9;
+            // 
             // FrmScreenCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1714,8 +1637,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgLedVersionType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStart.Properties)).EndInit();
-            this.grpCom.ResumeLayout(false);
-            this.grpCom.PerformLayout();
             this.grpNet.ResumeLayout(false);
             this.grpNet.PerformLayout();
             this.pageLedShowCfg.ResumeLayout(false);
@@ -1808,17 +1729,10 @@
         private System.Windows.Forms.TextBox txtwidth;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox grpCom;
-        private System.Windows.Forms.ComboBox cbbBaud;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbbCom;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbbpno;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbbModel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbbComm;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox grpNet;
         private System.Windows.Forms.TextBox txtip;
         private System.Windows.Forms.Label label4;
@@ -1925,5 +1839,7 @@
         private DevExpress.XtraEditors.CheckEdit chkShowInCarNoRecognition2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private System.Windows.Forms.TextBox txtPort;
+        private System.Windows.Forms.Label label5;
     }
 }

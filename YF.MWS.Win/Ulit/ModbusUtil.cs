@@ -315,16 +315,41 @@ namespace YF.MWS.Win
             try {
                 bs[4] = (byte)address;
                 if (time < 0) bs[5] = 0;
-                else bs[5] = (byte)1;
+                else {
+                    bs[5] = (byte)1;
+                    bs[7] = (byte)time;
+                }
                 _socket.Send(bs);
-                if (time > 0) {
+                /*if (time > 0) {
                     await Task.Delay(time * 1000);
                     bs[5] = 0;
                     _socket.Send(bs);
-                }
+                }*/
                 return true;
             } catch (Exception ex) {
                 Logger.Write("发送数据到网口数据失败 "+ex.Message);
+                return false;
+            }
+        }
+        /// <summary>
+        /// 读取红外  true 有遮挡  false 无遮挡
+        /// </summary>
+        public async Task<bool> ReadLine() {
+            if (_socket == null || !_socket.Connected) return false;
+            byte[] bs = new byte[] { 0x48, 0x3a, 0x01, 0x52, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xd5, 0x45, 0x44 };
+            byte[] read = new byte[24]; 
+            try {
+                _socket.Send(bs);
+                int r=_socket.Receive(read);
+                byte[] bn = new byte[r];
+                if (r > 0) {
+                    Array.Copy(read, bn, r);
+                    return bn[4] == 0x01||bn[5] == 0x01;
+                } else {
+                    return false;
+                }
+            } catch (Exception ex) {
+                Logger.Write("发送数据到网口数据失败 " + ex.Message);
                 return false;
             }
         }
@@ -481,8 +506,7 @@ namespace YF.MWS.Win
         /// <returns></returns>
         public bool ValidateInfrared()
         {
-            bool isValidated = true;
-            byte result = GetState();
+            bool isValidated = ReadLine().Result;
             /*if(blockCondition== InfraredBlockCondition.Zero)
             {
                 if ((result & 0x01) == 0x00 || (result >> 1 & 0x01) == 0x00) //X1或者X2被挡住

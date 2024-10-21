@@ -52,17 +52,8 @@ namespace YF.MWS.Win.View.Master
             {
                 cbbModel.SelectedIndex = 0;
             }
-            if (lxCfg.CommunicationModel == Metadata.CommunicationModelType.Network)
-            {
-                cbbComm.SelectedIndex = 0;
-            }
-            else 
-            {
-                cbbComm.SelectedIndex = 1;
-            }
             txtip.Text = lxCfg.IPAddr;
-            cbbCom.SelectedItem = lxCfg.PortName;
-            cbbBaud.SelectedItem = lxCfg.BaudRate.ToString();
+            txtPort.Text = lxCfg.PortNo.ToString();
             txtwidth.Text = lxCfg.ScreenWidth.ToString();
             txtheight.Text = lxCfg.ScreenHeight.ToString();
             cbbpno.SelectedItem = lxCfg.ScreenNo.ToString();
@@ -174,13 +165,11 @@ namespace YF.MWS.Win.View.Master
             try
             {
                 lxCfg.IPAddr = txtip.Text;
-                lxCfg.PortName = cbbCom.SelectedItem.ToObjectString();
                 lxCfg.ScreenHeight = txtheight.Text.ToInt();
                 lxCfg.ScreenNo = cbbpno.SelectedItem.ToInt();
                 lxCfg.ScreenWidth = txtwidth.Text.ToInt();
-                lxCfg.BaudRate = cbbBaud.SelectedItem.ToInt();
                 lxCfg.ScreenNo = cbbpno.SelectedItem.ToInt();
-                lxCfg.PortNo = cbbCom.SelectedIndex + 1;
+                lxCfg.PortNo = txtPort.Text.ToInt();
                 lxCfg.PlaySpeed = sePlaySpeed.Value.ToInt();
                 lxCfg.AdContent = teAd.Text;
                 lxCfg.Delay = spDelay.Value.ToInt();
@@ -188,14 +177,7 @@ namespace YF.MWS.Win.View.Master
                 lxCfg.WeightFontSize = spWeightFontSize.Value.ToInt();
                 lxCfg.Start = chkStart.Checked;
                 lxCfg.VersionType = rgLedVersionType.EditValue.ToEnum<LedVersionType>();
-                if (cbbComm.SelectedIndex == 0)
-                {
-                    lxCfg.CommunicationModel = Metadata.CommunicationModelType.Network;
-                }
-                else 
-                {
-                    lxCfg.CommunicationModel = Metadata.CommunicationModelType.SerlPort;
-                }
+                lxCfg.CommunicationModel = Metadata.CommunicationModelType.Network;
                 lxCfg.LedShow.ShowInCarNoRecognition = chkShowInCarNoRecognition.Checked;
                 lxCfg.LedShow.ShowInWeightStable = chkShowInWeightStable.Checked;
                 lxCfg.LedShow.IdleMinutesShowAd = teIdleMinutesShowAd.Text.ToInt();
@@ -294,6 +276,8 @@ namespace YF.MWS.Win.View.Master
                     bool isSettinged = lxLedUtil.Setting();
                     lxLedUtil.SetScreenParameter();
                     isSended = lxLedUtil.SendText(teContent.Text, 10);
+                }else if (type == LedVersionType.LQ) {
+
                 }
                 else
                 {
@@ -312,20 +296,6 @@ namespace YF.MWS.Win.View.Master
             {
                 Logger.WriteException(ex);
                 MessageDxUtil.ShowError("向大屏幕发送文字信息过程中出现未知错误,请重试.");
-            }
-        }
-
-        private void cbbComm_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbbComm.SelectedIndex == 0)
-            {
-                grpNet.Enabled = true;
-                grpCom.Enabled = false;
-            }
-            else
-            {
-                grpNet.Enabled = false;
-                grpCom.Enabled = true;
             }
         }
 

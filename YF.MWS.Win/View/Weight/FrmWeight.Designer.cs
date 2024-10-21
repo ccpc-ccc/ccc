@@ -232,7 +232,7 @@
             // 
             // timerSync
             // 
-            this.timerSync.Interval = 120000;
+            this.timerSync.Interval = 500;
             this.timerSync.Tick += new System.EventHandler(this.timerSync_Tick);
             // 
             // plMainWeight

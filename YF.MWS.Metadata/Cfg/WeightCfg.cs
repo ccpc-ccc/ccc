@@ -95,10 +95,6 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public bool StartValidateCarWithCard { get; set; }
         /// <summary>
-        /// 启用App磅单审核
-        /// </summary>
-        public bool StartAppWeightConfirm { get; set; }
-        /// <summary>
         /// 启用数据库备份
         /// </summary>
         public bool StartBackupDb { get; set; }

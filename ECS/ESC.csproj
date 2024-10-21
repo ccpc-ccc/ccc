@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Reference Include="YF.Utility">
-      <HintPath>..\Lib\YF.Utility.dll</HintPath>
+      <HintPath>..\..\Lib\YF.Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
 

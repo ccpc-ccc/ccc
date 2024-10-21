@@ -776,9 +776,6 @@ namespace YF.MWS.Win.View.Weight {
                     InitData();
                     InitAllDevice();
                     Init();
-                    if (startAppWeightConfirm) {
-                        timerSync.Start();
-                    }
                     timerStateSync.Start();
                     if (startReadCard || startIdCardReader) {
                         int interval = 1000;
@@ -1912,9 +1909,6 @@ namespace YF.MWS.Win.View.Weight {
                   FrmMain.CapturePicture(currentWeight.Id,string.Format("当前时间：{0}，称重重量：{1}",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),currentWeight.TareWeight),FileType.CarLeft);
                 }
                 this.SaveFile();
-                if (isSaved && isNew && startAppWeightConfirm) {
-                    AddWeightConfirm(currentWeight);
-                }
                 //如果设置了自动打印，则开启自动打印磅单功能
                 if (autoPrintWeight&& (CurrentUser.Instance.Powers != null &&CurrentUser.Instance.Powers.Contains("p2_5"))) {
                     Print(currentWeight.Id);
@@ -2094,9 +2088,7 @@ namespace YF.MWS.Win.View.Weight {
         private void timerSync_Tick(object sender, EventArgs e) {
             if (!isSyncing) {
                 isSyncing = true;
-                if (startAppWeightConfirm) {
-                    SyncWeightConfirm();
-                }
+
                 isSyncing = false;
             }
         }

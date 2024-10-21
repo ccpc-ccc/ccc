@@ -1044,6 +1044,14 @@ namespace YF.MWS.Metadata
         [Description("外校验")]
         Space
     }
+    public enum LedVersionType {
+        [Description("T3")]
+        T3,
+        [Description("T4")]
+        T4,
+        [Description("龙旗")]
+        LQ
+    }
     public static class EnumExtensions {
         public static string toDescription(this System.Enum value) {
             FieldInfo field = value.GetType().GetField(value.ToString());
