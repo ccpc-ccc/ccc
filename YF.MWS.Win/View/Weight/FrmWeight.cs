@@ -526,9 +526,6 @@ namespace YF.MWS.Win.View.Weight {
             if (weMaterial != null) {
                 weMaterial.EditValueChanged += wMaterialId_EditValueChanged;
             }
-            if (weBillNo != null) {
-                weBillNo.TextChanged += weBillNo_TextChanged;
-            }
             if (wlookupCustomer != null) {
                 wlookupCustomer.EditValueChanged += wlookupCustomer_EditValueChanged;
             }
@@ -538,19 +535,6 @@ namespace YF.MWS.Win.View.Weight {
             if (weUnitPrice != null) {
                 weUnitPrice.EditValueChanged += weUnitPrice_EditValueChanged;
             }
-            if (weMaterialAmount != null) {
-                weMaterialAmount.EditValueChanged += WeMaterialAmount_EditValueChanged;
-            }
-            if (weD1!= null) {
-                weD1.EditValueChanged += WeD1_EditValueChanged;
-            }
-        }
-
-        private void WeMaterialAmount_EditValueChanged(object sender, EventArgs e) {
-            if (weD1 != null&&weD2 != null) weD2.CurrentValue = weMaterialAmount.CurrentValue.ToInt() * weD1.CurrentValue.ToInt();
-        }
-        private void WeD1_EditValueChanged(object sender, EventArgs e) {
-            if (weMaterialAmount != null && weD2 != null) weD2.CurrentValue = weMaterialAmount.CurrentValue.ToInt() * weD1.CurrentValue.ToInt();
         }
 
         void wlookCar_ManualCarRecognizeTrigger(object sender, ManualCarRecognizeTriggerEventArgs e) {
@@ -577,20 +561,6 @@ namespace YF.MWS.Win.View.Weight {
             if (saveFormData && firstInitedUnitPrice) {
                 residentUnitPrice = weUnitPrice.Text.ToDecimal();
                 firstInitedUnitPrice = false;
-            }
-        }
-
-        private void weBillNo_TextChanged(object sender, EventArgs e) {
-            if (weBillNo.Text.Length > 0 && !hasLoadUnFinishWeight) {
-                string weightId = weightService.GetUnFinishedWeightId("票据编号", weBillNo.Text, CurrentClient.Instance.SubjectId);
-                if (!string.IsNullOrEmpty(weightId)) {
-                    if (MessageDxUtil.ShowYesNoAndTips("尚有未完成的磅单，是否需要继续完成该磅单？") == DialogResult.Yes) {
-                        hasLoadUnFinishWeight = true;
-                        List<string> lstExecutedField = new List<string>();
-                        lstExecutedField.Add("BillNo");
-                        LoadWeightWithExecutedControl(weightId, lstExecutedField);
-                    }
-                }
             }
         }
 
