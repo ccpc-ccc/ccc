@@ -42,11 +42,11 @@ using System.Diagnostics;
 using YF.Utility.Data;
 using YF.MWS.Win.View.Master;
 using DevExpress.XtraSplashScreen;
+using DevExpress.CodeParser;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeight : BaseForm {
         private DateTime grossWeightTime = DateTime.Now;
-        private DeviceCfg currentDeviceCfg;
         private SerialPortHelper serialPort;
 
         public FrmWeight() {
@@ -57,11 +57,8 @@ namespace YF.MWS.Win.View.Weight {
 
         private void FrmWeight_Load(object sender, EventArgs e) {
             try {
-                this.FrmMain=GetMain();
                 SplashScreenManager.CloseForm();
-                if (FrmMain!=null)Program.frmViewVideoDevice = Program.frmViewVideoDevice;
-                InitPort();
-                currentDeviceCfg = this.Cfg.Device;
+                InitPort(1, Cfg.Device);
             } catch (Exception ex) {
                 Logger.WriteException(ex);
             }
@@ -69,19 +66,13 @@ namespace YF.MWS.Win.View.Weight {
         }
         /// <summary>
         /// 初始化称重仪器
-        /// </summary>
-        private void InitPort() {
-            InitPort(1, Cfg.Device);
-        }
+        /// </summary>=
         private void InitPort(int deviceNo, DeviceCfg deviceCfg) {
             try {
                 if (deviceCfg.StartDevice) {
                     serialPort = new SerialPortHelper(deviceNo, deviceCfg);
                     serialPort.OnShowWeight = new SerialPortHelper.ShowWeight(this.ShowWeightInfo);
-                    bool isOpen = false;
-                    if (serialPort != null) {
-                        isOpen = serialPort.OpenPort();
-                    }
+                    if (serialPort != null)  serialPort.OpenPort();
                 }
             } catch (Exception ex) {
                 Logger.WriteException(ex);
@@ -124,7 +115,7 @@ namespace YF.MWS.Win.View.Weight {
             FrmDeviceSetting frmDeviceSetting = new FrmDeviceSetting();
             frmDeviceSetting.ShowDialog();
             Cfg = CfgUtil.GetCfg();
-            InitPort();
+            InitPort(1, Cfg.Device);
         }
 
         private void simpleButton2_Click_1(object sender, EventArgs e) {
@@ -153,6 +144,10 @@ namespace YF.MWS.Win.View.Weight {
 
         private void txtWeight_EditValueChanged(object sender, EventArgs e) {
             Calculate();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+            if (serialPort != null) serialPort.OpenPort();
         }
     }
 }

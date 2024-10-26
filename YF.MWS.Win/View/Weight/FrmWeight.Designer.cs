@@ -40,6 +40,7 @@
             this.txtResult = new DevExpress.XtraEditors.TextEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.imgListLarger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSymbol.Properties)).BeginInit();
@@ -164,6 +165,12 @@
             this.simpleButton3.Text = "设置";
             this.simpleButton3.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FrmWeight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -208,5 +215,6 @@
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private System.Windows.Forms.Timer timer1;
     }
 }
