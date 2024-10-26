@@ -35,6 +35,7 @@ namespace YF.MWS.Metadata.Cfg
         /// PDF打印
         /// </summary>
         public bool PrintPhoto { get; set; }
+        public string rightTitle { get; set; }
         /// <summary>
         /// 启用磅单打印次数限制
         /// </summary>

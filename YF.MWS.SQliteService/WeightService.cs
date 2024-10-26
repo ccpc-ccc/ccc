@@ -341,17 +341,14 @@ namespace YF.MWS.SQliteService
                                           CreateTime as WeightTime from B_Weight where LOWER(CarNo) = LOWER('{0}') and CreateTime >=datetime('{1}') 
                                           and  CreateTime <datetime('{2}') and RowState != '{3}'",
                                           carNo, DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), dtNow.ToString("yyyy-MM-dd 00:00:00"), (int)RowState.Delete);
-                dt = sqliteDb.ExecuteDataTable(sql);
             }
             else
             {
                 sql = string.Format(@"select Id,WeightNo,TareWeight,GrossWeight,SuttleWeight,NetWeight,OverWeight,
                                             CreateTime as WeightTime from B_Weight where CarNo = '{0}' and CreateTime >= '{1}' and  CreateTime < '{2}'  and RowState != '{3}'",
                                             carNo, DateTime.Now.ToString("yyyy-MM-dd 00:00:00"), dtNow.ToString("yyyy-MM-dd 00:00:00"), (int)RowState.Delete);
-                dt = service.GetDataTable(sql);
             }
-            lstWeight = TableHelper.TableToList<BWeight>(dt);
-            return lstWeight;
+            return base.getList<BWeight>(sql);
         }
 
         /// <summary>
@@ -468,7 +465,6 @@ namespace YF.MWS.SQliteService
             return lst;
         }
          
-
         /// <summary>
         /// 获取当前的磅单列表
         /// </summary>
@@ -1115,16 +1111,8 @@ namespace YF.MWS.SQliteService
 
         public void UpdatePrint(string weightId)
         {
-            string sql;
-            sql = string.Format("update B_Weight set PrintCount=PrintCount+1 where Id='{0}'", weightId);
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                sqliteDb.ExecuteNonQuery(sql);
-            }
-            else 
-            {
-                service.ExecuteNonQuery(sql);
-            }
+            string sql = string.Format("update B_Weight set PrintCount=PrintCount+1 where Id='{0}'", weightId);
+            base.ExecuteSql(sql);
         }
 
         public bool UpdateQcState(string weightId, QcState state, decimal deducteWeight) 

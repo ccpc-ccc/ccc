@@ -736,8 +736,6 @@ namespace YF.MWS.Win.View.Weight
             }
             if(currentDeviceCfg==Cfg.Device1)
             ShowWeightStableState(isWeightStatble, stateWeightStable1);
-            if (currentDeviceCfg == Cfg.Device2)
-                ShowWeightStableState(isWeightStatble, stateWeightStable2);
             return isWeightStatble;
         }
 

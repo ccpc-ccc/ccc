@@ -991,10 +991,10 @@
     <Compile Include="View\Setting\FrmLaunchCfg.Designer.cs">
       <DependentUpon>FrmLaunchCfg.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Setting\FrmPrint.cs">
+    <Compile Include="View\p4\FrmPrint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Setting\FrmPrint.Designer.cs">
+    <Compile Include="View\p4\FrmPrint.Designer.cs">
       <DependentUpon>FrmPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Setting\FrmQrCodeCfg.cs">
@@ -1597,7 +1597,7 @@
     <EmbeddedResource Include="View\Setting\FrmLaunchCfg.resx">
       <DependentUpon>FrmLaunchCfg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Setting\FrmPrint.resx">
+    <EmbeddedResource Include="View\p4\FrmPrint.resx">
       <DependentUpon>FrmPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Setting\FrmQrCodeCfg.resx">
@@ -2081,6 +2081,7 @@
     <Folder Include="Logo\" />
     <Folder Include="Sync\Temp\" />
     <Folder Include="View\Customer\System\" />
+    <Folder Include="View\View\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">

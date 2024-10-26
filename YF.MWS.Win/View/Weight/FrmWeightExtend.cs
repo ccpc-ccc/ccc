@@ -560,16 +560,7 @@ namespace YF.MWS.Win.View.Weight
                     startInfrared = Cfg.NobodyWeight.StartInfrared;
                     returnZeroWeightValue = UnitUtil.GetValue("Ton", currentDeviceCfg.SUnit, Cfg.NobodyWeight.MaxReturnZeroWeightValue);
                 }
-                gpDeviceGate1.Visible = Cfg.NobodyWeight.StartBoundGate;
-                gpDeviceGate2.Visible = Cfg.NobodyWeight.StartBoundGate;
-                gpLight1.Visible = Cfg.NobodyWeight.StartTrafficLight;
-                gpLight2.Visible = Cfg.NobodyWeight.StartTrafficLight;
             }
-            /*if (CurrentClient.Instance.IsSimulateWeight)
-            {
-                currentWeighWay = WeightWay.SimulateWeight;
-            }*/
-            lblWeightType.Text = YF.MWS.Util.Utility.GetWeightWayCaption(currentWeighWay);
             if (currentWeighWay == WeightWay.People || currentWeighWay == WeightWay.SimulateWeight)
             {
                 showValidateMessage = true;
@@ -817,7 +808,6 @@ namespace YF.MWS.Win.View.Weight
                 string strIP = resInfo.IP;
                 string strPlate = resInfo.Num.TrimEnd('\0');
                 strPlate = GetCarNo(strPlate);
-                txtCar.Text = strPlate;
                 if (!string.IsNullOrEmpty(strPlate))
                 {
                     ShowWeightStateTip("车牌("+strPlate+")已经识别");
@@ -1574,7 +1564,6 @@ namespace YF.MWS.Win.View.Weight
             {
                 if (mainWeight.ValidateChildren() && ValidateForm())
                 {
-                    AsyncCapturePhoto(GetWeightCapture(currentWeightId));
                     Save();
                 }
             }

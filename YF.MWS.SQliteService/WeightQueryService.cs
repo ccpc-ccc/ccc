@@ -141,32 +141,53 @@ namespace YF.MWS.SQliteService
             DataTable dt = GetTable(sql);
             return dt;
         }
-
+        public List<VWeight> GetViewsByWaybillNo(string waybillNo) {
+            string sql = "";
+            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
+                sql = string.Format(@"select {1},c.WarehName,b.MaterialName,d.CustomerName,e.CustomerName as DeliveryName,f.CustomerName as ReceiverName,g.CustomerName as TransferName,
+                                                  j.CustomerName as ManufacturerName,k.CustomerName as SupplierName from B_Weight a  left join S_Material b on a.MaterialId=b.Id 
+                                                 left join S_Wareh c on a.WarehId=c.Id
+                                                 left join S_Customer d on a.CustomerId=d.Id 
+                                                 left join S_Customer e on a.DeliveryId=e.Id  
+                                                 left join S_Customer f on a.ReceiverId=f.Id 
+                                                 left join S_Customer g on a.TransferId=g.Id 
+                                                 left join S_Customer j on a.ManufacturerId=j.Id 
+                                                 left join S_Customer k on a.SupplierId=k.Id 
+                                                 where a.WaybillNo='{0}' order by a.FinishTime",
+                                                 waybillNo,WeightFiles);
+            } else {
+                sql = string.Format(@"select {4},c.WarehName,b.MaterialName,d.CustomerName,e.CustomerName as DeliveryName,f.CustomerName as ReceiverName,g.CustomerName as TransferName,
+                                                  j.CustomerName as ManufacturerName,k.CustomerName as SupplierName from B_Weight a  left join S_Material b on a.MaterialId=b.Id 
+                                                 left join S_Wareh c on a.WarehId=c.Id
+                                                 left join S_Customer d on a.CustomerId=d.Id 
+                                                 left join S_Customer e on a.DeliveryId=e.Id  
+                                                 left join S_Customer f on a.ReceiverId=f.Id 
+                                                 left join S_Customer g on a.TransferId=g.Id 
+                                                 left join S_Customer j on a.ManufacturerId=j.Id 
+                                                 left join S_Customer k on a.SupplierId=k.Id 
+                                                 left join S_Client o on a.MachineCode=o.MachineCode 
+                                                 left join S_Client p on a.TareMachineCode=p.MachineCode 
+                                                 where a.WaybillNo='{0}' order by a.FinishTime desc",
+                                                  waybillNo, (int)WeightType.Tare, (int)WeightType.Gross, WeightFiles);
+            }
+            return base.getList<VWeight>(sql);
+        }
         public List<BWeight> GetList(int year) 
         {
-            List<BWeight> lst = new List<BWeight>();
             string sql;
-            
-            DataTable dt;
             if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
             {
                 sql = string.Format(@"select Id,WeightNo,CarNo from B_Weight a 
                                            where  (abs(strftime('%Y',a.FinishTime))={0} or abs(strftime('%Y',a.FinishTime))={1})  and a.RowState!={1}",
                                            year, year - 1, (int)RowState.Delete);
-                dt = sqliteDb.ExecuteDataTable(sql);
             }
             else 
             {
                 sql = string.Format(@"select Id,WeightNo,CarNo from B_Weight a 
                                            where  (datepart(year,a.FinishTime)={0} or datepart(year,a.FinishTime)={1})  and a.RowState!={1}",
                            year, year - 1, (int)RowState.Delete);
-                dt = service.GetDataTable(sql);
             }
-            if (dt != null && dt.Rows.Count > 0) 
-            {
-                lst = TableHelper.TableToList<BWeight>(dt);
-            }
-            return lst;
+            return base.getList<BWeight>(sql);
         }
 
         public List<BWeight> GetNotQcList(int year)

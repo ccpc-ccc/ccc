@@ -23,5 +23,6 @@ namespace YF.MWS.Client.DataService.Interface
         DataTable GetQcList(DateTime dtStart, DateTime dtEnd, int qcState);
         WeightQueryResult Query(WeightQueryCondition qc, bool startPage);
         DataTable GetTopListTable(TopWeightQuery query);
+        List<VWeight> GetViewsByWaybillNo(string waybillNo);
     }
 }

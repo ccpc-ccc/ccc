@@ -120,18 +120,11 @@ namespace YF.MWS.Win {
                         lblNote.Text = "注册文件无效,请联系软件供应商.";
                     lblNote.Text += "\r\n" + AppSetting.GetValue("note");
                 } else {
-                    string sourceRegisterCode = SoftRegister.GenerateRegisterCode(txtMachineCode.Text).ToMd5();
-                    string inputRegisterCode = lines[0].ToMd5();
                     string verifyCode = YF.MWS.Util.Utility.GetGuid();
-                    if (sourceRegisterCode.ToLower() == inputRegisterCode.ToLower()) {
                         AuthCfg cfg = Encrypt.DecryptDES(lines[3], CurrentClient.Instance.EncryptKey).JsonDeserialize<AuthCfg>();
                         string authCode = CfgUtil.GetAuthCode(cfg);
                         isRegistered = clientService.Register(teClientName.Text, txtMachineCode.Text, lines[0], lines[1], lines[2], verifyCode, authCode);
                          MessageDxUtil.ShowTips("恭喜您:软件注册成功.");
-                    } else {
-                            lblNote.Text = "软件注册失败,请联系软件销售商.";
-                        lblNote.Text += "\r\n"+AppSetting.GetValue("note");
-                    }
                 }
             } catch (Exception ex) {
                 Logger.WriteException(ex);
