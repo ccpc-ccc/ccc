@@ -44,52 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAttributeService.cs" />
-    <Compile Include="IBaseService.cs" />
-    <Compile Include="ICardService.cs" />
-    <Compile Include="ICarService.cs" />
     <Compile Include="IClientService.cs" />
-    <Compile Include="ICompanyPayService.cs" />
-    <Compile Include="ICustomerService.cs" />
-    <Compile Include="IDataEntryService.cs" />
-    <Compile Include="IFileService.cs" />
-    <Compile Include="ILocationService.cs" />
-    <Compile Include="ICommonService.cs" />
-    <Compile Include="ILogService.cs" />
-    <Compile Include="ICompanyService.cs" />
-    <Compile Include="IMaterialService.cs" />
-    <Compile Include="IMasterService.cs" />
-    <Compile Include="IPayService.cs" />
-    <Compile Include="IPlanService.cs" />
-    <Compile Include="IReportService.cs" />
-    <Compile Include="IRoleService.cs" />
-    <Compile Include="ISeqNoService.cs" />
-    <Compile Include="IStatementService.cs" />
-    <Compile Include="ISumReportService.cs" />
-    <Compile Include="ISyncService.cs" />
-    <Compile Include="ITaskService.cs" />
-    <Compile Include="IUserService.cs" />
     <Compile Include="IWarehService.cs" />
-    <Compile Include="IWeightExtService.cs" />
-    <Compile Include="IWeightProcessService.cs" />
-    <Compile Include="IWeightQcService.cs" />
-    <Compile Include="IWeightQueryService.cs" />
-    <Compile Include="IWeightService.cs" />
-    <Compile Include="IWeightTempService.cs" />
-    <Compile Include="IWeightViewService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Remote\IWebCardService.cs" />
-    <Compile Include="Remote\IWebCarService.cs" />
-    <Compile Include="Remote\IWebClientService.cs" />
-    <Compile Include="Remote\IWebCompanyService.cs" />
-    <Compile Include="Remote\IWebCustomerService.cs" />
-    <Compile Include="Remote\IWebFileService.cs" />
-    <Compile Include="Remote\IWebMaterialService.cs" />
-    <Compile Include="Remote\IWebMessageService.cs" />
-    <Compile Include="Remote\IWebPayService.cs" />
-    <Compile Include="Remote\IWebUserService.cs" />
-    <Compile Include="Remote\IWebWeightProcessService.cs" />
-    <Compile Include="Remote\IWebWeightService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">

@@ -71,11 +71,8 @@
     <Compile Include="Dynamic\ObjectProxy.cs" />
     <Compile Include="FFmpegUtil.cs" />
     <Compile Include="IniUtil.cs" />
-    <Compile Include="KeyGenerator.cs" />
-    <Compile Include="MatadataUtil.cs" />
     <Compile Include="NumerFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryUtil.cs" />
     <Compile Include="RegeditUtil.cs" />
     <Compile Include="ScaleUtil.cs" />
     <Compile Include="SqliteDb.cs" />

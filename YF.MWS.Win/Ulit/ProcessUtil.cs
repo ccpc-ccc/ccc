@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 using YF.MWS.Metadata;
 using YF.Utility.Configuration;
 using YF.Utility.Log;
@@ -41,7 +42,7 @@ namespace YF.MWS.Win
         //3.已经有了就把它激活，并将其窗口放置最前端
         public static void HandleRunningInstance(Process instance)
         {
-            MessageDxUtil.ShowWarning("本程序已经在运行，请不要同时运行多个相同程序。");  
+            MessageBox.Show("本程序已经在运行，请不要同时运行多个相同程序。");  
             ShowWindowAsync(instance.MainWindowHandle,3);  //调用api函数，正常显示窗口
             SetForegroundWindow(instance.MainWindowHandle); //将窗口放置最前端
         }

@@ -21,21 +21,7 @@ namespace YF.MWS.CacheService
             CardCacher.InitCacher();
             CustomerCacher.InitCacher();
             MasterCacher.InitCacher();
-            WarehCacher.GetWarehList();
             MaterialCacher.InitCacher();
-        }
-
-        /// <summary>
-        /// 刷新系统缓存
-        /// </summary>
-        public static void Refresh() 
-        {
-            CarCacher.Remove();
-            CardCacher.Refresh();
-            CustomerCacher.Remove();
-            MasterCacher.Refresh();
-            WarehCacher.Refresh();
-            MaterialCacher.Refresh();
         }
     }
 }

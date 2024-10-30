@@ -5,14 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using YF.MWS.BaseMetadata;
-using YF.MWS.CacheService;
 using YF.MWS.Client.DataService.Interface;
 using YF.MWS.Db;
 using YF.MWS.Metadata;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.Metadata.Partner;
-using YF.MWS.Metadata.Query;
-using YF.MWS.Metadata.Transfer;
 using YF.MWS.Util;
 using YF.Utility;
 using YF.Utility.Configuration;
@@ -25,27 +22,6 @@ namespace YF.MWS.Win
     public class WeightUtil
     {
 
-        public static decimal GetMaxWeight(string carNo) 
-        {
-            decimal maxWeight = 0;
-            if (!string.IsNullOrEmpty(carNo))
-            {
-                SCar car = CarCacher.GetWithCarNo(carNo);
-                if (car != null)
-                {
-                    maxWeight = car.LimitWeight;
-                }
-            }
-            if (maxWeight == 0)
-            {
-                SysCfg cfg = CfgUtil.GetCfg();
-                if (cfg != null && cfg.OverWeight != null) 
-                {
-                    maxWeight = cfg.OverWeight.MaxWeight;
-                }
-            }
-            return maxWeight;
-        }
         /// <summary>
         /// 重量单位换算
         /// </summary>

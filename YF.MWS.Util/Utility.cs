@@ -33,27 +33,6 @@ namespace YF.MWS.Util
             }
         }
 
-        private static decimal GetReduce(decimal value, CurrencyUnit unit)
-        {
-            decimal d = value;
-            switch (unit)
-            {
-                case CurrencyUnit.TenYuan:
-                    d = (int)(value / 10) * 10;
-                    break;
-                case CurrencyUnit.Yuan:
-                    d = (int)value;
-                    break;
-                case CurrencyUnit.Jiao:
-                    d = (decimal)((int)(value * 10)) / 10;
-                    break;
-                case CurrencyUnit.Fen:
-                    d = (decimal)((int)(value * 100)) / 100;
-                    break;
-            }
-            return d;
-        }
-
         #endregion
        
 
@@ -229,32 +208,6 @@ namespace YF.MWS.Util
                 }
             }
             return isExist;
-        }
-
-
-        public static int GetOverloadState(List<SLimitWeight> lstLimit, BWeightTemp temp) 
-        {
-            int overloadState = 0;
-            if (temp.AxleCount > 0 && lstLimit != null && lstLimit.Count>0) 
-            {
-                SLimitWeight limit = lstLimit.Find(c => c.AxleCount == temp.AxleCount);
-                if (limit != null) 
-                {
-                    if (temp.Weight > limit.MaxWeight*1000)
-                    {
-                        overloadState = 1;
-                    }
-                    else 
-                    {
-                        limit = lstLimit[lstLimit.Count - 1];
-                        if (temp.Weight > limit.MaxWeight*1000)
-                        {
-                            overloadState = 1;
-                        }
-                    }
-                }
-            }
-            return overloadState;
         }
 
 
@@ -529,41 +482,6 @@ namespace YF.MWS.Util
             return Guid.NewGuid().ToString("N");
         }
 
-        public static DataTable GetColumnsCfg(PrintCfgType type)
-        {
-            DataTable dt = new DataTable();
-            string filePath = string.Empty;
-            switch (type)
-            {
-                case PrintCfgType.Qc:
-                    filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"File\Config\QcPrint.xml");
-                    break;
-            }
-            if (!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-            {
-                DataSet ds = new DataSet();
-                ds.ReadXml(filePath);
-                dt = ds.Tables[0];
-            }
-            return dt;
-        }
-
-
-        public static string GetWeightWayCaption(WeightWay way) 
-        {
-            string caption = "人工称重";
-            switch (way) 
-            {
-                case WeightWay.Nobody:
-                    caption = "无人值守";
-                    break;
-                case WeightWay.SimulateWeight:
-                    caption = "模拟称重";
-                    break;
-            }
-            return caption;
-        }
-
         public static string GetDispayFormatValue(DisplayFormatStringType type) 
         {
             string displayFormat = string.Empty;
@@ -658,56 +576,5 @@ namespace YF.MWS.Util
             }
             return sb.ToString();
         }       
-
-        public static T Deserialize<T>(string path,string decryptKey)
-        {
-            string text = File.ReadAllText(path);
-            text = Encrypt.DecryptDES(text, decryptKey);
-            return text.JsonDeserialize<T>();
-        }
-
-        public static AuthCfg GetAuthCfg(string path, string decryptKey) 
-        {
-            string[] lines = File.ReadAllLines(path);
-            AuthCfg cfg = new AuthCfg();
-            if (lines.Length >0)
-            {
-                string text = Encrypt.DecryptDES(lines[lines.Length-1], decryptKey);
-                cfg = text.JsonDeserialize<AuthCfg>(); 
-            }
-            return cfg;
-        }
-
-        public static AuthCfgExtend GetAuthCfgExtend(string path, string decryptKey) 
-        {
-            string[] lines = File.ReadAllLines(path);
-            AuthCfgExtend cfgExtend = new AuthCfgExtend();
-            if (lines.Length > 1) 
-            {
-                string text = Encrypt.DecryptDES(lines[0], decryptKey);
-                cfgExtend.Cfg = text.JsonDeserialize<AuthCfg>();
-                cfgExtend.VerifyCode = lines[1];
-            }
-            return cfgExtend;
-        }
-
-        public static void Serialize(string path, object obj, string decryptKey) 
-        {
-            string text = obj.JsonSerialize();
-            text = Encrypt.EncryptDES(text, decryptKey);
-            File.WriteAllText(path, text);
-        }
-
-        public static void Serialize(string path, List<string> lstLine)
-        {
-            try
-            {
-                File.WriteAllLines(path, lstLine.ToArray());
-            }
-            catch (Exception ex) 
-            {
-                Logger.WriteException(ex);
-            }
-        }
     }
 }

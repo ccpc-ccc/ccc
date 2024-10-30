@@ -15,10 +15,6 @@ namespace YF.MWS.Db
         public virtual string CreaterId
         {
             get {
-                if (string.IsNullOrEmpty(createrId)) 
-                {
-                    createrId = CurrentUser.Instance.Id;
-                }
                 return createrId;
             }
             set { createrId = value; }
@@ -50,10 +46,6 @@ namespace YF.MWS.Db
         public virtual string UpdaterId
         {
             get {
-                if (string.IsNullOrEmpty(updaterId))
-                {
-                    updaterId = CurrentUser.Instance.Id;
-                }
                 return updaterId; }
             set { updaterId = value; }
         }

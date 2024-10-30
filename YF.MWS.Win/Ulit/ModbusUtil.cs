@@ -60,13 +60,11 @@ namespace YF.MWS.Win
         public ModbusUtil(int modbusNo)
         {
             SysCfg cfg = CfgUtil.GetCfg();
-            if (cfg != null && cfg.NobodyWeight != null)
+            if (cfg != null)
             {
-                funSixCloseTime = cfg.NobodyWeight.FunSixCloseTime;
-                blockCondition = cfg.NobodyWeight.InfraredWeight;
                 commMode = cfg.Weight.ModBusCommMode;
-                ServerIP=cfg.NobodyWeight.ModbusIP;
-                ServerPort = cfg.NobodyWeight.ModbusPort;
+                ServerIP=cfg.ModbusIP;
+                ServerPort = cfg.ModbusPort;
             }
             this.modbusNo = modbusNo;
             if(commMode== DeviceCommMode.Com)

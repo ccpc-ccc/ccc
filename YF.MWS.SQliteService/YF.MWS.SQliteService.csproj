@@ -106,53 +106,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeService.cs" />
     <Compile Include="BaseService.cs" />
-    <Compile Include="CardService.cs" />
-    <Compile Include="CarService.cs" />
     <Compile Include="ClientService.cs" />
-    <Compile Include="CompanyPayService.cs" />
-    <Compile Include="CustomerService.cs" />
-    <Compile Include="DataEntryService.cs" />
-    <Compile Include="FileService.cs" />
-    <Compile Include="LocationService.cs" />
-    <Compile Include="CommonService.cs" />
-    <Compile Include="LogService.cs" />
-    <Compile Include="CompanyService.cs" />
-    <Compile Include="MaterialService.cs" />
-    <Compile Include="MasterService.cs" />
-    <Compile Include="PayService.cs" />
-    <Compile Include="PlanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Remote\WebBaseService.cs" />
-    <Compile Include="Remote\WebCardService.cs" />
-    <Compile Include="Remote\WebClientService.cs" />
-    <Compile Include="Remote\WebCompanyService.cs" />
-    <Compile Include="Remote\WebCustomerService.cs" />
-    <Compile Include="Remote\WebFileService.cs" />
-    <Compile Include="Remote\WebMaterialService.cs" />
-    <Compile Include="Remote\WebMessageService.cs" />
-    <Compile Include="Remote\WebPayService.cs" />
-    <Compile Include="Remote\WebUserService.cs" />
-    <Compile Include="Remote\WebWeightProcessService.cs" />
-    <Compile Include="Remote\WebWeightService.cs" />
-    <Compile Include="ReportService.cs" />
-    <Compile Include="RoleService.cs" />
-    <Compile Include="SeqNoService.cs" />
     <Compile Include="ServiceInitialization.cs" />
-    <Compile Include="StatementService.cs" />
-    <Compile Include="SumReportService.cs" />
-    <Compile Include="SyncService.cs" />
-    <Compile Include="TaskService.cs" />
-    <Compile Include="UserService.cs" />
     <Compile Include="WarehService.cs" />
-    <Compile Include="WeightExtService.cs" />
-    <Compile Include="WeightProcessService.cs" />
-    <Compile Include="WeightQcService.cs" />
-    <Compile Include="WeightQueryService.cs" />
-    <Compile Include="WeightService.cs" />
-    <Compile Include="WeightTempService.cs" />
-    <Compile Include="WeightViewService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
@@ -178,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

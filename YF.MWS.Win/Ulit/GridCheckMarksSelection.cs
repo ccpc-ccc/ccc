@@ -13,7 +13,6 @@ using System.Data;
 using System.Collections;
 using System.Windows.Forms;
 using System.Drawing;
-using YF.MWS.Metadata.Event;
 
 namespace YF.MWS.Win
 {
@@ -23,8 +22,6 @@ namespace YF.MWS.Win
         protected ArrayList selection;
         private GridColumn column;
         private RepositoryItemCheckEdit edit;
-
-        public event CheckBoxChangedEventHandler CheckBoxChanged;
 
         public GridCheckMarksSelection()
             : base()
@@ -112,26 +109,6 @@ namespace YF.MWS.Win
                 {
                     ClearSelection();
                     SelectRow(info.RowHandle, true);
-                }
-
-                if (info.InColumn && info.Column == column)
-                {
-                    if (SelectedCount == view.DataRowCount)
-                    {
-                        ClearSelection();
-                        if (CheckBoxChanged != null)
-                        {
-                            CheckBoxChanged(sender, new CheckBoxChangedEventArgs(false));
-                        }
-                    }
-                    else
-                    {
-                        SelectAll();
-                        if (CheckBoxChanged != null)
-                        {
-                            CheckBoxChanged(sender, new CheckBoxChangedEventArgs(true));
-                        }
-                    }
                 }
 
                 if (info.InRow && view.IsGroupRow(info.RowHandle) && info.HitTest != GridHitTest.RowGroupButton)

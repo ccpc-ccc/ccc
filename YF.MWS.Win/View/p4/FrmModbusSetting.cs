@@ -8,7 +8,6 @@ using System.IO.Ports;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using YF.MWS.Win.Util;
 using YF.MWS.Metadata;
 using YF.Utility.Log;
 using YF.MWS.Metadata.Cfg;
@@ -19,11 +18,9 @@ using YF.MWS.BaseMetadata;
 using System.Runtime.InteropServices.ComTypes;
 using System.Net.Sockets;
 using System.Net;
-using YF.MWS.Win.Util.CarPlate;
 
 namespace YF.MWS.Win.View.Master {
     public partial class FrmModbusSetting : DevExpress.XtraEditors.XtraForm {
-        private IWeightViewService weightViewService = new WeightViewService();
         private SysCfg cfg;
         private int modbusNo = 1;
         Socket socket;
@@ -46,10 +43,6 @@ namespace YF.MWS.Win.View.Master {
         private delegate void ShowData(string value);
 
         private ShowData OnShowData;
-        /// <summary>
-        /// Ini文件仪表小节名称
-        /// </summary>
-        string deviceSection3;
 
         public FrmModbusSetting() {
             InitializeComponent();
@@ -57,22 +50,11 @@ namespace YF.MWS.Win.View.Master {
 
         private void FrmDeviceSetting_Load(object sender, EventArgs e) {
             cfg = CfgUtil.GetCfg();
-            //测速仪表小节名称
-            deviceSection3 = "Velocimeter";
-            if (!File.Exists(IniUtility.FilePath)) {
-                File.Create(IniUtility.FilePath);
-            }
             if (cfg != null) {
                 #region 控制箱设置
                 chkStartModBus.Checked = cfg.Weight.StartModBus;
-                txtModbusIP.Text = cfg.NobodyWeight.ModbusIP;
-                txtModbusPort.Text = cfg.NobodyWeight.ModbusPort.ToString();
-                rgCloseGateMode.EditValue = cfg.NobodyWeight.GateControl;
-                teFunSixCloseTime.Text = cfg.NobodyWeight.FunSixCloseTime.ToString();
-                chkStartTrafficLight.Checked = cfg.NobodyWeight.StartTrafficLight;
-                chkBoundGate.Checked = cfg.NobodyWeight.StartBoundGate;
-                chkInfrared.Checked = cfg.NobodyWeight.StartInfrared;
-                txtInfraredWeight.Text = cfg.NobodyWeight.InfraredWeight.ToString();
+                txtModbusIP.Text = cfg.ModbusIP;
+                txtModbusPort.Text = cfg.ModbusPort.ToString();
                 #endregion
             }
         }
@@ -90,21 +72,14 @@ namespace YF.MWS.Win.View.Master {
 
         private void simpleButton4_Click(object sender, EventArgs e) {
             Save2();
-            MessageDxUtil.ShowTips("成功保存控制器设置信息！");
+            MessageBox.Show("成功保存控制器设置信息！");
         }
         private void Save2() {
             if (cfg == null) cfg = CfgUtil.GetCfg();
             cfg.Weight.StartModBus = chkStartModBus.Checked;
             cfg.Weight.ModBusCommMode = DeviceCommMode.Network;
-            cfg.NobodyWeight.ModbusIP = txtModbusIP.Text;
-            cfg.NobodyWeight.ModbusPort = txtModbusPort.Text.ToInt();
-            cfg.NobodyWeight.StartTrafficLight = chkStartTrafficLight.Checked;
-            cfg.NobodyWeight.StartBoundGate = chkBoundGate.Checked;
-            cfg.NobodyWeight.StartInfrared = chkInfrared.Checked;
-            cfg.NobodyWeight.GateControl = rgCloseGateMode.EditValue.ToString();
-            cfg.NobodyWeight.FunSixCloseTime = teFunSixCloseTime.Text.ToInt();
-            cfg.NobodyWeight.InfraredWeight = txtInfraredWeight.Text.ToDecimal();
-            
+            cfg.ModbusIP = txtModbusIP.Text;
+            cfg.ModbusPort = txtModbusPort.Text.ToInt();
             CfgUtil.SaveCfg(cfg);
         }
 

@@ -457,58 +457,6 @@ namespace YF.MWS.Win
         }
 
         /// <summary>
-        /// 获取Xml路径对应的实体类
-        /// </summary>
-        /// <param name="fileName">Xml配置文件路径</param>
-        /// <param name="xmlPath">Xml节点路径</param>
-        /// <param name="configType">转换类型</param>
-        /// <returns></returns>
-        public static object GetXmlNodeEntity(string fileName, string xmlPath, SysConfig configType)
-        {
-            if (!File.Exists(fileName))
-            {
-                goto DefaultValue;
-            }
-
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(fileName);
-            //获取根节点
-            XmlNode xmlRoot = xmlDoc.SelectSingleNode("Config");
-
-            xmlPath = xmlPath.Trim('/');
-            XmlNode xmlNode = xmlRoot.SelectSingleNode(xmlPath);
-            if (xmlNode == null)
-            {
-                goto DefaultValue;
-            }
-            else
-            {
-                switch (configType)
-                {
-                    case SysConfig.VideoChannel:
-                        VideoChannel channel = new VideoChannel();
-                        channel.IpAddress = xmlNode.SelectSingleNode("IpAddress").InnerText;
-                        channel.PortNumber = int.Parse(xmlNode.SelectSingleNode("PortNumber").InnerText);
-                        channel.UserName = xmlNode.SelectSingleNode("UserName").InnerText;
-                        channel.PassWord = xmlNode.SelectSingleNode("PassWord").InnerText;
-                        channel.ChannelNo = xmlNode.SelectSingleNode("ChannelNo").InnerText.ToInt();
-                        return channel;
-                    default:
-                        return null;
-                }
-            }
-
-        DefaultValue:
-            switch (configType)
-            {
-                case SysConfig.VideoChannel:
-                    return null;
-                default:
-                    return null;
-            }
-        }
-
-        /// <summary>
         /// 序列化
         /// </summary>
         /// <typeparam name="T"></typeparam>

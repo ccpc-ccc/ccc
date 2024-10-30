@@ -103,25 +103,11 @@ namespace YF.MWS.SQliteService
         {
             bool isConnected = false;
             string sql = "select 1 as TestCol";
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver)
-            {
-                if (service != null) 
-                {
-                    DataTable dt = service.GetDataTable(sql);
-                    if (dt != null && dt.Rows.Count > 0 && dt.Rows[0][0].ToInt() == 1) 
-                    {
-                        isConnected = true;
-                    }
-                }
-            }
-            else
-            {
-                DataTable dt = sqliteDb.ExecuteDataTable(sql);
+            DataTable dt = base.GetTable(sql);
                 if (dt != null && dt.Rows.Count > 0 && dt.Rows[0][0].ToInt() == 1)
                 {
                     isConnected = true;
                 }
-            }
             return isConnected;
         }
 

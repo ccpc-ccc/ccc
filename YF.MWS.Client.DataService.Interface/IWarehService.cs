@@ -9,9 +9,11 @@ namespace YF.MWS.Client.DataService.Interface
     public interface IWarehService
     {
         bool Delete(string warehId);
-        SWareh Get(string warehId);
+        VWareh Get(string warehId);
         SWareh GetByName(string warehName);
-        List<SWareh> GetList();
-        bool Save(SWareh wareh);
+        List<VWareh> GetList();
+        void Save2(VWareh model);
+        void OptionWareh(string weightId, string type);
+        List<VWeight> GetBWeights();
     }
 }

@@ -12,7 +12,6 @@ using YF.Utility.Configuration;
 using YF.MWS.Db;
 using System.IO;
 using YF.Utility.IO;
-using YF.MWS.Metadata.UI;
 using System.Diagnostics;
 using YF.Utility.Log;
 using System.Windows.Forms;
@@ -32,52 +31,6 @@ namespace YF.MWS.Win {
                 searchTime = dt.ToString("yyyy-MM-dd HH:mm:ss");
             }
             return searchTime;
-        }
-
-        /// <summary>
-        /// 根据配置信息生成磅单号
-        /// </summary>
-        /// <param name="weightService"></param>
-        /// <param name="cfg"></param>
-        /// <returns></returns>
-        public static string GenerateWeightNo(IWeightService weightService, WeightNoCfg cfg) {
-            StringBuilder sbNo = new StringBuilder();
-            int currentTotalCount = 0;
-            if (weightService != null) {
-                currentTotalCount = weightService.GetCurrentDateCount();
-            }
-            if (cfg != null) {
-                if (cfg.PrefixFormat == WeightNoPrefixFormat.Date) {
-                    sbNo.Append(DateTime.Now.ToString("yyyyMMdd"));
-                } else {
-                    sbNo.Append(cfg.Prefix);
-                }
-                currentTotalCount = currentTotalCount + cfg.CardinalNo + 1;
-                sbNo.AppendFormat(currentTotalCount.ToString().PadLeft(cfg.SerialNoDigit, '0'));
-            } else {
-                currentTotalCount = currentTotalCount + 1;
-                sbNo.AppendFormat(currentTotalCount.ToString().PadLeft(5, '0'));
-            }
-            return sbNo.ToString();
-        }
-
-        public static List<FileItem> GetFileList(string dirName) {
-            List<FileItem> lstFile = new List<FileItem>();
-            string fName = string.Empty;
-            if (Directory.Exists(dirName)) {
-                foreach (string fileName in Directory.GetFiles(dirName)) {
-                    fName = Path.GetFileNameWithoutExtension(fileName);
-                    if (!fName.StartsWith("~")) {
-                        lstFile.Add(new FileItem() {
-                            FullPath = fileName,
-                            FileName = Path.GetFileNameWithoutExtension(fileName),
-                            CreateTime = Directory.GetCreationTime(fileName),
-                            UpdateTime = Directory.GetLastWriteTime(fileName),
-                        });
-                    }
-                }
-            }
-            return lstFile;
         }
 
         public static WaitDialogForm GetWaitForm(string message = null) {

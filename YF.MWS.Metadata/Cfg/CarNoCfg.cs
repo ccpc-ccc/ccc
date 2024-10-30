@@ -15,10 +15,6 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public string AreaCode { get; set; }
         /// <summary>
-        /// 车牌输出方式
-        /// </summary>
-        public CarNoOutMode OutMode { get; set; }
-        /// <summary>
         /// 车牌输出长度
         /// </summary>
         public int Length { get; set; }

@@ -27,20 +27,6 @@ namespace YF.MWS.Metadata
                 return "aswdxsdw2023";
             }
         }
-        /// <summary>
-        /// 是否治超模式
-        /// </summary>
-        public bool IsExceed { get; set; }
-
-        public VersionCodeType VersionCode { get; set; }
-        /// <summary>
-        /// 版本类型
-        /// </summary>
-        public VersionType CurrentVersion { get; set; }
-        /// <summary>
-        /// 公司名称
-        /// </summary>
-        public string CompanyName { get; set; }
 
         /// <summary>
         /// 当前程序运行版本类型
@@ -63,14 +49,6 @@ namespace YF.MWS.Metadata
         public DateTime RegisterDate { get; set; }
         public string RegisterCode { get; set; }
         /// <summary>
-        /// 验证授权文件
-        /// </summary>
-        public string VerifyCode { get; set; }
-        /// <summary>
-        /// 版本权限
-        /// </summary>
-        public AuthCfg AutoCfg { get; set; }
-        /// <summary>
         /// 剩余天数
         /// </summary>
         public int ResidualDays { get; set; }
@@ -87,20 +65,6 @@ namespace YF.MWS.Metadata
         /// 启用基础数据同步
         /// </summary>
         public bool StartSyncMaster { get; set; }
-        /// <summary>
-        /// 连接服务器状态
-        /// </summary>
-        public bool IsConnectedServer { get; set; }
-        /// <summary>
-        /// 是否模拟称重
-        /// </summary>
-        public bool IsSimulateWeight { get; set; } = false;
         public SysCfg sysCfg { get; set; }
-        #region Server Info
-        /// <summary>
-        /// 远程服务器地址
-        /// </summary>
-        public string RemoteServerUrl { get; set; }
-        #endregion
     }
 }

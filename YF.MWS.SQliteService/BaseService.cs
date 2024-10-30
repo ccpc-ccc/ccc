@@ -11,8 +11,6 @@ using YF.MWS.BaseMetadata;
 using YF.MWS.Client.DataService.Interface;
 using YF.MWS.Db;
 using YF.MWS.Metadata;
-using YF.MWS.Metadata.Dto;
-using YF.MWS.Metadata.Query;
 using YF.MWS.Util;
 using YF.MWS.Util.Dynamic;
 using YF.Utility;
@@ -31,20 +29,10 @@ namespace YF.MWS.SQliteService
             }
         }
         protected virtual DataTable GetTable(string sql) {
-            DataTable dt = null;
-                dt = sqliteDb.ExecuteDataTable(sql);
-            /*if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
-            } else {
-                dt = service.GetDataTable(sql);
-            }*/
-            return dt;
+                return sqliteDb.ExecuteDataTable(sql);
         }
         protected virtual bool ExecuteSql(string sql) {
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                 return sqliteDb.ExecuteNonQuery(sql) > 0;
-            } else {
-                return service.ExecuteNonQuery(sql);
-            }
         }
         protected virtual bool save<T>(T mode,string tableName) where T:BaseEntity,new() {
             string sql = SqliteSqlUtil.GetSaveSql<T>(mode, tableName);
@@ -70,11 +58,7 @@ namespace YF.MWS.SQliteService
             return TableHelper.RowToEntity<T>(row);
         }
         protected virtual List<T> getList<T>(string sql) where T : new() {
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
                 return sqliteDb.GetObjectList<T>(sql);
-            } else {
-                return service.GetObjectList<T>(sql);
-            }
         }
         protected virtual List<T> getPageData<T>(string sql,int pageIndex,int pageSize)  where T : new(){
             if (sql != ""&&pageSize>0) {

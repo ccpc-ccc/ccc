@@ -13,8 +13,6 @@ using YF.MWS.BaseMetadata;
 using YF.MWS.Db;
 using YF.MWS.SQliteService;
 using YF.MWS.Client.DataService.Interface;
-using YF.MWS.CacheService;
-using YF.MWS.Win.Util;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.Metadata;
 
@@ -46,11 +44,6 @@ namespace YF.MWS.Win
         {
             SysCfg cfg = CfgUtil.GetCfg();
             AppRunVersion runVersion = AppRunVersion.Corp;
-            if (cfg != null)
-            {
-                if (cfg.Launch != null)
-                    runVersion = cfg.Launch.RunVersion;
-            }
             CfgUtil.SetAppRunVersion(runVersion);
             string fileName = AppSetting.GetValue("StartLogoUrl");
             if (File.Exists(fileName))

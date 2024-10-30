@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="AuthUser.cs" />
     <Compile Include="CacheKeyCollection.cs" />
-    <Compile Include="CurrentUser.cs" />
     <Compile Include="DisplayFormatValueAttribute.cs" />
     <Compile Include="Enum\AppRunVersion.cs" />
     <Compile Include="Enum\BoolValueType.cs" />

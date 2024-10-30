@@ -40,16 +40,6 @@ namespace YF.MWS.Metadata.Cfg
         public bool StartLoadImageWithRemote { get; set; }
 
         /// <summary>
-        /// 加载未完成磅单方式
-        /// </summary>
-        public LoadUnfinishWeightType LoadUnfinishWeight { get; set; }
-
-        /// <summary>
-        /// 计量方式
-        /// </summary>
-        public WeightProcess Process { get; set; }
-
-        /// <summary>
         /// 启用计重方式配置
         /// </summary>
         public bool StartWeightProcessCfg { get; set; }
@@ -58,17 +48,6 @@ namespace YF.MWS.Metadata.Cfg
         /// 启用车辆套表
         /// </summary>
         public bool CarTemp { get; set; }
-
-        /// <summary>
-        /// 无人值守磅单流程触发方式
-        /// </summary>
-        public WeightProcessTriggerType WeightProcessTrigger { get; set; }
-
-        /// <summary>
-        /// 车牌限制范围
-        /// </summary>
-        public CarLimitScopeType LimitScope { get; set; }
-
         /// <summary>
         /// 是否开启输入项目自动保存
         /// </summary>

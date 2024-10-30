@@ -8,7 +8,6 @@ using DevExpress.XtraEditors;
 using YF.Utility;
 using YF.Utility.Metadata;
 using YF.Utility.Log;
-using YF.MWS.Win.Uc.Weight;
 
 namespace YF.MWS.Win
 {
@@ -88,16 +87,6 @@ namespace YF.MWS.Win
             string val = GetValue<T>(t, lstProperty, look.Tag.ToObjectString());
             if (val != null && val.Length > 0)
                 look.EditValue = val;
-        }
-        private static void SetSearchComboxValue<T>(WComboBoxTextEdit look, T t, List<PropertyInfo> lstProperty) {
-            string val = GetValue<T>(t, lstProperty, look.Tag.ToObjectString());
-            if (val != null && val.Length > 0)
-                look.CurrentValue = val;
-        }
-        private static void SetSearchCustomerEdit<T>(WCustomerEdit look, T t, List<PropertyInfo> lstProperty) {
-            string val = GetValue<T>(t, lstProperty, look.Tag.ToObjectString());
-            if (val != null && val.Length > 0)
-                look.CurrentValue = val;
         }
         /// <summary>
         ///    val 为控件值  lstProperty  为 t 的所有属性列表  propertyName 为控件的tag值
@@ -196,14 +185,6 @@ namespace YF.MWS.Win
                         SearchLookUpEdit look = (SearchLookUpEdit)c;
                         SetSearchLookUpEditValue<T>(look, t, lstProperty);
                     }
-                    if (c.GetType().Name == "WComboBoxTextEdit") {
-                        WComboBoxTextEdit look = (WComboBoxTextEdit)c;
-                        SetSearchComboxValue<T>(look,t,lstProperty);
-                    }
-                    if (c.GetType().Name == "WCustomerEdit") {
-                        WCustomerEdit look = (WCustomerEdit)c;
-                        SetSearchCustomerEdit<T>(look,t,lstProperty);
-                    }
 
                     if (c.HasChildren)
                     {
@@ -283,11 +264,6 @@ namespace YF.MWS.Win
                     if (c.GetType().Name == "DateEdit")
                     {
                         DateEdit de = (DateEdit)c;
-                        SetPropertyValue<T>(de.EditValue.ToObjectString(), lstProperty, de.Tag.ToObjectString(), ref t);
-                    }
-                    if (c.GetType().Name == "WCustomerEdit")
-                    {
-                        WCustomerEdit de = (WCustomerEdit)c;
                         SetPropertyValue<T>(de.EditValue.ToObjectString(), lstProperty, de.Tag.ToObjectString(), ref t);
                     }
                     //GridLookUpEdit

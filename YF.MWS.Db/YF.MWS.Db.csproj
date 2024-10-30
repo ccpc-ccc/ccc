@@ -57,12 +57,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BConsult.cs" />
     <Compile Include="BCommon.cs" />
-    <Compile Include="BPayDetail.cs" />
     <Compile Include="Card\BCardPreset.cs" />
-    <Compile Include="BFile.cs" />
-    <Compile Include="BLog.cs" />
-    <Compile Include="BPay.cs" />
-    <Compile Include="BTask.cs" />
     <Compile Include="BTrialAccount.cs" />
     <Compile Include="Master\SLocation.cs" />
     <Compile Include="Master\SMaterialSeries.cs" />
@@ -71,16 +66,10 @@
     <Compile Include="Server\ReturnEntity.cs" />
     <Compile Include="Server\FWeight.cs" />
     <Compile Include="Server\FClient.cs" />
-    <Compile Include="Weight\BWeight.cs" />
-    <Compile Include="Weight\BWeightConfirm.cs" />
-    <Compile Include="Weight\BWeightDetail.cs" />
+    <Compile Include="BWeight.cs" />
     <Compile Include="Card\BPlanCard.cs" />
-    <Compile Include="Weight\BWeightExt.cs" />
-    <Compile Include="Weight\BWeightQc.cs" />
-    <Compile Include="Weight\BWeightTemp.cs" />
     <Compile Include="Master\SCharge.cs" />
     <Compile Include="Org\SCustomerPrice.cs" />
-    <Compile Include="SLimitWeight.cs" />
     <Compile Include="Master\SWareh.cs" />
     <Compile Include="Master\SAd.cs" />
     <Compile Include="Master\SAttribute.cs" />
@@ -88,13 +77,7 @@
     <Compile Include="Master\SCardViewDtl.cs" />
     <Compile Include="Master\SControl.cs" />
     <Compile Include="Master\SReportTemplate.cs" />
-    <Compile Include="Weight\BWeightWarning.cs" />
-    <Compile Include="DataEntry.cs" />
-    <Compile Include="IKeyCode.cs" />
     <Compile Include="Master\SSeqNo.cs" />
-    <Compile Include="SWeightView.cs" />
-    <Compile Include="SWeightViewDtl.cs" />
-    <Compile Include="ViewEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master\SAlgLibary.cs" />
     <Compile Include="Master\SCar.cs" />
@@ -107,7 +90,6 @@
     <Compile Include="Role\SModule.cs" />
     <Compile Include="Role\SRole.cs" />
     <Compile Include="Role\SRolePermission.cs" />
-    <Compile Include="STableSyncCfg.cs" />
     <Compile Include="Role\SUser.cs" />
     <Compile Include="Role\SUserRole.cs" />
   </ItemGroup>

@@ -78,9 +78,5 @@ namespace YF.MWS.Metadata.Cfg
         /// 车牌号输出到大屏幕
         /// </summary>
         public bool OutputScreen { get; set; }
-        /// <summary>
-        /// 车牌识别条件
-        /// </summary>
-        public CarNoRecCondition RecCondition { get; set; }
     }
 }
