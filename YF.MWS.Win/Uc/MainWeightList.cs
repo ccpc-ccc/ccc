@@ -460,10 +460,12 @@ namespace YF.MWS.Win.Uc
                 return;
             }
             BWeight weight = weightService.Get(this.CurrentWeightId);
-            bool canPrint = frmWeight.CanPrint(weight);
-            if (canPrint) {
-                frmWeight.Print(this.CurrentWeightId);
+            List<VWeight> weightList = weightQueryService.GetViewsByWaybillNo(weight.WaybillNo);
+            if (weightList == null || weightList.Count <= 0) {
+                MessageDxUtil.ShowWarning("磅单数据不存在");
+                return;
             }
+            PrintUtil.Print(weightList, weight.t9.ToInt());
         }
     }
 }

@@ -45,6 +45,10 @@ namespace YF.MWS.Metadata.Cfg
         /// 读卡周期
         /// </summary>
         public decimal ReadCardCycle { get; set; }
+        /// <summary>
+        /// 订单号
+        /// </summary>
+        public int WayBillNo { get; set; } = 1;
 
         /// <summary>
         /// 启用车牌识别

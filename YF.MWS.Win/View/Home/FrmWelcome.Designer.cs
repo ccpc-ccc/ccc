@@ -49,7 +49,7 @@
             // peLogo
             // 
             this.peLogo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.peLogo.EditValue = global::YF.MWS.Win.Properties.Resources.banner1;
+            this.peLogo.EditValue = global::YF.MWS.Win.Properties.Resources.banner;
             this.peLogo.Location = new System.Drawing.Point(2, 2);
             this.peLogo.Name = "peLogo";
             this.peLogo.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;

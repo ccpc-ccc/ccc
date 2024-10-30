@@ -126,11 +126,6 @@ namespace YF.MWS.Win.View.Weight {
         private decimal outWeightValue = 0;
 
         /// <summary>
-        /// 无人职守模式检测车辆驶出地磅
-        /// </summary>
-        private System.Timers.Timer timerOut;
-
-        /// <summary>
         /// 无人职守模式检测车辆是否完全驶入地磅计数
         /// </summary>
         private volatile int checkCarCount = 0;
@@ -757,23 +752,13 @@ namespace YF.MWS.Win.View.Weight {
                         voiceCfg = CfgUtil.GetVoiceCfg();
                     }
                     InitModBus();
-                    //无人职守
-                    if (Cfg.MeasureFun == "Nobody") {
-                        //判断车辆是否完全驶出地磅
-                        this.timerOut = new System.Timers.Timer();
-                        decimal autoOutTime = 1;
-                        if (Cfg != null && Cfg.NobodyWeight != null && Cfg.NobodyWeight.AutoOutTime > 0) {
-                            autoOutTime = Cfg.NobodyWeight.AutoOutTime;
-                        }
-                        timerOut.Interval = (int)(1000 * autoOutTime);
-                        timerOut.Elapsed += TimerOut_Elapsed;
-                    }
                     InitControl();
 
                     InitRoleControl();
 
                     //LoadWeight();
                     InitDeviceNo();
+                    if (Cfg.WayBillNo <= 0) Cfg.WayBillNo = 1;
 
                     if ((printPhoto && autoPrintWeight) || startAutoReset || payCode == PayCodeType.Static) {
                         timerAutoTask.Start();
@@ -796,26 +781,6 @@ namespace YF.MWS.Win.View.Weight {
                 wlookCar.Properties.AppearanceDropDown.Font = f;
             }
 
-        }
-
-        private void TimerOut_Elapsed(object sender, System.Timers.ElapsedEventArgs e) {
-            if (currentWeighWay == WeightWay.Nobody && CanCarOut()) {
-                this.timerOut.Stop();
-                isBounding = false;
-                isNoteReadCard = false;
-                //称重完成,红灯亮,绿灯灭
-                RedServerLight(1);
-                if (startBoundGate) {
-                    if (readerNo == 1) {
-                        //关闭2#道闸
-                        CloseServerGate(2);
-                    } else {
-                        //关闭1#道闸
-                        CloseServerGate(1);
-                    }
-                }
-                FinishWeightProcess();
-            }
         }
 
         /// <summary>
@@ -1127,11 +1092,6 @@ namespace YF.MWS.Win.View.Weight {
             //无人职守
             if (Cfg != null && Cfg.MeasureFun == "Nobody") {
                 ReleaseModBus();
-                //关闭无人值守车辆驶出检测定时器
-                if (this.timerOut != null && this.timerOut.Enabled) {
-                    this.timerOut.Stop();
-                    this.timerOut = null;
-                }
             }
             ReleaseIdCardReader();
             ReleaseCarPlate();
@@ -1176,28 +1136,6 @@ namespace YF.MWS.Win.View.Weight {
             PrintUtil.Print(null,0);
         }
 
-        /// <summary>
-        /// 打印临时磅单
-        /// </summary>
-        private void PrintTemp() {
-            if (string.IsNullOrEmpty(searchList.CurrentWeightId)) {
-                MessageDxUtil.ShowWarning("请选择要打印的磅单");
-                searchList.Focus();
-            } else {
-                PrintUtil.PrintWeightReport(searchList.CurrentViewId, searchList.CurrentWeightId, DocumentType.TemporaryWeight, reportService, null, weightTempPrinterName);
-            }
-        }
-
-        /// <summary>
-        /// 废除
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnItemInvalid_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            if (searchList.InvalidWeight()) {
-                searchList.LoadData();
-            }
-        }
 
         /// <summary>
         /// 初始化近距离读卡器
@@ -1452,8 +1390,6 @@ namespace YF.MWS.Win.View.Weight {
                             }
                         }
                         BeginInvoke(new Action(() => {
-                            if (weWaybillNo != null)
-                                weWaybillNo.CurrentValue = info.IdNo;
                             if (weDriverName != null)
                                 weDriverName.CurrentValue = info.FullName;
                         }));
@@ -1754,6 +1690,11 @@ namespace YF.MWS.Win.View.Weight {
                     PrintUtil.PrintWeightReportPdf(currentViewId, currentWeight, reportService, null, weightPrinterName);
                 }
                 if (isSaved) {
+                    if (weWaybillNo != null) {
+                        Cfg.WayBillNo = weWaybillNo.Text.ToInt() + 1;
+                        CfgUtil.SaveCfg(Cfg);
+                        weWaybillNo.Text = Cfg.WayBillNo.ToString();
+                    }
                     RefreshWeightControl();
                     ShowWeightStateTip(string.Format("磅单({0})已经成功保存", currentWeight.WeightNo));
                     if ((currentWeight.FinishState==FinishState.Finished.ToInt())&&(MessageBox.Show( "当前数据已保存是否继续称重？","提示", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
@@ -1936,28 +1877,11 @@ namespace YF.MWS.Win.View.Weight {
             currentWeightProcess = rgWeightProcess.EditValue.ToEnum<WeightProcess>();
         }
 
-        private void btnOpenFirstGate_Click(object sender, EventArgs e) {
-            OpenServerGate(1);
-        }
-
-        private void btnCloseFirstGate_Click(object sender, EventArgs e) {
-            CloseServerGate(1);
-        }
-
-        private void btnOpenSecondGate_Click(object sender, EventArgs e) {
-            OpenServerGate(2);
-        }
-
-        private void btnCloseSecondGate_Click(object sender, EventArgs e) {
-            CloseServerGate(2);
-        }
-
         private void timerStateSync_Tick(object sender, EventArgs e) {
             lock (lockDeviceState) {
                 if (!isRunningState) {
                     isRunningState = true;
                     CheckDeviceState1();
-                    CheckDeviceState2();
                     isRunningState = false;
                 }
             }
@@ -1974,16 +1898,6 @@ namespace YF.MWS.Win.View.Weight {
                 if (!isNormal) {
                     ShowWeightStableState(false, stateWeightStable1);
                 }
-            }
-        }
-        private void CheckDeviceState2() {
-            if (serialPort2 != null) {
-                bool isReceive = serialPort2.HasReceiveData();
-                if (!isReceive&&!CurrentClient.Instance.IsSimulateWeight) {
-                    ShowWeightInfo(2, 0);
-                }
-                bool isNormal = serialPort2.IsNormal();
-                ShowDeviceState(isNormal);
             }
         }
 

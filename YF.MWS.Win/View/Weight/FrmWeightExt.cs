@@ -803,8 +803,6 @@ namespace YF.MWS.Win.View.Weight
                                 voice = string.Format(voiceCfg.SecondWeight, digitConverter.ConvertToString());
                             }
                         }
-                        //保存称重截图
-                        AsyncCapturePhoto(GetWeightCapture(currentWeightId, currentStableWeight));
                         bool isSaved = Save();
                         if (startVoice && speecher != null && isSaved)
                         {
@@ -817,8 +815,6 @@ namespace YF.MWS.Win.View.Weight
                            // if (!needWait) 
                                 HandleGateAfterSave();
                             ShowWeightStateTip("等待地磅重量归零,下次过磅准备");
-                            //启动车辆驶出地磅检测定时器
-                            this.timerOut.Start();
                         }
                     }
                 }
@@ -988,32 +984,6 @@ namespace YF.MWS.Win.View.Weight
             if (weDriverName != null) 
             {
                 weDriverName.InitData();
-            }
-        }
-
-        private void SaveCarWithTareWeight(BWeight weight) 
-        {
-            if (weight.SuttleWeight > 0 && weight.TareWeight>0 && weight.FinishState == (int)FinishState.Finished && !string.IsNullOrEmpty(weight.CarNo))
-            {
-                SCar car = carService.GetByCarNo(weight.CarNo);
-                if (car == null)
-                {
-                    car = new SCar();
-                    car.Id = YF.MWS.Util.Utility.GetGuid();
-                    car.CarNo = weight.CarNo;
-                    car.CarType = "A1";
-                    car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
-                    carService.Save(car);
-                    CarCacher.Remove();
-                }
-                else 
-                {
-                    if (car.TareWeight == 0) 
-                    {
-                        car.TareWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", weight.TareWeight);
-                        carService.Save(car);
-                    }
-                }
             }
         }
 

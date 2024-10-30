@@ -1505,26 +1505,15 @@ namespace YF.MWS.Win.View.Weight
             }
         }
 
-        private void AsyncCapturePhoto(WeightCapture wc)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(wc.WeightId))
-                {
-                    ThreadPool.QueueUserWorkItem(new WaitCallback(CapturePhoto), wc);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteException(ex);
-            }
-        }
-
         private void New(bool completelyClear = false)
         {
             ClearWeightControl();
             CreateNewWeight();
             mainWeight.Clear(completelyClear);
+            new Thread(() => {
+                Thread.Sleep(2000);
+                if (weWaybillNo != null) weWaybillNo.Text = Cfg.WayBillNo.ToString();
+            }).Start();
         }
 
         /// <summary>
