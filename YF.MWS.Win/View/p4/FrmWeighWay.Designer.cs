@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWeighWay));
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
@@ -79,9 +79,6 @@
             this.chkStartAutoInvalid = new DevExpress.XtraEditors.CheckEdit();
             this.lblStartAutoInvalidAfter = new DevExpress.XtraEditors.LabelControl();
             this.teUnfinishedTimeOut = new DevExpress.XtraEditors.TextEdit();
-            this.chkStartCustomerBalanceLimit = new DevExpress.XtraEditors.CheckEdit();
-            this.chkStartValidateCarWithCard = new DevExpress.XtraEditors.CheckEdit();
-            this.chkStartPlan = new DevExpress.XtraEditors.CheckEdit();
             this.gpDataCfg = new DevExpress.XtraEditors.GroupControl();
             this.lblBackupDbDirectory = new DevExpress.XtraEditors.LabelControl();
             this.btnSelectBackupDbDirectory = new DevExpress.XtraEditors.ButtonEdit();
@@ -89,6 +86,9 @@
             this.chkStartWeighterDataFilter = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartBackupDb = new DevExpress.XtraEditors.CheckEdit();
             this.gpOperationCfg = new DevExpress.XtraEditors.GroupControl();
+            this.chkStartPlan = new DevExpress.XtraEditors.CheckEdit();
+            this.chkStartValidateCarWithCard = new DevExpress.XtraEditors.CheckEdit();
+            this.chkStartCustomerBalanceLimit = new DevExpress.XtraEditors.CheckEdit();
             this.chkShareWeight = new DevExpress.XtraEditors.CheckEdit();
             this.chkGrossTareTransform = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartDoubleClickUnfinished = new DevExpress.XtraEditors.CheckEdit();
@@ -111,6 +111,7 @@
             this.gpLoadUnfinishWeightCfg = new DevExpress.XtraEditors.GroupControl();
             this.rgLoadUnfinishWeight = new DevExpress.XtraEditors.RadioGroup();
             this.folderOpen = new System.Windows.Forms.FolderBrowserDialog();
+            this.chkCarAfter = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).BeginInit();
             this.plMain.SuspendLayout();
@@ -149,9 +150,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkAutoReset.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartAutoInvalid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teUnfinishedTimeOut.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpDataCfg)).BeginInit();
             this.gpDataCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSelectBackupDbDirectory.Properties)).BeginInit();
@@ -160,6 +158,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStartBackupDb.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpOperationCfg)).BeginInit();
             this.gpOperationCfg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkGrossTareTransform.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartDoubleClickUnfinished.Properties)).BeginInit();
@@ -184,6 +185,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpLoadUnfinishWeightCfg)).BeginInit();
             this.gpLoadUnfinishWeightCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgLoadUnfinishWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCarAfter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -619,32 +621,6 @@
             this.teUnfinishedTimeOut.Size = new System.Drawing.Size(62, 20);
             this.teUnfinishedTimeOut.TabIndex = 130;
             // 
-            // chkStartCustomerBalanceLimit
-            // 
-            this.chkStartCustomerBalanceLimit.Location = new System.Drawing.Point(181, 100);
-            this.chkStartCustomerBalanceLimit.Name = "chkStartCustomerBalanceLimit";
-            this.chkStartCustomerBalanceLimit.Properties.Caption = "启用客户余额限制";
-            this.chkStartCustomerBalanceLimit.Size = new System.Drawing.Size(122, 20);
-            this.chkStartCustomerBalanceLimit.TabIndex = 108;
-            // 
-            // chkStartValidateCarWithCard
-            // 
-            this.chkStartValidateCarWithCard.Location = new System.Drawing.Point(412, 100);
-            this.chkStartValidateCarWithCard.Name = "chkStartValidateCarWithCard";
-            this.chkStartValidateCarWithCard.Properties.Caption = "启用IC卡验证车牌号";
-            this.chkStartValidateCarWithCard.Size = new System.Drawing.Size(130, 20);
-            this.chkStartValidateCarWithCard.TabIndex = 109;
-            this.chkStartValidateCarWithCard.Tag = "StartValidateCarWithCard";
-            // 
-            // chkStartPlan
-            // 
-            this.chkStartPlan.Location = new System.Drawing.Point(23, 133);
-            this.chkStartPlan.Name = "chkStartPlan";
-            this.chkStartPlan.Properties.Caption = "启用计划单限制功能";
-            this.chkStartPlan.Size = new System.Drawing.Size(130, 20);
-            this.chkStartPlan.TabIndex = 132;
-            this.chkStartPlan.Tag = "StartPlan";
-            // 
             // gpDataCfg
             // 
             this.gpDataCfg.Controls.Add(this.lblBackupDbDirectory);
@@ -673,11 +649,11 @@
             this.btnSelectBackupDbDirectory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.btnSelectBackupDbDirectory.Size = new System.Drawing.Size(306, 20);
-            toolTipTitleItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
-            toolTipTitleItem2.Text = "提示";
+            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
+            toolTipTitleItem1.Text = "提示";
             toolTipItem1.LeftIndent = 6;
             toolTipItem1.Text = "如果是网络版数据库，则需要确保此目录存在于安装数据库的那台电脑上。";
-            superToolTip1.Items.Add(toolTipTitleItem2);
+            superToolTip1.Items.Add(toolTipTitleItem1);
             superToolTip1.Items.Add(toolTipItem1);
             this.btnSelectBackupDbDirectory.SuperTip = superToolTip1;
             this.btnSelectBackupDbDirectory.TabIndex = 135;
@@ -713,6 +689,7 @@
             // 
             this.gpOperationCfg.Controls.Add(this.chkStartPlan);
             this.gpOperationCfg.Controls.Add(this.chkStartValidateCarWithCard);
+            this.gpOperationCfg.Controls.Add(this.chkCarAfter);
             this.gpOperationCfg.Controls.Add(this.chkStartCustomerBalanceLimit);
             this.gpOperationCfg.Controls.Add(this.chkShareWeight);
             this.gpOperationCfg.Controls.Add(this.chkGrossTareTransform);
@@ -726,6 +703,32 @@
             this.gpOperationCfg.Size = new System.Drawing.Size(604, 171);
             this.gpOperationCfg.TabIndex = 145;
             this.gpOperationCfg.Text = "操作控制";
+            // 
+            // chkStartPlan
+            // 
+            this.chkStartPlan.Location = new System.Drawing.Point(23, 133);
+            this.chkStartPlan.Name = "chkStartPlan";
+            this.chkStartPlan.Properties.Caption = "启用计划单限制功能";
+            this.chkStartPlan.Size = new System.Drawing.Size(130, 20);
+            this.chkStartPlan.TabIndex = 132;
+            this.chkStartPlan.Tag = "StartPlan";
+            // 
+            // chkStartValidateCarWithCard
+            // 
+            this.chkStartValidateCarWithCard.Location = new System.Drawing.Point(412, 100);
+            this.chkStartValidateCarWithCard.Name = "chkStartValidateCarWithCard";
+            this.chkStartValidateCarWithCard.Properties.Caption = "启用IC卡验证车牌号";
+            this.chkStartValidateCarWithCard.Size = new System.Drawing.Size(130, 20);
+            this.chkStartValidateCarWithCard.TabIndex = 109;
+            this.chkStartValidateCarWithCard.Tag = "StartValidateCarWithCard";
+            // 
+            // chkStartCustomerBalanceLimit
+            // 
+            this.chkStartCustomerBalanceLimit.Location = new System.Drawing.Point(181, 100);
+            this.chkStartCustomerBalanceLimit.Name = "chkStartCustomerBalanceLimit";
+            this.chkStartCustomerBalanceLimit.Properties.Caption = "启用客户余额限制";
+            this.chkStartCustomerBalanceLimit.Size = new System.Drawing.Size(122, 20);
+            this.chkStartCustomerBalanceLimit.TabIndex = 108;
             // 
             // chkShareWeight
             // 
@@ -948,6 +951,14 @@
             // 
             this.folderOpen.RootFolder = System.Environment.SpecialFolder.SendTo;
             // 
+            // chkCarAfter
+            // 
+            this.chkCarAfter.Location = new System.Drawing.Point(181, 133);
+            this.chkCarAfter.Name = "chkCarAfter";
+            this.chkCarAfter.Properties.Caption = "上磅后识别车牌";
+            this.chkCarAfter.Size = new System.Drawing.Size(122, 20);
+            this.chkCarAfter.TabIndex = 108;
+            // 
             // FrmWeighWay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1002,9 +1013,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkAutoReset.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartAutoInvalid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teUnfinishedTimeOut.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpDataCfg)).EndInit();
             this.gpDataCfg.ResumeLayout(false);
             this.gpDataCfg.PerformLayout();
@@ -1014,6 +1022,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkStartBackupDb.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpOperationCfg)).EndInit();
             this.gpOperationCfg.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkGrossTareTransform.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartDoubleClickUnfinished.Properties)).EndInit();
@@ -1039,6 +1050,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpLoadUnfinishWeightCfg)).EndInit();
             this.gpLoadUnfinishWeightCfg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rgLoadUnfinishWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCarAfter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1120,5 +1132,6 @@
         private DevExpress.XtraEditors.RadioGroup rgWeightType;
         private DevExpress.XtraEditors.CheckEdit chkCarTemp;
         private DevExpress.XtraEditors.CheckEdit chkAutoRun;
+        private DevExpress.XtraEditors.CheckEdit chkCarAfter;
     }
 }

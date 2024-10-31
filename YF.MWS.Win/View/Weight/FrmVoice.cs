@@ -10,6 +10,7 @@ using YF.MWS.Db;
 using YF.MWS.Win.Util;
 using YF.MWS.Metadata.Cfg;
 using System.IO;
+using YF.MWS.Metadata;
 
 namespace YF.MWS.Win.View.Weight
 {
@@ -17,23 +18,9 @@ namespace YF.MWS.Win.View.Weight
     {
         private BWeight weight;
         private SpeechUtil speecher;
-
-        public SpeechUtil Speecher
-        {
-            get { return speecher; }
-            set { speecher = value; }
+        public FrmVoice() {
+            this.InitializeComponent();
         }
-
-        public BWeight Weight
-        {
-            get { return weight; }
-            set { weight = value; }
-        }
-        public FrmVoice()
-        {
-            InitializeComponent();
-        }
-
         private void FrmVoice_Load(object sender, EventArgs e) {
             speecher = new SpeechUtil();
             Bind();
@@ -43,6 +30,7 @@ namespace YF.MWS.Win.View.Weight
         {
             string xmlPath = Path.Combine(Application.StartupPath, "VoiceCfg.xml");
             VoiceCfg cfg = XmlUtil.Deserialize<VoiceCfg>(xmlPath);
+            SysCfg sysCfg = CfgUtil.GetCfg();
             if (cfg != null)
             {
                 teOverWeight.Text = cfg.OverWeight;
@@ -58,6 +46,7 @@ namespace YF.MWS.Win.View.Weight
                 teWeightUnStable.Text = cfg.WeightUnStable;
                 teInfraredCovered.Text = cfg.InfraredCovered;
                 teUnloadWeight.Text = cfg.UnloadWeight;
+                checkEdit1.Checked = sysCfg.Weight.StartVoicePrompt;
             }
         }
 
@@ -157,6 +146,33 @@ namespace YF.MWS.Win.View.Weight
         private void btnItemClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Close();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+            string xmlPath = Path.Combine(Application.StartupPath, "VoiceCfg.xml");
+            VoiceCfg cfg = XmlUtil.Deserialize<VoiceCfg>(xmlPath);
+            SysCfg sysCfg = CfgUtil.GetCfg();
+            if (cfg != null) {
+               cfg.OverWeight = teOverWeight.Text ;
+               cfg.CarRecognition =  teCarRecognition.Text;
+                cfg.CarStopFail = teCarStopFail.Text;
+                cfg.FirstWeight = teFirstWeight.Text;
+                cfg.ReadCardFail = teReadCardFail.Text;
+                cfg.ReadCardSuccess = teReadCardSuccess.Text;
+                 cfg.SecondWeight =teSecondWeight.Text;
+               cfg.StartReadCard = teStartReadCard.Text ;
+                cfg.StartWeight = teStartWeight.Text;
+                cfg.TimeOut = teTimeOut.Text;
+                cfg.WeightUnStable = teWeightUnStable.Text;
+                cfg.InfraredCovered = teInfraredCovered.Text;
+               cfg.UnloadWeight =  teUnloadWeight.Text;
+            }
+                sysCfg.Weight.StartVoicePrompt = checkEdit1.Checked;
+            XmlUtil.Serialize<VoiceCfg>(cfg, xmlPath);
+            CfgUtil.ResetVoiceCfg();
+            sysCfg.Weight.StartVoicePrompt = checkEdit1.Checked;
+            CfgUtil.SaveCfg(sysCfg);
+            MessageDxUtil.ShowTips("成功保存语音文字配置信息.");
         }
     }
 }

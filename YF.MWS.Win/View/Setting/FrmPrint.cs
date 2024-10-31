@@ -32,7 +32,6 @@ namespace YF.MWS.Win.View.Setting
         }
 
         private void FrmPrint_Load(object sender, EventArgs e) {
-            LoadCurrentViewField();
             List<String> lstPrinters = PrintUtil.GetLocalPrinters();
             if (lstPrinters != null && lstPrinters.Count > 0)
             {
@@ -57,16 +56,6 @@ namespace YF.MWS.Win.View.Setting
                 teMaxPrintCount.Text = print.MaxPrintCount.ToString();
             }
             Bind();
-        }
-
-        private void LoadCurrentViewField() {
-            List<SWeightViewDtl> lstViewDtl = weightViewService.GetDetailList(CurrentClient.Instance.ViewId);
-            foreach (SWeightViewDtl dtl in lstViewDtl) {
-                if (dtl.FieldName != "ViewId" && dtl.FieldName != "WeightId") {
-                    chkMoneyUpperColumn.Items.Add(dtl.ControlName);
-                    chkWeightUpperColumns.Items.Add(dtl.ControlName);
-                }
-            }
         }
         private void Bind() {
             voiceCfg = XmlUtil.Deserialize<VoiceCfg>(xmlPath);
@@ -134,7 +123,7 @@ namespace YF.MWS.Win.View.Setting
         }
 
         private void simpleButton1_Click(object sender, EventArgs e) {
-
+            Save2();
         }
         private void Save2() {
             try {

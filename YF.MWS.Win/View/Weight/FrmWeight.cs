@@ -673,8 +673,8 @@ namespace YF.MWS.Win.View.Weight {
         /// <param name="manual"></param>
         private void TareGrossTransform() {
             if (startGrossTareTransform&&weGrossWeight!=null&&weTareWeight!=null) {
-                decimal tare = currentTareWeight;
-                if (oldGrossWeight > 0) //将毛重还原为上次过毛重的重量
+                decimal tare = weTareWeight.Text.ToDecimal();
+                /*if (oldGrossWeight > 0) //将毛重还原为上次过毛重的重量
                 {
                         decimal currentWeight = weGrossWeight.Text.ToDecimal();
                         if (currentWeight != oldGrossWeight) {
@@ -691,14 +691,14 @@ namespace YF.MWS.Win.View.Weight {
                                     weTareWeight.Text = oldTareWeight.ToString();
                                 }));
                         }
-                }
-                decimal gross = 0;
-                if (processMode == MeasureProcessMode.FirstGross) {
+                }*/
+                decimal gross = weGrossWeight.Text.ToDecimal();
+                /*if (processMode == MeasureProcessMode.FirstGross) {
                     gross = oldGrossWeight;
                 } else {
                     gross = currentGrossWeight;
                     tare = oldTareWeight;
-                }
+                }*/
                 if (tare > 0 && gross > 0 && tare > gross) {
                     grossTareTransformed = true;
                     currentTareWeight = gross;
@@ -712,6 +712,8 @@ namespace YF.MWS.Win.View.Weight {
                             }
                         }));
                 }
+                oldGrossWeight = weGrossWeight.Text.ToDecimal();
+                oldTareWeight = weTareWeight.Text.ToDecimal();
             }
         }
 
@@ -735,7 +737,6 @@ namespace YF.MWS.Win.View.Weight {
         private void FrmWeight_Load(object sender, EventArgs e) {
             try {
                 this.FrmMain=GetMain();
-                if(FrmMain!=null)Program.frmViewVideoDevice = Program.frmViewVideoDevice;
                 currentPort = this.serialPort1;
                 currentlblWeight = this.lblWeight1;
                 currentDeviceCfg = this.Cfg.Device1;
@@ -809,7 +810,7 @@ namespace YF.MWS.Win.View.Weight {
                 isBounding = false;
                 isNoteReadCard = false;
                 //称重完成,红灯亮,绿灯灭
-                RedServerLight(1);
+                GreeServerLight(1);
                 if (startBoundGate) {
                     if (readerNo == 1) {
                         //关闭2#道闸
@@ -1412,7 +1413,7 @@ namespace YF.MWS.Win.View.Weight {
                     if (isSuccess && isValidated) {
                             this.readerNo = 1;
                         //1#道闸红灯灭、绿灯亮
-                        GreeServerLight(readerNo);
+                        RedServerLight(readerNo);
                         OpenServerGate(this.readerNo);
                     }
                     //无人值守双道闸模式,1号IC卡读取失败情况下
@@ -1437,7 +1438,7 @@ namespace YF.MWS.Win.View.Weight {
                             this.readerNo = 1;
                             if (CanOpenDoubleGate()) {
                                 //1#道闸红灯灭、绿灯亮
-                                GreeServerLight(1);
+                                RedServerLight(1);
                                 //开启道闸
                                 OpenServerGate(1);
                             }
@@ -1450,7 +1451,7 @@ namespace YF.MWS.Win.View.Weight {
                             if (isSuccess && isValidated && CanOpenDoubleGate()) {
                                 this.readerNo = 2;
                                 //2#道闸红灯灭、绿灯亮
-                                GreeServerLight(2);
+                                RedServerLight(2);
                                 //开启道闸
                                 CloseServerGate(2);
                             }
@@ -1758,7 +1759,21 @@ namespace YF.MWS.Win.View.Weight {
             }
             return isChanged;
         }
-
+        private void getWeightTime(ref BWeight weight) {
+            if (Cfg.Weight.ProcessMode == 0) {
+                if (weGrossWeight != null && weGrossWeight.Text.ToDecimal() <= 0) {
+                    weight.GrossTime = DateTime.Now;
+                } else if (weTareWeight != null) {
+                    weight.TareTime = DateTime.Now;
+                }
+            } else if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstTare) { //第一次皮重时
+                if (weTareWeight != null && weTareWeight.Text.ToDecimal() <= 0) {
+                    tempWeight.TareTime = DateTime.Now;
+                } else if (weGrossWeight != null) {
+                    weight.GrossTime = DateTime.Now;
+                }
+            }
+        }
         public bool Save() {
             bool isSaved = false;
             try {
@@ -1807,9 +1822,7 @@ namespace YF.MWS.Win.View.Weight {
                 currentWeight.SuttleWeight = Math.Abs(currentWeight.GrossWeight - currentWeight.TareWeight);
                 currentWeight.WarehBizType = radWarehBizType.EditValue.ToString();
                 currentWeight.CompanyId = CurrentUser.Instance.CompanyId;
-                if (refusePay && currentWeight.FinishState == (int)FinishState.Finished) {
-                    currentWeight.SuttleWeight = 0;
-                }
+                getWeightTime(ref currentWeight);
                 if (startOverWeight) {
                     currentWeight.MaxWeight = maxWeight;
                     currentWeight.OverWeight = overWeight;
@@ -1835,12 +1848,10 @@ namespace YF.MWS.Win.View.Weight {
                         currentWeight.RefId = currentPlan.Id;
                 }
                 isSaved = weightService.Save(currentWeight);
-                if (!isSaved) {
-                    isSaved = weightService.Save(currentWeight);
-                }
                 if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
                     planService.Update(currentWeight);
                 }
+                AsyncCapturePhoto(GetWeightCapture(currentWeight.Id));
                 if (isSaved&&Cfg.Transfer.isOpen&&currentWeight.FinishState == 1) {//
                     Thread thread = new Thread(new ParameterizedThreadStart(sendWeight));
                     thread.Start(currentWeight);
@@ -1923,7 +1934,8 @@ namespace YF.MWS.Win.View.Weight {
         }
         private void sendWeight(object obj) {
             BWeight weight=obj as BWeight;
-            if (obj == null) return;
+            if (weight == null) return;
+            Thread.Sleep(5000);
             webWeightService.doneWeight(currentWeight);
         }
 
@@ -2058,7 +2070,6 @@ namespace YF.MWS.Win.View.Weight {
         private void timerSync_Tick(object sender, EventArgs e) {
             if (!isSyncing) {
                 isSyncing = true;
-
                 isSyncing = false;
             }
         }

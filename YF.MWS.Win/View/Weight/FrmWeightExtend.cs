@@ -397,27 +397,6 @@ namespace YF.MWS.Win.View.Weight
             taskService.AddTask(task);
         }
 
-        private void AddTask(TaskType type,string weightId)
-        {
-            BTask task = new BTask();
-            task.TaskType = type.ToString();
-            task.TaskState = 0;
-            task.RefId = weightId;
-            task.Id = YF.MWS.Util.Utility.GetGuid();
-            taskService.AddTask(task);
-        }
-
-        private void AddTask(TaskType type, string weightId, string waterMarkText)
-        {
-            BTask task = new BTask();
-            task.TaskType = type.ToString();
-            task.TaskState = 0;
-            task.RefId = weightId;
-            task.TaskContent = waterMarkText;
-            task.Id = YF.MWS.Util.Utility.GetGuid();
-            taskService.AddTask(task);
-        }
-
         private void InitConfig()
         {
             loginCfg = YF.Utility.Serialization.XmlUtil.Deserialize<LoginCfg>(loginCfgXml);
@@ -797,7 +776,9 @@ namespace YF.MWS.Win.View.Weight
                     ShowWeightStateTip("上个磅单流程尚未完成,不能识别新的车牌");
                     return;
                 }
-
+                if (Cfg.Weight.CarAfter &&  GetCurrentWeight() <this.minWeightValue) { //转换成吨后再做比较
+                    return;
+                }
                /* if (currentRecCondition == CarNoRecCondition.WeightGeZero)
                 {
                     if (leftWeightValue <= minWeightValue)
@@ -887,7 +868,7 @@ namespace YF.MWS.Win.View.Weight
                     if (currentWeighWay == WeightWay.Nobody)
                     {
                         //红灯灭绿灯亮
-                        GreeServerLight(readerNo);
+                        RedServerLight(readerNo);
                             //1#车牌识别仪识别车牌
                             this.OpenServerGate(this.readerNo);
                     }
@@ -1088,13 +1069,6 @@ namespace YF.MWS.Win.View.Weight
                         {
                             fileService.Add(file);
                         }
-                        if (autoPrintWeight)
-                        {
-                            if (wc.State == BaseMetadata.FinishState.Finished)
-                            {
-                                AddTask(TaskType.AutoPrint, wc.WeightId);
-                            }
-                        }
                     }
                     else
                     {
@@ -1142,9 +1116,9 @@ namespace YF.MWS.Win.View.Weight
                     isOpen = true;
                         if (startTrafficLight)
                         {
-                            //红灯亮、绿灯灭
-                            RedServerLight(1);
-                            RedServerLight(2);
+                            //绿灯亮、红灯灭
+                            GreeServerLight(1);
+                            GreeServerLight(2);
                         }
                     Logger.Write("打开控制器成功.");
                     ShowWeightStateTip("连接PLC控制箱成功");
@@ -1467,9 +1441,9 @@ namespace YF.MWS.Win.View.Weight
         private async void OpenServerGate(int no) {
             bool isOk = false;
             if (Cfg.NobodyWeight.GateControl=="Modbus"&& this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
-                no = no * 2 - 1;
+                int currentNo = no * 2 - 1;
                 int time = Cfg.NobodyWeight.FunSixCloseTime <= 0 ? 3 : Cfg.NobodyWeight.FunSixCloseTime;
-               await this.modbusLeft.SendData(no, time);
+               await this.modbusLeft.SendData(currentNo, time);
                 isOk = true;
             } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no==1&&this.hxRecognizerLeft!=null) {
@@ -1483,9 +1457,9 @@ namespace YF.MWS.Win.View.Weight
         private async void CloseServerGate(int no) {
             bool isOk = false;
             if (Cfg.NobodyWeight.GateControl == "Modbus" && this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
-                no = no * 2;
+                int currentNo = no * 2 - 1;
                 int time = Cfg.NobodyWeight.FunSixCloseTime <= 0 ? 3 : Cfg.NobodyWeight.FunSixCloseTime;
-                await this.modbusLeft.SendData(no, time);
+                await this.modbusLeft.SendData(currentNo, time);
             } else if (Cfg.NobodyWeight.GateControl == "Car") {
                 if (no == 1 && this.hxRecognizerLeft != null) {
                       isOk = hxRecognizerLeft.CloseGate();
@@ -1501,17 +1475,17 @@ namespace YF.MWS.Win.View.Weight
         private async void GreeServerLight(int no) {
             if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2 + 1;
-               await this.modbusLeft.SendData(no+1, -1);
+               await this.modbusLeft.SendData(no, -1);
                 Thread.Sleep(100);
-               await this.modbusLeft.SendData(no, 0);
+               await this.modbusLeft.SendData(no+1, 0);
             }
         }
         private async void RedServerLight(int no) {
             if (this.modbusLeft != null && Cfg.Weight.ModBusCommMode == DeviceCommMode.Network) {
                 no = no * 2+1;
-                await this.modbusLeft.SendData(no, -1);
+                await this.modbusLeft.SendData(no + 1, -1);
                 Thread.Sleep(100);
-                await this.modbusLeft.SendData(no + 1, 0);
+                await this.modbusLeft.SendData(no, 0);
             }
         }
 
@@ -1574,7 +1548,6 @@ namespace YF.MWS.Win.View.Weight
             {
                 if (mainWeight.ValidateChildren() && ValidateForm())
                 {
-                    AsyncCapturePhoto(GetWeightCapture(currentWeightId));
                     Save();
                 }
             }

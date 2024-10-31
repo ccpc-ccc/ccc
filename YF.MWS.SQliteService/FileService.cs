@@ -56,8 +56,7 @@ namespace YF.MWS.SQliteService
         /// <returns></returns>
         public bool Add(BFile file)
         {
-            string sql;
-            sql = SqliteSqlUtil.GetSaveSql<BFile>(file, "B_File");
+            string sql = SqliteSqlUtil.GetSaveSql<BFile>(file, "B_File");
             return sqliteDb.ExecuteNonQuery(sql) > 0;
         }
 

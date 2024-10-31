@@ -34,10 +34,6 @@
             this.plMain = new DevExpress.XtraEditors.PanelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.lblWeightUpperColumns = new DevExpress.XtraEditors.LabelControl();
-            this.chkWeightUpperColumns = new DevExpress.XtraEditors.CheckedListBoxControl();
-            this.lblMoneyUpperColumn = new DevExpress.XtraEditors.LabelControl();
-            this.chkMoneyUpperColumn = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.gpPrintConfig = new DevExpress.XtraEditors.GroupControl();
             this.chkPrintPhoto = new DevExpress.XtraEditors.CheckEdit();
@@ -95,8 +91,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkWeightUpperColumns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkMoneyUpperColumn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPrintConfig)).BeginInit();
             this.gpPrintConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkPrintPhoto.Properties)).BeginInit();
@@ -164,47 +158,11 @@
             // 
             // xtraTabPage1
             // 
-            this.xtraTabPage1.Controls.Add(this.lblWeightUpperColumns);
-            this.xtraTabPage1.Controls.Add(this.chkWeightUpperColumns);
-            this.xtraTabPage1.Controls.Add(this.lblMoneyUpperColumn);
-            this.xtraTabPage1.Controls.Add(this.chkMoneyUpperColumn);
             this.xtraTabPage1.Controls.Add(this.simpleButton2);
             this.xtraTabPage1.Controls.Add(this.gpPrintConfig);
             this.xtraTabPage1.Name = "xtraTabPage1";
             this.xtraTabPage1.Size = new System.Drawing.Size(949, 528);
             this.xtraTabPage1.Text = "打印设置";
-            // 
-            // lblWeightUpperColumns
-            // 
-            this.lblWeightUpperColumns.Location = new System.Drawing.Point(719, 18);
-            this.lblWeightUpperColumns.Name = "lblWeightUpperColumns";
-            this.lblWeightUpperColumns.Size = new System.Drawing.Size(100, 14);
-            this.lblWeightUpperColumns.TabIndex = 86;
-            this.lblWeightUpperColumns.Text = "重量大写字段设置:";
-            // 
-            // chkWeightUpperColumns
-            // 
-            this.chkWeightUpperColumns.Location = new System.Drawing.Point(718, 42);
-            this.chkWeightUpperColumns.Name = "chkWeightUpperColumns";
-            this.chkWeightUpperColumns.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.chkWeightUpperColumns.Size = new System.Drawing.Size(173, 376);
-            this.chkWeightUpperColumns.TabIndex = 85;
-            // 
-            // lblMoneyUpperColumn
-            // 
-            this.lblMoneyUpperColumn.Location = new System.Drawing.Point(505, 18);
-            this.lblMoneyUpperColumn.Name = "lblMoneyUpperColumn";
-            this.lblMoneyUpperColumn.Size = new System.Drawing.Size(100, 14);
-            this.lblMoneyUpperColumn.TabIndex = 84;
-            this.lblMoneyUpperColumn.Text = "金额大写字段设置:";
-            // 
-            // chkMoneyUpperColumn
-            // 
-            this.chkMoneyUpperColumn.Location = new System.Drawing.Point(504, 42);
-            this.chkMoneyUpperColumn.Name = "chkMoneyUpperColumn";
-            this.chkMoneyUpperColumn.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.chkMoneyUpperColumn.Size = new System.Drawing.Size(197, 376);
-            this.chkMoneyUpperColumn.TabIndex = 83;
             // 
             // simpleButton2
             // 
@@ -685,9 +643,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chkWeightUpperColumns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkMoneyUpperColumn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpPrintConfig)).EndInit();
             this.gpPrintConfig.ResumeLayout(false);
             this.gpPrintConfig.PerformLayout();
@@ -787,9 +742,5 @@
         private DevExpress.XtraEditors.TextEdit teTest;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.LabelControl lblMoneyUpperColumn;
-        private DevExpress.XtraEditors.CheckedListBoxControl chkMoneyUpperColumn;
-        private DevExpress.XtraEditors.LabelControl lblWeightUpperColumns;
-        private DevExpress.XtraEditors.CheckedListBoxControl chkWeightUpperColumns;
     }
 }

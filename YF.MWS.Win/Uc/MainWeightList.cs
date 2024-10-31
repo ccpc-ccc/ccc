@@ -50,8 +50,6 @@ namespace YF.MWS.Win.Uc
         //private List<SWeightViewDtl> columns = null;
         private SysCfg cfg = null;
         private bool startWeightPay = false;
-        //private bool startBatchWeight = false;
-        private bool canSaveLayout = false;
         /// <summary>
         /// 司磅员启用磅单过滤
         /// </summary>
@@ -268,7 +266,6 @@ namespace YF.MWS.Win.Uc
             {
                 InitControl();
                 LoadData();
-                LoadData();
             }
             //ActiveControl = btnSearch;
             AddEvent();
@@ -329,14 +326,6 @@ namespace YF.MWS.Win.Uc
             return isInvalided;
         }
 
-        private void itemFinsihWeight_Click(object sender, EventArgs e)
-        {
-            if (FinishWeight != null) 
-            {
-                FinishWeight(sender, e);
-            }
-        }
-
         private void gvWeight_RowClick(object sender, RowClickEventArgs e)
         {
             if (WeightFocusedRowChanged != null)
@@ -388,20 +377,7 @@ namespace YF.MWS.Win.Uc
 
         private void gvWeight_Layout(object sender, EventArgs e)
         {
-            if (canSaveLayout)
-            {
-                SaveLayout();
-            }
-        }
-
-        private void gvWeight_GotFocus(object sender, EventArgs e)
-        {
-            canSaveLayout = true;
-        }
-
-        private void gvWeight_LostFocus(object sender, EventArgs e)
-        {
-            canSaveLayout = false;
+                //SaveLayout();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e) {
@@ -452,7 +428,6 @@ namespace YF.MWS.Win.Uc
                 Search();
             }
         }
-
         private void 打印ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (this.frmWeight == null) return;
             if (string.IsNullOrEmpty(this.CurrentWeightId)) {

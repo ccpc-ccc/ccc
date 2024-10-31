@@ -142,6 +142,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />

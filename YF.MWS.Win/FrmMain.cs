@@ -400,6 +400,8 @@ namespace YF.MWS.Win {
             this.lbNote.Caption= AppSetting.GetValue("note");
             if (frmCfg.mainFrm.isMax != -1) {
                 this.WindowState = frmCfg.mainFrm.isMax==1? FormWindowState.Maximized:FormWindowState.Normal;
+                if (frmCfg.mainFrm.x < -100) frmCfg.mainFrm.x = 0;
+                if (frmCfg.mainFrm.y < -100) frmCfg.mainFrm.y = 0;
                 this.Location =new Point( frmCfg.mainFrm.x,frmCfg.mainFrm.y);
                 this.Height = frmCfg.mainFrm.height;
                 this.Width = frmCfg.mainFrm.width;

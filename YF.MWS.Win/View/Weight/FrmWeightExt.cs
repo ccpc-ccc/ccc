@@ -806,7 +806,7 @@ namespace YF.MWS.Win.View.Weight
                             }
                         }
                         //保存称重截图
-                        AsyncCapturePhoto(GetWeightCapture(currentWeightId, currentStableWeight));
+                        //AsyncCapturePhoto(GetWeightCapture(currentWeightId, currentStableWeight));
                         bool isSaved = Save();
                         if (startVoice && speecher != null && isSaved)
                         {

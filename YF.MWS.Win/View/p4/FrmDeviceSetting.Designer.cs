@@ -288,6 +288,10 @@
             this.cmbDataBits1.Properties.Appearance.Options.UseFont = true;
             this.cmbDataBits1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbDataBits1.Properties.Items.AddRange(new object[] {
+            "7",
+            "8",
+            "9"});
             this.cmbDataBits1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbDataBits1.Size = new System.Drawing.Size(92, 18);
             this.cmbDataBits1.TabIndex = 12;
@@ -301,6 +305,11 @@
             this.cmbBaudRate1.Properties.Appearance.Options.UseFont = true;
             this.cmbBaudRate1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbBaudRate1.Properties.Items.AddRange(new object[] {
+            "1200",
+            "2400",
+            "4800",
+            "9600"});
             this.cmbBaudRate1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbBaudRate1.Size = new System.Drawing.Size(92, 18);
             this.cmbBaudRate1.TabIndex = 11;
@@ -905,6 +914,10 @@
             this.cmbDataBits1_2.Properties.Appearance.Options.UseFont = true;
             this.cmbDataBits1_2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbDataBits1_2.Properties.Items.AddRange(new object[] {
+            "7",
+            "8",
+            "9"});
             this.cmbDataBits1_2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbDataBits1_2.Size = new System.Drawing.Size(92, 18);
             this.cmbDataBits1_2.TabIndex = 12;
@@ -918,6 +931,11 @@
             this.cmbBaudRate1_2.Properties.Appearance.Options.UseFont = true;
             this.cmbBaudRate1_2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbBaudRate1_2.Properties.Items.AddRange(new object[] {
+            "1200",
+            "2400",
+            "4800",
+            "9600"});
             this.cmbBaudRate1_2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cmbBaudRate1_2.Size = new System.Drawing.Size(92, 18);
             this.cmbBaudRate1_2.TabIndex = 11;

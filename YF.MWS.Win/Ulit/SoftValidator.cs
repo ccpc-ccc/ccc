@@ -9,6 +9,8 @@ using YF.Utility.Security;
 using YF.Utility;
 using System.IO;
 using YF.Utility.Configuration;
+using System.Security.Cryptography;
+using System.Management;
 
 namespace YF.MWS.Win
 {
@@ -21,149 +23,115 @@ namespace YF.MWS.Win
         /// 获取本机的机器码
         /// </summary>
         /// <returns></returns>
-        public static string GetMachineCode() 
-        {
-            string machineCode = SoftRegister.GenerateMachineCode();
-            CodeGeneratorMode mode = AppSetting.GetValue("codeGeneratorMode").ToEnum<CodeGeneratorMode>();
-            if (mode == CodeGeneratorMode.Auto)
-            {
-                machineCode = SoftRegister.GenerateMachineCode();
+        public static string GetMachineCode() {
+            var cpuInfo = GetCpuInfo();
+            var diskInfo = GetHDid();
+            var macAddresses = GetMoAddress();
+
+            var sb = new StringBuilder();
+            sb.Append(cpuInfo);
+            sb.Append(diskInfo);
+            foreach (var address in macAddresses) {
+                sb.Append(address);
             }
-            else
-            {
-                machineCode = AppSetting.GetValue("machineCode");
-            }
-            return machineCode;
+
+            var inputBytes = Encoding.ASCII.GetBytes(sb.ToString());
+            var provider = new MD5CryptoServiceProvider();
+            var hashBytes = provider.ComputeHash(inputBytes);
+
+            return BitConverter.ToString(hashBytes).Replace("-", "");
         }
 
-        /// <summary>
-        /// 通过验证注册文件来获取验证结果(正式版使用)
-        /// </summary>
-        /// <param name="client"></param>
-        /// <param name="machineCode"></param>
-        /// <returns></returns>
-        public static ValidateResult ValidateWithRegisterFile(SClient client, string machineCode)
-        {
-            ValidateResult result = new ValidateResult();
-            if (client != null)
-            {
-                if (!string.IsNullOrEmpty(client.ExpireCode))
-                {
-                    string endDate = DateTime.Now.ToString("yyyyMMdd");
-                    string expiredDate = YF.Utility.Security.Encrypt.DecryptDES(client.ExpireCode, CurrentClient.Instance.EncryptKey);
-                    if (YF.MWS.Util.Utility.CompareDate(expiredDate, endDate) != -1)
-                    {
-                        result.IsExpired = true;
-                    }
-                    int totalTimes = YF.Utility.Security.Encrypt.DecryptDES(client.TotalTimes, CurrentClient.Instance.EncryptKey).ToInt();
-                    int usedTimes = YF.Utility.Security.Encrypt.DecryptDES(client.UsedTimes, CurrentClient.Instance.EncryptKey).ToInt();
-                    if (usedTimes >= totalTimes)
-                    {
-                        result.IsExpired = true;
+        ///   <summary> 
+        ///   获取cpu序列号     
+        ///   </summary> 
+        ///   <returns> string </returns> 
+        public static string GetCpuInfo() {
+            string cpuInfo = "";
+            try {
+                using (ManagementClass cimobject = new ManagementClass("Win32_Processor")) {
+                    ManagementObjectCollection moc = cimobject.GetInstances();
+
+                    foreach (ManagementObject mo in moc) {
+                        cpuInfo = mo.Properties["ProcessorId"].Value.ToString();
+                        mo.Dispose();
                     }
                 }
-                if (!string.IsNullOrEmpty(client.MachineCode) && !string.IsNullOrEmpty(client.RegisterCode))
-                {
-                    if (!string.IsNullOrEmpty(machineCode))
-                    {
-                        string registerCode = SoftRegister.GenerateRegisterCode(machineCode).ToMd5();
-                        if (registerCode.ToLower() == client.RegisterCode.ToMd5().ToLower())
-                        {
-                            result.IsRegistered = true;
-                        }
-                    }
-                }
+            } catch (Exception) {
+                throw;
             }
-            return result;
+            return cpuInfo.ToString();
         }
 
-        /// <summary>
-        /// 获取验证结果(试用版使用)
-        /// </summary>
-        /// <param name="client"></param>
-        /// <param name="machineCode"></param>
-        /// <returns></returns>
-        public static ValidateResult ValidateProbation(SClient client, string machineCode)
-        {
-            ValidateResult result = new ValidateResult();
-            int maxUsedTimes = 30;
-            if (client != null)
-            {
-                if (!string.IsNullOrEmpty(client.ExpireCode))
-                {
-                    string endDate = DateTime.Now.ToString("yyyyMMdd");
-                    string expiredDate = YF.Utility.Security.Encrypt.DecryptDES(client.ExpireCode, CurrentClient.Instance.EncryptKey);
-                    if (YF.MWS.Util.Utility.CompareDate(expiredDate, endDate) != -1)
-                    {
-                        result.IsExpired = true;
+        ///   <summary> 
+        ///   获取硬盘ID     
+        ///   </summary> 
+        ///   <returns> string </returns> 
+        public static string GetHDid() {
+            string HDid = "";
+            try {
+                using (ManagementClass cimobject1 = new ManagementClass("Win32_DiskDrive")) {
+                    ManagementObjectCollection moc1 = cimobject1.GetInstances();
+                    foreach (ManagementObject mo in moc1) {
+                        HDid = (string)mo.Properties["Model"].Value;
+                        mo.Dispose();
                     }
-                    int totalTimes = YF.Utility.Security.Encrypt.DecryptDES(client.TotalTimes, CurrentClient.Instance.EncryptKey).ToInt();
-                    if (totalTimes > maxUsedTimes)
-                    {
-                        totalTimes = maxUsedTimes;
-                    }
-                    int usedTimes = YF.Utility.Security.Encrypt.DecryptDES(client.UsedTimes, CurrentClient.Instance.EncryptKey).ToInt();
-                    if (usedTimes >= totalTimes)
-                    {
-                        result.IsExpired = true;
-                    }
-                    int availableTimes = totalTimes - usedTimes;
-                    if (availableTimes <= 0)
-                    {
-                        availableTimes = 0;
-                        result.IsExpired = true;
-                    }
-                    else 
-                    {
-                        result.IsRegistered = true;
-                    }
-                    result.AvailableTimes = availableTimes;
                 }
+            } catch (Exception) {
+
+                throw;
             }
-            return result;
+            return HDid.ToString();
         }
 
-        public static ValidateResult ValidateProbation(string filePath)
-        {
-            ValidateResult result = new ValidateResult();
-            result.IsRegistered = true;
-            if (!File.Exists(filePath))
-            {
-                CreateProbationRegisterFile(filePath);
-            }
-            string[] contents = File.ReadAllLines(filePath);
-            string now = DateTime.Now.ToString("yyyyMMdd");
-            if (contents != null || contents.Length == 2)
-            {
-                string currentDate = YF.Utility.Security.Encrypt.DecryptDES(contents[1], CurrentClient.Instance.EncryptKey);
-                int usedTimes = Encrypt.DecryptDES(contents[0], CurrentClient.Instance.EncryptKey).ToInt();
-                if (YF.MWS.Util.Utility.CompareDate(now, currentDate) != 0)
-                {
-                    usedTimes += 1;
-                    List<string> lstContent = new List<string>();
-                    lstContent.Add(YF.Utility.Security.Encrypt.EncryptDES(usedTimes.ToString(), CurrentClient.Instance.EncryptKey));
-                    lstContent.Add(YF.Utility.Security.Encrypt.EncryptDES(DateTime.Now.ToString("yyyyMMdd"), CurrentClient.Instance.EncryptKey));
-                    File.WriteAllLines(filePath, lstContent.ToArray());
+        ///   <summary> 
+        ///   获取网卡硬件地址 
+        ///   </summary> 
+        ///   <returns> string </returns> 
+        public static string GetMoAddress() {
+            string MoAddress = "";
+            try {
+                using (ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration")) {
+                    ManagementObjectCollection moc2 = mc.GetInstances();
+                    foreach (ManagementObject mo in moc2) {
+                        if ((bool)mo["IPEnabled"] == true)
+                            MoAddress = mo["MacAddress"].ToString();
+                        mo.Dispose();
+                    }
                 }
-                int availableTimes = 30 - usedTimes;
-                if (availableTimes <= 0)
-                {
-                    availableTimes = 0;
-                    result.IsExpired = true;
-                }
-                result.AvailableTimes = availableTimes;
+            } catch (Exception) {
+                throw;
             }
-            return result;
+            return MoAddress.ToString();
         }
 
-        public static bool ValidateExpireDate()
-        {
-            bool isValidated = false;
-            DateTime expireDate = Encrypt.DecryptDES(AppSetting.GetValue("expireDate")).ToDateTime();
-            DateTime now = DateTime.Now;
-            if (expireDate > now)
-                isValidated = true;
-            return isValidated;
+        private static string GetCpuId() {
+            var managementObject = new ManagementObject("win32_processor");
+            return managementObject.GetPropertyValue("ProcessorId").ToString();
+        }
+
+        private static string GetHardDiskId() {
+            var managementObject = new ManagementObject("win32_physicalmedia");
+            return managementObject.GetPropertyValue("SerialNumber").ToString();
+        }
+
+        private static string GetVideoId() {
+            var managementObject = new ManagementObject("win32_videocontroller");
+            return managementObject.GetPropertyValue("VideoProcessorId").ToString();
+        }
+        private static string[] GetMacAddresses() {
+            var macAddresses = new string[2];
+            var mc = new ManagementClass("win32_networkAdapterConfiguration");
+            var mo = mc.GetInstances();
+
+            var i = 0;
+            foreach (var o in mo) {
+                if ((bool)o.GetPropertyValue("IPEnabled")) {
+                    macAddresses[i] = o.GetPropertyValue("MacAddress").ToString();
+                    i++;
+                }
+            }
+            return macAddresses;
         }
 
         private static void CreateProbationRegisterFile(string filePath)

@@ -68,6 +68,10 @@ namespace YF.MWS.Metadata.Cfg
         /// 车牌限制范围
         /// </summary>
         public CarLimitScopeType LimitScope { get; set; }
+        /// <summary>
+        /// 上磅后识别车牌
+        /// </summary>
+        public bool CarAfter { get; set; }
 
         /// <summary>
         /// 是否开启输入项目自动保存

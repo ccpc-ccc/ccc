@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+            SaveLayout();
             base.Dispose(disposing);
         }
 

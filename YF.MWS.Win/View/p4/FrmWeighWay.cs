@@ -51,6 +51,7 @@ namespace YF.MWS.Win.View.Setting
                 teMaxWeight.Text = overWeight.MaxWeight.ToString();
                 chkStartCustomerBalanceLimit.Checked = weight.StartCustomerBalanceLimit;
                 chkGrossTareTransform.Checked = weight.GrossTareTransform;
+                chkCarAfter.Checked = weight.CarAfter;
                 //chkShowShortCut.Checked = weight.ShowShortCut;
                 chkSaveFormData.Checked = weight.SaveFormData;
                 chkLoadImageWithRemote.Checked = weight.StartLoadImageWithRemote;
@@ -130,6 +131,7 @@ namespace YF.MWS.Win.View.Setting
             weight.GenerateWeightNoByRand = chkGenerateWeightNoByRand.Checked;
             weight.BackupDir = btnSelectBackupDbDirectory.Text;
             weight.ShareWeight = chkShareWeight.Checked;
+            weight.CarAfter = chkCarAfter.Checked;
 
             AutoStart(weight.AutoRun);
 

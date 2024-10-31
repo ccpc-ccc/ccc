@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVoice));
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barTop = new DevExpress.XtraBars.Bar();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnItemClose = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -78,6 +79,7 @@
             this.teReadCardSuccess = new DevExpress.XtraEditors.TextEdit();
             this.lblOverWeight = new DevExpress.XtraEditors.LabelControl();
             this.teOverWeight = new DevExpress.XtraEditors.TextEdit();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).BeginInit();
@@ -95,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.teWeightUnStable.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teReadCardSuccess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teOverWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -108,8 +111,9 @@
             this.barManager.Form = this;
             this.barManager.Images = this.imgListSmall;
             this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnItemClose});
-            this.barManager.MaxItemId = 11;
+            this.btnItemClose,
+            this.barButtonItem1});
+            this.barManager.MaxItemId = 12;
             // 
             // barTop
             // 
@@ -118,14 +122,25 @@
             this.barTop.DockRow = 0;
             this.barTop.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.barTop.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnItemClose, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnItemClose)});
             this.barTop.Text = "Tools";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "保存";
+            this.barButtonItem1.Id = 11;
+            this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // btnItemClose
             // 
             this.btnItemClose.Caption = "关闭";
             this.btnItemClose.Id = 7;
-            this.btnItemClose.ImageIndex = 0;
+            this.btnItemClose.ImageOptions.ImageIndex = 0;
             this.btnItemClose.Name = "btnItemClose";
             this.btnItemClose.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnItemClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnItemClose_ItemClick);
@@ -135,28 +150,32 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(576, 31);
+            this.barDockControlTop.Manager = this.barManager;
+            this.barDockControlTop.Size = new System.Drawing.Size(576, 24);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 511);
+            this.barDockControlBottom.Manager = this.barManager;
             this.barDockControlBottom.Size = new System.Drawing.Size(576, 0);
             // 
             // barDockControlLeft
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 31);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 480);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
+            this.barDockControlLeft.Manager = this.barManager;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 487);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(576, 31);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 480);
+            this.barDockControlRight.Location = new System.Drawing.Point(576, 24);
+            this.barDockControlRight.Manager = this.barManager;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 487);
             // 
             // imgListSmall
             // 
@@ -206,15 +225,15 @@
             this.pcMain.Controls.Add(this.lblOverWeight);
             this.pcMain.Controls.Add(this.teOverWeight);
             this.pcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pcMain.Location = new System.Drawing.Point(0, 31);
+            this.pcMain.Location = new System.Drawing.Point(0, 24);
             this.pcMain.Name = "pcMain";
-            this.pcMain.Size = new System.Drawing.Size(576, 480);
+            this.pcMain.Size = new System.Drawing.Size(576, 487);
             this.pcMain.TabIndex = 5;
             // 
             // btnUnloadWeight
             // 
-            this.btnUnloadWeight.ImageIndex = 1;
-            this.btnUnloadWeight.ImageList = this.imgListSmall;
+            this.btnUnloadWeight.ImageOptions.ImageIndex = 1;
+            this.btnUnloadWeight.ImageOptions.ImageList = this.imgListSmall;
             this.btnUnloadWeight.Location = new System.Drawing.Point(466, 438);
             this.btnUnloadWeight.Name = "btnUnloadWeight";
             this.btnUnloadWeight.Size = new System.Drawing.Size(75, 23);
@@ -224,8 +243,8 @@
             // 
             // btnSecondWeight
             // 
-            this.btnSecondWeight.ImageIndex = 1;
-            this.btnSecondWeight.ImageList = this.imgListSmall;
+            this.btnSecondWeight.ImageOptions.ImageIndex = 1;
+            this.btnSecondWeight.ImageOptions.ImageList = this.imgListSmall;
             this.btnSecondWeight.Location = new System.Drawing.Point(466, 403);
             this.btnSecondWeight.Name = "btnSecondWeight";
             this.btnSecondWeight.Size = new System.Drawing.Size(75, 23);
@@ -235,8 +254,8 @@
             // 
             // btnFirstWeight
             // 
-            this.btnFirstWeight.ImageIndex = 1;
-            this.btnFirstWeight.ImageList = this.imgListSmall;
+            this.btnFirstWeight.ImageOptions.ImageIndex = 1;
+            this.btnFirstWeight.ImageOptions.ImageList = this.imgListSmall;
             this.btnFirstWeight.Location = new System.Drawing.Point(466, 368);
             this.btnFirstWeight.Name = "btnFirstWeight";
             this.btnFirstWeight.Size = new System.Drawing.Size(75, 23);
@@ -246,8 +265,8 @@
             // 
             // btnOverWeight
             // 
-            this.btnOverWeight.ImageIndex = 1;
-            this.btnOverWeight.ImageList = this.imgListSmall;
+            this.btnOverWeight.ImageOptions.ImageIndex = 1;
+            this.btnOverWeight.ImageOptions.ImageList = this.imgListSmall;
             this.btnOverWeight.Location = new System.Drawing.Point(466, 330);
             this.btnOverWeight.Name = "btnOverWeight";
             this.btnOverWeight.Size = new System.Drawing.Size(75, 23);
@@ -257,8 +276,8 @@
             // 
             // btnInfraredCovered
             // 
-            this.btnInfraredCovered.ImageIndex = 1;
-            this.btnInfraredCovered.ImageList = this.imgListSmall;
+            this.btnInfraredCovered.ImageOptions.ImageIndex = 1;
+            this.btnInfraredCovered.ImageOptions.ImageList = this.imgListSmall;
             this.btnInfraredCovered.Location = new System.Drawing.Point(466, 296);
             this.btnInfraredCovered.Name = "btnInfraredCovered";
             this.btnInfraredCovered.Size = new System.Drawing.Size(75, 23);
@@ -268,8 +287,8 @@
             // 
             // btnWeightUnStable
             // 
-            this.btnWeightUnStable.ImageIndex = 1;
-            this.btnWeightUnStable.ImageList = this.imgListSmall;
+            this.btnWeightUnStable.ImageOptions.ImageIndex = 1;
+            this.btnWeightUnStable.ImageOptions.ImageList = this.imgListSmall;
             this.btnWeightUnStable.Location = new System.Drawing.Point(466, 262);
             this.btnWeightUnStable.Name = "btnWeightUnStable";
             this.btnWeightUnStable.Size = new System.Drawing.Size(75, 23);
@@ -279,8 +298,8 @@
             // 
             // btnCarStopFail
             // 
-            this.btnCarStopFail.ImageIndex = 1;
-            this.btnCarStopFail.ImageList = this.imgListSmall;
+            this.btnCarStopFail.ImageOptions.ImageIndex = 1;
+            this.btnCarStopFail.ImageOptions.ImageList = this.imgListSmall;
             this.btnCarStopFail.Location = new System.Drawing.Point(466, 223);
             this.btnCarStopFail.Name = "btnCarStopFail";
             this.btnCarStopFail.Size = new System.Drawing.Size(75, 23);
@@ -290,8 +309,8 @@
             // 
             // btnTimeOut
             // 
-            this.btnTimeOut.ImageIndex = 1;
-            this.btnTimeOut.ImageList = this.imgListSmall;
+            this.btnTimeOut.ImageOptions.ImageIndex = 1;
+            this.btnTimeOut.ImageOptions.ImageList = this.imgListSmall;
             this.btnTimeOut.Location = new System.Drawing.Point(466, 185);
             this.btnTimeOut.Name = "btnTimeOut";
             this.btnTimeOut.Size = new System.Drawing.Size(75, 23);
@@ -301,8 +320,8 @@
             // 
             // btnStartWeight
             // 
-            this.btnStartWeight.ImageIndex = 1;
-            this.btnStartWeight.ImageList = this.imgListSmall;
+            this.btnStartWeight.ImageOptions.ImageIndex = 1;
+            this.btnStartWeight.ImageOptions.ImageList = this.imgListSmall;
             this.btnStartWeight.Location = new System.Drawing.Point(466, 151);
             this.btnStartWeight.Name = "btnStartWeight";
             this.btnStartWeight.Size = new System.Drawing.Size(75, 23);
@@ -312,8 +331,8 @@
             // 
             // btnCarRecognition
             // 
-            this.btnCarRecognition.ImageIndex = 1;
-            this.btnCarRecognition.ImageList = this.imgListSmall;
+            this.btnCarRecognition.ImageOptions.ImageIndex = 1;
+            this.btnCarRecognition.ImageOptions.ImageList = this.imgListSmall;
             this.btnCarRecognition.Location = new System.Drawing.Point(466, 116);
             this.btnCarRecognition.Name = "btnCarRecognition";
             this.btnCarRecognition.Size = new System.Drawing.Size(75, 23);
@@ -323,8 +342,8 @@
             // 
             // btnReadCardFail
             // 
-            this.btnReadCardFail.ImageIndex = 1;
-            this.btnReadCardFail.ImageList = this.imgListSmall;
+            this.btnReadCardFail.ImageOptions.ImageIndex = 1;
+            this.btnReadCardFail.ImageOptions.ImageList = this.imgListSmall;
             this.btnReadCardFail.Location = new System.Drawing.Point(466, 82);
             this.btnReadCardFail.Name = "btnReadCardFail";
             this.btnReadCardFail.Size = new System.Drawing.Size(75, 23);
@@ -334,8 +353,8 @@
             // 
             // btnReadCardSuccess
             // 
-            this.btnReadCardSuccess.ImageIndex = 1;
-            this.btnReadCardSuccess.ImageList = this.imgListSmall;
+            this.btnReadCardSuccess.ImageOptions.ImageIndex = 1;
+            this.btnReadCardSuccess.ImageOptions.ImageList = this.imgListSmall;
             this.btnReadCardSuccess.Location = new System.Drawing.Point(466, 48);
             this.btnReadCardSuccess.Name = "btnReadCardSuccess";
             this.btnReadCardSuccess.Size = new System.Drawing.Size(75, 23);
@@ -345,8 +364,8 @@
             // 
             // btnStartReadCard
             // 
-            this.btnStartReadCard.ImageIndex = 1;
-            this.btnStartReadCard.ImageList = this.imgListSmall;
+            this.btnStartReadCard.ImageOptions.ImageIndex = 1;
+            this.btnStartReadCard.ImageOptions.ImageList = this.imgListSmall;
             this.btnStartReadCard.Location = new System.Drawing.Point(466, 18);
             this.btnStartReadCard.Name = "btnStartReadCard";
             this.btnStartReadCard.Size = new System.Drawing.Size(75, 23);
@@ -562,11 +581,21 @@
             this.teOverWeight.Size = new System.Drawing.Size(289, 20);
             this.teOverWeight.TabIndex = 0;
             // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Location = new System.Drawing.Point(357, 4);
+            this.checkEdit1.MenuManager = this.barManager;
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Caption = "启用";
+            this.checkEdit1.Size = new System.Drawing.Size(75, 20);
+            this.checkEdit1.TabIndex = 38;
+            // 
             // FrmVoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(576, 511);
+            this.Controls.Add(this.checkEdit1);
             this.Controls.Add(this.pcMain);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -597,7 +626,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.teWeightUnStable.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teReadCardSuccess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teOverWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -651,5 +682,7 @@
         private DevExpress.XtraEditors.SimpleButton btnCarRecognition;
         private DevExpress.XtraEditors.SimpleButton btnReadCardFail;
         private DevExpress.XtraEditors.SimpleButton btnReadCardSuccess;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraEditors.CheckEdit checkEdit1;
     }
 }
