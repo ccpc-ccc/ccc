@@ -16,7 +16,9 @@ namespace YF.MWS.Client.DataService.Interface
     {
         DataTable Export(WeightQueryCondition query);
         List<BWeight> GetList(int year);
-        WeightQueryResult GetTopList(TopWeightQuery query);
+        List<VWeight> GetViewsByIds(List<string> ids);
+
+       WeightQueryResult GetTopList(TopWeightQuery query);
         List<BWeight> GetNotQcList(int year);
         DataTable GetFinanceList(List<string> lstWeightId,string viewId);
         DataTable GetFinanceList(DateTime dtStart, DateTime dtEnd, FinaSettlement settleState,DateType type);

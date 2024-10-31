@@ -288,7 +288,7 @@ public static String GetDefaultPrinter()
                     cells=new testCell[] {
                         new testCell(){w=100,text=DateTime.Now.ToString("yyyy-MM-dd")},
                         new testCell(){w=100, text=BWeights[0].WaybillNo },
-                        new testCell(){ w=100, text=BWeights[0].CarNo },
+                        new testCell(){ w=100, text=BWeights[0].CarId },
                         new testCell(){ w=90, text=DateTime.Now.ToString("HH:mm") },
                         new testCell(){ w=100, text=BWeights[0].WeighterName }
                 }
@@ -310,6 +310,7 @@ public static String GetDefaultPrinter()
                 }
                 });
             decimal totalMoney = 0;
+            decimal totalWeight = 0;
             for(int i = 0; i < 5; i++) {
                 if (BWeights.Count > i) {
             tRows.Add(new testRow(){
@@ -326,6 +327,7 @@ public static String GetDefaultPrinter()
                 }
                 });
                     totalMoney += BWeights[i].UnitMoney;
+                    totalWeight += BWeights[i].NetWeight;
                 } else {
             tRows.Add(new testRow(){
                     h=30,
@@ -354,7 +356,7 @@ public static String GetDefaultPrinter()
             e.DrawString("重量計", printFont, Brushes.Black, x +400+ 10, y + 5);
             e.DrawString("金額計", printFont, Brushes.Black, x +400+180+ 10, y + 5);
             rightMiddle(e, x +400+180- 10, y + 5,180,20, printFont, $"￥{totalMoney.ToString("0.##")}");
-            rightMiddle(e, x +400- 10, y + 35,180,20, printFont, $"￥{totalMoney.ToString("0.##")}");
+            rightMiddle(e, x +400- 10, y + 35,180,20, printFont, $"{totalWeight.ToString("0.##")}");
             x = 500;
             e.DrawString(CfgUtil.GetCfg().Print.rightTitle, printFont, Brushes.Black, x, y1 + 5);
 
@@ -385,7 +387,7 @@ public static String GetDefaultPrinter()
                     cells=new testCell[] {
                         new testCell(){w=100,text=DateTime.Now.ToString("yyyy-MM-dd")},
                         new testCell(){w=100, text=BWeights[0].WaybillNo },
-                        new testCell(){ w=100, text=BWeights[0].CarNo },
+                        new testCell(){ w=100, text=BWeights[0].CarId },
                         new testCell(){ w=90, text=DateTime.Now.ToString("HH:mm") },
                         new testCell(){ w=100, text=BWeights[0].WeighterName }
                 }
@@ -407,6 +409,7 @@ public static String GetDefaultPrinter()
                 }
             });
             decimal totalMoney = 0;
+            decimal totalWeight = 0;
             for (int i = 0; i < 5; i++) {
                 if (BWeights.Count > i) {
                     tRows.Add(new testRow() {
@@ -423,6 +426,7 @@ public static String GetDefaultPrinter()
                 }
                     });
                     totalMoney += BWeights[i].UnitMoney;
+                    totalWeight+= BWeights[i].NetWeight;
                 } else {
                     tRows.Add(new testRow() {
                         h = 30,
@@ -451,7 +455,7 @@ public static String GetDefaultPrinter()
             e.DrawString("重量計", printFont, Brushes.Black, x + 400 + 10, y + 5);
             e.DrawString("金額計", printFont, Brushes.Black, x + 400 + 180 + 10, y + 5);
             rightMiddle(e, x + 400 + 180 - 10, y + 5, 180, 20, printFont, $"￥{totalMoney.ToString("0.##")}");
-            rightMiddle(e, x + 400 - 10, y + 35, 180, 20, printFont, $"￥{totalMoney.ToString("0.##")}");
+            rightMiddle(e, x + 400 - 10, y + 35, 180, 20, printFont, $"{totalWeight.ToString("0.##")}");
             x = 500;
             e.DrawString(CfgUtil.GetCfg().Print.rightTitle, printFont, Brushes.Black, x, y1 + 5);
 

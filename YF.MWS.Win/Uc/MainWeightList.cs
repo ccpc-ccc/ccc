@@ -199,16 +199,14 @@ namespace YF.MWS.Win.Uc
             WeightQueryResult result = weightQueryService.GetTopList(query);
             if (result == null)
                 result = new WeightQueryResult();
-            gvWeight.Columns.Clear();
+            //gvWeight.Columns.Clear();
             gcWeight.DataSource = result.Weight;
             if (File.Exists(layoutXmlPath))
             {
                 gvWeight.RestoreLayoutFromXml(layoutXmlPath);
             }
 
-            if (chkWeight == null)
-                chkWeight = new GridCheckMarksSelection(gvWeight);
-            chkWeight.ClearSelection();
+            if(chkWeight!=null)chkWeight.ClearSelection();
             string fieldName = "CreateTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
@@ -251,12 +249,14 @@ namespace YF.MWS.Win.Uc
                 gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
                 gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
             }
+            if (chkWeight == null)
+                chkWeight = new GridCheckMarksSelection(gvWeight);
             //gvWeight.GridControl.ForceInitialize();
-            gvWeight.Columns[0].Visible = false;
-            gvWeight.Columns[1].Visible = false;
+            //gvWeight.Columns[0].Visible = false;
+            //gvWeight.Columns[1].Visible = false;
             gcWeight.RefreshDataSource();
             //gvWeight.OptionsView.ColumnAutoWidth = true;
-            gvWeight.BestFitColumns();
+           // gvWeight.BestFitColumns();
             gvWeight.FocusedRowHandle = -1;
         }
         private void MainWeightList_Load(object sender, EventArgs e)
@@ -266,9 +266,11 @@ namespace YF.MWS.Win.Uc
             teStartDate.Time = DateTime.Now;
             if (!DesignMode)
             {
+                gvWeight.OptionsView.ColumnAutoWidth = false;
+                gvWeight.BestFitColumns();
                 InitControl();
                 LoadData();
-                LoadData();
+               //chkWeight.ClearSelection();
             }
             //ActiveControl = btnSearch;
             AddEvent();
@@ -454,18 +456,23 @@ namespace YF.MWS.Win.Uc
         }
 
         private void 打印ToolStripMenuItem_Click(object sender, EventArgs e) {
+            print();
+        }
+        public void print() {
             if (this.frmWeight == null) return;
-            if (string.IsNullOrEmpty(this.CurrentWeightId)) {
+            List<DataRow> listWeight = chkWeight.GetSelectedDataRow();
+            if (listWeight==null||listWeight.Count<=0) {
                 MessageDxUtil.ShowWarning("请选择要打印的磅单");
                 return;
             }
-            BWeight weight = weightService.Get(this.CurrentWeightId);
-            List<VWeight> weightList = weightQueryService.GetViewsByWaybillNo(weight.WaybillNo);
+            List<string> ids= listWeight.Select(li => li["Id"].ToString()).ToList();
+            List<VWeight> weightList = weightQueryService.GetViewsByIds(ids);
             if (weightList == null || weightList.Count <= 0) {
                 MessageDxUtil.ShowWarning("磅单数据不存在");
                 return;
             }
-            PrintUtil.Print(weightList, weight.t9.ToInt());
+            PrintUtil.Print(weightList, weightList[0].t9.ToInt());
+
         }
     }
 }

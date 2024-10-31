@@ -65,7 +65,6 @@ namespace YF.MWS.Win.View.Weight {
         private StringBuilder sbConditionTareTime = new StringBuilder();
         private StringBuilder sbConditionGrossTime = new StringBuilder();
         private List<QueryCondition> lstExtendCondition = new List<QueryCondition>();
-        private QPage page = null;
         private bool startReWeightPrint = false;
         private bool startPage = false;
         private int pageSize = 25;
@@ -98,7 +97,7 @@ namespace YF.MWS.Win.View.Weight {
                 InitRoleControl();
                 InitControl();
                 InitCommandBar();
-                LoadEmpty();
+                Search();
             }
         }
 
@@ -109,9 +108,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void ucPage_PageChanged(object sender, PageChangedEventArgs e) {
-            page.PageIndex = e.Page.PageIndex;
             Search();
-            e.Page.TotalRows = page.TotalRows;
         }
 
         private void InitRoleControl() {
@@ -190,7 +187,6 @@ namespace YF.MWS.Win.View.Weight {
                     }
                 }
             }
-            page = new QPage(pageSize);
         }
 
         private WeightQueryCondition GetCondition() {
@@ -230,8 +226,6 @@ namespace YF.MWS.Win.View.Weight {
             qc.Columns = viewService.GetShow2DetailList(ViewType.Weight);
             WeightQueryResult result = weightQueryService.Query(qc, startPage);
             if (result != null) {
-                page.TotalRows = result.Total;
-                ucPage.Page.TotalRows = page.TotalRows;
                 gcWeight.DataSource = result.Weight;
                 gcWeight.RefreshDataSource();
             }
@@ -240,6 +234,9 @@ namespace YF.MWS.Win.View.Weight {
             chkWeight.ClearSelection();
             gvWeight.OptionsView.ColumnAutoWidth = false;
             gvWeight.BestFitColumns();
+            if (File.Exists(layoutXmlPath)) {
+                gvWeight.RestoreLayoutFromXml(layoutXmlPath);
+            }
             string fieldName = "CreateTime";
             if (DxHelper.ContainsField(gvWeight, fieldName)) {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
@@ -250,20 +247,14 @@ namespace YF.MWS.Win.View.Weight {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
                 gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
-            if (File.Exists(layoutXmlPath)) {
-                gvWeight.RestoreLayoutFromXml(layoutXmlPath);
-            }
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
-
         }
 
         private void Search() {
             using (Utility.GetWaitForm("正在查询磅单,请稍后...")) {
                 WeightQueryResult result = weightQueryService.Query(GetCondition(), startPage);
                 if (result != null) {
-                    page.TotalRows = result.Total;
-                    ucPage.Page.TotalRows = page.TotalRows;
                     gcWeight.DataSource = result.Weight;
                     gcWeight.RefreshDataSource();
                     string fieldName = "CreateTime";
@@ -299,10 +290,14 @@ namespace YF.MWS.Win.View.Weight {
                     gvWeight.OptionsView.ColumnAutoWidth = false;
                     gvWeight.BestFitColumns();
                 }
+                if (chkWeight == null)
+                    chkWeight = new GridCheckMarksSelection(gvWeight);
                 chkWeight.ClearSelection();
                 if (File.Exists(layoutXmlPath)) {
                     gvWeight.RestoreLayoutFromXml(layoutXmlPath);
                 }
+                gvWeight.Columns[0].Visible = false;
+                gvWeight.Columns[1].Visible = false;
                 getTotal();
             }
         }
@@ -614,7 +609,6 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void barItemQuery_ItemClick(object sender, ItemClickEventArgs e) {
-            page.PageIndex = 0;
             Search();
             ucPage.InitControl();
         }

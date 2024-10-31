@@ -527,6 +527,9 @@ namespace YF.MWS.Win.View.Weight {
             if (weUnitPrice != null) {
                 weUnitPrice.EditValueChanged += weUnitPrice_EditValueChanged;
             }
+            if (weNetWeight != null) {
+                weNetWeight.EditValueChanged += weUnitPrice_EditValueChanged;
+            }
         }
 
         void wlookCar_ManualCarRecognizeTrigger(object sender, ManualCarRecognizeTriggerEventArgs e) {
@@ -550,9 +553,8 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         void weUnitPrice_EditValueChanged(object sender, EventArgs e) {
-            if (saveFormData && firstInitedUnitPrice) {
-                residentUnitPrice = weUnitPrice.Text.ToDecimal();
-                firstInitedUnitPrice = false;
+            if (weNetWeight != null && weUnitMoney != null) {
+                weUnitMoney.Text=(Math.Round(weUnitPrice.Text.ToDecimal()*weNetWeight.Text.ToDecimal()/10)*10).ToString();
             }
         }
 
@@ -644,20 +646,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void Weight_TextChanged(object sender, EventArgs e) {
-            if (weSuttleWeight != null) {
-                if (weSuttleWeight.Text.ToDecimal() < 0) {
-                    weSuttleWeight.Text = "0";
-                }
-                if (weD2 != null && weUnitMoney != null) {
-                    if (weD2.Text.ToDecimal() > 0) {
-                        weUnitMoney.Text = (weD2.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-                    } else if (weSuttleWeight != null && weUnitMoney != null) {
-                        weUnitMoney.Text = (weSuttleWeight.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-                    }
-                } else if (weSuttleWeight != null && weUnitMoney != null) {
-                    weUnitMoney.Text = (weSuttleWeight.Text.ToDecimal() * weUnitPrice.Text.ToDecimal()).ToString();
-                }
-            }
+
         }
         /// <summary>
         /// 毛皮互换
@@ -1690,11 +1679,6 @@ namespace YF.MWS.Win.View.Weight {
                     PrintUtil.PrintWeightReportPdf(currentViewId, currentWeight, reportService, null, weightPrinterName);
                 }
                 if (isSaved) {
-                    if (weWaybillNo != null) {
-                        Cfg.WayBillNo = weWaybillNo.Text.ToInt() + 1;
-                        CfgUtil.SaveCfg(Cfg);
-                        weWaybillNo.Text = Cfg.WayBillNo.ToString();
-                    }
                     RefreshWeightControl();
                     ShowWeightStateTip(string.Format("磅单({0})已经成功保存", currentWeight.WeightNo));
                     if ((currentWeight.FinishState==FinishState.Finished.ToInt())&&(MessageBox.Show( "当前数据已保存是否继续称重？","提示", MessageBoxButtons.YesNo) == DialogResult.Yes)) {
@@ -1705,6 +1689,11 @@ namespace YF.MWS.Win.View.Weight {
                         currentWeight.SuttleWeight = 0;
                         currentWeight.WeightNo = seqNoService.GetSeqNo(SeqCode.Weight.ToString());
                         weightService.Save(currentWeight);
+                    } else {
+                    if (weWaybillNo != null) {
+                        Cfg.WayBillNo = weWaybillNo.Text.ToInt() + 1;
+                        CfgUtil.SaveCfg(Cfg);
+                    }
                     }
                 } else {
                     ShowWeightStateTip("磅单保存失败");
@@ -1736,17 +1725,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
-            if (string.IsNullOrEmpty(searchList.CurrentWeightId)) {
-                MessageDxUtil.ShowWarning("请选择要打印的磅单");
-                return;
-            }
-            BWeight weight = weightService.Get(searchList.CurrentWeightId);
-            List<VWeight> weightList = weightQueryService.GetViewsByWaybillNo(weight.WaybillNo);
-            if (weightList == null || weightList.Count <= 0) {
-                MessageDxUtil.ShowWarning("磅单数据不存在");
-                return;
-            }
-                PrintUtil.Print(weightList,weight.t9.ToInt());
+            searchList.print();
         }
 
         private void btnSave_Click(object sender, EventArgs e) {

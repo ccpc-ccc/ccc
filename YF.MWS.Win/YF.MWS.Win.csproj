@@ -342,12 +342,6 @@
     <Compile Include="Uc\WeightViewControl.Designer.cs">
       <DependentUpon>WeightViewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\WeightScreen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Uc\WeightScreen.Designer.cs">
-      <DependentUpon>WeightScreen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uc\WeightTempList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1327,9 +1321,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\WeightViewControl.resx">
       <DependentUpon>WeightViewControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uc\WeightScreen.resx">
-      <DependentUpon>WeightScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\WeightTempList.resx">
       <DependentUpon>WeightTempList.cs</DependentUpon>
