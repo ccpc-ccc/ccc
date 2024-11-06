@@ -134,6 +134,13 @@
             this.groupControl10 = new DevExpress.XtraEditors.GroupControl();
             this.radioDigit1_2 = new DevExpress.XtraEditors.RadioGroup();
             this.memoReceive1_2 = new DevExpress.XtraEditors.MemoEdit();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
+            this.txtServerIP = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
+            this.txtServerPort = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCom)).BeginInit();
             this.gcCom.SuspendLayout();
@@ -212,6 +219,12 @@
             this.groupControl10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radioDigit1_2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoReceive1_2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -225,19 +238,17 @@
             // 
             this.gcCom.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gcCom.Appearance.Options.UseFont = true;
+            this.gcCom.Controls.Add(this.xtraTabControl1);
             this.gcCom.Controls.Add(this.simpleButton2);
             this.gcCom.Controls.Add(this.cmbParity1);
             this.gcCom.Controls.Add(this.cmbStopBits1);
             this.gcCom.Controls.Add(this.cmbDataBits1);
-            this.gcCom.Controls.Add(this.cmbBaudRate1);
-            this.gcCom.Controls.Add(this.cmbCom1);
             this.gcCom.Controls.Add(this.labelControl5);
             this.gcCom.Controls.Add(this.labelControl4);
             this.gcCom.Controls.Add(this.labelControl3);
-            this.gcCom.Controls.Add(this.labelControl2);
-            this.gcCom.Controls.Add(this.labelControl1);
             this.gcCom.Location = new System.Drawing.Point(28, 15);
             this.gcCom.Name = "gcCom";
+            this.gcCom.ShowCaption = false;
             this.gcCom.Size = new System.Drawing.Size(191, 217);
             this.gcCom.TabIndex = 4;
             this.gcCom.Text = "COM端口设置";
@@ -299,7 +310,7 @@
             // 
             // cmbBaudRate1
             // 
-            this.cmbBaudRate1.Location = new System.Drawing.Point(79, 66);
+            this.cmbBaudRate1.Location = new System.Drawing.Point(79, 43);
             this.cmbBaudRate1.Name = "cmbBaudRate1";
             this.cmbBaudRate1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBaudRate1.Properties.Appearance.Options.UseFont = true;
@@ -317,7 +328,7 @@
             // 
             // cmbCom1
             // 
-            this.cmbCom1.Location = new System.Drawing.Point(79, 35);
+            this.cmbCom1.Location = new System.Drawing.Point(79, 12);
             this.cmbCom1.Name = "cmbCom1";
             this.cmbCom1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbCom1.Properties.Appearance.Options.UseFont = true;
@@ -331,7 +342,7 @@
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("宋体", 9F);
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(15, 165);
+            this.labelControl5.Location = new System.Drawing.Point(14, 165);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(60, 12);
             this.labelControl5.TabIndex = 8;
@@ -341,7 +352,7 @@
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(15, 133);
+            this.labelControl4.Location = new System.Drawing.Point(14, 133);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(60, 12);
             this.labelControl4.TabIndex = 6;
@@ -351,7 +362,7 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(15, 101);
+            this.labelControl3.Location = new System.Drawing.Point(14, 101);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(60, 12);
             this.labelControl3.TabIndex = 4;
@@ -361,7 +372,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(15, 69);
+            this.labelControl2.Location = new System.Drawing.Point(15, 46);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(60, 12);
             this.labelControl2.TabIndex = 2;
@@ -371,7 +382,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(15, 38);
+            this.labelControl1.Location = new System.Drawing.Point(15, 15);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(60, 12);
             this.labelControl1.TabIndex = 0;
@@ -1417,6 +1428,70 @@
             this.memoReceive1_2.Size = new System.Drawing.Size(229, 192);
             this.memoReceive1_2.TabIndex = 0;
             // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(187, 90);
+            this.xtraTabControl1.TabIndex = 3;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.cmbBaudRate1);
+            this.xtraTabPage1.Controls.Add(this.labelControl1);
+            this.xtraTabPage1.Controls.Add(this.labelControl2);
+            this.xtraTabPage1.Controls.Add(this.cmbCom1);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(185, 64);
+            this.xtraTabPage1.Text = "串口配置";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.txtServerPort);
+            this.xtraTabPage2.Controls.Add(this.labelControl19);
+            this.xtraTabPage2.Controls.Add(this.txtServerIP);
+            this.xtraTabPage2.Controls.Add(this.labelControl18);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(185, 64);
+            this.xtraTabPage2.Text = "网口配置";
+            // 
+            // labelControl18
+            // 
+            this.labelControl18.Location = new System.Drawing.Point(24, 11);
+            this.labelControl18.Name = "labelControl18";
+            this.labelControl18.Size = new System.Drawing.Size(47, 14);
+            this.labelControl18.TabIndex = 14;
+            this.labelControl18.Text = "设备IP：";
+            // 
+            // txtServerIP
+            // 
+            this.txtServerIP.EditValue = "";
+            this.txtServerIP.Location = new System.Drawing.Point(76, 8);
+            this.txtServerIP.Name = "txtServerIP";
+            this.txtServerIP.Size = new System.Drawing.Size(92, 20);
+            this.txtServerIP.TabIndex = 15;
+            // 
+            // labelControl19
+            // 
+            this.labelControl19.Location = new System.Drawing.Point(9, 37);
+            this.labelControl19.Name = "labelControl19";
+            this.labelControl19.Size = new System.Drawing.Size(60, 14);
+            this.labelControl19.TabIndex = 14;
+            this.labelControl19.Text = "设备端口：";
+            // 
+            // txtServerPort
+            // 
+            this.txtServerPort.EditValue = "";
+            this.txtServerPort.Location = new System.Drawing.Point(76, 34);
+            this.txtServerPort.Name = "txtServerPort";
+            this.txtServerPort.Size = new System.Drawing.Size(92, 20);
+            this.txtServerPort.TabIndex = 15;
+            // 
             // FrmDeviceSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1519,6 +1594,14 @@
             this.groupControl10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radioDigit1_2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoReceive1_2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage1.PerformLayout();
+            this.xtraTabPage2.ResumeLayout(false);
+            this.xtraTabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1628,5 +1711,12 @@
         private DevExpress.XtraEditors.GroupControl groupControl10;
         private DevExpress.XtraEditors.RadioGroup radioDigit1_2;
         private DevExpress.XtraEditors.MemoEdit memoReceive1_2;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraEditors.TextEdit txtServerIP;
+        private DevExpress.XtraEditors.LabelControl labelControl18;
+        private DevExpress.XtraEditors.TextEdit txtServerPort;
+        private DevExpress.XtraEditors.LabelControl labelControl19;
     }
 }

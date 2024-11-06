@@ -241,12 +241,6 @@
     <Compile Include="Uc\FrmCarSelector.Designer.cs">
       <DependentUpon>FrmCarSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\FrmCarSelectorPad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uc\FrmCarSelectorPad.Designer.cs">
-      <DependentUpon>FrmCarSelectorPad.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uc\FrmCodeSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,12 +270,6 @@
     </Compile>
     <Compile Include="Uc\FrmMaterialSelector.Designer.cs">
       <DependentUpon>FrmMaterialSelector.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Uc\FrmMaterialSelectorPad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uc\FrmMaterialSelectorPad.Designer.cs">
-      <DependentUpon>FrmMaterialSelectorPad.cs</DependentUpon>
     </Compile>
     <Compile Include="Uc\FrmWarehSelector.cs">
       <SubType>Form</SubType>
@@ -378,6 +366,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Uc\Weight\WIntegerEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Uc\Weight\WarehEdit.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Uc\Weight\WMaterialEdit.cs">
@@ -517,18 +508,6 @@
     </Compile>
     <Compile Include="View\Extend\FrmWeightDetail.Designer.cs">
       <DependentUpon>FrmWeightDetail.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Extend\FrmWeightQc.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Extend\FrmWeightQc.Designer.cs">
-      <DependentUpon>FrmWeightQc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Extend\FrmWeightQcList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Extend\FrmWeightQcList.Designer.cs">
-      <DependentUpon>FrmWeightQcList.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Extend\FrmWeightSettle.cs">
       <SubType>Form</SubType>
@@ -704,18 +683,6 @@
     <Compile Include="View\Master\FrmCompanyPayList.Designer.cs">
       <DependentUpon>FrmCompanyPayList.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Master\FrmPlanCardEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmPlanCardEdit.Designer.cs">
-      <DependentUpon>FrmPlanCardEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Master\FrmPlanCardList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmPlanCardList.Designer.cs">
-      <DependentUpon>FrmPlanCardList.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Master\FrmCarEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -805,12 +772,6 @@
     </Compile>
     <Compile Include="View\Master\FrmMaterialList.Designer.cs">
       <DependentUpon>FrmMaterialList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Master\FrmPlanCardPadEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Master\FrmPlanCardPadEdit.Designer.cs">
-      <DependentUpon>FrmPlanCardPadEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Master\FrmReadCard.cs">
       <SubType>Form</SubType>
@@ -1285,9 +1246,6 @@
     <EmbeddedResource Include="Uc\FrmCarSelector.resx">
       <DependentUpon>FrmCarSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Uc\FrmCarSelectorPad.resx">
-      <DependentUpon>FrmCarSelectorPad.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Uc\FrmCodeSelector.resx">
       <DependentUpon>FrmCodeSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -1302,9 +1260,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\FrmMaterialSelector.resx">
       <DependentUpon>FrmMaterialSelector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uc\FrmMaterialSelectorPad.resx">
-      <DependentUpon>FrmMaterialSelectorPad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\FrmWarehSelector.resx">
       <DependentUpon>FrmWarehSelector.cs</DependentUpon>
@@ -1365,12 +1320,6 @@
     <EmbeddedResource Include="View\Extend\FrmWeightDetail.resx">
       <DependentUpon>FrmWeightDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Extend\FrmWeightQc.resx">
-      <DependentUpon>FrmWeightQc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Extend\FrmWeightQcList.resx">
-      <DependentUpon>FrmWeightQcList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Extend\FrmWeightSettle.resx">
       <DependentUpon>FrmWeightSettle.cs</DependentUpon>
@@ -1454,12 +1403,6 @@
     <EmbeddedResource Include="View\Master\FrmCompanyPayList.resx">
       <DependentUpon>FrmCompanyPayList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmPlanCardEdit.resx">
-      <DependentUpon>FrmPlanCardEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmPlanCardList.resx">
-      <DependentUpon>FrmPlanCardList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmCarEdit.resx">
       <DependentUpon>FrmCarEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -1504,9 +1447,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmMaterialList.resx">
       <DependentUpon>FrmMaterialList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Master\FrmPlanCardPadEdit.resx">
-      <DependentUpon>FrmPlanCardPadEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmReadCard.resx">
       <DependentUpon>FrmReadCard.cs</DependentUpon>
