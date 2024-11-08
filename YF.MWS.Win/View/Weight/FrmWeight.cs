@@ -329,7 +329,7 @@ namespace YF.MWS.Win.View.Weight {
         private WCustomerEdit weDeliver;
         private WCustomerEdit wlookupReceiver;
         private WComboBoxEdit wbWarehBizType;
-        private WLookupSearchEdit weWareh;
+        private WarehEdit weWareh;
         /// <summary>
         /// 物资
         /// </summary>
@@ -368,7 +368,7 @@ namespace YF.MWS.Win.View.Weight {
             weWaybillNo = mainWeight.FindControl<WTextEdit>("WaybillNo");
             wePayType = mainWeight.FindControl<WComboBoxEdit>("PayType");
             weImpurityWeight = mainWeight.FindControl<WNumbericEdit>("ImpurityWeight");
-            weWareh = mainWeight.FindControl<WLookupSearchEdit>("WarehId");
+            weWareh = mainWeight.FindControl<WarehEdit>("WarehId");
             weTareWeight = mainWeight.FindControl<WNumbericEdit>("TareWeight");
             weGrossWeight = mainWeight.FindControl<WNumbericEdit>("GrossWeight");
             weSuttleWeight = mainWeight.FindControl<WNumbericEdit>("SuttleWeight");
@@ -1819,7 +1819,7 @@ namespace YF.MWS.Win.View.Weight {
                 currentWeight.WeightProcess = (int)currentWeightProcess;
                 currentWeight.ViewId = CurrentClient.Instance.ViewId;
                 currentWeight.WeighterName = CurrentUser.Instance.FullName;
-                currentWeight.SuttleWeight = Math.Abs(currentWeight.GrossWeight - currentWeight.TareWeight);
+                //currentWeight.SuttleWeight = Math.Abs(currentWeight.GrossWeight - currentWeight.TareWeight);
                 currentWeight.WarehBizType = radWarehBizType.EditValue.ToString();
                 currentWeight.CompanyId = CurrentUser.Instance.CompanyId;
                 getWeightTime(ref currentWeight);

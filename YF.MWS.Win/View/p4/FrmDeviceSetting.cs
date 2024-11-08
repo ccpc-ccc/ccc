@@ -17,6 +17,8 @@ using YF.MWS.SQliteService;
 using YF.MWS.Client.DataService.Interface;
 using YF.MWS.BaseMetadata;
 using System.Runtime.InteropServices.ComTypes;
+using System.Net.Sockets;
+using System.Threading;
 
 namespace YF.MWS.Win.View.Master {
     public partial class FrmDeviceSetting : DevExpress.XtraEditors.XtraForm {
@@ -121,8 +123,13 @@ namespace YF.MWS.Win.View.Master {
             this.chkReturnZero1.Checked = cfg.Device1.StartReturnZero;
             this.rgSendReturnZeroProcess1.EditValue = cfg.Device1.SendReturnZeroProcess.ToString();
             this.teReturnZeroCommand1.Text = cfg.Device1.ReturnZeroCommand;
+            this.txtServerIP.Text = cfg.Device1.ServerIP;
+            this.txtServerPort.Text = cfg.Device1.ServerPort.ToString();
+            this.tabControl1.SelectedIndex = cfg.Device1.ConnectMode;
+            this.mode=cfg.Device1.ConnectMode;
             DxHelper.BindComboBoxEdit(cmbSequence1, SysCode.Sequence, cfg.Device1.Sequence);
         }
+        private int mode = 0;
         private void SetDeviceInfo2() {
             DxHelper.BindComboBoxEdit(cmbDevice1_2, SysCode.Device, cfg.Device2.Version);
             DxHelper.BindComboBoxEdit(cmbDUnit1_2, SysCode.MeasureUnit, cfg.Device2.DUnit);
@@ -271,7 +278,9 @@ namespace YF.MWS.Win.View.Master {
             cfg.Device1.StartReturnZero = chkReturnZero1.Checked;
             cfg.Device1.SendReturnZeroProcess = rgSendReturnZeroProcess1.EditValue.ToEnum<SendReturnZeroProcessType>();
             cfg.Device1.ReturnZeroCommand = teReturnZeroCommand1.Text;
-
+            cfg.Device1.ServerPort = txtServerPort.Text.ToInt();
+            cfg.Device1.ServerIP = txtServerIP.Text;
+            cfg.Device1.ConnectMode = tabControl1.SelectedIndex;
             string fomart = cmbFormat1.Text;
             int decimalDigits = 0;
             DisplayFormatStringType displayType = DisplayFormatStringType.Int;
@@ -354,22 +363,63 @@ namespace YF.MWS.Win.View.Master {
             //weightViewService.UpdateWeightColumnDecimalDigits(decimalDigits);
             CfgUtil.SaveCfg(cfg);
         }
-
-
+        private Socket _socket;
         private void btnSend_Click(object sender, EventArgs e) {
-            if (this.serialPort1 == null) return;
-            if (simpleButton2.Text == "连接") {
-                this.serialPort1.ClosePort();
-                this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
-                this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.Text.ToInt();
-                this.serialPort1.SerlPort.DataBits = cmbDataBits1.Text.ToInt();
-                this.serialPort1.SerlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits),cmbStopBits1.GetStrValue());
-                this.serialPort1.SetParity((System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity),cmbParity1.GetStrValue()));
-                this.serialPort1.OpenPort();
-                simpleButton2.Text = "断开";
-            } else {
-                this.serialPort1.ClosePort();
-                simpleButton2.Text = "连接";
+            if (this.simpleButton2.Text == "连接") mode = tabControl1.SelectedIndex;
+            if (mode == 0) {
+                if (this.serialPort1 == null) return;
+                if (simpleButton2.Text == "连接") {
+                    this.serialPort1.ClosePort();
+                    this.serialPort1.SerlPort.PortName = cmbCom1.EditValue.ToString();
+                    this.serialPort1.SerlPort.BaudRate = cmbBaudRate1.Text.ToInt();
+                    this.serialPort1.SerlPort.DataBits = cmbDataBits1.Text.ToInt();
+                    this.serialPort1.SerlPort.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), cmbStopBits1.GetStrValue());
+                    this.serialPort1.SetParity((System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), cmbParity1.GetStrValue()));
+                    this.serialPort1.OpenPort();
+                    simpleButton2.Text = "断开";
+                } else {
+                    this.serialPort1.ClosePort();
+                    simpleButton2.Text = "连接";
+                }
+            } else if (mode == 1) {
+                if (simpleButton2.Text == "连接") {
+                    this._socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    try {
+                        new Thread(() => {
+                            this.Invoke(new Action(() => {
+                                this.simpleButton2.Text = "连接中";
+                            }));
+                            try {
+                                this._socket.Connect(txtServerIP.Text, txtServerPort.Text.ToInt());
+                                this.Invoke(new Action(() => {
+                                    simpleButton2.Text = "断开";
+                                }));
+                                byte[] bytes = new byte[48];
+                                while (true) {
+                                    Thread.Sleep(100);
+                                    if (this._socket == null || !this._socket.Connected) return;
+                                    int received = this._socket.Receive(bytes);
+                                    string message = Encoding.ASCII.GetString(bytes, 0, received);
+                                    memoReceive1.Text += message;
+                                }
+
+                            } catch (Exception ex) {
+                                Logger.WriteException(ex);
+                                MessageBox.Show("连接失败");
+                                this.Invoke(new Action(() => {
+                                    simpleButton2.Text = "连接";
+                                }));
+                            }
+                        }).Start();
+                    } catch (Exception ex) {
+                        Logger.Write("网络连接失败，" + ex.Message);
+                        MessageBox.Show("连接失败");
+                    }
+
+                } else {
+                    if (this._socket != null && this._socket.Connected) this._socket.Close();
+                    simpleButton2.Text = "连接";
+                }
             }
         }
 

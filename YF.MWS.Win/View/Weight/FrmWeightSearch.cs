@@ -131,7 +131,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void barItemVedio_ItemClick(object sender, ItemClickEventArgs e) {
-            string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToObjectString();
+            string weightId = gvWeight.GetFocusedRowCellValue("Id").ToObjectString();
             if (string.IsNullOrEmpty(weightId)) {
                 MessageDxUtil.ShowWarning("请选择要浏览的磅单.");
                 return;
@@ -148,7 +148,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void barItemGraphic_ItemClick(object sender, ItemClickEventArgs e) {
-            string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToObjectString();
+            string weightId = gvWeight.GetFocusedRowCellValue("Id").ToObjectString();
             if (string.IsNullOrEmpty(weightId)) {
                 MessageDxUtil.ShowWarning("请选择要浏览的磅单.");
                 return;

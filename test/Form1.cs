@@ -1,18 +1,26 @@
-﻿using DevExpress.Internal.WinApi;
+﻿using DevExpress.CodeParser;
+using DevExpress.Internal.WinApi;
 using DevExpress.Utils.About;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YF.Utility;
+using System.IO;
+using System.IO.Compression;
 
 namespace test {
     public partial class Form1 : Form {
+        private SerialPort serialPort1;
         public Form1() {
             InitializeComponent();
         }
@@ -168,6 +176,90 @@ namespace test {
                 str5 = "零";
             }
             return str5;
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            this.serialPort1 = new SerialPort();
+            this.serialPort1.DataReceived += new SerialDataReceivedEventHandler(this.SerlPort_DataReceived);
+            foreach (string item in SerialPort.GetPortNames()) {
+                cmbCom1.Properties.Items.Add(item);
+            }
+            DxHelper.BindComboBoxEdit<YF.MWS.Metadata.StopBits>(cmbStopBits1,"One");
+            DxHelper.BindComboBoxEdit<YF.MWS.Metadata.Parity>(cmbParity1,"None");
+        }
+        private void SerlPort_DataReceived(object sender, SerialDataReceivedEventArgs e) {
+            if (this.serialPort1 == null || !this.serialPort1.IsOpen) return;
+                //等待接收数据
+                Thread.Sleep(100);
+            //接收数据
+            try {
+                int count = this.serialPort1.BytesToRead;
+                byte[] byteRead = new byte[count];
+                this.serialPort1.Read(byteRead, 0, count);
+                StringBuilder sbData = new StringBuilder();
+                foreach (byte item in byteRead) {
+                    sbData.Append(string.Format("{0} ", item.ToString("X2")));
+                }
+                this.Invoke(new Action(
+                    () => {
+                        textBox3.Text += "Rx:" + sbData.ToString() + "\r\n";
+                    }
+                    ));
+            } catch (Exception ex) {
+            }
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e) {
+            if (simpleButton2.Text == "连接") {
+                if (this.serialPort1 != null && this.serialPort1.IsOpen) {
+                    this.serialPort1.Close();
+                }
+                this.serialPort1.PortName = cmbCom1.EditValue.ToString();
+                this.serialPort1.BaudRate = cmbBaudRate1.Text.ToInt();
+                this.serialPort1.DataBits = cmbDataBits1.Text.ToInt();
+                this.serialPort1.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), cmbStopBits1.GetStrValue());
+                this.serialPort1.Parity=(System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), cmbParity1.GetStrValue());
+                try {
+                this.serialPort1.Open();
+                simpleButton2.Text = "断开";
+                }catch (Exception ex) {
+                    MessageBox.Show("打开串口失败！");
+                }
+            } else {
+                this.serialPort1.Close();
+                simpleButton2.Text = "连接";
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            if (this.serialPort1 != null&&this.serialPort1.IsOpen) {
+                this.serialPort1.Close();
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e) {
+            if (!this.serialPort1.IsOpen) {
+                MessageBox.Show("串口未打开");
+                return;
+            } else {
+                byte[] bs = textBox4.Text.HexGetBytes();
+                byte[] a= new byte[2] { bs[2] , bs[3] };
+                int add = (bs[2] << 8)+bs[3];
+                add += this.cmbAddress.SelectedIndex * 500;
+                add.ToByte2(a,0);
+                bs[2] = a[0];
+                bs[3] = a[1];
+                if(this.chkCRC.Checked) {
+                    byte[] crc=DxHelper.GetCRC(bs);
+                    bs=bs.Concat(crc).ToArray();
+                }
+                this.serialPort1.Write(bs,0,bs.Length);
+                StringBuilder sbData = new StringBuilder();
+                foreach (byte item in bs) {
+                    sbData.Append(string.Format("{0} ", item.ToString("X2")));
+                }
+                textBox3.Text += "Tx:" + sbData.ToString() + "\r\n";
+            }
         }
     }
 }

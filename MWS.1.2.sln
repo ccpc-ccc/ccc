@@ -40,6 +40,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{64585A33-6131-471E-BB03-1A3FCEEF3557}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{21C06A29-2598-4C79-B18F-739657FCB5A9}"
+	ProjectSection(SolutionItems) = preProject
+		YF.MWS.Win\Ulit\DxHelper.cs = YF.MWS.Win\Ulit\DxHelper.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "加密狗", "..\加密狗\加密狗.csproj", "{1C901933-0444-4784-84C8-AAC9F35E0FB6}"
 EndProject
