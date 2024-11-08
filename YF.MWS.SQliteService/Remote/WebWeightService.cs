@@ -7,6 +7,8 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using YF.MWS.BaseMetadata;
 using YF.MWS.Client.DataService.Interface;
 using YF.MWS.Client.DataService.Interface.Remote;
@@ -149,57 +151,40 @@ namespace YF.MWS.SQliteService.Remote
             #endregion
             return weight;
         }
-        public bool doneWeight(BWeight weightOld)
+        public bool doneWeight(BWeight weightOld,string url)
         {
-            QWeight weight = new QWeight();
-            Type type = weightOld.GetType();
-            System.Reflection.PropertyInfo[] properties = type.GetProperties();
-            foreach (PropertyInfo info in properties) {
-                PropertyInfo p = weightOld.GetType().GetProperty(info.Name);
-                if (p == null) continue;
-                var value = p.GetValue(weightOld,null);
-                if (value == null) continue;
-                if (info.PropertyType == typeof(string)) {
-                    info.SetValue(weight, value.ToString());
-                } else if (info.PropertyType == typeof(int)) {
-                    info.SetValue(weight, value.ToInt());
-                } else if (info.PropertyType == typeof(decimal)) {
-                    info.SetValue(weight, value.ToDecimal());
-                } else if (info.PropertyType == typeof(double)) {
-                    info.SetValue(weight, (double)value.ToDecimal());
-                } else if (info.PropertyType == typeof(DateTime)) {
-                    info.SetValue(weight, value.ToDateTime());
-                }
-            }
-            weight.CompanyId = WebWeightService.CompanyId;
-            weight.ClientId=WebWeightService.ClientId;
+            FWeight weight = new FWeight();
+            weight.billerName = weightOld.WeighterName;
+            weight.plateNumber = weightOld.CarNo;
+            weight.actualLoad = weightOld.SuttleWeight;
+            weight.transportStartTime = weightOld.CreateTime.ToString("yyyy-MM-dd HH:mm:ss").ToDateTime();
+            weight.transportEndTime = weightOld.FinishTime.ToString("yyyy-MM-dd HH:mm:ss").ToDateTime();
             #region  客户单位调整
-                SCustomer customer = customerService.GetCustomer(weight.CustomerId);
-                if (customer != null) weight.CustomerName= customer.CustomerName;
+                SCustomer customer = customerService.GetCustomer(weightOld.ReceiverId);
+                if (customer != null) weight.intendedArrivalHarbour= customer.CustomerName;
             #endregion
             #region  仓库调整
-            SWareh wareh = warehService.Get(weight.WarehId);
-            if (wareh != null) weight.WarehName = wareh.WarehName;
+            SWareh wareh = warehService.Get(weightOld.WarehId);
+            if (wareh != null) weight.billAddress = wareh.WarehName;
             #endregion
             #region 货物调整
-            SMaterial material = materialService.GetMaterial(weight.MaterialId);
-            if (material != null) weight.MaterialName = material.MaterialName;
+            SMaterial material = materialService.GetMaterial(weightOld.MaterialId);
+            if (material != null) weight.category = material.MachineCode.ToInt();
             #endregion
-            List<BFile>lstFile = fileService.Get(weight.Id, "B_Weight", FileBusinessType.Graphic);
-            weight.files = lstFile;
-            weight.Id = weight.ServiceId;
-            weight.CreateTime = null;
-            weight.UpdateTime = null;
-            string url = string.Format("{0}/api/weight/doneWeight", WebWeightService.ServerUrl);
-            var isOk = WebBaseService.sendPost(url, weight, Token).Result;
+            List<BFile>lstFile = fileService.Get(weightOld.Id, "B_Weight", FileBusinessType.Graphic);
+            List<string> images = new List<string>();    
             foreach(BFile file in lstFile) {
-                   file.FileContent= UnitUtil.FileToBase64(file.FileUrl);
-                file.RecId = weight.Id;
+                string fileName = Path.Combine(Application.StartupPath, file.FileUrl);
+                if (File.Exists(fileName)) {
+                    using(FileStream fs=new FileStream(fileName, FileMode.Open)) {
+                        byte[] buffer = new byte[fs.Length];
+                        fs.Read(buffer,0, buffer.Length);
+                        images.Add(Convert.ToBase64String(buffer));
+                    }
+                }
             }
-            if (isOk) {
-                url = string.Format("{0}/api/file/save", WebWeightService.ServerUrl);
-                WebBaseService.sendPost(url, lstFile, Token);
-            }
+            weight.documents=images.ToArray();
+            var isOk = WebBaseService.sendPost(url, weight, Token).Result;
             return isOk;
         }
 

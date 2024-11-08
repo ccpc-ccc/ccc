@@ -1936,7 +1936,7 @@ namespace YF.MWS.Win.View.Weight {
             BWeight weight=obj as BWeight;
             if (weight == null) return;
             Thread.Sleep(5000);
-            webWeightService.doneWeight(currentWeight);
+            webWeightService.doneWeight(currentWeight,Cfg.Transfer.CompanyCode);
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {

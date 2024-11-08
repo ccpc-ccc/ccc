@@ -234,6 +234,9 @@ namespace YF.MWS.Db
         /// 司磅员ID
         /// </summary>
         public virtual string WeighterId { get; set; }
+        /// <summary>
+        /// 司磅员姓名
+        /// </summary>
 
         public virtual string WeighterName { get; set; }
         /// <summary>

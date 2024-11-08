@@ -16,6 +16,6 @@ namespace YF.MWS.Client.DataService.Interface.Remote
         BWeight Get(string carNo);
         bool UpdateState(string weightId, RowState state);
         bool Save(SyncWeight syncWeight);
-        bool doneWeight(BWeight weight);
+        bool doneWeight(BWeight weight,string url);
     }
 }

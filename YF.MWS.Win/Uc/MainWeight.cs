@@ -545,48 +545,6 @@ namespace YF.MWS.Win.Uc
                 }
             }
         }
-        public void BindServerView(ServerEntity card, WCardEdit wCardNo=null) 
-        { 
-            var lookupDelivery = FindControl<WCustomerEdit>("DeliveryId"); 
-            var lookupReceiver = FindControl<WCustomerEdit>("ReceiverId");
-            var lookupCustomer = FindControl<WCustomerEdit>("CustomerId");
-            var driverName = FindControl<WTextEdit>("DriverName");
-            var lookupMaterial = FindControl<WMaterialEdit>("MaterialId");
-            var lookupCar = FindControl<WCarLookup>("CarId");
-            WLookupSearchEdit weWareh = FindControl<WLookupSearchEdit>("WarehId");
-            WComboBoxEdit wbWarehBizType = FindControl<WComboBoxEdit>("WarehBizType");
-            if (lookupCar != null && !string.IsNullOrEmpty(card.carNo)) {
-                SCar car= carService.GetByCarNo(card.carNo);
-                if(car==null){
-                    car=new SCar();
-                    car.CarNo = card.carNo;
-                    car.Id=YF.MWS.Util.Utility.GetGuid();
-                    carService.Save(car);
-                }
-                lookupCar.CurrentValue = car.Id;
-            }
-            if (lookupDelivery != null && !string.IsNullOrEmpty(card.startDeliver)) {
-               SCustomer customer = masterService.GetCustomerByName(CustomerType.Delivery,card.startDeliver);
-                if (customer == null) {
-                    customer = new SCustomer();
-                    customer.CustomerName = card.startDeliver;
-                    customer.Id= YF.MWS.Util.Utility.GetGuid();
-                    customer.CustomerType = CustomerType.Delivery.ToString();
-                    masterService.SaveCustomer(customer);
-                }
-                lookupDelivery.CurrentValue = customer.Id;
-            }
-            if (weWareh != null && !string.IsNullOrEmpty(card.endDeliver)) {
-                SWareh wareh= warehService.GetByName(card.endDeliver);
-                if (wareh == null) {
-                    wareh = new SWareh();
-                    wareh.WarehName = card.startDeliver;
-                    wareh.Id = YF.MWS.Util.Utility.GetGuid();
-                    warehService.Save(wareh);
-                }
-                weWareh.CurrentValue = wareh.Id;
-            }
-        }
 
         public void BindControl<T>(T t)
         {

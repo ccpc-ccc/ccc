@@ -10,65 +10,46 @@ namespace YF.MWS.Db.Server
     /// <summary>
     /// 服务器远程实体类
     /// </summary>
-    public class ServerEntity {
-        public string id{get;set; }
+    public class FWeight {
         /// <summary>
-        /// 车牌号
+        /// 产品类型 0－砂石，1－卵石  2 - 土
         /// </summary>
-        public string carNo { get; set; }
+        public int category { get;set; }
         /// <summary>
-         ///  榜单号
-         /// </summary>
-        public string weightNo { get; set; }
+        /// 开单员姓名，需要和系统一致
+        /// </summary>
+        public string billerName { get; set; }
         /// <summary>
-         ///  物料名称
-          /// </summary>
-        public string materialName { get; set; }
+        ///  开单地点
+        /// </summary>
+        public string billAddress { get; set; }
         /// <summary>
-         ///  发货单位
-          /// </summary>
-        public string startDeliver { get; set; }
+        ///  车牌号码
+        /// </summary>
+        public string plateNumber { get; set; }
         /// <summary>
-         ///  收货仓库
-         /// </summary>
-        public string endDeliver { get; set; }
+        ///  实际载运吨
+        /// </summary>
+        public decimal actualLoad { get; set; }
         /// <summary>
-         ///  订单状态 0、未使用 1、使用中  2、已完成
-         /// </summary>
-        public int state { get; set; }
+        ///  采区名称，需要和系统一致
+        /// </summary>
+        public string miningAreaName { get; set; }
         /// <summary>
-         ///  数据状态 0、正常   -1、删除
-         /// </summary>
-        public int rowState { get; set; }
+        ///  装运砂起始时间，格式 yyyy-MM-ddHH:mm:ss
+        /// </summary>
+        public DateTime transportStartTime { get; set; }
         /// <summary>
-         ///  客户Id
-         /// </summary>
-        public string clientId { get; set; }
+        /// 装运砂结束时间，格式 yyyy-MM-ddHH:mm:ss
+        /// </summary>
+        public DateTime transportEndTime { get; set; }
         /// <summary>
-         ///  皮重
-         /// </summary>
-        public decimal tareWeight { get; set; }
+        ///  收货单位
+        /// </summary>
+        public string intendedArrivalHarbour { get; set; }
         /// <summary>
-         ///  毛重
-         /// </summary>
-        public decimal grossWeight { get; set; }
-        /// <summary>
-         ///  过皮时间
-         /// </summary>
-        public long tareTime { get; set; }
-        /// <summary>
-         ///  过毛时间
-         /// </summary>
-        public long grossTime { get; set; }
-        /// <summary>
-         ///  净重
-         /// </summary>
-        public decimal netWeight { get; set; }
-        public long createTime { get; set; }
-        public int createBy { get; set; }
-
-        public long delTime { get; set; }
-        public int version { get; set; }
-
+        ///  图片Base64数组，至少三张，最多九张
+        /// </summary>
+        public string[] documents { get; set; }
     }
 }

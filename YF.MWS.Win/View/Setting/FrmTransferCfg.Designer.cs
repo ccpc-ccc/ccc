@@ -40,14 +40,8 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.plMain = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.gpRuiJieYun = new DevExpress.XtraEditors.GroupControl();
-            this.lblRemoteAppSecret = new DevExpress.XtraEditors.LabelControl();
-            this.txtRegisterCode = new DevExpress.XtraEditors.TextEdit();
-            this.lblAppKey = new DevExpress.XtraEditors.LabelControl();
-            this.txtMachineCode = new DevExpress.XtraEditors.TextEdit();
             this.lblRemoteServerUrl = new DevExpress.XtraEditors.LabelControl();
             this.txtCompanyCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
@@ -57,8 +51,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).BeginInit();
             this.gpRuiJieYun.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,7 +110,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 249);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 161);
             this.barDockControlBottom.Manager = this.barManager;
             this.barDockControlBottom.Size = new System.Drawing.Size(437, 0);
             // 
@@ -128,7 +120,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
             this.barDockControlLeft.Manager = this.barManager;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 225);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 137);
             // 
             // barDockControlRight
             // 
@@ -136,7 +128,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(437, 24);
             this.barDockControlRight.Manager = this.barManager;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 225);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 137);
             // 
             // imgListSmall
             // 
@@ -147,34 +139,13 @@
             // 
             // plMain
             // 
-            this.plMain.Controls.Add(this.simpleButton2);
-            this.plMain.Controls.Add(this.simpleButton1);
             this.plMain.Controls.Add(this.checkEdit1);
             this.plMain.Controls.Add(this.gpRuiJieYun);
             this.plMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plMain.Location = new System.Drawing.Point(0, 24);
             this.plMain.Name = "plMain";
-            this.plMain.Size = new System.Drawing.Size(437, 225);
+            this.plMain.Size = new System.Drawing.Size(437, 137);
             this.plMain.TabIndex = 5;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(246, 12);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton2.TabIndex = 61;
-            this.simpleButton2.Text = "测试连接";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(336, 12);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 61;
-            this.simpleButton1.Text = "生成二维码";
-            this.simpleButton1.Visible = false;
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // checkEdit1
             // 
@@ -188,50 +159,14 @@
             // 
             // gpRuiJieYun
             // 
-            this.gpRuiJieYun.Controls.Add(this.lblRemoteAppSecret);
-            this.gpRuiJieYun.Controls.Add(this.txtRegisterCode);
-            this.gpRuiJieYun.Controls.Add(this.lblAppKey);
-            this.gpRuiJieYun.Controls.Add(this.txtMachineCode);
             this.gpRuiJieYun.Controls.Add(this.lblRemoteServerUrl);
             this.gpRuiJieYun.Controls.Add(this.txtCompanyCode);
             this.gpRuiJieYun.Enabled = false;
             this.gpRuiJieYun.Location = new System.Drawing.Point(12, 39);
             this.gpRuiJieYun.Name = "gpRuiJieYun";
-            this.gpRuiJieYun.Size = new System.Drawing.Size(415, 174);
+            this.gpRuiJieYun.Size = new System.Drawing.Size(415, 90);
             this.gpRuiJieYun.TabIndex = 60;
             this.gpRuiJieYun.Text = "云磅服务器设置";
-            // 
-            // lblRemoteAppSecret
-            // 
-            this.lblRemoteAppSecret.Location = new System.Drawing.Point(36, 137);
-            this.lblRemoteAppSecret.Name = "lblRemoteAppSecret";
-            this.lblRemoteAppSecret.Size = new System.Drawing.Size(40, 14);
-            this.lblRemoteAppSecret.TabIndex = 17;
-            this.lblRemoteAppSecret.Text = "连接码:";
-            // 
-            // txtRegisterCode
-            // 
-            this.txtRegisterCode.Location = new System.Drawing.Point(119, 135);
-            this.txtRegisterCode.Name = "txtRegisterCode";
-            this.txtRegisterCode.Size = new System.Drawing.Size(263, 20);
-            this.txtRegisterCode.TabIndex = 18;
-            this.txtRegisterCode.Tag = "AppSecret";
-            // 
-            // lblAppKey
-            // 
-            this.lblAppKey.Location = new System.Drawing.Point(36, 86);
-            this.lblAppKey.Name = "lblAppKey";
-            this.lblAppKey.Size = new System.Drawing.Size(52, 14);
-            this.lblAppKey.TabIndex = 15;
-            this.lblAppKey.Text = "终端编码:";
-            // 
-            // txtMachineCode
-            // 
-            this.txtMachineCode.Location = new System.Drawing.Point(119, 84);
-            this.txtMachineCode.Name = "txtMachineCode";
-            this.txtMachineCode.Size = new System.Drawing.Size(263, 20);
-            this.txtMachineCode.TabIndex = 16;
-            this.txtMachineCode.Tag = "AppKey";
             // 
             // lblRemoteServerUrl
             // 
@@ -239,7 +174,7 @@
             this.lblRemoteServerUrl.Name = "lblRemoteServerUrl";
             this.lblRemoteServerUrl.Size = new System.Drawing.Size(52, 14);
             this.lblRemoteServerUrl.TabIndex = 11;
-            this.lblRemoteServerUrl.Text = "商户编码:";
+            this.lblRemoteServerUrl.Text = "接口地址:";
             // 
             // txtCompanyCode
             // 
@@ -253,7 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 249);
+            this.ClientSize = new System.Drawing.Size(437, 161);
             this.Controls.Add(this.plMain);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -274,8 +209,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).EndInit();
             this.gpRuiJieYun.ResumeLayout(false);
             this.gpRuiJieYun.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -295,14 +228,8 @@
         private DevExpress.Utils.ImageCollection imgListSmall;
         private DevExpress.XtraEditors.PanelControl plMain;
         private DevExpress.XtraEditors.GroupControl gpRuiJieYun;
-        private DevExpress.XtraEditors.LabelControl lblRemoteAppSecret;
-        private DevExpress.XtraEditors.TextEdit txtRegisterCode;
-        private DevExpress.XtraEditors.LabelControl lblAppKey;
-        private DevExpress.XtraEditors.TextEdit txtMachineCode;
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
         private DevExpress.XtraEditors.LabelControl lblRemoteServerUrl;
         private DevExpress.XtraEditors.TextEdit txtCompanyCode;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
     }
 }

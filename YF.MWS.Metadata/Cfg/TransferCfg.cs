@@ -17,15 +17,7 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public string ServerUrl { get; set; }
         /// <summary>
-        /// 连接码
-        /// </summary>
-        public string RegisterCode { get; set; }
-        /// <summary>
-        /// 终端编号
-        /// </summary>
-        public string MachineCode { get; set; }
-        /// <summary>
-        /// 商户编码
+        /// 服务器地址
         /// </summary>
         public string CompanyCode { get; set; }
         /// <summary>
