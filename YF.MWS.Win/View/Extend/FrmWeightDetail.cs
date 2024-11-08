@@ -506,8 +506,10 @@ namespace YF.MWS.Win.View.Extend
                 weight.FinishState = (int)state;
                 weight.MeasureUnit = softOneUnit;
                 weight.WeightProcess = (int)WeightProcess.Two;
-                
-                weight.FinishTime = deCreateTime.DateTime;
+                weight.CreateTime = deCreateTime.DateTime;
+                weight.FinishTime = deFinishTime.DateTime;
+                weight.TareTime = deTareTime.DateTime;
+                weight.GrossTime = deGrossTime.DateTime;
                 weight.ViewId = CurrentClient.Instance.ViewId;
                 weight.AdditionalTime = DateTime.Now;
                 weight.SyncState = (int)SyncState.UnSynced;

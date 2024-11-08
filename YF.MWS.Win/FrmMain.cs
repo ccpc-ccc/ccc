@@ -297,12 +297,6 @@ namespace YF.MWS.Win {
                     }
                     return;
                 }
-                if (fullName == "YF.MWS.Win.View.Master.FrmPlanCardPadEdit") {
-                    FrmPlanCardPadEdit frmWeightPad = new FrmPlanCardPadEdit();
-                    frmWeightPad.FormBorderStyle = FormBorderStyle.None;
-                    frmWeightPad.ShowDialog();
-                    return;
-                }
                 if (fullName == "YF.MWS.Win.View.Pay.FrmPayCfg") {
                     string formName = "YF.MWS.Win.View.Master.FrmSysConfig";
                     Form frm = FindChildForm(formName);

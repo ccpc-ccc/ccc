@@ -97,5 +97,11 @@ namespace YF.MWS.Metadata.Cfg
         /// 归零指令
         /// </summary>
         public string ReturnZeroCommand { get; set; }
+        /// <summary>
+        /// 0 串口连接， 1 网口连接
+        /// </summary>
+        public int ConnectMode { get; set; }
+        public string ServerIP { get; set; }
+        public int ServerPort { get; set; }
     }
 }
