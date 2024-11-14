@@ -14,6 +14,7 @@ using YF.MWS.BaseMetadata;
 using Microsoft.Win32;
 using YF.Utility.Log;
 using YF.Utility.Configuration;
+using System.IO;
 
 namespace YF.MWS.Win.View.Setting
 {
@@ -27,6 +28,8 @@ namespace YF.MWS.Win.View.Setting
         }
 
         private void FrmWeighWay_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             cfg = CfgUtil.GetCfg();
             if (cfg != null) 
             {

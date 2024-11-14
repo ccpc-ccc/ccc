@@ -13,6 +13,7 @@ using YF.Utility;
 using System.IO;
 using YF.MWS.Db;
 using YF.MWS.Win.Uc;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Master
 {
@@ -40,8 +41,9 @@ namespace YF.MWS.Win.View.Master
             InitializeComponent();
         }
 
-        private void FrmVideoSetting_Load(object sender, EventArgs e)
-        {
+        private void FrmVideoSetting_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             this.cfg = Cfg;
             this.videoCamera = string.Format("VideoCamera{0}", this.cameraNo);
             this.Init();

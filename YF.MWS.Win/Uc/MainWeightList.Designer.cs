@@ -35,7 +35,6 @@
             this.txtCar = new DevExpress.XtraEditors.TextEdit();
             this.btnViewPhoto = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblTitle = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnExportExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
@@ -45,13 +44,15 @@
             this.teStartDate = new DevExpress.XtraEditors.TimeEdit();
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.cmbTimeType = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cmbDate = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
-            this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.补录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
@@ -59,9 +60,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbTimeType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // pcHeader
@@ -75,11 +78,11 @@
             // txtCar
             // 
             this.txtCar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCar.Location = new System.Drawing.Point(397, 10);
+            this.txtCar.Location = new System.Drawing.Point(556, 9);
             this.txtCar.Name = "txtCar";
             this.txtCar.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCar.Properties.Appearance.Options.UseFont = true;
-            this.txtCar.Size = new System.Drawing.Size(133, 18);
+            this.txtCar.Size = new System.Drawing.Size(71, 18);
             this.txtCar.TabIndex = 96;
             // 
             // btnViewPhoto
@@ -100,22 +103,11 @@
             this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(355, 13);
+            this.labelControl1.Location = new System.Drawing.Point(514, 12);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(36, 12);
             this.labelControl1.TabIndex = 93;
             this.labelControl1.Text = "车牌号";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTitle.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTitle.Appearance.Options.UseFont = true;
-            this.lblTitle.Location = new System.Drawing.Point(5, 13);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(48, 12);
-            this.lblTitle.TabIndex = 93;
-            this.lblTitle.Text = "最新磅单";
             // 
             // simpleButton1
             // 
@@ -136,7 +128,7 @@
             this.btnExportExcel.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportExcel.Appearance.Options.UseFont = true;
             this.btnExportExcel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
-            this.btnExportExcel.Location = new System.Drawing.Point(634, 7);
+            this.btnExportExcel.Location = new System.Drawing.Point(729, 7);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 25);
             this.btnExportExcel.TabIndex = 90;
@@ -149,7 +141,7 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
-            this.btnSearch.Location = new System.Drawing.Point(536, 7);
+            this.btnSearch.Location = new System.Drawing.Point(631, 7);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 25);
             this.btnSearch.TabIndex = 89;
@@ -160,7 +152,7 @@
             // 
             this.teEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teEndDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teEndDate.Location = new System.Drawing.Point(174, 9);
+            this.teEndDate.Location = new System.Drawing.Point(331, 7);
             this.teEndDate.Name = "teEndDate";
             this.teEndDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teEndDate.Properties.Appearance.Options.UseFont = true;
@@ -179,7 +171,7 @@
             this.lblRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblRange.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRange.Appearance.Options.UseFont = true;
-            this.lblRange.Location = new System.Drawing.Point(156, 13);
+            this.lblRange.Location = new System.Drawing.Point(313, 11);
             this.lblRange.Name = "lblRange";
             this.lblRange.Size = new System.Drawing.Size(12, 12);
             this.lblRange.TabIndex = 87;
@@ -189,7 +181,7 @@
             // 
             this.combFinishState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.combFinishState.EditValue = "所有磅单";
-            this.combFinishState.Location = new System.Drawing.Point(269, 10);
+            this.combFinishState.Location = new System.Drawing.Point(428, 9);
             this.combFinishState.Name = "combFinishState";
             this.combFinishState.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.combFinishState.Properties.Appearance.Options.UseFont = true;
@@ -206,7 +198,7 @@
             // 
             this.teStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teStartDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teStartDate.Location = new System.Drawing.Point(59, 9);
+            this.teStartDate.Location = new System.Drawing.Point(216, 7);
             this.teStartDate.Name = "teStartDate";
             this.teStartDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teStartDate.Properties.Appearance.Options.UseFont = true;
@@ -227,13 +219,14 @@
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Controls.Add(this.cmbTimeType);
+            this.panelControl3.Controls.Add(this.cmbDate);
             this.panelControl3.Controls.Add(this.btnViewPhoto);
             this.panelControl3.Controls.Add(this.txtCar);
             this.panelControl3.Controls.Add(this.simpleButton1);
             this.panelControl3.Controls.Add(this.lblRange);
             this.panelControl3.Controls.Add(this.labelControl1);
             this.panelControl3.Controls.Add(this.teEndDate);
-            this.panelControl3.Controls.Add(this.lblTitle);
             this.panelControl3.Controls.Add(this.combFinishState);
             this.panelControl3.Controls.Add(this.btnSearch);
             this.panelControl3.Controls.Add(this.btnExportExcel);
@@ -243,6 +236,25 @@
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(1414, 36);
             this.panelControl3.TabIndex = 97;
+            // 
+            // cmbTimeType
+            // 
+            this.cmbTimeType.Location = new System.Drawing.Point(3, 8);
+            this.cmbTimeType.Name = "cmbTimeType";
+            this.cmbTimeType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbTimeType.Size = new System.Drawing.Size(100, 20);
+            this.cmbTimeType.TabIndex = 97;
+            // 
+            // cmbDate
+            // 
+            this.cmbDate.Location = new System.Drawing.Point(109, 7);
+            this.cmbDate.Name = "cmbDate";
+            this.cmbDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbDate.Size = new System.Drawing.Size(100, 20);
+            this.cmbDate.TabIndex = 97;
+            this.cmbDate.SelectedIndexChanged += new System.EventHandler(this.cmbDate_SelectedIndexChanged);
             // 
             // gcWeight
             // 
@@ -256,6 +268,44 @@
             this.gcWeight.TabIndex = 98;
             this.gcWeight.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvWeight});
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.补录ToolStripMenuItem,
+            this.修改ToolStripMenuItem,
+            this.作废ToolStripMenuItem,
+            this.打印ToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 92);
+            // 
+            // 补录ToolStripMenuItem
+            // 
+            this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
+            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.补录ToolStripMenuItem.Text = "补录";
+            this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // 作废ToolStripMenuItem
+            // 
+            this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
+            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.作废ToolStripMenuItem.Text = "作废";
+            this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
+            // 
+            // 打印ToolStripMenuItem
+            // 
+            this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
+            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.打印ToolStripMenuItem.Text = "打印";
+            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
             // 
             // gvWeight
             // 
@@ -322,45 +372,8 @@
             this.gvWeight.OptionsView.ShowFooter = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             this.gvWeight.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvWeight_RowClick);
+            this.gvWeight.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvWeight_CustomColumnDisplayText);
             this.gvWeight.DoubleClick += new System.EventHandler(this.gvWeight_DoubleClick);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.补录ToolStripMenuItem,
-            this.修改ToolStripMenuItem,
-            this.作废ToolStripMenuItem,
-            this.打印ToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 114);
-            // 
-            // 补录ToolStripMenuItem
-            // 
-            this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
-            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.补录ToolStripMenuItem.Text = "补录";
-            this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
-            // 
-            // 修改ToolStripMenuItem
-            // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
-            // 
-            // 打印ToolStripMenuItem
-            // 
-            this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
-            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.打印ToolStripMenuItem.Text = "打印";
-            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
-            // 
-            // 作废ToolStripMenuItem
-            // 
-            this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
-            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.作废ToolStripMenuItem.Text = "作废";
-            this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
             // 
             // MainWeightList
             // 
@@ -381,9 +394,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbTimeType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -398,7 +413,6 @@
         private DevExpress.XtraEditors.SimpleButton btnExportExcel;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.SaveFileDialog sfdFileSave;
-        private DevExpress.XtraEditors.LabelControl lblTitle;
         private DevExpress.XtraEditors.SimpleButton btnViewPhoto;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtCar;
@@ -411,5 +425,7 @@
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 作废ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打印ToolStripMenuItem;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbDate;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbTimeType;
     }
 }

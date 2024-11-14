@@ -121,28 +121,6 @@ namespace YF.MWS.Win
             return code;
         }
 
-        public static string GetText(ComboBoxEdit combo)
-        {
-            string value = string.Empty;
-            if (combo.EditValue != null)
-            {
-                try
-                {
-                    ListItem c = combo.EditValue as ListItem;
-                    if (c != null)
-                        return c.Text;
-
-                    var code = combo.EditValue as SCode;
-                    if (code != null)
-                    {
-                        return code.ItemCode;
-                    }
-                    return combo.Text;
-                }
-                catch { }
-            }
-            return value;
-        }
 
         public static int GetValue(ComboBoxEdit combo)
         {
@@ -224,6 +202,10 @@ namespace YF.MWS.Win
             }
             return value;
         }
+        public static T GetEnum<T>(this ComboBoxEdit combo) {
+            string value=GetStrValue(combo);
+            return (T)Enum.Parse(typeof(T), value);
+        }
         public static void SetSelectItemValue(this ComboBoxEdit combo, string value) {
             try {
                 foreach(ListItem c in combo.Properties.Items) {
@@ -237,48 +219,7 @@ namespace YF.MWS.Win
                 Logger.WriteException(ex);
             }
         }
-        /// <summary>
-        /// 枚举类型绑定到下拉列表
-        /// </summary>
-        /// <typeparam name="T">枚举类型</typeparam>
-        /// <param name="combo"></param>
-        /// <param name="seletedValue"></param>
-        public static void BindComboBoxEdit<T>(ComboBoxEdit combo, int seletedValue)
-        {
-            combo.Properties.Items.Clear();
-            ComboBoxItemCollection coll = combo.Properties.Items;
-            List<ListItem> lst = new List<ListItem>();
-            //lst.Add(new ListItem() { Text="全部",Value=-1 });
-            coll.BeginUpdate();
-            ListItem selectedItem = null;
-            List<EnumItem> items = Converter.ToEnumItemList<T>();
-            if (items != null && items.Count > 0)
-            {
-                foreach (EnumItem item in items)
-                {
-                    lst.Add(new ListItem()
-                    {
-                        Text = item.ItemCaption,
-                        Value = item.ItemValue.ToString()
-                    });
-                    if (item.ItemValue == seletedValue)
-                    {
-                        selectedItem = new ListItem()
-                        {
-                            Text = item.ItemCaption,
-                            Value = item.ItemValue.ToString()
-                        };
-                    }
-                }
-            }
-            if (selectedItem != null)
-            {
-                combo.EditValue = selectedItem;
-            }
-            coll.AddRange(lst.ToArray());
-            coll.EndUpdate();
-        }
-        public static void BindComboBoxEdit<T>(ComboBoxEdit combo, string seletedValue = "")
+        public static void BindComboBoxEdit<T>(this ComboBoxEdit combo, string seletedValue = "")
         {
             combo.Properties.Items.Clear();
             ComboBoxItemCollection coll = combo.Properties.Items;

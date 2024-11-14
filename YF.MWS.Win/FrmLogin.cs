@@ -127,18 +127,17 @@ namespace YF.MWS.Win
             } 
         }
 
-        private void FrmLogin_Load(object sender, EventArgs e)
-        {
+        private void FrmLogin_Load(object sender, EventArgs e) {
             string fileName = AppSetting.GetValue("LoginLogoUrl");
-            if (File.Exists(fileName))
-            {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
+            if (File.Exists(fileName)) {
                 peWaitting.Image = Image.FromFile(fileName);
             }
             BindData();
             DataBaseType dbType = AppSetting.GetValue("databaseType").ToEnum<DataBaseType>();
             BindDbCfg(dbType);
-            if (autoLogin) 
-            {
+            if (autoLogin) {
                 btnLogin.PerformClick();
             }
         }

@@ -377,6 +377,11 @@ namespace YF.MWS.Win {
         private void FrmMain_Load(object sender, EventArgs e) {
             Program.frmMain = this;
             AllFormCfg frmCfg=CfgUtil.GetFormCfg();
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) {
+                this.IconOptions.Image = Image.FromFile(iconFont);
+                this.ribbon.ApplicationButtonImageOptions.Image = Image.FromFile(iconFont);
+            }
             loginCfg = YF.Utility.Serialization.XmlUtil.Deserialize<LoginCfg>(loginCfgXml);
             if (cfg != null) {
                 if (cfg.Launch != null) {
