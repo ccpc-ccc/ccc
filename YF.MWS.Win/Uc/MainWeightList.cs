@@ -154,27 +154,30 @@ namespace YF.MWS.Win.Uc
             StringBuilder sbCondition = new StringBuilder();
             sbCondition.AppendFormat(" and a.RowState != {0} ", (int)RowState.Delete);
             int finishState = combFinishState.SelectedIndex;
+            if (!string.IsNullOrEmpty(cmbTimeType.GetStrValue())) {
             if (teStartDate.Time != DateTime.MinValue)
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.AppendFormat("and a.FinishTime>=datetime('{0}') ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}>=datetime('{teStartDate.Time.ToString("yyyy-MM-dd 00:00:00")}') ");
                 }
                 else
                 {
-                    sbCondition.AppendFormat("and a.FinishTime>='{0}' ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}>='{teStartDate.Time.ToString("yyyy-MM-dd 00:00:00")}' ");
                 }
             }
             if (teEndDate.Time != DateTime.MinValue)
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.AppendFormat("and a.FinishTime<datetime('{0}') ", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<datetime('{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}') ");
                 }
                 else
                 {
-                    sbCondition.AppendFormat("and a.FinishTime<'{0}'", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<'{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}'");
                 }
+            }
+
             }
             if (finishState != 2)
             {
@@ -211,13 +214,13 @@ namespace YF.MWS.Win.Uc
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "FinishTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "TareTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
@@ -252,6 +255,8 @@ namespace YF.MWS.Win.Uc
             //gvWeight.GridControl.ForceInitialize();
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
+            gvWeight.Columns[2].SummaryItem.SummaryType = SummaryItemType.Count;
+            gvWeight.Columns[2].SummaryItem.DisplayFormat = "车次：{0}";
             gcWeight.RefreshDataSource();
             //gvWeight.OptionsView.ColumnAutoWidth = true;
             gvWeight.BestFitColumns();
@@ -260,6 +265,8 @@ namespace YF.MWS.Win.Uc
         private void MainWeightList_Load(object sender, EventArgs e)
         {
             RemoveEvent();
+            cmbTimeType.BindComboBoxEdit<CheckDateType>();
+            cmbDate.BindComboBoxEdit<CheckDate>();
             teEndDate.Time = DateTime.Now;
             teStartDate.Time = DateTime.Now;
             if (!DesignMode)
@@ -438,6 +445,31 @@ namespace YF.MWS.Win.Uc
             bool canPrint = frmWeight.CanPrint(weight);
             if (canPrint) {
                 frmWeight.Print(this.CurrentWeightId);
+            }
+        }
+
+        private void cmbDate_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cmbDate.SelectedIndex == 0) {
+                teStartDate.Time = DateTime.Now;
+                teEndDate.Time = DateTime.Now;
+            }else if (cmbDate.SelectedIndex == 1) {
+                teStartDate.Time = DateTime.Now.AddDays(-1);
+                teEndDate.Time = DateTime.Now.AddDays(-1);
+            }else if (cmbDate.SelectedIndex == 2) {
+                teStartDate.Time = DateTime.Now.AddDays(-7);
+                teEndDate.Time = DateTime.Now;
+            }else if (cmbDate.SelectedIndex == 3) {
+                teStartDate.Time = DateTime.Now.AddDays(-30);
+                teEndDate.Time = DateTime.Now;
+            }
+        }
+
+        private void gvWeight_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e) {
+            if (e.Column.FieldName == "SyncState") {
+                if (e.Value.ToString() == "1")
+                    e.DisplayText = "已同步";
+                else
+                    e.DisplayText = "未同步";
             }
         }
     }

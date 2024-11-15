@@ -20,6 +20,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Net.Sockets;
 using System.Net;
 using YF.MWS.Win.Util.CarPlate;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Master {
     public partial class FrmModbusSetting : DevExpress.XtraEditors.XtraForm {
@@ -56,6 +57,8 @@ namespace YF.MWS.Win.View.Master {
         }
 
         private void FrmDeviceSetting_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             cfg = CfgUtil.GetCfg();
             //测速仪表小节名称
             deviceSection3 = "Velocimeter";

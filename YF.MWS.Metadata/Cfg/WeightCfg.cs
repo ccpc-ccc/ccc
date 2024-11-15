@@ -194,5 +194,9 @@ namespace YF.MWS.Metadata.Cfg
         /// 共享磅单
         /// </summary>
         public bool ShareWeight { get; set; }
+        /// <summary>
+        /// 首页显示称重界面
+        /// </summary>
+        public bool ShowWeight { get; set; }
     }
 }

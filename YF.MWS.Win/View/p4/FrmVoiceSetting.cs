@@ -12,6 +12,7 @@ using YF.MWS.Win.Util;
 using YF.Utility.Log;
 using YF.Utility;
 using YF.MWS.Metadata;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Master
 {
@@ -26,8 +27,9 @@ namespace YF.MWS.Win.View.Master
             InitializeComponent();
         }
 
-        private void FrmVoiceSetting_Load(object sender, EventArgs e)
-        {
+        private void FrmVoiceSetting_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             Bind();
         }
 

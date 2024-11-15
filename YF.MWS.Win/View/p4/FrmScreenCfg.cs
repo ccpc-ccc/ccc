@@ -16,6 +16,7 @@ using YF.MWS.Win.Util.Screen;
 using YF.MWS.Metadata.Screen;
 using YF.MWS.Metadata.Enum;
 using YF.MWS.Metadata;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Master
 {
@@ -32,8 +33,9 @@ namespace YF.MWS.Win.View.Master
             InitializeComponent();
         }
 
-        private void FrmScreenCfg_Load(object sender, EventArgs e)
-        {
+        private void FrmScreenCfg_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             xmlPath = Path.Combine(Application.StartupPath, "LXCfg_1.xml");
             xmlPath2 = Path.Combine(Application.StartupPath, "LXCfg_2.xml");
             BindData();

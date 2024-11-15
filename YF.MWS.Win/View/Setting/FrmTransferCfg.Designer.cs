@@ -50,6 +50,7 @@
             this.txtMachineCode = new DevExpress.XtraEditors.TextEdit();
             this.lblRemoteServerUrl = new DevExpress.XtraEditors.LabelControl();
             this.txtCompanyCode = new DevExpress.XtraEditors.TextEdit();
+            this.chkAutoSend = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).BeginInit();
@@ -60,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -149,6 +151,7 @@
             // 
             this.plMain.Controls.Add(this.simpleButton2);
             this.plMain.Controls.Add(this.simpleButton1);
+            this.plMain.Controls.Add(this.chkAutoSend);
             this.plMain.Controls.Add(this.checkEdit1);
             this.plMain.Controls.Add(this.gpRuiJieYun);
             this.plMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -249,6 +252,15 @@
             this.txtCompanyCode.TabIndex = 12;
             this.txtCompanyCode.Tag = "ServerUrl";
             // 
+            // chkAutoSend
+            // 
+            this.chkAutoSend.Location = new System.Drawing.Point(131, 13);
+            this.chkAutoSend.Name = "chkAutoSend";
+            this.chkAutoSend.Properties.Caption = "自动上传";
+            this.chkAutoSend.Size = new System.Drawing.Size(75, 20);
+            this.chkAutoSend.TabIndex = 19;
+            this.chkAutoSend.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
+            // 
             // FrmTransferCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -277,6 +289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,5 +317,6 @@
         private DevExpress.XtraEditors.TextEdit txtCompanyCode;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.CheckEdit chkAutoSend;
     }
 }

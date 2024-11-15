@@ -95,7 +95,7 @@ namespace YF.MWS.Win {
             IniUtil.FilePath = Path.Combine(Application.StartupPath, ConfigurationManager.AppSettings["ini"].Replace(".\\", ""));
             ribbon.Minimized = true;
             CurrentClient.Instance.sysCfg = CfgUtil.GetCfg();
-            cfg=new SysCfg();
+            cfg=CfgUtil.GetCfg();
             auth = CfgUtil.GetAuth();
             Program.frmViewVideoDevice = new FrmViewVideoDevice();
             Program.frmViewVideoDevice.Visible = false;
@@ -377,6 +377,11 @@ namespace YF.MWS.Win {
         private void FrmMain_Load(object sender, EventArgs e) {
             Program.frmMain = this;
             AllFormCfg frmCfg=CfgUtil.GetFormCfg();
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) {
+                this.IconOptions.Image = Image.FromFile(iconFont);
+                this.ribbon.ApplicationButtonImageOptions.Image = Image.FromFile(iconFont);
+            }
             loginCfg = YF.Utility.Serialization.XmlUtil.Deserialize<LoginCfg>(loginCfgXml);
             if (cfg != null) {
                 if (cfg.Launch != null) {
@@ -399,6 +404,9 @@ namespace YF.MWS.Win {
                 this.Location =new Point( frmCfg.mainFrm.x,frmCfg.mainFrm.y);
                 this.Height = frmCfg.mainFrm.height;
                 this.Width = frmCfg.mainFrm.width;
+            }
+            if (cfg.Weight.ShowWeight) {
+                getTag("Weight.FrmWeight");
             }
         }
         /// <summary>

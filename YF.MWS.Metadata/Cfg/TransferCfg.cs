@@ -32,5 +32,6 @@ namespace YF.MWS.Metadata.Cfg
         /// 是否开启
         /// </summary>
         public bool isOpen { get; set; }
+        public bool AutoSend { get; set; }
     }
 }

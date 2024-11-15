@@ -19,6 +19,7 @@ using YF.MWS.BaseMetadata;
 using System.Runtime.InteropServices.ComTypes;
 using System.Net.Sockets;
 using System.Threading;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Master {
     public partial class FrmDeviceSetting : DevExpress.XtraEditors.XtraForm {
@@ -43,6 +44,8 @@ namespace YF.MWS.Win.View.Master {
         }
 
         private void FrmDeviceSetting_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             cfg = CfgUtil.GetCfg();
             InitSerialPort();
             SetDeviceInfo1();

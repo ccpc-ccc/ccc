@@ -14,6 +14,7 @@ using YF.MWS.BaseMetadata;
 using Microsoft.Win32;
 using YF.Utility.Log;
 using YF.Utility.Configuration;
+using System.IO;
 
 namespace YF.MWS.Win.View.Setting
 {
@@ -27,6 +28,8 @@ namespace YF.MWS.Win.View.Setting
         }
 
         private void FrmWeighWay_Load(object sender, EventArgs e) {
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             cfg = CfgUtil.GetCfg();
             if (cfg != null) 
             {
@@ -68,6 +71,7 @@ namespace YF.MWS.Win.View.Setting
                 chkGenerateWeightNoByRand.Checked = weight.GenerateWeightNoByRand;
                 chkShareWeight.Checked = weight.ShareWeight;
                 btnSelectBackupDbDirectory.Text = weight.BackupDir;
+                chkShowWeight.Checked = weight.ShowWeight;
                 if (string.IsNullOrEmpty(btnSelectBackupDbDirectory.Text))
                     btnSelectBackupDbDirectory.Text = @"D:\MWS\DataBack";
                 #endregion
@@ -132,7 +136,7 @@ namespace YF.MWS.Win.View.Setting
             weight.BackupDir = btnSelectBackupDbDirectory.Text;
             weight.ShareWeight = chkShareWeight.Checked;
             weight.CarAfter = chkCarAfter.Checked;
-
+            weight.ShowWeight = chkShowWeight.Checked;
             AutoStart(weight.AutoRun);
 
             CfgUtil.SaveCfg(cfg);

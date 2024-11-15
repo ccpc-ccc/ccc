@@ -15,30 +15,6 @@ namespace YF.MWS.Metadata
     }
 
     /// <summary>
-    /// 道闸控制方式
-    /// </summary>
-    public enum CloseGateMode 
-    {
-        /// <summary>
-        /// 控制箱
-        /// </summary>
-        Command,
-        /// <summary>
-        /// 车牌识别
-        /// </summary>
-        SenseCoil
-    }
-
-    /// <summary>
-    /// 机器码生成方式
-    /// </summary>
-    public enum CodeGeneratorMode
-    {
-        Auto,
-        Cfg
-    }
-
-    /// <summary>
     /// 控件类别
     /// </summary>
     public enum ControlType
@@ -81,18 +57,6 @@ namespace YF.MWS.Metadata
         /// 过磅
         /// </summary>
         Weight=0
-    }
-
-    /// <summary>
-    /// 数据类型
-    /// </summary>
-    public enum DataType
-    {
-        Unkown,
-        DateTime,
-        Int,
-        Float,
-        String
     }
 
     /// <summary>
@@ -1051,6 +1015,26 @@ namespace YF.MWS.Metadata
         T4,
         [Description("龙旗")]
         LQ
+    }
+    public enum CheckDateType {
+        [Description("开始时间")]
+        CreateTime,
+        [Description("毛重时间")]
+        GrossTime,
+        [Description("皮重时间")]
+        TareTime,
+        [Description("结束时间")]
+        FinishTime
+    }
+    public enum CheckDate {
+        [Description("今天")]
+        ToDay,
+        [Description("昨天")]
+        Yesterday,
+        [Description("7天")]
+        Week, 
+        [Description("30天")]
+        Month
     }
     public static class EnumExtensions {
         public static string toDescription(this System.Enum value) {

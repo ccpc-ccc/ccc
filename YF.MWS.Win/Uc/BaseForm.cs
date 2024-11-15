@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using DevExpress.XtraEditors;
@@ -10,6 +12,7 @@ using YF.MWS.Db;
 using YF.MWS.Metadata;
 using YF.MWS.Metadata.Cfg;
 using YF.MWS.Win.Util;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.Uc
 {
@@ -59,6 +62,8 @@ namespace YF.MWS.Win.Uc
                 }
             }
             base.OnLoad(e);
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
         }
     }
 }

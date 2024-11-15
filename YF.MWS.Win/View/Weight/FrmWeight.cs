@@ -1935,8 +1935,10 @@ namespace YF.MWS.Win.View.Weight {
         private void sendWeight(object obj) {
             BWeight weight=obj as BWeight;
             if (weight == null) return;
+            if (Cfg.Transfer.AutoSend) {
             Thread.Sleep(5000);
-            webWeightService.doneWeight(currentWeight);
+             webWeightService.doneWeight(currentWeight);
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {

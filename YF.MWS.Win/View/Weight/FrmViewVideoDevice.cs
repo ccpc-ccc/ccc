@@ -27,6 +27,7 @@ using System.Runtime.InteropServices;
 using YF.Utility.IO;
 using System.Linq;
 using System.Runtime.Remoting.Lifetime;
+using YF.Utility.Configuration;
 
 namespace YF.MWS.Win.View.Weight
 {
@@ -54,7 +55,9 @@ namespace YF.MWS.Win.View.Weight
         }
 
         private void FrmViewVideo_Load(object sender, EventArgs e) {
-             CfgUtil.GetFormCfg();
+            string iconFont = AppSetting.GetValue("iconUrl");
+            if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
+            CfgUtil.GetFormCfg();
             FormUtil.LoadFormCfg(this,CfgUtil.allFormCfg.videoFrm);
         }
 
