@@ -82,7 +82,9 @@
     <Compile Include="UnitUtil.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YF.MWS.BaseMetadata\YF.MWS.BaseMetadata.csproj">
       <Project>{388fd347-fc4a-4ad8-b78d-ba4d94519975}</Project>

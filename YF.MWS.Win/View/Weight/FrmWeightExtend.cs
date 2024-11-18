@@ -1041,15 +1041,6 @@ namespace YF.MWS.Win.View.Weight
             }
         }
 
-        private void AddCarRecognitionPhoto(ASBPlateInfo resInfo) 
-        {
-            if (resInfo.File != null &&!string.IsNullOrEmpty(currentWeightId))
-            {
-                resInfo.File.RecId = currentWeightId;
-                fileService.Add(resInfo.File);
-            }
-        }
-
         /// <summary>
         /// 抓拍图片
         /// </summary>
@@ -1389,14 +1380,12 @@ namespace YF.MWS.Win.View.Weight
                 {
                     LoadWeight(currentWeight, false);
                     isNewWeight = false;
-                    currentWeightId = currentWeight.Id;
                     hasLoaded = true;
                 }else if (Cfg.Transfer.isOpen) {
                     currentWeight = webWeightService.Get(carNo);
                     if (currentWeight != null) {
                         currentWeight.ServiceId = currentWeight.Id;
                         currentWeight.Id = Guid.NewGuid().ToString("N");
-                        currentWeightId=currentWeight.Id;
                         isNewWeight = true;
                         LoadWeight(currentWeight,false);
                         hasLoaded = true;

@@ -1022,8 +1022,8 @@ namespace YF.MWS.Win.View.Weight
         private void SaveWeightInputItem() 
         {
             mainWeight.SaveInputItem();
-            if (wlookupCustomer != null && !wlookupCustomer.StartAutoSave)
-                CustomerUtil.AutoSaveCustomer(masterService, seqNoService, mainWeight);
+            //if (wlookupCustomer != null && !wlookupCustomer.StartAutoSave)
+            //    CustomerUtil.AutoSaveCustomer(masterService, seqNoService, mainWeight);
         }
 
         #region 设备状态显示灯

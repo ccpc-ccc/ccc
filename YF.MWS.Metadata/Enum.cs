@@ -1034,7 +1034,9 @@ namespace YF.MWS.Metadata
         [Description("7天")]
         Week, 
         [Description("30天")]
-        Month
+        Month,
+        [Description("全部")]
+        None
     }
     public static class EnumExtensions {
         public static string toDescription(this System.Enum value) {

@@ -429,8 +429,9 @@ namespace YF.MWS.Win.View.Extend
                 we.SetCustomer();
         }
 
-        private void SaveWeightInputItem()
-        {
+        private void SaveWeightInputItem() {
+            mainWeight.SaveInputItem();
+            /*
             if (!startInputItemAutoSave)
                 return;
             //SaveCode(weDriverName, WeightSysCode.DriverName);
@@ -450,7 +451,7 @@ namespace YF.MWS.Win.View.Extend
             {
                 weMaterial.SetMaterial();
                 MaterialCacher.Refresh();
-            }
+            }*/
         }
 
         private void Save()

@@ -118,7 +118,7 @@ namespace YF.MWS.SQliteService
         }
         #endregion
         private string WeightFiles = @"a.ViewId, a.Id, a.WeightNo, a.MeasureType, a.RowState, a.CardNo, a.FinishState,a.QcState, a.CreateTime, a.FinishTime,a.WaybillNo,a.TareTime,a.GrossTime,
-            a.CarNo as CarId, a.DriverName, a.QcNo,a.MaterialAmount,a.AdditionalTime,a.GrossWeight, a.MeasureUnit, a.CustomCharge,a.OrderSource,a.TareWeight, a.SuttleWeight, 
+            a.CarNo as CarId, a.DriverName, a.QcNo,a.MaterialAmount,a.AdditionalTime,a.GrossWeight, a.MeasureUnit, a.CustomCharge,a.OrderSource,a.TareWeight, a.SuttleWeight,a.SyncState,
             a.WeighterName WeighterId,a.d1,a.d2,a.d3,a.d4,a.d5,a.t1,a.t2,a.t3,a.t4,a.t5,a.t6,a.t7,a.t8,a.t9,a.PayType,a.UnitMoney,a.ImpurityWeight,a.MaxWeight,a.NetWeight,a.UnitPrice,a.RegularCharge,a.Remark,a.MaterialModel,a.WarehBizType as WarehBizType,a.AxleCount,
             a.CustomerBalance,a.PrintCount";
 

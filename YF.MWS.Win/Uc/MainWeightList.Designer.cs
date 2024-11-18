@@ -53,6 +53,7 @@
             this.作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.存为套表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
@@ -275,35 +276,36 @@
             this.补录ToolStripMenuItem,
             this.修改ToolStripMenuItem,
             this.作废ToolStripMenuItem,
+            this.存为套表ToolStripMenuItem,
             this.打印ToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 92);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 136);
             // 
             // 补录ToolStripMenuItem
             // 
             this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
-            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.补录ToolStripMenuItem.Text = "补录";
             this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
             // 
             // 修改ToolStripMenuItem
             // 
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.修改ToolStripMenuItem.Text = "修改";
             this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
             // 
             // 作废ToolStripMenuItem
             // 
             this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
-            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.作废ToolStripMenuItem.Text = "作废";
             this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
             // 
             // 打印ToolStripMenuItem
             // 
             this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
-            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.打印ToolStripMenuItem.Text = "打印";
             this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
             // 
@@ -375,6 +377,13 @@
             this.gvWeight.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvWeight_CustomColumnDisplayText);
             this.gvWeight.DoubleClick += new System.EventHandler(this.gvWeight_DoubleClick);
             // 
+            // 存为套表ToolStripMenuItem
+            // 
+            this.存为套表ToolStripMenuItem.Name = "存为套表ToolStripMenuItem";
+            this.存为套表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.存为套表ToolStripMenuItem.Text = "存为套表";
+            this.存为套表ToolStripMenuItem.Click += new System.EventHandler(this.存为套表ToolStripMenuItem_Click);
+            // 
             // MainWeightList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -427,5 +436,6 @@
         private System.Windows.Forms.ToolStripMenuItem 打印ToolStripMenuItem;
         private DevExpress.XtraEditors.ComboBoxEdit cmbDate;
         private DevExpress.XtraEditors.ComboBoxEdit cmbTimeType;
+        private System.Windows.Forms.ToolStripMenuItem 存为套表ToolStripMenuItem;
     }
 }

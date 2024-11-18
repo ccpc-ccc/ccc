@@ -40,7 +40,7 @@ namespace YF.MWS.Win.Uc
         private ILogService logService = new LogService();
         private IWeightQueryService weightQueryService;
         private IWeightViewService viewService = new WeightViewService();
-        private GridCheckMarksSelection chkWeight;
+        private ICarService carService = new CarService();
         public event EventHandler FinishWeight;
         public event EventHandler FocusRowChanged;
         private List<QWeight> lst=new List<QWeight>();
@@ -166,11 +166,11 @@ namespace YF.MWS.Win.Uc
                     sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}>='{teStartDate.Time.ToString("yyyy-MM-dd 00:00:00")}' ");
                 }
             }
-            if (teEndDate.Time != DateTime.MinValue)
+            if (teEndDate.Time != DateTime.MinValue&&teEndDate.Time<=DateTime.MaxValue.AddDays(-1))
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<datetime('{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}') ");
+                        sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<datetime('{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}') ");
                 }
                 else
                 {
@@ -206,10 +206,6 @@ namespace YF.MWS.Win.Uc
             {
                 gvWeight.RestoreLayoutFromXml(layoutXmlPath);
             }
-
-            if (chkWeight == null)
-                chkWeight = new GridCheckMarksSelection(gvWeight);
-            chkWeight.ClearSelection();
             string fieldName = "CreateTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
@@ -269,6 +265,8 @@ namespace YF.MWS.Win.Uc
             cmbDate.BindComboBoxEdit<CheckDate>();
             teEndDate.Time = DateTime.Now;
             teStartDate.Time = DateTime.Now;
+            cmbTimeType.SelectedIndex = 0;
+            cmbDate.SelectedIndex = 0;
             if (!DesignMode)
             {
                 InitControl();
@@ -311,8 +309,8 @@ namespace YF.MWS.Win.Uc
         public bool InvalidWeight()
         {
             bool isInvalided = false;
-            List<DataRow> lstWeight = chkWeight.GetSelectedDataRow();
-            if (lstWeight == null && lstWeight.Count == 0)
+            DataRow lstWeight = gvWeight.GetFocusedDataRow();
+            if (lstWeight == null)
             {
                 MessageDxUtil.ShowWarning("请选择要作废的磅单.");
             }
@@ -320,14 +318,11 @@ namespace YF.MWS.Win.Uc
             {
                 if (MessageDxUtil.ShowYesNoAndTips("确实要将所选的磅单作废吗?") == DialogResult.Yes)
                 {
-                    foreach (DataRow row in lstWeight)
-                    {
-                        string weightId=row["Id"].ToObjectString();
-                        string weightNo = row["WeightNo"].ToObjectString();
+                        string weightId= lstWeight["Id"].ToObjectString();
+                        string weightNo = lstWeight["WeightNo"].ToObjectString();
                         string desc = string.Format("作废磅单号:{0}", weightNo);
                         logService.Add(LogActionType.Weight, weightId, weightNo, desc);
                         isInvalided = weightService.UpdateWeight(weightId, RowState.Delete);
-                    }
                 }
             }
             return isInvalided;
@@ -461,6 +456,9 @@ namespace YF.MWS.Win.Uc
             }else if (cmbDate.SelectedIndex == 3) {
                 teStartDate.Time = DateTime.Now.AddDays(-30);
                 teEndDate.Time = DateTime.Now;
+            }else if (cmbDate.SelectedIndex == 4) {
+                teStartDate.Time = DateTime.MinValue;
+                teEndDate.Time = DateTime.MaxValue;
             }
         }
 
@@ -471,6 +469,46 @@ namespace YF.MWS.Win.Uc
                 else
                     e.DisplayText = "未同步";
             }
+        }
+
+        private void 存为套表ToolStripMenuItem_Click(object sender, EventArgs e) {
+            DataRow dr = gvWeight.GetFocusedDataRow();
+            if (dr == null) {
+                MessageBox.Show("请选择数据");
+                return;
+            }
+            BWeight weight = weightService.Get(dr["Id"].ToString());
+            if (weight == null || string.IsNullOrEmpty(weight.CarNo)) {
+                MessageBox.Show("数据不存在");
+                return;
+            }
+            SCar car= carService.GetByCarNo(weight.CarNo);
+            if (car == null) { 
+                car=new SCar();
+                car.CarNo = weight.CarNo;
+                car.Id = Guid.NewGuid().ToString("N");
+            }
+            car.TransferId = weight.TransferId;
+            car.ReceiverId= weight.ReceiverId;
+            car.DeliveryId = weight.DeliveryId;
+            car.SupplierId = weight.SupplierId;
+            car.MaterialId = weight.MaterialId;
+            car.ManufacturerId = weight.ManufacturerId;
+            car.WarehId = weight.WarehId;
+            car.d1 = weight.d1;
+            car.d2 = weight.d2;
+            car.d3 = weight.d3;
+            car.t1 = weight.t1;
+            car.t2 = weight.t2;
+            car.t3 = weight.t3;
+            car.t4 = weight.t4;
+            car.t5 = weight.t5;
+            car.t6 = weight.t6;
+            car.t7 = weight.t7;
+            car.t8 = weight.t8;
+            car.t9 = weight.t9;
+            carService.Save(car);
+            MessageBox.Show("操作成功");
         }
     }
 }

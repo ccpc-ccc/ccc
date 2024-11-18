@@ -259,12 +259,6 @@
     <Compile Include="Uc\FrmCustomerSelector.Designer.cs">
       <DependentUpon>FrmCustomerSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Uc\FrmCustomerSelectorPad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Uc\FrmCustomerSelectorPad.Designer.cs">
-      <DependentUpon>FrmCustomerSelectorPad.cs</DependentUpon>
-    </Compile>
     <Compile Include="Uc\FrmMaterialSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1236,9 +1230,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\FrmCustomerSelector.resx">
       <DependentUpon>FrmCustomerSelector.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Uc\FrmCustomerSelectorPad.resx">
-      <DependentUpon>FrmCustomerSelectorPad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\FrmMaterialSelector.resx">
       <DependentUpon>FrmMaterialSelector.cs</DependentUpon>
