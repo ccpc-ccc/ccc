@@ -47,7 +47,7 @@ namespace YF.MWS.Win.View.Weight
         private ITaskService taskService = new TaskService();
         private ILogService logService = new LogService();
         private IPlanService planService = new PlanService();
-        private IWebWeightService webWeightService = new WebWeightService();
+        private IWebWeightService webWeightService;
         private IWebWeightProcessService webWeightProcessService = new WebWeightProcessService();
         private IWeightProcessService weightProcessService = new WeightProcessService();
         private BWeight currentWeight = null;
@@ -1052,8 +1052,7 @@ namespace YF.MWS.Win.View.Weight
                 if (startVideo && obj!=null)
                 {
                     WeightCapture wc = (WeightCapture)obj;
-                    List<BFile> files = new List<BFile>();
-                    files = Program.frmViewVideoDevice.CapturePicture(wc.WeightId, wc.WaterMarkText);
+                    List<BFile>  files = Program.frmViewVideoDevice.CapturePicture(wc.WeightId, wc.WaterMarkText);
                     if (files != null && files.Count > 0)
                     {
                         foreach (BFile file in files)

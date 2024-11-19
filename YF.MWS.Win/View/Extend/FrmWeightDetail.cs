@@ -408,6 +408,7 @@ namespace YF.MWS.Win.View.Extend
                 isValidate = false;
                 return isValidate;
             }
+            if (Cfg.Weight.Process != WeightProcess.One) {
             if (tareWeight <= 0 && grossWeight <= 0)
             {
                 MessageDxUtil.ShowWarning("毛重或皮重必须有一个大于0.");
@@ -419,6 +420,7 @@ namespace YF.MWS.Win.View.Extend
                 MessageDxUtil.ShowWarning("毛重必须大于皮重.");
                 isValidate = false;
                 return isValidate;
+            }
             }
             return isValidate;
         }

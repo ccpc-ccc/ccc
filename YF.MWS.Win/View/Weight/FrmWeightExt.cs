@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraGauges.Win.Gauges.State;
+using DevExpress.XtraRichEdit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -332,7 +333,7 @@ namespace YF.MWS.Win.View.Weight
             {
                 DataSet dsReport = new DataSet();
                 SReportTemplate template = reportService.Get(e.Item.Tag.ToObjectString());
-                dsReport = reportService.GetWeight(searchList.CurrentViewId, searchList.CurrentWeightId);
+                dsReport = reportService.GetWeight(searchList.CurrentViewId,1, searchList.CurrentWeightId);
                 FrmXWeight frmReport = new FrmXWeight();
                 if (template != null)
                 {
@@ -717,7 +718,7 @@ namespace YF.MWS.Win.View.Weight
                         {
                             dValue = (decimal)(lstWeight[i] - firstWeight);
                         }
-                        dValue = UnitUtil.GetValue(currentDeviceCfg.SUnit, selftUnit, (decimal)dValue);
+                        //dValue = UnitUtil.GetValue(currentDeviceCfg.SUnit, selftUnit, (decimal)dValue);
                         if (Math.Abs(dValue) <= weightDeviation)
                         {
                             stableCount++;

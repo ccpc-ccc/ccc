@@ -29,10 +29,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWeightSearch));
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-            YF.MWS.Metadata.Query.QPage qPage1 = new YF.MWS.Metadata.Query.QPage();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            YF.MWS.Metadata.Query.QPage qPage2 = new YF.MWS.Metadata.Query.QPage();
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barTop = new DevExpress.XtraBars.Bar();
             this.barItemQuery = new DevExpress.XtraBars.BarButtonItem();
@@ -64,10 +64,10 @@
             this.teStartDate = new DevExpress.XtraEditors.TimeEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.gpSearchKey = new DevExpress.XtraEditors.GroupControl();
+            this.cmbLabel2 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cmbLabel1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtCustomerName = new DevExpress.XtraEditors.TextEdit();
             this.txtCar = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.gpRecordType = new DevExpress.XtraEditors.GroupControl();
             this.rdBizType = new DevExpress.XtraEditors.RadioGroup();
             this.rgPayType = new DevExpress.XtraEditors.RadioGroup();
@@ -75,12 +75,6 @@
             this.rgRecordType = new DevExpress.XtraEditors.RadioGroup();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
             this.gpSearchResult = new DevExpress.XtraEditors.GroupControl();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.lbTotalMoney = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.lbTotalSuttleWeight = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
@@ -97,6 +91,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchKey)).BeginInit();
             this.gpSearchKey.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLabel2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLabel1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRecordType)).BeginInit();
@@ -107,10 +103,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgRecordType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchResult)).BeginInit();
             this.gpSearchResult.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
@@ -162,10 +154,10 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemInvaild),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemRecover),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemExport),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPrint),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemImport),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemPreviewWeight),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemRePrintWeight),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPrint),
             new DevExpress.XtraBars.LinkPersistInfo(this.barItemDelete, true)});
             this.barTop.Text = "Tools";
             // 
@@ -280,7 +272,7 @@
             // 
             // barItemRePrintWeight
             // 
-            this.barItemRePrintWeight.Caption = "重印";
+            this.barItemRePrintWeight.Caption = "重印磅单";
             this.barItemRePrintWeight.Id = 15;
             this.barItemRePrintWeight.ImageOptions.ImageIndex = 3;
             this.barItemRePrintWeight.Name = "barItemRePrintWeight";
@@ -290,7 +282,7 @@
             // 
             // barSubItemPrint
             // 
-            this.barSubItemPrint.Caption = "统计报表";
+            this.barSubItemPrint.Caption = "打印报表";
             this.barSubItemPrint.Id = 18;
             this.barSubItemPrint.ImageOptions.ImageIndex = 3;
             this.barSubItemPrint.Name = "barSubItemPrint";
@@ -379,13 +371,13 @@
             this.barItemExportWithGv.ImageOptions.ImageIndex = 7;
             this.barItemExportWithGv.Name = "barItemExportWithGv";
             this.barItemExportWithGv.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
-            toolTipTitleItem1.Text = "磅单格式导出";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "完全按照当前磅单的格式导出Excel，导出的数据不支持再次导入，如果要导入请用标准Excel导出功能。";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.barItemExportWithGv.SuperTip = superToolTip1;
+            toolTipTitleItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
+            toolTipTitleItem2.Text = "磅单格式导出";
+            toolTipItem2.LeftIndent = 6;
+            toolTipItem2.Text = "完全按照当前磅单的格式导出Excel，导出的数据不支持再次导入，如果要导入请用标准Excel导出功能。";
+            superToolTip2.Items.Add(toolTipTitleItem2);
+            superToolTip2.Items.Add(toolTipItem2);
+            this.barItemExportWithGv.SuperTip = superToolTip2;
             this.barItemExportWithGv.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barItemExportWithGv_ItemClick);
             // 
             // gpSearchCondition
@@ -472,15 +464,34 @@
             // 
             // gpSearchKey
             // 
+            this.gpSearchKey.Controls.Add(this.cmbLabel2);
+            this.gpSearchKey.Controls.Add(this.cmbLabel1);
             this.gpSearchKey.Controls.Add(this.txtCustomerName);
             this.gpSearchKey.Controls.Add(this.txtCar);
-            this.gpSearchKey.Controls.Add(this.labelControl3);
-            this.gpSearchKey.Controls.Add(this.labelControl2);
             this.gpSearchKey.Location = new System.Drawing.Point(2, 213);
             this.gpSearchKey.Name = "gpSearchKey";
             this.gpSearchKey.Size = new System.Drawing.Size(345, 127);
             this.gpSearchKey.TabIndex = 55;
             this.gpSearchKey.Text = "查询关键词";
+            // 
+            // cmbLabel2
+            // 
+            this.cmbLabel2.Location = new System.Drawing.Point(21, 83);
+            this.cmbLabel2.Name = "cmbLabel2";
+            this.cmbLabel2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbLabel2.Size = new System.Drawing.Size(74, 20);
+            this.cmbLabel2.TabIndex = 97;
+            // 
+            // cmbLabel1
+            // 
+            this.cmbLabel1.Location = new System.Drawing.Point(21, 41);
+            this.cmbLabel1.MenuManager = this.barManager;
+            this.cmbLabel1.Name = "cmbLabel1";
+            this.cmbLabel1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbLabel1.Size = new System.Drawing.Size(74, 20);
+            this.cmbLabel1.TabIndex = 97;
             // 
             // txtCustomerName
             // 
@@ -496,22 +507,6 @@
             this.txtCar.Name = "txtCar";
             this.txtCar.Size = new System.Drawing.Size(147, 20);
             this.txtCar.TabIndex = 96;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(43, 86);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(48, 14);
-            this.labelControl3.TabIndex = 95;
-            this.labelControl3.Text = "客户名：";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(43, 44);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 14);
-            this.labelControl2.TabIndex = 95;
-            this.labelControl2.Text = "车牌号：";
             // 
             // gpRecordType
             // 
@@ -599,8 +594,6 @@
             // 
             // gpSearchResult
             // 
-            this.gpSearchResult.Controls.Add(this.panelControl2);
-            this.gpSearchResult.Controls.Add(this.panelControl1);
             this.gpSearchResult.Controls.Add(this.gcWeight);
             this.gpSearchResult.Controls.Add(this.ucPage);
             this.gpSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -609,58 +602,6 @@
             this.gpSearchResult.Size = new System.Drawing.Size(1283, 767);
             this.gpSearchResult.TabIndex = 6;
             this.gpSearchResult.Text = "查询结果";
-            // 
-            // panelControl2
-            // 
-            this.panelControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelControl2.Controls.Add(this.lbTotalMoney);
-            this.panelControl2.Controls.Add(this.labelControl6);
-            this.panelControl2.Location = new System.Drawing.Point(623, 738);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(201, 29);
-            this.panelControl2.TabIndex = 15;
-            // 
-            // lbTotalMoney
-            // 
-            this.lbTotalMoney.Location = new System.Drawing.Point(52, 8);
-            this.lbTotalMoney.Name = "lbTotalMoney";
-            this.lbTotalMoney.Size = new System.Drawing.Size(12, 14);
-            this.lbTotalMoney.TabIndex = 0;
-            this.lbTotalMoney.Text = "   ";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Location = new System.Drawing.Point(5, 6);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(48, 14);
-            this.labelControl6.TabIndex = 0;
-            this.labelControl6.Text = "总金额：";
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panelControl1.Controls.Add(this.lbTotalSuttleWeight);
-            this.panelControl1.Controls.Add(this.labelControl4);
-            this.panelControl1.Location = new System.Drawing.Point(373, 741);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(201, 29);
-            this.panelControl1.TabIndex = 15;
-            // 
-            // lbTotalSuttleWeight
-            // 
-            this.lbTotalSuttleWeight.Location = new System.Drawing.Point(52, 8);
-            this.lbTotalSuttleWeight.Name = "lbTotalSuttleWeight";
-            this.lbTotalSuttleWeight.Size = new System.Drawing.Size(12, 14);
-            this.lbTotalSuttleWeight.TabIndex = 0;
-            this.lbTotalSuttleWeight.Text = "   ";
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Location = new System.Drawing.Point(5, 6);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(48, 14);
-            this.labelControl4.TabIndex = 0;
-            this.labelControl4.Text = "总重量：";
             // 
             // gcWeight
             // 
@@ -708,10 +649,10 @@
             this.ucPage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ucPage.Location = new System.Drawing.Point(2, 735);
             this.ucPage.Name = "ucPage";
-            qPage1.PageIndex = 0;
-            qPage1.PageSize = 20;
-            qPage1.TotalRows = 0;
-            this.ucPage.Page = qPage1;
+            qPage2.PageIndex = 0;
+            qPage2.PageSize = 20;
+            qPage2.TotalRows = 0;
+            this.ucPage.Page = qPage2;
             this.ucPage.Size = new System.Drawing.Size(1279, 30);
             this.ucPage.TabIndex = 9;
             // 
@@ -747,7 +688,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchKey)).EndInit();
             this.gpSearchKey.ResumeLayout(false);
-            this.gpSearchKey.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLabel2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbLabel1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCustomerName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRecordType)).EndInit();
@@ -758,12 +700,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgRecordType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpSearchResult)).EndInit();
             this.gpSearchResult.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
-            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
@@ -821,14 +757,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtCustomerName;
         private DevExpress.XtraEditors.TextEdit txtCar;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.LabelControl lbTotalSuttleWeight;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.RadioGroup rdBizType;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private DevExpress.XtraEditors.LabelControl lbTotalMoney;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbLabel2;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbLabel1;
     }
 }

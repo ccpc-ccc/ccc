@@ -142,14 +142,6 @@ namespace YF.MWS.Util
                 if (null!= qc.PayType)
                     sb.AppendFormat(" and a.PayType='{0}'", qc.PayType);
             sb.AppendFormat(" {0}", qc.Condtion);
-            if (qc.ExtendConditions != null && qc.ExtendConditions.Count > 0) 
-            {
-                foreach (QueryCondition extQc in qc.ExtendConditions) 
-                {
-                    sb.AppendFormat(@" and a.WeightId in(select WeightId from B_WeightAttribute a inner join S_WeightViewDtl b on a.AttributeId=b.ControlId 
-                                                     where b.DetailId='{0}' and a.AttributeValue like '%{1}%')",extQc.Id.Split('-')[1],extQc.Input);
-                }
-            }
             return sb.ToString();
         }
         public static string GetSaveSql<T>(T t, string tableName) where T : new() {

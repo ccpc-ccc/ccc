@@ -42,6 +42,7 @@
             this.plMain = new DevExpress.XtraEditors.PanelControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.chkAutoSend = new DevExpress.XtraEditors.CheckEdit();
             this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.gpRuiJieYun = new DevExpress.XtraEditors.GroupControl();
             this.lblRemoteAppSecret = new DevExpress.XtraEditors.LabelControl();
@@ -50,18 +51,20 @@
             this.txtMachineCode = new DevExpress.XtraEditors.TextEdit();
             this.lblRemoteServerUrl = new DevExpress.XtraEditors.LabelControl();
             this.txtCompanyCode = new DevExpress.XtraEditors.TextEdit();
-            this.chkAutoSend = new DevExpress.XtraEditors.CheckEdit();
+            this.txtServerUrl = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).BeginInit();
             this.plMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).BeginInit();
             this.gpRuiJieYun.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerUrl.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -179,6 +182,15 @@
             this.simpleButton1.Visible = false;
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
+            // chkAutoSend
+            // 
+            this.chkAutoSend.Location = new System.Drawing.Point(131, 13);
+            this.chkAutoSend.Name = "chkAutoSend";
+            this.chkAutoSend.Properties.Caption = "自动上传";
+            this.chkAutoSend.Size = new System.Drawing.Size(75, 20);
+            this.chkAutoSend.TabIndex = 19;
+            this.chkAutoSend.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
+            // 
             // checkEdit1
             // 
             this.checkEdit1.Location = new System.Drawing.Point(25, 13);
@@ -195,7 +207,9 @@
             this.gpRuiJieYun.Controls.Add(this.txtRegisterCode);
             this.gpRuiJieYun.Controls.Add(this.lblAppKey);
             this.gpRuiJieYun.Controls.Add(this.txtMachineCode);
+            this.gpRuiJieYun.Controls.Add(this.labelControl1);
             this.gpRuiJieYun.Controls.Add(this.lblRemoteServerUrl);
+            this.gpRuiJieYun.Controls.Add(this.txtServerUrl);
             this.gpRuiJieYun.Controls.Add(this.txtCompanyCode);
             this.gpRuiJieYun.Enabled = false;
             this.gpRuiJieYun.Location = new System.Drawing.Point(12, 39);
@@ -222,7 +236,7 @@
             // 
             // lblAppKey
             // 
-            this.lblAppKey.Location = new System.Drawing.Point(36, 86);
+            this.lblAppKey.Location = new System.Drawing.Point(36, 106);
             this.lblAppKey.Name = "lblAppKey";
             this.lblAppKey.Size = new System.Drawing.Size(52, 14);
             this.lblAppKey.TabIndex = 15;
@@ -230,7 +244,7 @@
             // 
             // txtMachineCode
             // 
-            this.txtMachineCode.Location = new System.Drawing.Point(119, 84);
+            this.txtMachineCode.Location = new System.Drawing.Point(119, 104);
             this.txtMachineCode.Name = "txtMachineCode";
             this.txtMachineCode.Size = new System.Drawing.Size(263, 20);
             this.txtMachineCode.TabIndex = 16;
@@ -238,7 +252,7 @@
             // 
             // lblRemoteServerUrl
             // 
-            this.lblRemoteServerUrl.Location = new System.Drawing.Point(36, 39);
+            this.lblRemoteServerUrl.Location = new System.Drawing.Point(36, 73);
             this.lblRemoteServerUrl.Name = "lblRemoteServerUrl";
             this.lblRemoteServerUrl.Size = new System.Drawing.Size(52, 14);
             this.lblRemoteServerUrl.TabIndex = 11;
@@ -246,20 +260,27 @@
             // 
             // txtCompanyCode
             // 
-            this.txtCompanyCode.Location = new System.Drawing.Point(119, 37);
+            this.txtCompanyCode.Location = new System.Drawing.Point(119, 71);
             this.txtCompanyCode.Name = "txtCompanyCode";
             this.txtCompanyCode.Size = new System.Drawing.Size(263, 20);
             this.txtCompanyCode.TabIndex = 12;
             this.txtCompanyCode.Tag = "ServerUrl";
             // 
-            // chkAutoSend
+            // txtServerUrl
             // 
-            this.chkAutoSend.Location = new System.Drawing.Point(131, 13);
-            this.chkAutoSend.Name = "chkAutoSend";
-            this.chkAutoSend.Properties.Caption = "自动上传";
-            this.chkAutoSend.Size = new System.Drawing.Size(75, 20);
-            this.chkAutoSend.TabIndex = 19;
-            this.chkAutoSend.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
+            this.txtServerUrl.Location = new System.Drawing.Point(119, 35);
+            this.txtServerUrl.Name = "txtServerUrl";
+            this.txtServerUrl.Size = new System.Drawing.Size(263, 20);
+            this.txtServerUrl.TabIndex = 12;
+            this.txtServerUrl.Tag = "";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(36, 37);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(52, 14);
+            this.labelControl1.TabIndex = 11;
+            this.labelControl1.Text = "平台地址:";
             // 
             // FrmTransferCfg
             // 
@@ -282,6 +303,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).EndInit();
             this.plMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).EndInit();
             this.gpRuiJieYun.ResumeLayout(false);
@@ -289,7 +311,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRegisterCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMachineCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkAutoSend.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerUrl.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,8 +337,10 @@
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
         private DevExpress.XtraEditors.LabelControl lblRemoteServerUrl;
         private DevExpress.XtraEditors.TextEdit txtCompanyCode;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.CheckEdit chkAutoSend;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.TextEdit txtServerUrl;
     }
 }

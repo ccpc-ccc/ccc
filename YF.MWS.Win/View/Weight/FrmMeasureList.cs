@@ -129,7 +129,7 @@ namespace YF.MWS.Win.View.Weight
             {
                 DataRow dr = gvWeight.GetFocusedDataRow();
                 DataSet dsReport = new DataSet(); 
-                dsReport = reportService.GetWeight(viewId, dr["WeightId"].ToObjectString());
+                dsReport = reportService.GetWeight(viewId,1, dr["WeightId"].ToObjectString());
                 FrmXReport frmReport = new FrmXReport();
                 frmReport.ReportFilePath = ReportFilePath;
                 frmReport.DataSource = dsReport;
@@ -241,7 +241,7 @@ namespace YF.MWS.Win.View.Weight
                 return;
             }
             DataSet dsReport = new DataSet();
-            dsReport = reportService.GetWeight(viewId, weightId);
+            dsReport = reportService.GetWeight(viewId, 1, weightId);
             this.report.DataSource = dsReport;
             this.report.ShowPrintMarginsWarning = false;
             report.CreateDocument(true);

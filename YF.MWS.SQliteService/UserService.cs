@@ -95,17 +95,8 @@ namespace YF.MWS.SQliteService
         public List<string> GetUserList() 
         {
             List<string> lstUser = new List<string>();
-            string sql; 
-            DataTable dt;
-                sql = "select UserName from S_User where Active=1";
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else
-            {
-                dt = service.GetDataTable(sql);
-            }
+            string sql = "select UserName from S_User where Active=1";
+            DataTable dt = base.GetTable(sql);
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows) 
@@ -118,26 +109,9 @@ namespace YF.MWS.SQliteService
 
         public SUser Login(string userName, string userPwd)
         {
-            SUser user = null;
-            string sql = null;
-            DataTable dt;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
-            {
-                sql = string.Format("select * from S_User where UserName='{0}' and UserPwd='{1}'",
+            string sql = string.Format("select * from S_User where UserName='{0}' and UserPwd='{1}'",
                      userName, userPwd);
-                dt = sqliteDb.ExecuteDataTable(sql);
-            }
-            else 
-            {
-                sql = string.Format("select * from S_User where UserName='{0}' and UserPwd='{1}' and Platform='{2}'",
-                     userName, userPwd, PlatformType.Client);
-                dt = service.GetDataTable(sql);
-            }
-            if (dt != null && dt.Rows.Count > 0) 
-            {
-                user = TableHelper.RowToEntity<SUser>(dt.Rows[0]);
-            }
-            return user;
+            return base.getModel<SUser>(sql);
         }
 
         public bool UserExist(string userName)

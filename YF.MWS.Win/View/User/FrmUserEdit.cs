@@ -74,7 +74,6 @@ namespace YF.MWS.Win.View.User
         }
         private void BindData()
         {
-            weUserType.InitDataNew();
             lstRole = roleService.GetRoleList();
             DataTable dtRole=roleService.GetRoleTable();
             DataTable dtCompany = companyService.GetCompanies(CurrentUser.Instance.CompanyIds);
@@ -86,16 +85,12 @@ namespace YF.MWS.Win.View.User
             {
                     txtUserName.Text = user.UserName;
                     txtUserName.Enabled = false;
-                    txtEmail.Text = user.Email;
                     txtMobilePhone.Text = user.MobilePhone;
                     comboGender.SelectedItem = user.Gender;
                     txtFullName.Text = user.FullName;
-                    weUserType.CurrentValue = (int)user.UserType.ToEnum<UserType>();
                     chkActive.Checked = user.Active == 1 ? true : false;
                     chkIsAdmin.Checked = user.IsAdmin == 1 ? true : false;
                     DxHelper.BindComboBoxEdit(comboGender, SysCode.Gender, user.Gender);
-                    DxHelper.BindComboBoxEdit(combRole, dtRole, "RoleName", user.RoleId);
-                DxHelper.BindComboBoxEdit(cbCompany, list, user.CompanyId);
                 tabPagePassword.PageEnabled = true;
                     if (!string.IsNullOrEmpty(user.RoleId))
                         BindRole(user.Powers.Split(','));
@@ -103,8 +98,6 @@ namespace YF.MWS.Win.View.User
             else
             {
                 DxHelper.BindComboBoxEdit(comboGender, SysCode.Gender, null);
-                DxHelper.BindComboBoxEdit(combRole, dtRole, "RoleName", null);  
-                DxHelper.BindComboBoxEdit(cbCompany, list, null);
                 tabPagePassword.PageEnabled = false;
                 //tabPageRoleSetting.PageEnabled = false;
             }
@@ -183,24 +176,11 @@ namespace YF.MWS.Win.View.User
                 txtUserName.ErrorIconAlignment = ErrorIconAlignment.MiddleRight;
                 isValidated = false;
             }
-            if (weUserType.Text.Length == 0)
-            {
-                weUserType.ErrorText = "请选择用户类型";
-                isValidated = false;
-            }
             if (txtFullName.Text.Length == 0)
             {
                 txtFullName.ErrorText = "请输入真实姓名";
                 txtFullName.ErrorIconAlignment = ErrorIconAlignment.MiddleRight;
                 isValidated = false;
-            }
-            if (!chkIsAdmin.Checked) 
-            {
-                if (combRole.Text.Length == 0) 
-                {
-                    combRole.ErrorText = "请选择角色";
-                    isValidated = false;
-                }
             }
             return isValidated;
         }
@@ -238,16 +218,12 @@ namespace YF.MWS.Win.View.User
                             user.UserPwd = AppSetting.GetValue("defaultPwd").ToMd5();
                         }
                         user.Gender = DxHelper.GetCode(comboGender);
-                        user.RoleId = DxHelper.GetCode(combRole);
                         user.UserName = txtUserName.Text;
                         user.FullName = txtFullName.Text;
-                        user.Email = txtEmail.Text;
                         
                         user.MobilePhone = txtMobilePhone.Text;
-                        user.UserType = weUserType.CurrentValue.ToEnum<UserType>().ToString();
                         user.Active = chkActive.Checked ? 1:0;
                         user.IsAdmin = chkIsAdmin.Checked ? 1:0;
-                        user.CompanyId = DxHelper.GetStrValue(cbCompany);
                             List<TreeListNode> lstNode = DxHelper.GetTreeCheckedNodes(treeModule.Nodes);
                             List<string> lstModuleId = new List<string>();
                             foreach (TreeListNode node in lstNode)
@@ -299,12 +275,6 @@ namespace YF.MWS.Win.View.User
         {
             DxHelper.SetChildNode(e.Node, e.Node.CheckState);
             DxHelper.SetParentNode(e.Node, e.Node.CheckState);
-        }
-
-        private void combRole_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string roleId = DxHelper.GetCode(combRole);
-            BindRole(roleId);
         }
     }
 }

@@ -41,6 +41,7 @@ using System.Collections;
 using System.Diagnostics;
 using YF.Utility.Data;
 using com.google.zxing;
+using YF.Utility.Metadata;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeight : BaseForm {
@@ -721,6 +722,7 @@ namespace YF.MWS.Win.View.Weight {
                 currentlblWeight = this.lblWeight1;
                 currentDeviceCfg = this.Cfg.Device1;
                 using (Utility.GetWaitForm(this)) {
+                    webWeightService = new WebWeightService(Cfg.Transfer.ServerUrl);
                 this.searchList.frmWeight = this;
                     InitCommandBar();
                     InitConfig();
@@ -765,10 +767,10 @@ namespace YF.MWS.Win.View.Weight {
                         timerAutoTask.Start();
                     }
 
-                    if (wlookCar != null)
+                    if (wlookCar != null&&wlookCar.Visible&&wlookCar.Enabled)
                         this.ActiveControl = wlookCar;
                     else {
-                        if (weMaterial != null)
+                        if (weMaterial != null&& weMaterial.Visible&& weMaterial.Enabled)
                             this.ActiveControl = weMaterial;
                     }
                 }
@@ -985,6 +987,15 @@ namespace YF.MWS.Win.View.Weight {
                             CompareWeightValue();
                     }
 
+            } else if(currentDeviceCfg == Cfg.Device1) {
+                if (value > 0 && value.ToDecimal() >= minCredibleWeight) {
+                    //新的判断重量稳定的方法
+                    if (lstWeightValue.Count >= samplingCount) {
+                        lstWeightValue.RemoveAt(0);
+                    }
+                    lstWeightValue.Add(value);
+                    IsWeightStable();
+                }
             }
             return Task.CompletedTask;
         }
@@ -1184,7 +1195,7 @@ namespace YF.MWS.Win.View.Weight {
             } else {
                 DataSet dsReport = new DataSet();
                 SReportTemplate template = reportService.GetDefaultTemplate(DocumentType.Weight);
-                dsReport = reportService.GetWeight(searchList.CurrentViewId, searchList.CurrentWeightId);
+                dsReport = reportService.GetWeight(searchList.CurrentViewId,1, searchList.CurrentWeightId);
                 FrmXReport frmReport = new FrmXReport();
                 if (template != null) {
                     if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
@@ -1764,6 +1775,7 @@ namespace YF.MWS.Win.View.Weight {
                 if (currentWeight == null) {
                     isNew = true;
                     currentWeight = new BWeight();
+                    currentWeight.Id = Guid.NewGuid().ToString("N");
                     currentWeight.MachineCode = CurrentClient.Instance.MachineCode;
                 } else {
                     if (!grossTareTransformed) {
@@ -1827,7 +1839,6 @@ namespace YF.MWS.Win.View.Weight {
                 if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
                     planService.Update(currentWeight);
                 }
-                AsyncCapturePhoto(GetWeightCapture(currentWeight.Id));
                 if (isSaved&&Cfg.Transfer.isOpen&&currentWeight.FinishState == 1) {//
                     Thread thread = new Thread(new ParameterizedThreadStart(sendWeight));
                     thread.Start(currentWeight);
@@ -1863,7 +1874,7 @@ namespace YF.MWS.Win.View.Weight {
                 }
                 SendReturnZero(SendReturnZeroProcessType.WeightSaved);
                 if (isSaved) {
-                  FrmMain.CapturePicture(currentWeight.Id,string.Format("当前时间：{0}，称重重量：{1}",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),currentWeight.TareWeight),FileType.CarLeft);
+                AsyncCapturePhoto(GetWeightCapture(currentWeight.Id));
                 }
                 this.SaveFile();
                 //如果设置了自动打印，则开启自动打印磅单功能

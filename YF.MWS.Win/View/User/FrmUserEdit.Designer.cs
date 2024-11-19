@@ -40,23 +40,16 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
-            this.weUserType = new YF.MWS.Win.Uc.Weight.WComboBoxEnumEdit();
             this.tabUser = new DevExpress.XtraTab.XtraTabControl();
             this.tabPageDetail = new DevExpress.XtraTab.XtraTabPage();
-            this.cbCompany = new YF.MWS.Win.Uc.Weight.WComboBoxEnumEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblUserType = new DevExpress.XtraEditors.LabelControl();
+            this.plAdmin = new DevExpress.XtraEditors.PanelControl();
+            this.lblIsAdmin = new DevExpress.XtraEditors.LabelControl();
+            this.chkIsAdmin = new DevExpress.XtraEditors.CheckEdit();
             this.gpRole = new DevExpress.XtraEditors.GroupControl();
             this.treeModule = new DevExpress.XtraTreeList.TreeList();
             this.colModuleName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.combRole = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.lblRole = new DevExpress.XtraEditors.LabelControl();
             this.lblActive = new DevExpress.XtraEditors.LabelControl();
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
-            this.chkIsAdmin = new DevExpress.XtraEditors.CheckEdit();
-            this.lblIsAdmin = new DevExpress.XtraEditors.LabelControl();
-            this.txtEmail = new DevExpress.XtraEditors.TextEdit();
-            this.lblEmail = new DevExpress.XtraEditors.LabelControl();
             this.txtMobilePhone = new DevExpress.XtraEditors.TextEdit();
             this.lblMobilePhone = new DevExpress.XtraEditors.LabelControl();
             this.comboGender = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -69,30 +62,25 @@
             this.btnChangePwd = new DevExpress.XtraEditors.SimpleButton();
             this.txtNewPwd = new DevExpress.XtraEditors.TextEdit();
             this.lblNewPwd = new DevExpress.XtraEditors.LabelControl();
-            this.plAdmin = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.weUserType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabUser)).BeginInit();
             this.tabUser.SuspendLayout();
             this.tabPageDetail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCompany.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plAdmin)).BeginInit();
+            this.plAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsAdmin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRole)).BeginInit();
             this.gpRole.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeModule)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkIsAdmin.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMobilePhone.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
             this.tabPagePassword.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPwd.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plAdmin)).BeginInit();
-            this.plAdmin.SuspendLayout();
             this.SuspendLayout();
             // 
             // barManager
@@ -181,34 +169,6 @@
             // 
             this.dxErrorProvider.ContainerControl = this;
             // 
-            // weUserType
-            // 
-            this.weUserType.ActionName = null;
-            this.weUserType.AutoCalcNo = 0;
-            this.weUserType.Caption = null;
-            this.weUserType.ControlName = null;
-            this.weUserType.CurrentValue = -1;
-            this.weUserType.DecimalDigits = 0;
-            this.weUserType.EditText = "";
-            this.weUserType.EditValue = "";
-            this.weUserType.ErrorTipText = null;
-            this.weUserType.Expression = null;
-            this.weUserType.FieldName = "UserType";
-            this.dxErrorProvider.SetIconAlignment(this.weUserType, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-            this.weUserType.IsRequired = false;
-            this.weUserType.Location = new System.Drawing.Point(404, 19);
-            this.weUserType.MenuManager = this.barManager;
-            this.weUserType.Name = "weUserType";
-            this.weUserType.ParentLocation = new System.Drawing.Point(0, 0);
-            this.weUserType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.weUserType.Size = new System.Drawing.Size(195, 20);
-            this.weUserType.StartAutoSave = false;
-            this.weUserType.StartStay = false;
-            this.weUserType.t1 = null;
-            this.weUserType.TabIndex = 22;
-            this.weUserType.WeightVauleChanged = null;
-            // 
             // tabUser
             // 
             this.tabUser.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -224,17 +184,9 @@
             // tabPageDetail
             // 
             this.tabPageDetail.Controls.Add(this.plAdmin);
-            this.tabPageDetail.Controls.Add(this.cbCompany);
-            this.tabPageDetail.Controls.Add(this.labelControl1);
-            this.tabPageDetail.Controls.Add(this.weUserType);
-            this.tabPageDetail.Controls.Add(this.lblUserType);
             this.tabPageDetail.Controls.Add(this.gpRole);
-            this.tabPageDetail.Controls.Add(this.combRole);
-            this.tabPageDetail.Controls.Add(this.lblRole);
             this.tabPageDetail.Controls.Add(this.lblActive);
             this.tabPageDetail.Controls.Add(this.chkActive);
-            this.tabPageDetail.Controls.Add(this.txtEmail);
-            this.tabPageDetail.Controls.Add(this.lblEmail);
             this.tabPageDetail.Controls.Add(this.txtMobilePhone);
             this.tabPageDetail.Controls.Add(this.lblMobilePhone);
             this.tabPageDetail.Controls.Add(this.comboGender);
@@ -247,54 +199,41 @@
             this.tabPageDetail.Size = new System.Drawing.Size(674, 659);
             this.tabPageDetail.Text = "基本信息";
             // 
-            // cbCompany
+            // plAdmin
             // 
-            this.cbCompany.ActionName = null;
-            this.cbCompany.AutoCalcNo = 0;
-            this.cbCompany.Caption = null;
-            this.cbCompany.ControlName = null;
-            this.cbCompany.CurrentValue = -1;
-            this.cbCompany.DecimalDigits = 0;
-            this.cbCompany.EditText = "";
-            this.cbCompany.EditValue = "";
-            this.cbCompany.ErrorTipText = null;
-            this.cbCompany.Expression = null;
-            this.cbCompany.FieldName = "UserType";
-            this.cbCompany.IsRequired = false;
-            this.cbCompany.Location = new System.Drawing.Point(406, 138);
-            this.cbCompany.Name = "cbCompany";
-            this.cbCompany.ParentLocation = new System.Drawing.Point(0, 0);
-            this.cbCompany.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbCompany.Size = new System.Drawing.Size(195, 20);
-            this.cbCompany.StartAutoSave = false;
-            this.cbCompany.StartStay = false;
-            this.cbCompany.t1 = null;
-            this.cbCompany.TabIndex = 22;
-            this.cbCompany.WeightVauleChanged = null;
+            this.plAdmin.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.plAdmin.Controls.Add(this.lblIsAdmin);
+            this.plAdmin.Controls.Add(this.chkIsAdmin);
+            this.plAdmin.Location = new System.Drawing.Point(335, 91);
+            this.plAdmin.Name = "plAdmin";
+            this.plAdmin.Size = new System.Drawing.Size(200, 23);
+            this.plAdmin.TabIndex = 23;
             // 
-            // labelControl1
+            // lblIsAdmin
             // 
-            this.labelControl1.Location = new System.Drawing.Point(335, 141);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(52, 14);
-            this.labelControl1.TabIndex = 21;
-            this.labelControl1.Text = "所属商家:";
+            this.lblIsAdmin.Location = new System.Drawing.Point(12, 3);
+            this.lblIsAdmin.Name = "lblIsAdmin";
+            this.lblIsAdmin.Size = new System.Drawing.Size(40, 14);
+            this.lblIsAdmin.TabIndex = 13;
+            this.lblIsAdmin.Text = "管理员:";
             // 
-            // lblUserType
+            // chkIsAdmin
             // 
-            this.lblUserType.Location = new System.Drawing.Point(333, 22);
-            this.lblUserType.Name = "lblUserType";
-            this.lblUserType.Size = new System.Drawing.Size(52, 14);
-            this.lblUserType.TabIndex = 21;
-            this.lblUserType.Text = "用户类型:";
+            this.chkIsAdmin.Location = new System.Drawing.Point(71, 2);
+            this.chkIsAdmin.MenuManager = this.barManager;
+            this.chkIsAdmin.Name = "chkIsAdmin";
+            this.chkIsAdmin.Properties.Caption = "";
+            this.chkIsAdmin.Size = new System.Drawing.Size(20, 20);
+            this.chkIsAdmin.TabIndex = 14;
+            this.chkIsAdmin.Tag = "IsAdmin";
+            this.chkIsAdmin.ToolTipTitle = "如果是管理员,整个系统都有权限访问,请慎重设置";
             // 
             // gpRole
             // 
             this.gpRole.Controls.Add(this.treeModule);
-            this.gpRole.Location = new System.Drawing.Point(25, 198);
+            this.gpRole.Location = new System.Drawing.Point(25, 120);
             this.gpRole.Name = "gpRole";
-            this.gpRole.Size = new System.Drawing.Size(623, 426);
+            this.gpRole.Size = new System.Drawing.Size(623, 504);
             this.gpRole.TabIndex = 20;
             this.gpRole.Text = "权限设置";
             // 
@@ -309,7 +248,7 @@
             this.treeModule.OptionsView.CheckBoxStyle = DevExpress.XtraTreeList.DefaultNodeCheckBoxStyle.Check;
             this.treeModule.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.treeModule.ParentFieldName = "ParentId";
-            this.treeModule.Size = new System.Drawing.Size(619, 401);
+            this.treeModule.Size = new System.Drawing.Size(619, 479);
             this.treeModule.TabIndex = 7;
             this.treeModule.AfterCheckNode += new DevExpress.XtraTreeList.NodeEventHandler(this.treeModule_AfterCheckNode);
             // 
@@ -323,29 +262,9 @@
             this.colModuleName.VisibleIndex = 0;
             this.colModuleName.Width = 91;
             // 
-            // combRole
-            // 
-            this.combRole.Location = new System.Drawing.Point(96, 138);
-            this.combRole.MenuManager = this.barManager;
-            this.combRole.Name = "combRole";
-            this.combRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.combRole.Size = new System.Drawing.Size(169, 20);
-            this.combRole.TabIndex = 19;
-            this.combRole.Tag = "RoleId";
-            this.combRole.SelectedIndexChanged += new System.EventHandler(this.combRole_SelectedIndexChanged);
-            // 
-            // lblRole
-            // 
-            this.lblRole.Location = new System.Drawing.Point(25, 141);
-            this.lblRole.Name = "lblRole";
-            this.lblRole.Size = new System.Drawing.Size(52, 14);
-            this.lblRole.TabIndex = 18;
-            this.lblRole.Text = "所属角色:";
-            // 
             // lblActive
             // 
-            this.lblActive.Location = new System.Drawing.Point(25, 178);
+            this.lblActive.Location = new System.Drawing.Point(25, 94);
             this.lblActive.Name = "lblActive";
             this.lblActive.Size = new System.Drawing.Size(52, 14);
             this.lblActive.TabIndex = 17;
@@ -353,7 +272,7 @@
             // 
             // chkActive
             // 
-            this.chkActive.Location = new System.Drawing.Point(94, 176);
+            this.chkActive.Location = new System.Drawing.Point(94, 92);
             this.chkActive.MenuManager = this.barManager;
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Caption = "";
@@ -361,45 +280,9 @@
             this.chkActive.TabIndex = 16;
             this.chkActive.Tag = "Active";
             // 
-            // chkIsAdmin
-            // 
-            this.chkIsAdmin.Location = new System.Drawing.Point(71, 0);
-            this.chkIsAdmin.MenuManager = this.barManager;
-            this.chkIsAdmin.Name = "chkIsAdmin";
-            this.chkIsAdmin.Properties.Caption = "";
-            this.chkIsAdmin.Size = new System.Drawing.Size(20, 20);
-            this.chkIsAdmin.TabIndex = 14;
-            this.chkIsAdmin.Tag = "IsAdmin";
-            this.chkIsAdmin.ToolTipTitle = "如果是管理员,整个系统都有权限访问,请慎重设置";
-            // 
-            // lblIsAdmin
-            // 
-            this.lblIsAdmin.Location = new System.Drawing.Point(12, 3);
-            this.lblIsAdmin.Name = "lblIsAdmin";
-            this.lblIsAdmin.Size = new System.Drawing.Size(40, 14);
-            this.lblIsAdmin.TabIndex = 13;
-            this.lblIsAdmin.Text = "管理员:";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(406, 95);
-            this.txtEmail.MenuManager = this.barManager;
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(195, 20);
-            this.txtEmail.TabIndex = 12;
-            this.txtEmail.Tag = "Email";
-            // 
-            // lblEmail
-            // 
-            this.lblEmail.Location = new System.Drawing.Point(335, 98);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(52, 14);
-            this.lblEmail.TabIndex = 11;
-            this.lblEmail.Text = "电子邮箱:";
-            // 
             // txtMobilePhone
             // 
-            this.txtMobilePhone.Location = new System.Drawing.Point(96, 98);
+            this.txtMobilePhone.Location = new System.Drawing.Point(406, 55);
             this.txtMobilePhone.MenuManager = this.barManager;
             this.txtMobilePhone.Name = "txtMobilePhone";
             this.txtMobilePhone.Size = new System.Drawing.Size(169, 20);
@@ -407,7 +290,7 @@
             // 
             // lblMobilePhone
             // 
-            this.lblMobilePhone.Location = new System.Drawing.Point(25, 101);
+            this.lblMobilePhone.Location = new System.Drawing.Point(335, 58);
             this.lblMobilePhone.Name = "lblMobilePhone";
             this.lblMobilePhone.Size = new System.Drawing.Size(52, 14);
             this.lblMobilePhone.TabIndex = 9;
@@ -415,7 +298,7 @@
             // 
             // comboGender
             // 
-            this.comboGender.Location = new System.Drawing.Point(406, 58);
+            this.comboGender.Location = new System.Drawing.Point(406, 18);
             this.comboGender.MenuManager = this.barManager;
             this.comboGender.Name = "comboGender";
             this.comboGender.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -426,7 +309,7 @@
             // 
             // lblGender
             // 
-            this.lblGender.Location = new System.Drawing.Point(335, 58);
+            this.lblGender.Location = new System.Drawing.Point(335, 18);
             this.lblGender.Name = "lblGender";
             this.lblGender.Size = new System.Drawing.Size(28, 14);
             this.lblGender.TabIndex = 4;
@@ -500,16 +383,6 @@
             this.lblNewPwd.TabIndex = 4;
             this.lblNewPwd.Text = "新密码:";
             // 
-            // plAdmin
-            // 
-            this.plAdmin.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.plAdmin.Controls.Add(this.lblIsAdmin);
-            this.plAdmin.Controls.Add(this.chkIsAdmin);
-            this.plAdmin.Location = new System.Drawing.Point(335, 175);
-            this.plAdmin.Name = "plAdmin";
-            this.plAdmin.Size = new System.Drawing.Size(200, 23);
-            this.plAdmin.TabIndex = 23;
-            // 
             // FrmUserEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -528,19 +401,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.weUserType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabUser)).EndInit();
             this.tabUser.ResumeLayout(false);
             this.tabPageDetail.ResumeLayout(false);
             this.tabPageDetail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbCompany.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.plAdmin)).EndInit();
+            this.plAdmin.ResumeLayout(false);
+            this.plAdmin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkIsAdmin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRole)).EndInit();
             this.gpRole.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeModule)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkIsAdmin.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEmail.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMobilePhone.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).EndInit();
@@ -548,9 +420,6 @@
             this.tabPagePassword.ResumeLayout(false);
             this.tabPagePassword.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewPwd.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.plAdmin)).EndInit();
-            this.plAdmin.ResumeLayout(false);
-            this.plAdmin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -572,8 +441,6 @@
         private DevExpress.XtraEditors.CheckEdit chkActive;
         private DevExpress.XtraEditors.CheckEdit chkIsAdmin;
         private DevExpress.XtraEditors.LabelControl lblIsAdmin;
-        private DevExpress.XtraEditors.TextEdit txtEmail;
-        private DevExpress.XtraEditors.LabelControl lblEmail;
         private DevExpress.XtraEditors.TextEdit txtMobilePhone;
         private DevExpress.XtraEditors.LabelControl lblMobilePhone;
         private DevExpress.XtraEditors.ComboBoxEdit comboGender;
@@ -588,15 +455,9 @@
         private DevExpress.XtraEditors.LabelControl lblNewPwd;
         private DevExpress.Utils.ImageCollection imgListSmall;
         private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider;
-        private DevExpress.XtraEditors.ComboBoxEdit combRole;
-        private DevExpress.XtraEditors.LabelControl lblRole;
         private DevExpress.XtraEditors.GroupControl gpRole;
         private DevExpress.XtraTreeList.TreeList treeModule;
         private DevExpress.XtraTreeList.Columns.TreeListColumn colModuleName;
-        private Uc.Weight.WComboBoxEnumEdit weUserType;
-        private DevExpress.XtraEditors.LabelControl lblUserType;
-        private Uc.Weight.WComboBoxEnumEdit cbCompany;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.PanelControl plAdmin;
     }
 }

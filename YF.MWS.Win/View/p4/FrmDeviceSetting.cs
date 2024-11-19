@@ -47,6 +47,10 @@ namespace YF.MWS.Win.View.Master {
             string iconFont = AppSetting.GetValue("iconUrl");
             if (File.Exists(iconFont)) this.IconOptions.Image = Image.FromFile(iconFont);
             cfg = CfgUtil.GetCfg();
+            WeightStableCfg weightStable = cfg.WeightStable;
+            teWeightDeviation.Text = weightStable.WeightDeviation.ToString();
+            teMinCredibleWeight.Text = weightStable.MinCredibleWeight.ToString();
+            spSamplingCount.Value = weightStable.SamplingCount;
             InitSerialPort();
             SetDeviceInfo1();
             SetDeviceInfo2();
@@ -284,6 +288,11 @@ namespace YF.MWS.Win.View.Master {
             cfg.Device1.ServerPort = txtServerPort.Text.ToInt();
             cfg.Device1.ServerIP = txtServerIP.Text;
             cfg.Device1.ConnectMode = tabControl1.SelectedIndex;
+
+            WeightStableCfg weightStable = cfg.WeightStable;
+            weightStable.WeightDeviation=teWeightDeviation.Text.ToDecimal();
+            weightStable.MinCredibleWeight = teMinCredibleWeight.Text.ToDecimal();
+            weightStable.SamplingCount= spSamplingCount.Value.ToInt();
             string fomart = cmbFormat1.Text;
             int decimalDigits = 0;
             DisplayFormatStringType displayType = DisplayFormatStringType.Int;

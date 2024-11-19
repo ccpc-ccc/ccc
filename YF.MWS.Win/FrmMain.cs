@@ -606,9 +606,6 @@ namespace YF.MWS.Win {
             Program.frmViewVideoDevice.Activate();
             }
         }
-        public void CapturePicture(string weightId, string waterMarkText, FileType fileType) {
-            Program.frmViewVideoDevice.CapturePicture(weightId, waterMarkText, fileType);
-        }
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) {
             if (Program.frmViewVideoDevice != null) {
                 Program.frmViewVideoDevice.Close();

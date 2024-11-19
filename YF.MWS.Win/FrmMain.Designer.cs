@@ -1707,6 +1707,7 @@
             this.ribbonPageGroup43.ItemLinks.Add(this.barButtonItem73);
             this.ribbonPageGroup43.Name = "ribbonPageGroup43";
             this.ribbonPageGroup43.Tag = "p5_3";
+            this.ribbonPageGroup43.Visible = false;
             // 
             // ribbonPageGroup17
             // 
@@ -1903,6 +1904,7 @@
             this.ribbonPageGroup23.ItemLinks.Add(this.barButtonItem28);
             this.ribbonPageGroup23.ItemLinks.Add(this.barButtonItem74);
             this.ribbonPageGroup23.Name = "ribbonPageGroup23";
+            this.ribbonPageGroup23.Visible = false;
             // 
             // ribbonPageGroup24
             // 

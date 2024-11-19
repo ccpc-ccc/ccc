@@ -105,10 +105,6 @@ namespace YF.MWS.Metadata
         /// 称重数据列设置信息
         /// </summary>
         public List<SWeightViewDtl> Columns { get; set; }
-        /// <summary>
-        /// 扩展控件输入的查询条件
-        /// </summary>
-        public List<QueryCondition> ExtendConditions { get; set; }
         public string Condtion { get; set; }
     }
 }

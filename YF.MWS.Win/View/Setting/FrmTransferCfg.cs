@@ -49,6 +49,7 @@ namespace YF.MWS.Win.View.Setting
                 txtMachineCode.Text = transfer.MachineCode;
                 txtRegisterCode.Text = transfer.RegisterCode;
                 txtCompanyCode.Text = transfer.CompanyCode;// AppSetting.GetValue("MobileServer");
+                txtServerUrl.Text = transfer.ServerUrl;
                 checkEdit1.Checked = transfer.isOpen;
                 chkAutoSend.Checked = transfer.AutoSend;
             }
@@ -73,6 +74,7 @@ namespace YF.MWS.Win.View.Setting
             transfer.RegisterCode = txtRegisterCode.Text;
             transfer.CompanyCode = txtCompanyCode.Text;
             transfer.AutoSend = chkAutoSend.Checked;
+            transfer.ServerUrl = txtServerUrl.Text;
             //transfer.ServerUrl = txtCompanyCode.Text;
             transfer.isOpen = checkEdit1.Checked;
             CfgUtil.SaveCfg(cfg);

@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmWeighWay));
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.plMain = new DevExpress.XtraEditors.PanelControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
@@ -56,13 +56,6 @@
             this.txtAutoOutTime = new DevExpress.XtraEditors.TextEdit();
             this.txtAutoSaveTime = new DevExpress.XtraEditors.TextEdit();
             this.lblAutoOutTime = new DevExpress.XtraEditors.LabelControl();
-            this.gpWeightStableCfg = new DevExpress.XtraEditors.GroupControl();
-            this.spSamplingCount = new DevExpress.XtraEditors.SpinEdit();
-            this.lblSamplingCount = new DevExpress.XtraEditors.LabelControl();
-            this.lblMinCredibleWeight = new DevExpress.XtraEditors.LabelControl();
-            this.teMinCredibleWeight = new DevExpress.XtraEditors.TextEdit();
-            this.lblWeightDeviation = new DevExpress.XtraEditors.LabelControl();
-            this.teWeightDeviation = new DevExpress.XtraEditors.TextEdit();
             this.gpWeightProcessTriggerType = new DevExpress.XtraEditors.GroupControl();
             this.rgWeightProcessTriggerType = new DevExpress.XtraEditors.RadioGroup();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
@@ -88,6 +81,7 @@
             this.gpOperationCfg = new DevExpress.XtraEditors.GroupControl();
             this.chkStartPlan = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartValidateCarWithCard = new DevExpress.XtraEditors.CheckEdit();
+            this.chkShowWeight = new DevExpress.XtraEditors.CheckEdit();
             this.chkCarAfter = new DevExpress.XtraEditors.CheckEdit();
             this.chkStartCustomerBalanceLimit = new DevExpress.XtraEditors.CheckEdit();
             this.chkShareWeight = new DevExpress.XtraEditors.CheckEdit();
@@ -112,7 +106,6 @@
             this.gpLoadUnfinishWeightCfg = new DevExpress.XtraEditors.GroupControl();
             this.rgLoadUnfinishWeight = new DevExpress.XtraEditors.RadioGroup();
             this.folderOpen = new System.Windows.Forms.FolderBrowserDialog();
-            this.chkShowWeight = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).BeginInit();
             this.plMain.SuspendLayout();
@@ -132,11 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMinWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAutoOutTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAutoSaveTime.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gpWeightStableCfg)).BeginInit();
-            this.gpWeightStableCfg.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessTriggerType)).BeginInit();
             this.gpWeightProcessTriggerType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcessTriggerType.Properties)).BeginInit();
@@ -161,6 +149,7 @@
             this.gpOperationCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkShowWeight.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCarAfter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).BeginInit();
@@ -187,7 +176,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpLoadUnfinishWeightCfg)).BeginInit();
             this.gpLoadUnfinishWeightCfg.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgLoadUnfinishWeight.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkShowWeight.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -259,7 +247,6 @@
             // gpNobody
             // 
             this.gpNobody.Controls.Add(this.gpWeightProcessCfg);
-            this.gpNobody.Controls.Add(this.gpWeightStableCfg);
             this.gpNobody.Controls.Add(this.gpWeightProcessTriggerType);
             this.gpNobody.Location = new System.Drawing.Point(123, 28);
             this.gpNobody.Name = "gpNobody";
@@ -382,85 +369,6 @@
             this.lblAutoOutTime.Size = new System.Drawing.Size(108, 14);
             this.lblAutoOutTime.TabIndex = 10;
             this.lblAutoOutTime.Text = "重量小于落杆重量：";
-            // 
-            // gpWeightStableCfg
-            // 
-            this.gpWeightStableCfg.Controls.Add(this.spSamplingCount);
-            this.gpWeightStableCfg.Controls.Add(this.lblSamplingCount);
-            this.gpWeightStableCfg.Controls.Add(this.lblMinCredibleWeight);
-            this.gpWeightStableCfg.Controls.Add(this.teMinCredibleWeight);
-            this.gpWeightStableCfg.Controls.Add(this.lblWeightDeviation);
-            this.gpWeightStableCfg.Controls.Add(this.teWeightDeviation);
-            this.gpWeightStableCfg.Location = new System.Drawing.Point(30, 311);
-            this.gpWeightStableCfg.Name = "gpWeightStableCfg";
-            this.gpWeightStableCfg.Size = new System.Drawing.Size(560, 124);
-            this.gpWeightStableCfg.TabIndex = 82;
-            this.gpWeightStableCfg.Text = "重量稳定规则设置";
-            // 
-            // spSamplingCount
-            // 
-            this.spSamplingCount.EditValue = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.spSamplingCount.Location = new System.Drawing.Point(404, 42);
-            this.spSamplingCount.Name = "spSamplingCount";
-            this.spSamplingCount.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.spSamplingCount.Properties.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.spSamplingCount.Properties.MinValue = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.spSamplingCount.Size = new System.Drawing.Size(76, 20);
-            this.spSamplingCount.TabIndex = 101;
-            // 
-            // lblSamplingCount
-            // 
-            this.lblSamplingCount.Location = new System.Drawing.Point(313, 45);
-            this.lblSamplingCount.Name = "lblSamplingCount";
-            this.lblSamplingCount.Size = new System.Drawing.Size(52, 14);
-            this.lblSamplingCount.TabIndex = 98;
-            this.lblSamplingCount.Text = "采样点数:";
-            // 
-            // lblMinCredibleWeight
-            // 
-            this.lblMinCredibleWeight.Location = new System.Drawing.Point(17, 84);
-            this.lblMinCredibleWeight.Name = "lblMinCredibleWeight";
-            this.lblMinCredibleWeight.Size = new System.Drawing.Size(100, 14);
-            this.lblMinCredibleWeight.TabIndex = 75;
-            this.lblMinCredibleWeight.Text = "最低可信重量(Kg):";
-            // 
-            // teMinCredibleWeight
-            // 
-            this.teMinCredibleWeight.EditValue = "";
-            this.teMinCredibleWeight.Location = new System.Drawing.Point(127, 81);
-            this.teMinCredibleWeight.Name = "teMinCredibleWeight";
-            this.teMinCredibleWeight.Size = new System.Drawing.Size(87, 20);
-            this.teMinCredibleWeight.TabIndex = 74;
-            // 
-            // lblWeightDeviation
-            // 
-            this.lblWeightDeviation.Location = new System.Drawing.Point(17, 47);
-            this.lblWeightDeviation.Name = "lblWeightDeviation";
-            this.lblWeightDeviation.Size = new System.Drawing.Size(100, 14);
-            this.lblWeightDeviation.TabIndex = 70;
-            this.lblWeightDeviation.Text = "重量稳定偏差(Kg):";
-            // 
-            // teWeightDeviation
-            // 
-            this.teWeightDeviation.EditValue = "";
-            this.teWeightDeviation.Location = new System.Drawing.Point(127, 44);
-            this.teWeightDeviation.Name = "teWeightDeviation";
-            this.teWeightDeviation.Size = new System.Drawing.Size(87, 20);
-            this.teWeightDeviation.TabIndex = 69;
-            this.teWeightDeviation.Tag = "WeightDeviation";
             // 
             // gpWeightProcessTriggerType
             // 
@@ -651,13 +559,13 @@
             this.btnSelectBackupDbDirectory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.btnSelectBackupDbDirectory.Size = new System.Drawing.Size(306, 20);
-            toolTipTitleItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
-            toolTipTitleItem1.Text = "提示";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "如果是网络版数据库，则需要确保此目录存在于安装数据库的那台电脑上。";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.btnSelectBackupDbDirectory.SuperTip = superToolTip1;
+            toolTipTitleItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_16x16;
+            toolTipTitleItem2.Text = "提示";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "如果是网络版数据库，则需要确保此目录存在于安装数据库的那台电脑上。";
+            superToolTip3.Items.Add(toolTipTitleItem2);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.btnSelectBackupDbDirectory.SuperTip = superToolTip3;
             this.btnSelectBackupDbDirectory.TabIndex = 135;
             this.btnSelectBackupDbDirectory.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnSelectBackupDbDirectory_ButtonClick);
             // 
@@ -724,6 +632,14 @@
             this.chkStartValidateCarWithCard.Size = new System.Drawing.Size(130, 20);
             this.chkStartValidateCarWithCard.TabIndex = 109;
             this.chkStartValidateCarWithCard.Tag = "StartValidateCarWithCard";
+            // 
+            // chkShowWeight
+            // 
+            this.chkShowWeight.Location = new System.Drawing.Point(412, 133);
+            this.chkShowWeight.Name = "chkShowWeight";
+            this.chkShowWeight.Properties.Caption = "首页显示称重界面";
+            this.chkShowWeight.Size = new System.Drawing.Size(122, 20);
+            this.chkShowWeight.TabIndex = 108;
             // 
             // chkCarAfter
             // 
@@ -797,12 +713,12 @@
             this.chkStartInputItemAutoSave.Name = "chkStartInputItemAutoSave";
             this.chkStartInputItemAutoSave.Properties.Caption = "开启输入项目自动保存";
             this.chkStartInputItemAutoSave.Size = new System.Drawing.Size(148, 20);
-            toolTipItem2.Appearance.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
-            toolTipItem2.Appearance.Options.UseImage = true;
-            toolTipItem2.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
-            toolTipItem2.Text = "开启此功能会延长保存磅单的时间,如无必要请不要开启此功能.";
-            superToolTip2.Items.Add(toolTipItem2);
-            this.chkStartInputItemAutoSave.SuperTip = superToolTip2;
+            toolTipItem1.Appearance.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
+            toolTipItem1.Appearance.Options.UseImage = true;
+            toolTipItem1.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.info_32x32;
+            toolTipItem1.Text = "开启此功能会延长保存磅单的时间,如无必要请不要开启此功能.";
+            superToolTip1.Items.Add(toolTipItem1);
+            this.chkStartInputItemAutoSave.SuperTip = superToolTip1;
             this.chkStartInputItemAutoSave.TabIndex = 105;
             this.chkStartInputItemAutoSave.Tag = "StartInputItemAutoSave";
             // 
@@ -962,14 +878,6 @@
             // 
             this.folderOpen.RootFolder = System.Environment.SpecialFolder.SendTo;
             // 
-            // chkShowWeight
-            // 
-            this.chkShowWeight.Location = new System.Drawing.Point(412, 133);
-            this.chkShowWeight.Name = "chkShowWeight";
-            this.chkShowWeight.Properties.Caption = "首页显示称重界面";
-            this.chkShowWeight.Size = new System.Drawing.Size(122, 20);
-            this.chkShowWeight.TabIndex = 108;
-            // 
             // FrmWeighWay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1003,12 +911,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMinWeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAutoOutTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtAutoSaveTime.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gpWeightStableCfg)).EndInit();
-            this.gpWeightStableCfg.ResumeLayout(false);
-            this.gpWeightStableCfg.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpWeightProcessTriggerType)).EndInit();
             this.gpWeightProcessTriggerType.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rgWeightProcessTriggerType.Properties)).EndInit();
@@ -1035,6 +937,7 @@
             this.gpOperationCfg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chkStartPlan.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartValidateCarWithCard.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkShowWeight.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCarAfter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkStartCustomerBalanceLimit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkShareWeight.Properties)).EndInit();
@@ -1062,7 +965,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpLoadUnfinishWeightCfg)).EndInit();
             this.gpLoadUnfinishWeightCfg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rgLoadUnfinishWeight.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkShowWeight.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1081,13 +983,6 @@
         private DevExpress.XtraEditors.TextEdit txtAutoOutTime;
         private DevExpress.XtraEditors.TextEdit txtAutoSaveTime;
         private DevExpress.XtraEditors.LabelControl lblAutoOutTime;
-        private DevExpress.XtraEditors.GroupControl gpWeightStableCfg;
-        private DevExpress.XtraEditors.SpinEdit spSamplingCount;
-        private DevExpress.XtraEditors.LabelControl lblSamplingCount;
-        private DevExpress.XtraEditors.LabelControl lblMinCredibleWeight;
-        private DevExpress.XtraEditors.TextEdit teMinCredibleWeight;
-        private DevExpress.XtraEditors.LabelControl lblWeightDeviation;
-        private DevExpress.XtraEditors.TextEdit teWeightDeviation;
         private DevExpress.XtraEditors.GroupControl gpWeightProcessTriggerType;
         private DevExpress.XtraEditors.RadioGroup rgWeightProcessTriggerType;
         private DevExpress.XtraEditors.GroupControl gpMeasureCfg;

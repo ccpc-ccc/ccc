@@ -23,7 +23,6 @@ namespace YF.MWS.Win.Core
 {
     public class SyncUtil
     {
-        private static IWebWeightService webWeightService = new WebWeightService();
 
         public static void UploadPhoto(BFile file, IWebFileService webFileService, IFileService fileService,string apiUrl)
         {

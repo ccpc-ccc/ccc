@@ -248,11 +248,17 @@ namespace YF.MWS.Win.Uc
                 gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
                 gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
             }
+            fieldName = "UnitMoney";
+            if (DxHelper.ContainsField(gvWeight, fieldName))
+            {
+                gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+            }
             //gvWeight.GridControl.ForceInitialize();
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
             gvWeight.Columns[2].SummaryItem.SummaryType = SummaryItemType.Count;
-            gvWeight.Columns[2].SummaryItem.DisplayFormat = "车次：{0}";
+            gvWeight.Columns[2].SummaryItem.DisplayFormat = "计数：{0}";
             gcWeight.RefreshDataSource();
             //gvWeight.OptionsView.ColumnAutoWidth = true;
             gvWeight.BestFitColumns();

@@ -519,7 +519,7 @@ namespace YF.MWS.SQliteService
             return ds;
         }
 
-        public DataSet GetWeight(string viewId, string weightId="")
+        public DataSet GetWeight(string viewId,int total, string weightId="")
         { 
             DataTable dtWeight = null;
             DataSet ds=new DataSet();
@@ -528,7 +528,7 @@ namespace YF.MWS.SQliteService
                 condition = string.Format("and a.Id='{0}'", weightId);
             }
             WeightQueryService weightQueryService = new WeightQueryService();
-            dtWeight = weightQueryService.GetTopListTable(new TopWeightQuery() { TopN=1,Condition= condition });
+            dtWeight = weightQueryService.GetTopListTable(new TopWeightQuery() { TopN= total, Condition= condition });
             YF.MWS.Util.Utility.InitRow(dtWeight);
             SetFileToWeight(dtWeight, weightId);
             SetDecimalToUpper(dtWeight, "d1");

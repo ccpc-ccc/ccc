@@ -16,7 +16,7 @@ namespace YF.MWS.Client.DataService.Interface
         SReportTemplate Get(string templateId); 
         SReportTemplate GetDefaultTemplate(DocumentType type);
         DataSet GetFinance(string viewId, string weightId);
-        DataSet GetWeight(string viewId, string weightId="");
+        DataSet GetWeight(string viewId,int total, string weightId="");
         DataSet GetWeightSearch(string viewId, WeightQueryCondition qc);
         DataSet GetWeightSearch(string viewId, string condition, string conditionTareTime, string conditionGrossTime, List<QueryCondition> lstExtendCondition, QPage page);
         List<QReportTemplate> GetTemplateList(TemplateType type);

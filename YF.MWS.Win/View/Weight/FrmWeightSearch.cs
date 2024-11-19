@@ -33,12 +33,13 @@ using YF.MWS.SQliteService.Remote;
 using YF.MWS.Client.DataService.Interface.Remote;
 using YF.MWS.Metadata.Dto;
 using YF.MWS.Win.View.Log;
+using DevExpress.Data;
 
 namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeightSearch : BaseForm {
         public DataTable Dt { get; set; }
         private IMasterService masterService = new MasterService();
-        private IWebWeightService webWeightService = new WebWeightService();
+        private IWebWeightService webWeightService;
         private IWeightViewService viewService = new WeightViewService();
         private ICardService cardService = new CardService();
         private ICarService carService = new CarService();
@@ -92,6 +93,7 @@ namespace YF.MWS.Win.View.Weight {
 
         private void FrmWeightSearch_Load(object sender, EventArgs e) {
             using (Utility.GetWaitForm()) {
+                webWeightService = new WebWeightService(Cfg.Transfer.ServerUrl);
                 BindData();
                 teStartDate.Time=DateTime.Now.AddDays(-1);
                 teEndDate.Time = DateTime.Now;
@@ -220,9 +222,26 @@ namespace YF.MWS.Win.View.Weight {
             }
             qc.StartTime = teStartDate.Time;
             qc.EndTime = teEndDate.Time;
-            qc.CustomerName=txtCustomerName.Text;
-            qc.CarNo = txtCar.Text;
+            this.dtStart = teStartDate.Time;
+            this.dtEnd = teEndDate.Time;
+            qc.Condtion = getWhere(cmbLabel1.GetStrValue(), txtCar.Text);
+            qc.Condtion += getWhere(cmbLabel2.GetStrValue(), txtCustomerName.Text);
             return qc;
+        }
+        private string getWhere(string fieldValue,string controlValue) {
+            string where = "";
+            if (string.IsNullOrEmpty(fieldValue)) return where;
+            if (fieldValue == "WarehId") where += $" and a.WarehId in (select Id from S_Wareh where WarehName like '%{controlValue}%')";
+            else if (fieldValue == "MaterialId") where += $" and a.MaterialId in (select Id from S_Material where MaterialName like '%{controlValue}%')";
+            else if (fieldValue == "DeliveryId") where += $" and a.DeliveryId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";
+            else if (fieldValue == "CustomerId"||fieldValue == "CustomerName") where += $" and a.CustomerId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";//客户单位
+            else if (fieldValue == "ReceiverId"||fieldValue == "ReceiverName") where += $" and a.ReceiverId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";
+            else if (fieldValue == "SupplierId"||fieldValue == "SupplierName") where += $" and a.SupplierId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";//供应商
+            else if (fieldValue == "ManufacturerId"||fieldValue == "ManufacturerName") where += $" and a.ManufacturerId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";//生产商
+            else if (fieldValue == "TransferId"||fieldValue == "TransferName") where += $" and a.TransferId in (select Id from S_Customer where CustomerName like '%{controlValue}%')";//承运单位
+            else if (fieldValue == "CarId"||fieldValue == "CarNo") where += $" and a.CarNo like '%{controlValue}%'";//承运单位
+            else where += $" and a.{cmbLabel1.GetStrValue()} like '%{controlValue}%'";
+            return where;
         }
 
         private void LoadEmpty() {
@@ -253,9 +272,15 @@ namespace YF.MWS.Win.View.Weight {
             if (File.Exists(layoutXmlPath)) {
                 gvWeight.RestoreLayoutFromXml(layoutXmlPath);
             }
-            gvWeight.Columns[0].Visible = false;
-            gvWeight.Columns[1].Visible = false;
-
+            List<ListItem> list = new List<ListItem>();
+            foreach(SWeightViewDtl dtl in qc.Columns) {
+                if (dtl.RowState == 3||dtl.FieldName=="GrossTime" || dtl.FieldName == "CreateTime" || dtl.FieldName == "TareTime" || dtl.FieldName == "FinishTime" 
+                    || dtl.FieldName == "GrossWeight"|| dtl.FieldName == "TareWeight"|| dtl.FieldName == "SuttleWeight"|| dtl.FieldName == "UnitPrice"|| dtl.FieldName == "UnitMoney" 
+                    || dtl.FieldName == "FinishState") continue;
+                list.Add(new ListItem(dtl.ControlName, dtl.FieldName));
+            }
+            cmbLabel1.BindComboBoxEdit(list);
+            cmbLabel2.BindComboBoxEdit(list);
         }
 
         private void Search() {
@@ -266,6 +291,10 @@ namespace YF.MWS.Win.View.Weight {
                     ucPage.Page.TotalRows = page.TotalRows;
                     gcWeight.DataSource = result.Weight;
                     gcWeight.RefreshDataSource();
+                chkWeight.ClearSelection();
+                if (File.Exists(layoutXmlPath)) {
+                    gvWeight.RestoreLayoutFromXml(layoutXmlPath);
+                }
                     string fieldName = "CreateTime";
                     if (DxHelper.ContainsField(gvWeight, fieldName)) {
                         gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
@@ -296,32 +325,34 @@ namespace YF.MWS.Win.View.Weight {
                         gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                         gvWeight.Columns[fieldName].Width = 200;
                     }
+                    fieldName = "GrossWeight";
+                    if (DxHelper.ContainsField(gvWeight, fieldName)) {
+                        gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                        gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+                    }
+                    fieldName = "TareWeight";
+                    if (DxHelper.ContainsField(gvWeight, fieldName)) {
+                        gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                        gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+                    }
+                    fieldName = "SuttleWeight";
+                    if (DxHelper.ContainsField(gvWeight, fieldName)) {
+                        gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                        gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+                    }
+                    fieldName = "UnitMoney";
+                    if (DxHelper.ContainsField(gvWeight, fieldName)) {
+                        gvWeight.Columns[fieldName].SummaryItem.SummaryType = SummaryItemType.Sum;
+                        gvWeight.Columns[fieldName].SummaryItem.DisplayFormat = "{0}";
+                    }
+                    gvWeight.Columns[0].Visible = false;
+                    gvWeight.Columns[1].Visible = false;
+                    gvWeight.Columns[2].SummaryItem.SummaryType = SummaryItemType.Count;
+                    gvWeight.Columns[2].SummaryItem.DisplayFormat = "计数：{0}";
                     gvWeight.OptionsView.ColumnAutoWidth = false;
                     gvWeight.BestFitColumns();
                 }
-                chkWeight.ClearSelection();
-                if (File.Exists(layoutXmlPath)) {
-                    gvWeight.RestoreLayoutFromXml(layoutXmlPath);
-                }
-                getTotal();
             }
-        }
-        private void getTotal() {
-            decimal total = 0;
-            decimal totalMoney = 0;
-            for (int i = 0; i < gvWeight.RowCount; i++) {
-                DataRow row = gvWeight.GetDataRow(i);
-                if (!row.Table.isColumns(new string[] { "WarehBizType", "SuttleWeight", "d2", "UnitMoney" })) return;
-                if (row["WarehBizType"].ToString() == WarehBizType.RuKu.ToDescription()) {
-                     total += row["SuttleWeight"].ToDecimal();
-                    totalMoney += row["UnitMoney"].ToDecimal();
-                } else if (row["WarehBizType"].ToString() == WarehBizType.ChuKu.ToDescription()) {
-                    total -= row["SuttleWeight"].ToDecimal();
-                    totalMoney -= row["UnitMoney"].ToDecimal();
-                }
-            }
-                lbTotalSuttleWeight.Text = total.ToString();
-                lbTotalMoney.Text = totalMoney.ToString();
         }
 
         private void InitCommandBar() {
@@ -355,39 +386,27 @@ namespace YF.MWS.Win.View.Weight {
         private void PrintAmountReport(string templateId) {
             SReportTemplate template = reportService.Get(templateId);
             DataSet dsReport = new DataSet();
-            dsReport = reportService.GetWeightSearch(CurrentClient.Instance.ViewId, GetCondition());
-            DataTable dt = null;
-            if (!string.IsNullOrEmpty(supplierId) && supplierId.Length > 0) {
-                dt = masterService.GetCustomerTable(supplierId);
-                if (dt != null) {
-                    dsReport.Tables.Add(dt);
-                    if (dsReport.Tables.Count > 1) {
-                        dsReport.Tables[1].TableName = "供货商";
-                    }
-                }
+            List<DataRow> listWeight = chkWeight.GetSelectedDataRow();
+            if (listWeight == null || listWeight.Count <= 0) {
+                MessageBox.Show("请选择需要打印的记录");
+                return;
             }
-            if (template != null && !string.IsNullOrEmpty(template.SubReportType)) {
-                WeightSubReportType subType = template.SubReportType.ToEnum<WeightSubReportType>();
-                if (subType != WeightSubReportType.Weight && subType != WeightSubReportType.WeightDay && subType != WeightSubReportType.WeightMonth) {
-                    dsReport.Tables.Clear();
-                    dt = statementSerivice.GetWeightDataSource(subType, GetCondition());
-                    if (dt != null) {
-                        dsReport.Tables.Add(dt);
-                    }
+            DataTable dt = listWeight[0].Table.Clone();
+            foreach (DataRow row in listWeight) {
+                DataRow dr=dt.NewRow();
+                for(int i = 0; i < dt.Columns.Count; i++) {
+                    dr[i] = row[i];
                 }
+                dt.Rows.Add(dr);
             }
+            dsReport.Tables.Add(dt);
+            dsReport.Tables[0].TableName = "磅单";
             FrmXReport frmReport = new FrmXReport();
             string reportPath = Application.StartupPath + "\\Report\\Weight\\rptWeightSummary.repx";
-            if (template != null) {
-                if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
-                    reportPath = Path.Combine(Application.StartupPath, template.TemplateUrl);
-                } else {
-                    reportPath = Utility.GetReportTemplate(template);
-                }
-            }
+            if (template != null) reportPath = Path.Combine(Application.StartupPath, template.TemplateUrl);
             frmReport.Parameters = GetParameter();
             frmReport.ReportFilePath = reportPath;
-            if (dsReport != null && dsReport.Tables.Count > 0) {
+            if (dsReport != null ) {
                 frmReport.DataMember = dsReport.Tables[0].TableName;
             }
             frmReport.DataSource = dsReport;
@@ -425,7 +444,7 @@ namespace YF.MWS.Win.View.Weight {
             if (gvWeight.GetFocusedRow() == null) {
                 MessageDxUtil.ShowWarning("请选择要重印的磅单!");
             }
-            string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToString();
+            string weightId = gvWeight.GetFocusedRowCellValue("Id").ToString();
             string viewId = gvWeight.GetFocusedRowCellValue("ViewId").ToString();
 
             Print(weightId, viewId);
@@ -476,7 +495,7 @@ namespace YF.MWS.Win.View.Weight {
             if (gvWeight.GetFocusedDataRow() == null) {
                 MessageDxUtil.ShowWarning("请选择要预览的磅单！");
             } else {
-                string weightId = gvWeight.GetFocusedRowCellValue("WeightId").ToString();
+                string weightId = gvWeight.GetFocusedRowCellValue("Id").ToString();
                 string viewId = gvWeight.GetFocusedRowCellValue("ViewId").ToString();
                 DataSet dsReport = new DataSet();
                 SReportTemplate template = null;
@@ -488,7 +507,7 @@ namespace YF.MWS.Win.View.Weight {
                 } else {
                     template = reportService.GetDefaultTemplate(DocumentType.Weight);
                 }
-                dsReport = reportService.GetWeight(viewId, weightId);
+                dsReport = reportService.GetWeight(viewId, 1, weightId);
                 FrmXWeight frmReport = new FrmXWeight();
                 if (template != null) {
                     if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {

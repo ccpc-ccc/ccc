@@ -84,7 +84,7 @@ namespace YF.MWS.Win.View.Master
                 case DocumentType.Measure:
                 case DocumentType.ReWeight:
                 case DocumentType.TemporaryWeight:
-                    DataSource = reportService.GetWeight(viewId);//weightQueryService.GetTopList(new TopWeightQuery() { TopN =1})
+                    DataSource = reportService.GetWeight(viewId, 1);//weightQueryService.GetTopList(new TopWeightQuery() { TopN =1})
                     break;
                 case DocumentType.Charge:
                     DataSource = statementService.GetDocumentDesignResource(type);
@@ -155,7 +155,7 @@ namespace YF.MWS.Win.View.Master
             DisplayName = template.TemplateName;
             viewId = template.ViewId;
             ReportFilePath = Path.Combine(Application.StartupPath, template.TemplateUrl);
-            DataSource = reportService.GetWeight(viewId,weightId);
+            DataSource = reportService.GetWeight(viewId,1, weightId);
             BindReport();
             XRDesignForm form = new XRDesignForm();
             mdiController = form.DesignMdiController;

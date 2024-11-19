@@ -62,7 +62,7 @@ public static String GetDefaultPrinter()
         {
             DataSet dsReport = new DataSet();
             SReportTemplate template = reportService.GetDefaultTemplate(type);
-            dsReport = reportService.GetWeight(viewId, weightId);
+            dsReport = reportService.GetWeight(viewId, 1, weightId);
             string reportFilePath = string.Empty;
             if (type == DocumentType.ReWeight) 
             {
@@ -95,7 +95,7 @@ public static String GetDefaultPrinter()
         public static void PrintWeightReportPdf(string viewId, BWeight weight, IReportService reportService, Hashtable parameters, string printerName = null) {
             DataSet dsReport = new DataSet();
             SReportTemplate template = reportService.GetDefaultTemplate(DocumentType.Weight);
-            dsReport = reportService.GetWeight(viewId, weight.Id);
+            dsReport = reportService.GetWeight(viewId, 1, weight.Id);
             string reportFilePath = string.Empty;
             if (template != null) {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
@@ -115,7 +115,7 @@ public static String GetDefaultPrinter()
         public static void PrintWeightReport(string viewId, string weightId, IReportService reportService, string printerName = null) {
             DataSet dsReport = new DataSet();
             SReportTemplate template = reportService.GetDefaultTemplate(DocumentType.Weight);
-            dsReport = reportService.GetWeight(viewId, weightId);
+            dsReport = reportService.GetWeight(viewId,1, weightId);
             string reportFilePath = string.Empty;
             if (template != null) {
                     if (!string.IsNullOrEmpty(template.TemplateUrl)) {
@@ -135,7 +135,7 @@ public static String GetDefaultPrinter()
             {
                 return;
             }
-            dsReport = reportService.GetWeight(viewId, weightId);
+            dsReport = reportService.GetWeight(viewId,1, weightId);
             string reportFilePath = string.Empty;
             if (template != null)
             {

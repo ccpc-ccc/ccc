@@ -67,6 +67,7 @@
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.txtText1 = new DevExpress.XtraEditors.TextEdit();
             this.lblChannelOne = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.txtLocation1X = new DevExpress.XtraEditors.TextEdit();
@@ -77,7 +78,9 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.chkSuper1 = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.txtText2 = new DevExpress.XtraEditors.TextEdit();
             this.lblChannelTwo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtLocation2X = new DevExpress.XtraEditors.TextEdit();
@@ -88,7 +91,9 @@
             this.labelControl28 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.chkSuper2 = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
+            this.txtText3 = new DevExpress.XtraEditors.TextEdit();
             this.lblChannelThree = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.txtLocation3X = new DevExpress.XtraEditors.TextEdit();
@@ -99,7 +104,9 @@
             this.labelControl32 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.chkSuper3 = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.txtText4 = new DevExpress.XtraEditors.TextEdit();
             this.lblChannelFour = new DevExpress.XtraEditors.LabelControl();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.txtLocation4X = new DevExpress.XtraEditors.TextEdit();
@@ -110,6 +117,7 @@
             this.labelControl37 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl36 = new DevExpress.XtraEditors.LabelControl();
+            this.chkSuper4 = new DevExpress.XtraEditors.CheckEdit();
             this.gpVideo = new DevExpress.XtraEditors.GroupControl();
             this.teVideoAppName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
@@ -162,14 +170,6 @@
             this.teIP1 = new DevExpress.XtraEditors.TextEdit();
             this.lblIPFirst = new DevExpress.XtraEditors.LabelControl();
             this.chkCarNoRecognition = new DevExpress.XtraEditors.CheckEdit();
-            this.chkSuper1 = new DevExpress.XtraEditors.CheckEdit();
-            this.chkSuper2 = new DevExpress.XtraEditors.CheckEdit();
-            this.chkSuper4 = new DevExpress.XtraEditors.CheckEdit();
-            this.chkSuper3 = new DevExpress.XtraEditors.CheckEdit();
-            this.txtText3 = new DevExpress.XtraEditors.TextEdit();
-            this.txtText4 = new DevExpress.XtraEditors.TextEdit();
-            this.txtText2 = new DevExpress.XtraEditors.TextEdit();
-            this.txtText1 = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbVideo.Properties)).BeginInit();
@@ -204,20 +204,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtVideoWidth.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation1X.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation1Y.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation2X.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation2Y.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation3X.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation3Y.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper3.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation4X.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation4Y.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper4.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpVideo)).BeginInit();
             this.gpVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.teVideoAppName.Properties)).BeginInit();
@@ -256,14 +264,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tePort1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teIP1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCarNoRecognition.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -511,8 +511,8 @@
             this.dxErrorProvider.SetIconAlignment(this.chkStartVideo, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
             this.chkStartVideo.Location = new System.Drawing.Point(22, 43);
             this.chkStartVideo.Name = "chkStartVideo";
-            this.chkStartVideo.Properties.Caption = "启用视频";
-            this.chkStartVideo.Size = new System.Drawing.Size(87, 20);
+            this.chkStartVideo.Properties.Caption = "自动抓拍";
+            this.chkStartVideo.Size = new System.Drawing.Size(100, 20);
             this.chkStartVideo.TabIndex = 12;
             this.chkStartVideo.CheckedChanged += new System.EventHandler(this.chkStartVideo_CheckedChanged);
             // 
@@ -615,6 +615,14 @@
             this.groupControl2.TabIndex = 5;
             this.groupControl2.Text = "1路视频";
             // 
+            // txtText1
+            // 
+            this.txtText1.EditValue = "";
+            this.txtText1.Location = new System.Drawing.Point(18, 97);
+            this.txtText1.Name = "txtText1";
+            this.txtText1.Size = new System.Drawing.Size(110, 20);
+            this.txtText1.TabIndex = 29;
+            // 
             // lblChannelOne
             // 
             this.lblChannelOne.Location = new System.Drawing.Point(18, 180);
@@ -695,6 +703,15 @@
             this.labelControl2.TabIndex = 1;
             this.labelControl2.Text = "IP地址";
             // 
+            // chkSuper1
+            // 
+            this.chkSuper1.Location = new System.Drawing.Point(18, 71);
+            this.chkSuper1.Name = "chkSuper1";
+            this.chkSuper1.Properties.Caption = "叠加文字";
+            this.chkSuper1.Size = new System.Drawing.Size(75, 20);
+            this.chkSuper1.TabIndex = 0;
+            this.chkSuper1.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
+            // 
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.txtText2);
@@ -720,6 +737,14 @@
             this.groupControl3.Size = new System.Drawing.Size(276, 232);
             this.groupControl3.TabIndex = 9;
             this.groupControl3.Text = "2路视频";
+            // 
+            // txtText2
+            // 
+            this.txtText2.EditValue = "";
+            this.txtText2.Location = new System.Drawing.Point(16, 97);
+            this.txtText2.Name = "txtText2";
+            this.txtText2.Size = new System.Drawing.Size(110, 20);
+            this.txtText2.TabIndex = 28;
             // 
             // lblChannelTwo
             // 
@@ -801,6 +826,15 @@
             this.labelControl9.TabIndex = 1;
             this.labelControl9.Text = "IP地址";
             // 
+            // chkSuper2
+            // 
+            this.chkSuper2.Location = new System.Drawing.Point(18, 71);
+            this.chkSuper2.Name = "chkSuper2";
+            this.chkSuper2.Properties.Caption = "叠加文字";
+            this.chkSuper2.Size = new System.Drawing.Size(75, 20);
+            this.chkSuper2.TabIndex = 0;
+            this.chkSuper2.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
+            // 
             // groupControl4
             // 
             this.groupControl4.Controls.Add(this.txtText3);
@@ -826,6 +860,14 @@
             this.groupControl4.Size = new System.Drawing.Size(276, 230);
             this.groupControl4.TabIndex = 9;
             this.groupControl4.Text = "3路视频";
+            // 
+            // txtText3
+            // 
+            this.txtText3.EditValue = "";
+            this.txtText3.Location = new System.Drawing.Point(15, 94);
+            this.txtText3.Name = "txtText3";
+            this.txtText3.Size = new System.Drawing.Size(110, 20);
+            this.txtText3.TabIndex = 26;
             // 
             // lblChannelThree
             // 
@@ -907,6 +949,15 @@
             this.labelControl13.TabIndex = 1;
             this.labelControl13.Text = "IP地址";
             // 
+            // chkSuper3
+            // 
+            this.chkSuper3.Location = new System.Drawing.Point(15, 68);
+            this.chkSuper3.Name = "chkSuper3";
+            this.chkSuper3.Properties.Caption = "叠加文字";
+            this.chkSuper3.Size = new System.Drawing.Size(75, 20);
+            this.chkSuper3.TabIndex = 0;
+            this.chkSuper3.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
+            // 
             // groupControl5
             // 
             this.groupControl5.Controls.Add(this.txtText4);
@@ -932,6 +983,14 @@
             this.groupControl5.Size = new System.Drawing.Size(276, 230);
             this.groupControl5.TabIndex = 10;
             this.groupControl5.Text = "4路视频";
+            // 
+            // txtText4
+            // 
+            this.txtText4.EditValue = "";
+            this.txtText4.Location = new System.Drawing.Point(18, 94);
+            this.txtText4.Name = "txtText4";
+            this.txtText4.Size = new System.Drawing.Size(110, 20);
+            this.txtText4.TabIndex = 27;
             // 
             // lblChannelFour
             // 
@@ -1012,6 +1071,15 @@
             this.labelControl36.Size = new System.Drawing.Size(48, 14);
             this.labelControl36.TabIndex = 5;
             this.labelControl36.Text = "叠加位置";
+            // 
+            // chkSuper4
+            // 
+            this.chkSuper4.Location = new System.Drawing.Point(16, 68);
+            this.chkSuper4.Name = "chkSuper4";
+            this.chkSuper4.Properties.Caption = "叠加文字";
+            this.chkSuper4.Size = new System.Drawing.Size(75, 20);
+            this.chkSuper4.TabIndex = 0;
+            this.chkSuper4.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
             // 
             // gpVideo
             // 
@@ -1508,74 +1576,6 @@
             this.chkCarNoRecognition.Size = new System.Drawing.Size(108, 20);
             this.chkCarNoRecognition.TabIndex = 12;
             // 
-            // chkSuper1
-            // 
-            this.chkSuper1.Location = new System.Drawing.Point(18, 71);
-            this.chkSuper1.Name = "chkSuper1";
-            this.chkSuper1.Properties.Caption = "叠加文字";
-            this.chkSuper1.Size = new System.Drawing.Size(75, 20);
-            this.chkSuper1.TabIndex = 0;
-            this.chkSuper1.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
-            // 
-            // chkSuper2
-            // 
-            this.chkSuper2.Location = new System.Drawing.Point(18, 71);
-            this.chkSuper2.Name = "chkSuper2";
-            this.chkSuper2.Properties.Caption = "叠加文字";
-            this.chkSuper2.Size = new System.Drawing.Size(75, 20);
-            this.chkSuper2.TabIndex = 0;
-            this.chkSuper2.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
-            // 
-            // chkSuper4
-            // 
-            this.chkSuper4.Location = new System.Drawing.Point(16, 68);
-            this.chkSuper4.Name = "chkSuper4";
-            this.chkSuper4.Properties.Caption = "叠加文字";
-            this.chkSuper4.Size = new System.Drawing.Size(75, 20);
-            this.chkSuper4.TabIndex = 0;
-            this.chkSuper4.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
-            // 
-            // chkSuper3
-            // 
-            this.chkSuper3.Location = new System.Drawing.Point(15, 68);
-            this.chkSuper3.Name = "chkSuper3";
-            this.chkSuper3.Properties.Caption = "叠加文字";
-            this.chkSuper3.Size = new System.Drawing.Size(75, 20);
-            this.chkSuper3.TabIndex = 0;
-            this.chkSuper3.CheckedChanged += new System.EventHandler(this.chkVideoOne_CheckedChanged);
-            // 
-            // txtText3
-            // 
-            this.txtText3.EditValue = "";
-            this.txtText3.Location = new System.Drawing.Point(15, 94);
-            this.txtText3.Name = "txtText3";
-            this.txtText3.Size = new System.Drawing.Size(110, 20);
-            this.txtText3.TabIndex = 26;
-            // 
-            // txtText4
-            // 
-            this.txtText4.EditValue = "";
-            this.txtText4.Location = new System.Drawing.Point(18, 94);
-            this.txtText4.Name = "txtText4";
-            this.txtText4.Size = new System.Drawing.Size(110, 20);
-            this.txtText4.TabIndex = 27;
-            // 
-            // txtText2
-            // 
-            this.txtText2.EditValue = "";
-            this.txtText2.Location = new System.Drawing.Point(16, 97);
-            this.txtText2.Name = "txtText2";
-            this.txtText2.Size = new System.Drawing.Size(110, 20);
-            this.txtText2.TabIndex = 28;
-            // 
-            // txtText1
-            // 
-            this.txtText1.EditValue = "";
-            this.txtText1.Location = new System.Drawing.Point(18, 97);
-            this.txtText1.Name = "txtText1";
-            this.txtText1.Size = new System.Drawing.Size(110, 20);
-            this.txtText1.TabIndex = 29;
-            // 
             // FrmVideoSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1626,23 +1626,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation1X.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation1Y.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation2X.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation2Y.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             this.groupControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation3X.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation3Y.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper3.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
             this.groupControl5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtText4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation4X.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLocation4Y.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkSuper4.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpVideo)).EndInit();
             this.gpVideo.ResumeLayout(false);
             this.gpVideo.PerformLayout();
@@ -1684,14 +1692,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tePort1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teIP1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkCarNoRecognition.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chkSuper3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtText1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

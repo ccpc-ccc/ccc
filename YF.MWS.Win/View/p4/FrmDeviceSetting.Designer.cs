@@ -32,17 +32,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDeviceSetting));
             this.imgListSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.gcCom = new DevExpress.XtraEditors.GroupControl();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.cmbBaudRate1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.cmbCom1 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.txtServerPort = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
+            this.txtServerIP = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.cmbParity1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbStopBits1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbDataBits1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.cmbBaudRate1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.cmbCom1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.radioDigit1 = new DevExpress.XtraEditors.RadioGroup();
@@ -134,21 +141,27 @@
             this.groupControl10 = new DevExpress.XtraEditors.GroupControl();
             this.radioDigit1_2 = new DevExpress.XtraEditors.RadioGroup();
             this.memoReceive1_2 = new DevExpress.XtraEditors.MemoEdit();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
-            this.txtServerIP = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
-            this.txtServerPort = new DevExpress.XtraEditors.TextEdit();
+            this.gpWeightStableCfg = new DevExpress.XtraEditors.GroupControl();
+            this.spSamplingCount = new DevExpress.XtraEditors.SpinEdit();
+            this.lblSamplingCount = new DevExpress.XtraEditors.LabelControl();
+            this.lblMinCredibleWeight = new DevExpress.XtraEditors.LabelControl();
+            this.teMinCredibleWeight = new DevExpress.XtraEditors.TextEdit();
+            this.lblWeightDeviation = new DevExpress.XtraEditors.LabelControl();
+            this.teWeightDeviation = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCom)).BeginInit();
             this.gcCom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBaudRate1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbCom1.Properties)).BeginInit();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbParity1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbStopBits1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDataBits1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbBaudRate1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbCom1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -219,12 +232,11 @@
             this.groupControl10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radioDigit1_2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoReceive1_2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gpWeightStableCfg)).BeginInit();
+            this.gpWeightStableCfg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // imgListSmall
@@ -252,6 +264,120 @@
             this.gcCom.Size = new System.Drawing.Size(191, 217);
             this.gcCom.TabIndex = 4;
             this.gcCom.Text = "COM端口设置";
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(187, 90);
+            this.xtraTabControl1.TabIndex = 3;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.cmbBaudRate1);
+            this.xtraTabPage1.Controls.Add(this.labelControl1);
+            this.xtraTabPage1.Controls.Add(this.labelControl2);
+            this.xtraTabPage1.Controls.Add(this.cmbCom1);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(185, 64);
+            this.xtraTabPage1.Text = "串口配置";
+            // 
+            // cmbBaudRate1
+            // 
+            this.cmbBaudRate1.Location = new System.Drawing.Point(79, 43);
+            this.cmbBaudRate1.Name = "cmbBaudRate1";
+            this.cmbBaudRate1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbBaudRate1.Properties.Appearance.Options.UseFont = true;
+            this.cmbBaudRate1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbBaudRate1.Properties.Items.AddRange(new object[] {
+            "1200",
+            "2400",
+            "4800",
+            "9600"});
+            this.cmbBaudRate1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbBaudRate1.Size = new System.Drawing.Size(92, 18);
+            this.cmbBaudRate1.TabIndex = 11;
+            this.cmbBaudRate1.Tag = "BaundRate";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(15, 15);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(60, 12);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "端    口：";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(15, 46);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(60, 12);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "波 特 率：";
+            // 
+            // cmbCom1
+            // 
+            this.cmbCom1.Location = new System.Drawing.Point(79, 12);
+            this.cmbCom1.Name = "cmbCom1";
+            this.cmbCom1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbCom1.Properties.Appearance.Options.UseFont = true;
+            this.cmbCom1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbCom1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cmbCom1.Size = new System.Drawing.Size(92, 18);
+            this.cmbCom1.TabIndex = 10;
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.txtServerPort);
+            this.xtraTabPage2.Controls.Add(this.labelControl19);
+            this.xtraTabPage2.Controls.Add(this.txtServerIP);
+            this.xtraTabPage2.Controls.Add(this.labelControl18);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(185, 64);
+            this.xtraTabPage2.Text = "网口配置";
+            // 
+            // txtServerPort
+            // 
+            this.txtServerPort.EditValue = "";
+            this.txtServerPort.Location = new System.Drawing.Point(76, 34);
+            this.txtServerPort.Name = "txtServerPort";
+            this.txtServerPort.Size = new System.Drawing.Size(92, 20);
+            this.txtServerPort.TabIndex = 15;
+            // 
+            // labelControl19
+            // 
+            this.labelControl19.Location = new System.Drawing.Point(9, 37);
+            this.labelControl19.Name = "labelControl19";
+            this.labelControl19.Size = new System.Drawing.Size(60, 14);
+            this.labelControl19.TabIndex = 14;
+            this.labelControl19.Text = "设备端口：";
+            // 
+            // txtServerIP
+            // 
+            this.txtServerIP.EditValue = "";
+            this.txtServerIP.Location = new System.Drawing.Point(76, 8);
+            this.txtServerIP.Name = "txtServerIP";
+            this.txtServerIP.Size = new System.Drawing.Size(92, 20);
+            this.txtServerIP.TabIndex = 15;
+            // 
+            // labelControl18
+            // 
+            this.labelControl18.Location = new System.Drawing.Point(24, 11);
+            this.labelControl18.Name = "labelControl18";
+            this.labelControl18.Size = new System.Drawing.Size(47, 14);
+            this.labelControl18.TabIndex = 14;
+            this.labelControl18.Text = "设备IP：";
             // 
             // simpleButton2
             // 
@@ -308,36 +434,6 @@
             this.cmbDataBits1.TabIndex = 12;
             this.cmbDataBits1.Tag = "DataBit";
             // 
-            // cmbBaudRate1
-            // 
-            this.cmbBaudRate1.Location = new System.Drawing.Point(79, 43);
-            this.cmbBaudRate1.Name = "cmbBaudRate1";
-            this.cmbBaudRate1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbBaudRate1.Properties.Appearance.Options.UseFont = true;
-            this.cmbBaudRate1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbBaudRate1.Properties.Items.AddRange(new object[] {
-            "1200",
-            "2400",
-            "4800",
-            "9600"});
-            this.cmbBaudRate1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbBaudRate1.Size = new System.Drawing.Size(92, 18);
-            this.cmbBaudRate1.TabIndex = 11;
-            this.cmbBaudRate1.Tag = "BaundRate";
-            // 
-            // cmbCom1
-            // 
-            this.cmbCom1.Location = new System.Drawing.Point(79, 12);
-            this.cmbCom1.Name = "cmbCom1";
-            this.cmbCom1.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbCom1.Properties.Appearance.Options.UseFont = true;
-            this.cmbCom1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbCom1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cmbCom1.Size = new System.Drawing.Size(92, 18);
-            this.cmbCom1.TabIndex = 10;
-            // 
             // labelControl5
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("宋体", 9F);
@@ -367,26 +463,6 @@
             this.labelControl3.Size = new System.Drawing.Size(60, 12);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "数 据 位：";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(15, 46);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(60, 12);
-            this.labelControl2.TabIndex = 2;
-            this.labelControl2.Text = "波 特 率：";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(15, 15);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 12);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "端    口：";
             // 
             // panelControl1
             // 
@@ -433,6 +509,7 @@
             // 
             // panelControl2
             // 
+            this.panelControl2.Controls.Add(this.gpWeightStableCfg);
             this.panelControl2.Controls.Add(this.chkReturnZero1);
             this.panelControl2.Controls.Add(this.gpReturnZeroCfg);
             this.panelControl2.Controls.Add(this.chkStartDevice1);
@@ -451,7 +528,7 @@
             this.panelControl2.Controls.Add(this.labelControl6);
             this.panelControl2.Location = new System.Drawing.Point(28, 238);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(653, 313);
+            this.panelControl2.Size = new System.Drawing.Size(653, 387);
             this.panelControl2.TabIndex = 14;
             // 
             // chkReturnZero1
@@ -810,7 +887,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(742, 648);
+            this.tabControl1.Size = new System.Drawing.Size(742, 689);
             this.tabControl1.TabIndex = 19;
             // 
             // tabPage1
@@ -822,14 +899,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(734, 621);
+            this.tabPage1.Size = new System.Drawing.Size(734, 662);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "1号仪表设置";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // simpleButton3
             // 
-            this.simpleButton3.Location = new System.Drawing.Point(253, 561);
+            this.simpleButton3.Location = new System.Drawing.Point(249, 631);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(75, 23);
             this.simpleButton3.TabIndex = 15;
@@ -1428,75 +1505,90 @@
             this.memoReceive1_2.Size = new System.Drawing.Size(229, 192);
             this.memoReceive1_2.TabIndex = 0;
             // 
-            // xtraTabControl1
+            // gpWeightStableCfg
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.xtraTabControl1.Location = new System.Drawing.Point(2, 2);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(187, 90);
-            this.xtraTabControl1.TabIndex = 3;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.gpWeightStableCfg.Controls.Add(this.spSamplingCount);
+            this.gpWeightStableCfg.Controls.Add(this.lblSamplingCount);
+            this.gpWeightStableCfg.Controls.Add(this.lblMinCredibleWeight);
+            this.gpWeightStableCfg.Controls.Add(this.teMinCredibleWeight);
+            this.gpWeightStableCfg.Controls.Add(this.lblWeightDeviation);
+            this.gpWeightStableCfg.Controls.Add(this.teWeightDeviation);
+            this.gpWeightStableCfg.Location = new System.Drawing.Point(14, 299);
+            this.gpWeightStableCfg.Name = "gpWeightStableCfg";
+            this.gpWeightStableCfg.Size = new System.Drawing.Size(630, 73);
+            this.gpWeightStableCfg.TabIndex = 115;
+            this.gpWeightStableCfg.Text = "重量稳定规则设置";
             // 
-            // xtraTabPage1
+            // spSamplingCount
             // 
-            this.xtraTabPage1.Controls.Add(this.cmbBaudRate1);
-            this.xtraTabPage1.Controls.Add(this.labelControl1);
-            this.xtraTabPage1.Controls.Add(this.labelControl2);
-            this.xtraTabPage1.Controls.Add(this.cmbCom1);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(185, 64);
-            this.xtraTabPage1.Text = "串口配置";
+            this.spSamplingCount.EditValue = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.spSamplingCount.Location = new System.Drawing.Point(545, 35);
+            this.spSamplingCount.Name = "spSamplingCount";
+            this.spSamplingCount.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.spSamplingCount.Properties.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.spSamplingCount.Properties.MinValue = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.spSamplingCount.Size = new System.Drawing.Size(76, 20);
+            this.spSamplingCount.TabIndex = 101;
             // 
-            // xtraTabPage2
+            // lblSamplingCount
             // 
-            this.xtraTabPage2.Controls.Add(this.txtServerPort);
-            this.xtraTabPage2.Controls.Add(this.labelControl19);
-            this.xtraTabPage2.Controls.Add(this.txtServerIP);
-            this.xtraTabPage2.Controls.Add(this.labelControl18);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(185, 64);
-            this.xtraTabPage2.Text = "网口配置";
+            this.lblSamplingCount.Location = new System.Drawing.Point(489, 38);
+            this.lblSamplingCount.Name = "lblSamplingCount";
+            this.lblSamplingCount.Size = new System.Drawing.Size(52, 14);
+            this.lblSamplingCount.TabIndex = 98;
+            this.lblSamplingCount.Text = "采样点数:";
             // 
-            // labelControl18
+            // lblMinCredibleWeight
             // 
-            this.labelControl18.Location = new System.Drawing.Point(24, 11);
-            this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(47, 14);
-            this.labelControl18.TabIndex = 14;
-            this.labelControl18.Text = "设备IP：";
+            this.lblMinCredibleWeight.Location = new System.Drawing.Point(233, 41);
+            this.lblMinCredibleWeight.Name = "lblMinCredibleWeight";
+            this.lblMinCredibleWeight.Size = new System.Drawing.Size(100, 14);
+            this.lblMinCredibleWeight.TabIndex = 75;
+            this.lblMinCredibleWeight.Text = "最低可信重量(Kg):";
             // 
-            // txtServerIP
+            // teMinCredibleWeight
             // 
-            this.txtServerIP.EditValue = "";
-            this.txtServerIP.Location = new System.Drawing.Point(76, 8);
-            this.txtServerIP.Name = "txtServerIP";
-            this.txtServerIP.Size = new System.Drawing.Size(92, 20);
-            this.txtServerIP.TabIndex = 15;
+            this.teMinCredibleWeight.EditValue = "";
+            this.teMinCredibleWeight.Location = new System.Drawing.Point(343, 38);
+            this.teMinCredibleWeight.Name = "teMinCredibleWeight";
+            this.teMinCredibleWeight.Size = new System.Drawing.Size(87, 20);
+            this.teMinCredibleWeight.TabIndex = 74;
             // 
-            // labelControl19
+            // lblWeightDeviation
             // 
-            this.labelControl19.Location = new System.Drawing.Point(9, 37);
-            this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(60, 14);
-            this.labelControl19.TabIndex = 14;
-            this.labelControl19.Text = "设备端口：";
+            this.lblWeightDeviation.Location = new System.Drawing.Point(17, 41);
+            this.lblWeightDeviation.Name = "lblWeightDeviation";
+            this.lblWeightDeviation.Size = new System.Drawing.Size(100, 14);
+            this.lblWeightDeviation.TabIndex = 70;
+            this.lblWeightDeviation.Text = "重量稳定偏差(Kg):";
             // 
-            // txtServerPort
+            // teWeightDeviation
             // 
-            this.txtServerPort.EditValue = "";
-            this.txtServerPort.Location = new System.Drawing.Point(76, 34);
-            this.txtServerPort.Name = "txtServerPort";
-            this.txtServerPort.Size = new System.Drawing.Size(92, 20);
-            this.txtServerPort.TabIndex = 15;
+            this.teWeightDeviation.EditValue = "";
+            this.teWeightDeviation.Location = new System.Drawing.Point(127, 38);
+            this.teWeightDeviation.Name = "teWeightDeviation";
+            this.teWeightDeviation.Size = new System.Drawing.Size(87, 20);
+            this.teWeightDeviation.TabIndex = 69;
+            this.teWeightDeviation.Tag = "WeightDeviation";
             // 
             // FrmDeviceSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 648);
+            this.ClientSize = new System.Drawing.Size(742, 689);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.IconOptions.Image = global::YF.MWS.Win.Properties.Resources.app;
@@ -1512,11 +1604,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCom)).EndInit();
             this.gcCom.ResumeLayout(false);
             this.gcCom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbBaudRate1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbCom1.Properties)).EndInit();
+            this.xtraTabPage2.ResumeLayout(false);
+            this.xtraTabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbParity1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbStopBits1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDataBits1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbBaudRate1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbCom1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
@@ -1594,14 +1694,12 @@
             this.groupControl10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radioDigit1_2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoReceive1_2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
-            this.xtraTabPage1.PerformLayout();
-            this.xtraTabPage2.ResumeLayout(false);
-            this.xtraTabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtServerIP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtServerPort.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gpWeightStableCfg)).EndInit();
+            this.gpWeightStableCfg.ResumeLayout(false);
+            this.gpWeightStableCfg.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spSamplingCount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teMinCredibleWeight.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.teWeightDeviation.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1718,5 +1816,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.TextEdit txtServerPort;
         private DevExpress.XtraEditors.LabelControl labelControl19;
+        private DevExpress.XtraEditors.GroupControl gpWeightStableCfg;
+        private DevExpress.XtraEditors.SpinEdit spSamplingCount;
+        private DevExpress.XtraEditors.LabelControl lblSamplingCount;
+        private DevExpress.XtraEditors.LabelControl lblMinCredibleWeight;
+        private DevExpress.XtraEditors.TextEdit teMinCredibleWeight;
+        private DevExpress.XtraEditors.LabelControl lblWeightDeviation;
+        private DevExpress.XtraEditors.TextEdit teWeightDeviation;
     }
 }

@@ -35,8 +35,8 @@ namespace YF.MWS.SQliteService.Remote
         ICustomerService customerService = new CustomerService();
         IMaterialService materialService = new MaterialService();
         IFileService fileService = new FileService();
-        public WebWeightService() {
-            WebWeightService.ServerUrl=AppSetting.GetValue("EcsServer");
+        public WebWeightService(string url) {
+            WebWeightService.ServerUrl= url;
         }
         public static ReturnEntity Login(string CompanyCode, string MachineCode, string RegisterCode) {
             string url = string.Format("{0}/api/client/login", WebWeightService.ServerUrl);

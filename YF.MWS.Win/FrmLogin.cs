@@ -136,19 +136,8 @@ namespace YF.MWS.Win
             }
             BindData();
             DataBaseType dbType = AppSetting.GetValue("databaseType").ToEnum<DataBaseType>();
-            BindDbCfg(dbType);
             if (autoLogin) {
                 btnLogin.PerformClick();
-            }
-        }
-
-        private void BindDbCfg(DataBaseType dbType) 
-        {
-            if (dbType == DataBaseType.Sqlserver) 
-            {
-                string dsn = AppSetting.GetValue("dsn");
-                if (string.IsNullOrEmpty(dsn)) return;
-                List<string> lstDsn = dsn.Split(';').ToList();
             }
         }
 
@@ -161,8 +150,9 @@ namespace YF.MWS.Win
                 {
                     txtPassword.Text = Encrypt.DecryptDES(loginCfg.UserPwd, CurrentClient.Instance.EncryptKey);
                 }
+                List<string> list = userService.GetUserList();
                 chkRememberPwd.Checked = loginCfg.RememberPwd;
-                combUserName.Properties.Items.AddRange(loginCfg.UserNames.ToArray());
+                combUserName.Properties.Items.AddRange(list.ToArray());
                 combUserName.Text = loginCfg.UserName;
             }
             SysCfg cfg = CfgUtil.GetCfg();

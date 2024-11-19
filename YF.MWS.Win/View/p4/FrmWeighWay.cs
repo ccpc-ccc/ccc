@@ -42,9 +42,6 @@ namespace YF.MWS.Win.View.Setting
                 chkStartSaveWithManualFirst.Checked = cfg.NobodyWeight.StartSaveWithManualFirst;
                 chkStartSaveWithManualSecond.Checked = cfg.NobodyWeight.StartSaveWithManualSecond;
                 rgWeightProcessTriggerType.EditValue = weight.WeightProcessTrigger.ToString();
-                teWeightDeviation.Text = weightStable.WeightDeviation.ToString();
-                teMinCredibleWeight.Text = weightStable.MinCredibleWeight.ToString();
-                spSamplingCount.Value = weightStable.SamplingCount;
                 rgWeightType.EditValue=cfg.MeasureFun;
                 #region 称重设置
                 OverWeightCfg overWeight = cfg.OverWeight;
@@ -95,9 +92,6 @@ namespace YF.MWS.Win.View.Setting
                 cfg.NobodyWeight.StartSaveWithManualSecond = chkStartSaveWithManualSecond.Checked;
             cfg.Weight.WeightProcessTrigger = rgWeightProcessTriggerType.EditValue.ToEnum<WeightProcessTriggerType>();
             WeightStableCfg weightStable = cfg.WeightStable;
-            weightStable.WeightDeviation = teWeightDeviation.Text.ToDecimal();
-            weightStable.MinCredibleWeight = teMinCredibleWeight.Text.ToDecimal();
-            weightStable.SamplingCount = spSamplingCount.Value.ToInt();
             cfg.MeasureFun = rgWeightType.EditValue.ToString();
             CfgUtil.SaveCfg(cfg);
             MessageDxUtil.ShowTips("成功保存过磅方式设置信息");

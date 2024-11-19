@@ -31,7 +31,7 @@ namespace YF.MWS.Win.View.Weight
     public partial class FrmSyncWeightList : BaseForm
     {
         private IWeightService weightService = new WeightService();
-        private IWebWeightService webWeightService = new WebWeightService();
+        private IWebWeightService webWeightService;
         private IFileService fileService = new FileService();
         private IMasterService masterService = new MasterService();
         private IWeightExtService extService = new WeightExtService();
@@ -58,6 +58,7 @@ namespace YF.MWS.Win.View.Weight
             lst = weightService.GetList(teStartDate.Time, teEndDate.Time, combFinishState.SelectedIndex);
             gcWeight.DataSource = lst;
             gcWeight.RefreshDataSource();
+            webWeightService = new WebWeightService(Cfg.Transfer.ServerUrl);
             //gvWeight.OptionsView.ColumnAutoWidth = false;
             //gvWeight.BestFitColumns();
             if (chkWeight == null)

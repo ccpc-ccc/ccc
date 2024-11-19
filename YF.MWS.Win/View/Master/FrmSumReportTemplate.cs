@@ -133,8 +133,8 @@ namespace YF.MWS.Win.View.Master
             {
                 case SummaryReportType.Weight:
                     WeightSubReportType subType = subReportType.ToEnum<WeightSubReportType>();
-                    DataSource = reportService.GetWeight(viewId, weightId);
-                    DataTable dt = masterService.GetCustomerTable(customerId);
+                    DataSource = reportService.GetWeight(viewId,10000);
+                    /*DataTable dt = masterService.GetCustomerTable(customerId);
                     if (dt != null)
                     {
                         DataSource.Tables.Add(dt);
@@ -148,7 +148,7 @@ namespace YF.MWS.Win.View.Master
                         DataSource.Tables.Clear();
                         dt = statementService.GetWeightDesignDataSource(subType);
                         DataSource.Tables.Add(dt);
-                    }
+                    }*/
                     break;
                 case SummaryReportType.Charge:
                     DataSource = statementService.GetSummaryDesignResource(type);
