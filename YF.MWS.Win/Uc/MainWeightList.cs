@@ -153,35 +153,27 @@ namespace YF.MWS.Win.Uc
         {
             StringBuilder sbCondition = new StringBuilder();
             sbCondition.AppendFormat(" and a.RowState != {0} ", (int)RowState.Delete);
-            int finishState = combFinishState.SelectedIndex;
-            if (!string.IsNullOrEmpty(cmbTimeType.GetStrValue())) {
             if (teStartDate.Time != DateTime.MinValue)
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}>=datetime('{teStartDate.Time.ToString("yyyy-MM-dd 00:00:00")}') ");
+                    sbCondition.Append($"and a.CreateTime>=datetime('{teStartDate.Time.ToString("yyyy-MM-dd HH:mm:ss")}') ");
                 }
                 else
                 {
-                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}>='{teStartDate.Time.ToString("yyyy-MM-dd 00:00:00")}' ");
+                    sbCondition.Append($"and a.CreateTime>='{teStartDate.Time.ToString("yyyy-MM-dd HH:mm:ss")}' ");
                 }
             }
             if (teEndDate.Time != DateTime.MinValue)
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<datetime('{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}') ");
+                    sbCondition.Append($"and a.CreateTime<datetime('{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss")}') ");
                 }
                 else
                 {
-                    sbCondition.Append($"and a.{cmbTimeType.GetStrValue()}<'{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00")}'");
+                    sbCondition.Append($"and a.CreateTime<'{teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss")}'");
                 }
-            }
-
-            }
-            if (finishState != 2)
-            {
-                sbCondition.AppendFormat("and a.FinishState='{0}'", finishState);
             }
             if (startWeighterDataFilter)
             {
@@ -193,19 +185,14 @@ namespace YF.MWS.Win.Uc
             if (!cfg.Weight.ShareWeight) {
                 sbCondition.AppendFormat(" and a.CompanyId='{0}'", CurrentUser.Instance.CompanyId);
             }
-            if (txtCar.Text.ToTrim() != "") {
-                sbCondition.AppendFormat("and a.CarNo like '%{0}%'", txtCar.Text.ToTrim());
-            }
             TopWeightQuery query = new TopWeightQuery() { Condition=sbCondition.ToString(), TopN=0, StartWeightPay=startWeightPay};
             WeightQueryResult result = weightQueryService.GetTopList(query);
             if (result == null)
                 result = new WeightQueryResult();
             gvWeight.Columns.Clear();
             gcWeight.DataSource = result.Weight;
-            if (File.Exists(layoutXmlPath))
-            {
-                gvWeight.RestoreLayoutFromXml(layoutXmlPath);
-            }
+            if (File.Exists(layoutXmlPath)) gvWeight.RestoreLayoutFromXml(layoutXmlPath);
+            gvWeight.OptionsView.ColumnAutoWidth = false;
 
             if (chkWeight == null)
                 chkWeight = new GridCheckMarksSelection(gvWeight);
@@ -214,13 +201,13 @@ namespace YF.MWS.Win.Uc
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "FinishTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "TareTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
@@ -255,6 +242,9 @@ namespace YF.MWS.Win.Uc
             //gvWeight.GridControl.ForceInitialize();
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
+            gvWeight.Columns[2].Visible = false;
+                gvWeight.Columns[3].SummaryItem.SummaryType = SummaryItemType.Count;
+                gvWeight.Columns[3].SummaryItem.DisplayFormat = "合计：{0}";
             gcWeight.RefreshDataSource();
             //gvWeight.OptionsView.ColumnAutoWidth = true;
             gvWeight.BestFitColumns();
@@ -263,7 +253,6 @@ namespace YF.MWS.Win.Uc
         private void MainWeightList_Load(object sender, EventArgs e)
         {
             RemoveEvent();
-            cmbTimeType.BindComboBoxEdit<CheckDateType>();
             cmbDate.BindComboBoxEdit<CheckDate>();
             teEndDate.Time = DateTime.Now;
             teStartDate.Time = DateTime.Now;
@@ -448,17 +437,17 @@ namespace YF.MWS.Win.Uc
 
         private void cmbDate_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbDate.SelectedIndex == 0) {
-                teStartDate.Time = DateTime.Now;
-                teEndDate.Time = DateTime.Now;
+                teStartDate.Time = DateTime.Now.ToString("yyyy-MM-dd 00:00:00:00").ToDateTime() ;
+                teEndDate.Time = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
             }else if (cmbDate.SelectedIndex == 1) {
-                teStartDate.Time = DateTime.Now.AddDays(-1);
-                teEndDate.Time = DateTime.Now.AddDays(-1);
+                teStartDate.Time = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
+                teEndDate.Time = DateTime.Now.ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
             }else if (cmbDate.SelectedIndex == 2) {
-                teStartDate.Time = DateTime.Now.AddDays(-7);
-                teEndDate.Time = DateTime.Now;
+                teStartDate.Time = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
+                teEndDate.Time = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
             }else if (cmbDate.SelectedIndex == 3) {
-                teStartDate.Time = DateTime.Now.AddDays(-30);
-                teEndDate.Time = DateTime.Now;
+                teStartDate.Time = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
+                teEndDate.Time = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd 00:00:00:00").ToDateTime();
             }
         }
 

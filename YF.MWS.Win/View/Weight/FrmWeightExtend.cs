@@ -47,7 +47,7 @@ namespace YF.MWS.Win.View.Weight
         private ITaskService taskService = new TaskService();
         private ILogService logService = new LogService();
         private IPlanService planService = new PlanService();
-        private IWebWeightService webWeightService = new WebWeightService();
+        private IWebWeightService webWeightService = new WebWeightService("");
         private IWebWeightProcessService webWeightProcessService = new WebWeightProcessService();
         private IWeightProcessService weightProcessService = new WeightProcessService();
         private BWeight currentWeight = null;
@@ -68,7 +68,6 @@ namespace YF.MWS.Win.View.Weight
         private bool isSendingAd = false;
         private LXCfg lxCfg = null;
         private LXLedUtil lxLedUtil = null;
-        private string serverUrl = string.Empty;
         private bool startVideo = false;
         private bool startReadCard=false;
         private bool startWeightProcessCfg = false;
@@ -460,11 +459,6 @@ namespace YF.MWS.Win.View.Weight
                 if (Cfg.MeasureFun != null)
                 {
                     currentWeighWay = Cfg.MeasureFun.ToEnum<WeightWay>();
-                }
-                if (Cfg.Transfer != null)
-                {
-                    serverUrl = Cfg.Transfer.ServerUrl;
-                    syncObj.ServerUrl = serverUrl;
                 }
                 if (Cfg.Print != null)
                 {
@@ -1509,48 +1503,7 @@ namespace YF.MWS.Win.View.Weight
             ClearWeightControl();
             CreateNewWeight();
             mainWeight.Clear(completelyClear);
-        }
-
-        /// <summary>
-        /// 手动保存磅单
-        /// </summary>
-        private void ManualSave()
-        {
-            bool needSetWeight = true;
-            decimal tareWeight = 0;
-            decimal grossWeight = 0;
-            if (weTareWeight != null)
-            {
-                tareWeight = weTareWeight.Text.ToDecimal();
-            }
-            if (weGrossWeight != null)
-            {
-                grossWeight = weGrossWeight.Text.ToDecimal();
-            }
-            if (tareWeight > 0 && grossWeight > 0)
-            {
-                needSetWeight = false;
-            }
-            decimal weight = GetCurrentWeight();
-            if (tareWeight > 0 && grossWeight > 0 && tareWeight > grossWeight && !needSetWeight)
-            {
-                TareGrossTransform();
-            }
-            if (currentWeighWay == WeightWay.Nobody)
-            {
-                bool isValidated = ValidateForm() && mainWeight.ValidateChildren();
-                if (isValidated)
-                {
-                    AutoWeightSave();
-                }
-            }
-            else
-            {
-                if (mainWeight.ValidateChildren() && ValidateForm())
-                {
-                    Save();
-                }
-            }
+            if (weWaybillNo != null) weWaybillNo.Focus();
         }
 
         /// <summary>

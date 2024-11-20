@@ -32,19 +32,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWeightList));
             this.pcHeader = new DevExpress.XtraEditors.PanelControl();
-            this.txtCar = new DevExpress.XtraEditors.TextEdit();
             this.btnViewPhoto = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnExportExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.teEndDate = new DevExpress.XtraEditors.TimeEdit();
             this.lblRange = new DevExpress.XtraEditors.LabelControl();
-            this.combFinishState = new DevExpress.XtraEditors.ComboBoxEdit();
             this.teStartDate = new DevExpress.XtraEditors.TimeEdit();
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.cmbTimeType = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cmbDate = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -54,13 +50,10 @@
             this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combFinishState.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbTimeType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
@@ -75,16 +68,6 @@
             this.pcHeader.Size = new System.Drawing.Size(1414, 3);
             this.pcHeader.TabIndex = 6;
             // 
-            // txtCar
-            // 
-            this.txtCar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCar.Location = new System.Drawing.Point(556, 9);
-            this.txtCar.Name = "txtCar";
-            this.txtCar.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCar.Properties.Appearance.Options.UseFont = true;
-            this.txtCar.Size = new System.Drawing.Size(71, 18);
-            this.txtCar.TabIndex = 96;
-            // 
             // btnViewPhoto
             // 
             this.btnViewPhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -97,17 +80,6 @@
             this.btnViewPhoto.TabIndex = 95;
             this.btnViewPhoto.Text = "查看图片";
             this.btnViewPhoto.Click += new System.EventHandler(this.btnViewPhoto_Click);
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(514, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(36, 12);
-            this.labelControl1.TabIndex = 93;
-            this.labelControl1.Text = "车牌号";
             // 
             // simpleButton1
             // 
@@ -128,7 +100,7 @@
             this.btnExportExcel.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExportExcel.Appearance.Options.UseFont = true;
             this.btnExportExcel.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.exportexcel_16x16;
-            this.btnExportExcel.Location = new System.Drawing.Point(729, 7);
+            this.btnExportExcel.Location = new System.Drawing.Point(534, 6);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 25);
             this.btnExportExcel.TabIndex = 90;
@@ -141,7 +113,7 @@
             this.btnSearch.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.ImageOptions.Image = global::YF.MWS.Win.Properties.Resources.search_16x16;
-            this.btnSearch.Location = new System.Drawing.Point(631, 7);
+            this.btnSearch.Location = new System.Drawing.Point(436, 6);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 25);
             this.btnSearch.TabIndex = 89;
@@ -152,18 +124,18 @@
             // 
             this.teEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teEndDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teEndDate.Location = new System.Drawing.Point(331, 7);
+            this.teEndDate.Location = new System.Drawing.Point(284, 9);
             this.teEndDate.Name = "teEndDate";
             this.teEndDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teEndDate.Properties.Appearance.Options.UseFont = true;
             this.teEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.teEndDate.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.teEndDate.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.teEndDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.teEndDate.Properties.EditFormat.FormatString = "yyyy-MM-dd";
+            this.teEndDate.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.teEndDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.teEndDate.Properties.MaskSettings.Set("mask", "yyyy-MM-dd");
-            this.teEndDate.Size = new System.Drawing.Size(89, 20);
+            this.teEndDate.Properties.MaskSettings.Set("mask", "yyyy-MM-dd HH:mm:ss");
+            this.teEndDate.Size = new System.Drawing.Size(145, 20);
             this.teEndDate.TabIndex = 88;
             // 
             // lblRange
@@ -171,45 +143,28 @@
             this.lblRange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblRange.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblRange.Appearance.Options.UseFont = true;
-            this.lblRange.Location = new System.Drawing.Point(313, 11);
+            this.lblRange.Location = new System.Drawing.Point(266, 13);
             this.lblRange.Name = "lblRange";
             this.lblRange.Size = new System.Drawing.Size(12, 12);
             this.lblRange.TabIndex = 87;
             this.lblRange.Text = "至";
             // 
-            // combFinishState
-            // 
-            this.combFinishState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.combFinishState.EditValue = "所有磅单";
-            this.combFinishState.Location = new System.Drawing.Point(428, 9);
-            this.combFinishState.Name = "combFinishState";
-            this.combFinishState.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.combFinishState.Properties.Appearance.Options.UseFont = true;
-            this.combFinishState.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.combFinishState.Properties.Items.AddRange(new object[] {
-            "未完成磅单",
-            "已完成磅单",
-            "所有磅单"});
-            this.combFinishState.Size = new System.Drawing.Size(80, 18);
-            this.combFinishState.TabIndex = 86;
-            // 
             // teStartDate
             // 
             this.teStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.teStartDate.EditValue = new System.DateTime(2014, 11, 4, 23, 59, 59, 0);
-            this.teStartDate.Location = new System.Drawing.Point(216, 7);
+            this.teStartDate.Location = new System.Drawing.Point(116, 8);
             this.teStartDate.Name = "teStartDate";
             this.teStartDate.Properties.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.teStartDate.Properties.Appearance.Options.UseFont = true;
             this.teStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.teStartDate.Properties.DisplayFormat.FormatString = "yyyy-MM-dd";
+            this.teStartDate.Properties.DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.teStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.teStartDate.Properties.EditFormat.FormatString = "yyyy-MM-dd";
+            this.teStartDate.Properties.EditFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
             this.teStartDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.teStartDate.Properties.MaskSettings.Set("mask", "yyyy-MM-dd");
-            this.teStartDate.Size = new System.Drawing.Size(91, 20);
+            this.teStartDate.Properties.MaskSettings.Set("mask", "yyyy-MM-dd HH:mm:ss");
+            this.teStartDate.Size = new System.Drawing.Size(146, 20);
             this.teStartDate.TabIndex = 63;
             // 
             // sfdFileSave
@@ -219,15 +174,11 @@
             // panelControl3
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl3.Controls.Add(this.cmbTimeType);
             this.panelControl3.Controls.Add(this.cmbDate);
             this.panelControl3.Controls.Add(this.btnViewPhoto);
-            this.panelControl3.Controls.Add(this.txtCar);
             this.panelControl3.Controls.Add(this.simpleButton1);
             this.panelControl3.Controls.Add(this.lblRange);
-            this.panelControl3.Controls.Add(this.labelControl1);
             this.panelControl3.Controls.Add(this.teEndDate);
-            this.panelControl3.Controls.Add(this.combFinishState);
             this.panelControl3.Controls.Add(this.btnSearch);
             this.panelControl3.Controls.Add(this.btnExportExcel);
             this.panelControl3.Controls.Add(this.teStartDate);
@@ -237,18 +188,9 @@
             this.panelControl3.Size = new System.Drawing.Size(1414, 36);
             this.panelControl3.TabIndex = 97;
             // 
-            // cmbTimeType
-            // 
-            this.cmbTimeType.Location = new System.Drawing.Point(3, 8);
-            this.cmbTimeType.Name = "cmbTimeType";
-            this.cmbTimeType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cmbTimeType.Size = new System.Drawing.Size(100, 20);
-            this.cmbTimeType.TabIndex = 97;
-            // 
             // cmbDate
             // 
-            this.cmbDate.Location = new System.Drawing.Point(109, 7);
+            this.cmbDate.Location = new System.Drawing.Point(9, 8);
             this.cmbDate.Name = "cmbDate";
             this.cmbDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -369,6 +311,7 @@
             this.gvWeight.Name = "gvWeight";
             this.gvWeight.OptionsBehavior.Editable = false;
             this.gvWeight.OptionsBehavior.ReadOnly = true;
+            this.gvWeight.OptionsView.ColumnAutoWidth = false;
             this.gvWeight.OptionsView.ShowFooter = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             this.gvWeight.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvWeight_RowClick);
@@ -387,14 +330,11 @@
             this.Size = new System.Drawing.Size(1414, 320);
             this.Load += new System.EventHandler(this.MainWeightList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.combFinishState.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teStartDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbTimeType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
@@ -407,15 +347,12 @@
 
         private DevExpress.XtraEditors.PanelControl pcHeader;
         private DevExpress.XtraEditors.TimeEdit teStartDate;
-        private DevExpress.XtraEditors.ComboBoxEdit combFinishState;
         private DevExpress.XtraEditors.TimeEdit teEndDate;
         private DevExpress.XtraEditors.LabelControl lblRange;
         private DevExpress.XtraEditors.SimpleButton btnExportExcel;
         private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.SaveFileDialog sfdFileSave;
         private DevExpress.XtraEditors.SimpleButton btnViewPhoto;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtCar;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraGrid.GridControl gcWeight;
@@ -426,6 +363,5 @@
         private System.Windows.Forms.ToolStripMenuItem 作废ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打印ToolStripMenuItem;
         private DevExpress.XtraEditors.ComboBoxEdit cmbDate;
-        private DevExpress.XtraEditors.ComboBoxEdit cmbTimeType;
     }
 }

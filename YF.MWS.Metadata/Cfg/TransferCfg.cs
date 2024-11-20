@@ -15,7 +15,8 @@ namespace YF.MWS.Metadata.Cfg
         /// <summary>
         /// 服务端地址
         /// </summary>
-        public string ServerUrl { get; set; }
+        public string ServerUrlIn { get; set; }
+        public string ServerUrlOut { get; set; }
         /// <summary>
         /// 连接码
         /// </summary>

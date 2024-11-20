@@ -46,34 +46,14 @@ namespace YF.MWS.SQliteService
             if (dtWeight == null || dtWeight.Rows == null || dtWeight.Rows.Count == 0)
                 return;
             bool loadImageWithRemote = false;
-            string serverUrl = string.Empty;
             int maxCount=8;
             SysCfg cfg = GetCfg();
-            if (cfg!=null && cfg.Transfer != null)
-            {
-                serverUrl = cfg.Transfer.ServerUrl;
-            }
             if (cfg != null && cfg.Weight != null)
             {
                 loadImageWithRemote = cfg.Weight.StartLoadImageWithRemote;
             }
             List<BFile> lstFile = new List<BFile>();
-            if (loadImageWithRemote)
-            {
-                TPageResult result = fileService.GetListFromRemote(serverUrl, weightId);
-                if (result != null && result.Code == (int)ResultCode.Success && result.Rows != null)
-                {
-                    lstFile = result.Rows.ToString().JsonDeserialize<List<BFile>>();
-                    if (lstFile != null && lstFile.Count > 0)
-                    {
-                        lstFile = lstFile.FindAll(c => c.BusinessType == FileBusinessType.Graphic.ToString());
-                    }
-                }
-            }
-            else
-            {
                 lstFile = fileService.Get(weightId, FileBusinessType.Graphic);
-            }
             string columnName;
             for (int i = 0; i < maxCount; i++) 
             {
@@ -105,15 +85,7 @@ namespace YF.MWS.SQliteService
                         columnName = "图片" + (i + 1).ToString();
                         if (dtWeight.Columns.Contains(columnName))
                         {
-                            if (loadImageWithRemote)
-                            {
-                                string url = string.Format("{0}{1}", serverUrl, lstFile[i].FileUrl);
-                                dtWeight.Rows[0][columnName] = url;
-                            }
-                            else
-                            {
                                 dtWeight.Rows[0][columnName] = Path.Combine(Application.StartupPath, lstFile[i].FileUrl);
-                            }
                         }
                     }
                 }

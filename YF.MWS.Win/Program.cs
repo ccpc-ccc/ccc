@@ -119,7 +119,6 @@ namespace YF.MWS.Win {
                 if (!isConnected) {
                     return;
                 }
-                CfgUtil.Init();
                 CacheUtil.Init();
                 bool isOk = InitApplication();
                 if (!isOk) {

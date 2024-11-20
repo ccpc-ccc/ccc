@@ -22,7 +22,6 @@ namespace YF.MWS.Win.Core
         public IPayService PayService;
         public IWeightExtService WeightExtService;
         public ISyncService SyncService;
-        public string ServerUrl;
         public List<BFile> LstFile;
         public YF.MWS.Client.DataService.Interface.IWeightService WeightService;
     }

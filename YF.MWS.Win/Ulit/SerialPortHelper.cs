@@ -286,10 +286,16 @@ namespace YF.MWS.Win
                     GetWithJWI4E(byteReceived);
                     return;
                 }
-                if (deviceVersion == "KL3101")
+                if (deviceVersion == "KL3101"||deviceVersion=="KL")
                 {
                     //GetWithJWI4E(byteReceived);
                     this.GetWithKL3101(byteReceived);
+                    return;
+                }
+                if (deviceVersion == "Other")
+                {
+                    //GetWithJWI4E(byteReceived);
+                    this.GetOther(byteReceived);
                     return;
                 }
 
@@ -789,6 +795,35 @@ namespace YF.MWS.Win
             catch (Exception EX) {
                 Logger.Write(EX.Message);
                 Logger.Write(EX.StackTrace);
+            }
+        }
+
+        /// <summary>
+        /// 处理称重数据
+        /// </summary>
+        /// <param name="byteFrame">帧数据</param>
+        private void GetOther(byte[] byteFrame)
+        {
+            try
+            {
+                if (byteFrame == null || byteFrame.Length < 10)
+                {
+                    return;
+                }
+                if (byteFrame[0] != 0x01|| byteFrame[1] != 0x02) return;
+                string sWeight = "";
+                for (int i = 3; i < byteFrame.Length; i++) {
+                    if (byteFrame[i] == 0x03||byteFrame[i] == 0x04) break;
+                    if ((byteFrame[i] > 0x39 || byteFrame[i] < 0x30) && byteFrame[i]!=0x2D&&byteFrame[i]!=0x2E) continue;
+                    sWeight += (char)byteFrame[i];
+                }
+                double weightValue = 0;
+                Double.TryParse(sWeight, out weightValue);
+                if (this.OnShowWeight != null)
+                    this.OnShowWeight(this.DeviceNo, weightValue);
+            }
+            catch (Exception EX) {
+                Logger.Write(EX.Message);
             }
         }
             /// <summary>

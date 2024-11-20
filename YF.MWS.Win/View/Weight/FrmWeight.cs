@@ -346,7 +346,6 @@ namespace YF.MWS.Win.View.Weight {
         private WCardEdit wCardNo;
         private WComboBoxTextEdit wRefuseType;
         private WNumbericEdit wKougan;
-        private WTextEdit weBillNo;
         private WNumbericEdit wnRealWater;
         private WNumbericEdit wCustomerBalance;
         private WNumbericEdit weRealCharge;
@@ -394,7 +393,6 @@ namespace YF.MWS.Win.View.Weight {
             wCardNo = mainWeight.FindControl<WCardEdit>("CardNo");
             wKougan = mainWeight.FindControl<WNumbericEdit>("Kougan");
             wRefuseType = mainWeight.FindControl<WComboBoxTextEdit>("RefuseType");
-            weBillNo = mainWeight.FindControl<WTextEdit>("BillNo");
             wnRealWater = mainWeight.FindControl<WNumbericEdit>("RealWater");
             wePickQty = mainWeight.FindControl<WNumbericEdit>("PickQty");
             wCustomerBalance = mainWeight.FindControl<WNumbericEdit>("CustomerBalance");
@@ -403,6 +401,9 @@ namespace YF.MWS.Win.View.Weight {
             weD2 = mainWeight.FindControl<WNumbericEdit>("d2");
             if (wRefuseType != null) {
                 wRefuseType.SelectedItem = wRefuseType.Properties.Items.Cast<SCode>().FirstOrDefault(c => c.ItemCode == RefuseType.Accepted.ToString());
+            }
+            if (weWaybillNo != null) {
+
             }
             if (!CurrentUser.Instance.IsAdministrator) {
                 mainWeight.SetRole(LstModule);
@@ -535,6 +536,19 @@ namespace YF.MWS.Win.View.Weight {
             if (weUnitPrice != null) {
                 weUnitPrice.EditValueChanged += weUnitPrice_EditValueChanged;
             }
+            if (weWaybillNo != null) {
+                //weWaybillNo.EditValueChanged += WeWaybillNo_EditValueChanged;
+                weWaybillNo.KeyDown += WeBillNo_KeyDown;
+            }
+        }
+
+        private void WeBillNo_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter||e.KeyCode==Keys.LineFeed) Save();
+        }
+
+        private void WeWaybillNo_EditValueChanged(object sender, EventArgs e) {
+            if (string.IsNullOrEmpty(weWaybillNo.EditValue.ToObjectString()) || !weWaybillNo.EditValue.ToObjectString().Contains("\r") || !weWaybillNo.EditValue.ToObjectString().Contains("\n")) return;
+                Save();
         }
 
         void wlookCar_ManualCarRecognizeTrigger(object sender, ManualCarRecognizeTriggerEventArgs e) {
@@ -1731,212 +1745,43 @@ namespace YF.MWS.Win.View.Weight {
             hasGetIdCardNo = false;
             processMode = oldProcessMode;
         }
-
-        /// <summary>
-        /// 保存视频、图片文件
-        /// </summary>
-        private void SaveFile() {
-            try {
-                if (lstTempFile != null && lstTempFile.Count > 0) {
-                    foreach (BFile file in lstTempFile) {
-                        if (CurrentClient.Instance.DataBase == DataBaseType.Sqlserver) {
-                            //file.FileContent = File.ReadAllBytes(Path.Combine(Application.StartupPath, file.FileUrl));
-                        }
-                        fileService.Add(file);
-                    }
-                    lstTempFile.Clear();
-                }
-            } catch (Exception ex) {
-                Logger.WriteException(ex);
-            }
-        }
-
-        private bool CurrentDateChanged() {
-            bool isChanged = false;
-            if (Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd")) > currentDate) {
-                currentDate = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
-                isChanged = true;
-            }
-            return isChanged;
-        }
-        private void getWeightTime(ref BWeight weight) {
-            if (Cfg.Weight.ProcessMode == 0) {
-                if (weGrossWeight != null && weGrossWeight.Text.ToDecimal() <= 0) {
-                    weight.GrossTime = DateTime.Now;
-                } else if (weTareWeight != null) {
-                    weight.TareTime = DateTime.Now;
-                }
-            } else if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstTare) { //第一次皮重时
-                if (weTareWeight != null && weTareWeight.Text.ToDecimal() <= 0) {
-                    tempWeight.TareTime = DateTime.Now;
-                } else if (weGrossWeight != null) {
-                    weight.GrossTime = DateTime.Now;
-                }
-            }
-        }
         public bool Save() {
             bool isSaved = false;
             try {
-                bool isNew = false;
-                decimal weight = GetCurrentWeight();
-                OrderSource source = OrderSource.Weight;
-                SaveWeightInputItem();
-                if (CurrentClient.Instance.IsSimulateWeight) {
-                    source = OrderSource.SimulateWeight;
-                }
-                if (currentWeight == null) {
-                    isNew = true;
-                    currentWeight = new BWeight();
-                    currentWeight.MachineCode = CurrentClient.Instance.MachineCode;
-                } else {
-                    if (!grossTareTransformed) {
-                        currentWeight.TareMachineCode = currentWeight.MachineCode;
-                        currentWeight.MachineCode = CurrentClient.Instance.MachineCode;
-                    } else {
-                        currentWeight.TareMachineCode = CurrentClient.Instance.MachineCode;
-                    }
-                }
-                currentWeight.Id = currentWeightId;
-                mainWeight.ControlToEntity(ref currentWeight);
-                currentWeight.FinishTime = DateTime.Now;
-                currentWeight.WeighterId = CurrentUser.Instance.Id;
-                if (wlookCar != null) {
-                    if (wlookCar.CurrentValue != null && wlookCar.CurrentValue.ToObjectString().Length > 0) {
-                        currentWeight.CarId = wlookCar.CurrentValue.ToObjectString();
-                    }
-                    currentWeight.CarNo = wlookCar.Text;
-                }
-                if (wCardNo != null) {
-                    currentWeight.CardNo = wCardNo.Text;
-                }
-                FinishState state = FinishState.Unfinished;
-                    if (currentWeight.TareWeight > 0 && currentWeight.GrossWeight > 0) {
-                        state = FinishState.Finished;
-                    }
-                currentWeight.OrderSource = source.ToString();
-                currentWeight.FinishState = (int)state;
-                currentWeight.MeasureUnit = currentDeviceCfg.SUnit;
-                currentWeight.WeightProcess = (int)currentWeightProcess;
-                currentWeight.ViewId = CurrentClient.Instance.ViewId;
-                currentWeight.WeighterName = CurrentUser.Instance.FullName;
-                //currentWeight.SuttleWeight = Math.Abs(currentWeight.GrossWeight - currentWeight.TareWeight);
-                currentWeight.WarehBizType = radWarehBizType.EditValue.ToString();
-                currentWeight.CompanyId = CurrentUser.Instance.CompanyId;
-                getWeightTime(ref currentWeight);
-                if (startOverWeight) {
-                    currentWeight.MaxWeight = maxWeight;
-                    currentWeight.OverWeight = overWeight;
-                    if (overWeight > 0) {
-                        currentWeight.OverWeightState = 1;
-                    } else {
-                        currentWeight.OverWeightState = 0;
-                    }
-                } else {
-                    currentWeight.OverWeightState = 0;
-                }
-                currentWeight.SyncState = (int)SyncState.UnSynced;
-                if (string.IsNullOrEmpty(currentWeight.WeightNo)  //生成磅单号
-                    &&((weightNoGenerateMode == FinishState.Finished&& currentWeight.FinishState==1)  //如果是完成榜单时生成磅单并且当前磅单是完成状态
-                    || weightNoGenerateMode == FinishState.Unfinished)) //如果是开始过磅时就生成磅单
-                        currentWeight.WeightNo = seqNoService.GetSeqNo(SeqCode.Weight.ToString());
-                if (startWeightPay && currentChargeTriggerCondtion == ChargeTriggerCondtionType.FinishWeight) {
-                    if (currentWeight.FinishState == (int)FinishState.Unfinished)
-                        currentWeight.RegularCharge = 0;
-                }
-                if (isNew && startPlan) {
-                    if (currentPlan != null)
-                        currentWeight.RefId = currentPlan.Id;
-                }
+                 currentWeight = new BWeight();
+                currentWeight.MachineCode = CurrentClient.Instance.MachineCode;
+                currentWeight.Id = Guid.NewGuid().ToString("N");
+                currentWeight.SuttleWeight = GetCurrentWeight();
+                currentWeight.CreateTime = DateTime.Now;
+                currentWeight.WaybillNo = weWaybillNo.EditValue.ToObjectString();
+                currentWeight.WarehBizType= radWarehBizType.EditValue.ToObjectString();
                 isSaved = weightService.Save(currentWeight);
-                if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
-                    planService.Update(currentWeight);
-                }
-                AsyncCapturePhoto(GetWeightCapture(currentWeight.Id));
-                if (isSaved&&Cfg.Transfer.isOpen&&currentWeight.FinishState == 1) {//
-                    Thread thread = new Thread(new ParameterizedThreadStart(sendWeight));
-                    thread.Start(currentWeight);
-                }
-                if (isNew && !isSaved) {
-                    seqNoService.Cancel(SeqCode.Weight.ToString());
-                }
-                if (autoSaveTareWeight) {
-                    SaveCarWithTareWeight(currentWeight);
-                }
-                //无人值守模式下保存重量后，将是否归零设为False，是为了反正重复保存
-                if (isSaved && currentWeighWay == WeightWay.Nobody) {
-                    returnZero = false;
-                }
-                BPay pay = null;
-                if (isSaved && startWeightPay) {
-                    if (currentWeight.RegularCharge <= 0) {
-                        paySuccess = true;
-                    } else {
-                        if (currentChargeTriggerCondtion == ChargeTriggerCondtionType.NewWeight) {
-                            if (isNew)
-                                pay = SavePay(currentWeight.Id, currentWeight.CarNo, currentWeight.WeightNo, currentWeight.RegularCharge, currentWeight.GrossWeight);
-                            else
-                                paySuccess = true;
-                        }
-                        if (currentChargeTriggerCondtion == ChargeTriggerCondtionType.FinishWeight) {
-                            if (isNew)
-                                paySuccess = true;
-                            if (currentWeight.FinishState == (int)FinishState.Finished)
-                                pay = SavePay(currentWeight.Id, currentWeight.CarNo, currentWeight.WeightNo, currentWeight.RegularCharge, currentWeight.GrossWeight);
-                        }
-                    }
-                }
-                SendReturnZero(SendReturnZeroProcessType.WeightSaved);
                 if (isSaved) {
-                  FrmMain.CapturePicture(currentWeight.Id,string.Format("当前时间：{0}，称重重量：{1}",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),currentWeight.TareWeight),FileType.CarLeft);
-                }
-                this.SaveFile();
-                //如果设置了自动打印，则开启自动打印磅单功能
-                if (autoPrintWeight&& (CurrentUser.Instance.Powers != null &&CurrentUser.Instance.Powers.Contains("p2_5"))) {
-                    Print(currentWeight.Id);
-                }
-                if (printPhoto&& CurrentUser.Instance.Powers != null && CurrentUser.Instance.Powers.Contains("p2_5")) {
-                    PrintUtil.PrintWeightReportPdf(currentViewId, currentWeight, reportService, null, weightPrinterName);
-                }
-                if (startScreen) {
-                    string info = GetLedInfo(currentWeight);
-                    SendInfoToLed(WeightFlowType.WeightStable, info);
-                }
-                if (isSaved) {
-                    RefreshWeightControl();
-                    ShowWeightStateTip(string.Format("磅单({0})已经成功保存", currentWeight.WeightNo));
-                } else {
-                    ShowWeightStateTip("磅单保存失败");
-                }
-                if (CurrentDateChanged()) {
-                    searchList.InitWeightDate();
-                }
-
-                Task.Factory.StartNew(new Action(() => {
-                    searchList.LoadData();
-                }));
-
-                //人工称重
-                if (Cfg.MeasureFun == "People") {
-                    //MessageDxUtil.ShowTips("成功保存磅单信息.");
-                    readerNo = 0;
+                    send(currentWeight);
+                    this.searchList.LoadData();
                 }
             } catch (Exception ex) {
                 isSaved = false;
                 Logger.WriteException(ex);
-                //人工称重
-                if (Cfg.MeasureFun == "People") {
-                    MessageDxUtil.ShowError("保存磅单信息时发生未知错误,请重试.");
-                }
             } finally {
                 New(!Cfg.Weight.SaveFormData);
             }
             return isSaved;
         }
-        private void sendWeight(object obj) {
-            BWeight weight=obj as BWeight;
-            if (weight == null) return;
-            Thread.Sleep(5000);
-            webWeightService.doneWeight(currentWeight);
+        private async Task send(BWeight weight) {
+            if (!Cfg.Transfer.isOpen||weight==null) return;
+            bool isOk = false;
+            if (weight.WarehBizType == "RuKu") {
+                isOk =  webWeightService.sendWeight(weight, Cfg.Transfer.ServerUrlIn);
+            } else {
+                isOk = webWeightService.sendWeight(weight, Cfg.Transfer.ServerUrlOut);
+            }
+            if (isOk) {
+                weightService.UpdateSyncState(weight.Id);
+                ShowWeightStateTip("上传数据成功");
+            } else {
+                ShowWeightStateTip("上传数据失败");
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
@@ -1952,7 +1797,7 @@ namespace YF.MWS.Win.View.Weight {
         }
 
         private void btnSave_Click(object sender, EventArgs e) {
-            ManualSave();
+            Save();
         }
 
         private void btnWeight_Click(object sender, EventArgs e) {

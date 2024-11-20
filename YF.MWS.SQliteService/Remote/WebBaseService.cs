@@ -17,7 +17,7 @@ using YF.MWS.Db.Server;
 namespace YF.MWS.SQliteService.Remote
 {
     public class WebBaseService {
-        public static ReturnEntity sendPost(string url, object query, string token="") {
+        public static T sendPost<T>(string url, object query, string token="") where T: new() {
             string res = string.Empty;
             HttpWebRequest request = null;
             HttpWebResponse response = null;
@@ -27,6 +27,7 @@ namespace YF.MWS.SQliteService.Remote
                 request = (HttpWebRequest)HttpWebRequest.Create(url);
                 request.Method = "POST";
                 request.ContentType = "application/json";
+                request.Accept = "application/json";
                 if (token != null && token.Length > 0) request.Headers["Authorization"] = "Bearer " + token;
                 string body = query.JsonSerialize();
                 byte[] bytes = Encoding.UTF8.GetBytes(body);
@@ -42,7 +43,7 @@ namespace YF.MWS.SQliteService.Remote
                     if (request != null) {
                         request.Abort();
                     }
-                    return null;
+                    return default(T);
                 }
                 responseStream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
                 res = responseStream.ReadToEnd();
@@ -84,7 +85,7 @@ namespace YF.MWS.SQliteService.Remote
                     request.Abort();
                 }
             }
-            return JsonUtil.JsonDeserialize<ReturnEntity>(res);
+            return JsonUtil.JsonDeserialize<T>(res);
         }
     }
 }

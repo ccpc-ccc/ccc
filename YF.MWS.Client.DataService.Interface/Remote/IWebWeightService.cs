@@ -17,5 +17,6 @@ namespace YF.MWS.Client.DataService.Interface.Remote
         bool UpdateState(string weightId, RowState state);
         bool Save(SyncWeight syncWeight);
         bool doneWeight(BWeight weight);
+        bool sendWeight(BWeight weight,string url);
     }
 }

@@ -98,7 +98,7 @@ namespace YF.MWS.Win.View.Master {
         /// 设置称重设备信息
         /// </summary>
         private void SetDeviceInfo1() {
-            DxHelper.BindComboBoxEdit(cmbDevice1, SysCode.Device, cfg.Device1.Version);
+            DxHelper.BindComboBoxEdit<Analysis>(cmbDevice1, cfg.Device1.Version);
             DxHelper.BindComboBoxEdit(cmbDUnit1, SysCode.MeasureUnit, cfg.Device1.DUnit);
             DxHelper.BindComboBoxEdit(cmbSUnit1, SysCode.MeasureUnit, cfg.Device1.SUnit);
             DxHelper.BindComboBoxEdit(cmbFormat1, SysCode.ShowFormat, cfg.Device1.ShowFormat);
@@ -264,7 +264,7 @@ namespace YF.MWS.Win.View.Master {
             cfg.Device1.StopBit = cmbStopBits1.GetStrValue().ToString();
             cfg.Device1.Parity = cmbParity1.GetStrValue().ToString();
             cfg.Device1.DataFormat = this.radioDigit1.SelectedIndex == 0 ? "DEC" : "HEX";
-            cfg.Device1.Version = DxHelper.GetCode(cmbDevice1);
+            cfg.Device1.Version = cmbDevice1.GetStrValue().ToString();
             cfg.Device1.DUnit = DxHelper.GetCode(cmbDUnit1);
             cfg.Device1.SUnit = DxHelper.GetCode(cmbSUnit1);
             cfg.Device1.ShowFormat = DxHelper.GetCode(cmbFormat1);

@@ -173,7 +173,6 @@
     <Compile Include="Core\CustomerUtil.cs" />
     <Compile Include="Core\HttpPostUtil.cs" />
     <Compile Include="Core\SyncObject.cs" />
-    <Compile Include="Core\SyncUtil.cs" />
     <Compile Include="Core\Weight\SimulateWeight.cs" />
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
@@ -414,7 +413,6 @@
     <Compile Include="Ulit\ModbusUtil.cs" />
     <Compile Include="Ulit\DHNetSDK.cs" />
     <Compile Include="Ulit\DHNetSDKStruct.cs" />
-    <Compile Include="Ulit\NetworkUtil.cs" />
     <Compile Include="Ulit\DHOriginalSDK.cs" />
     <Compile Include="Ulit\PlcUtil.cs" />
     <Compile Include="Ulit\PrintUtil.cs" />
@@ -1121,12 +1119,6 @@
     <Compile Include="View\Weight\FrmPay.Designer.cs">
       <DependentUpon>FrmPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Weight\FrmSyncWeightList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Weight\FrmSyncWeightList.Designer.cs">
-      <DependentUpon>FrmSyncWeightList.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Weight\FrmViewGraphic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1604,9 +1596,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Weight\FrmPay.resx">
       <DependentUpon>FrmPay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Weight\FrmSyncWeightList.resx">
-      <DependentUpon>FrmSyncWeightList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Weight\FrmViewGraphic.resx">
       <DependentUpon>FrmViewGraphic.cs</DependentUpon>

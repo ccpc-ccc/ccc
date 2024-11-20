@@ -35,27 +35,8 @@ namespace YF.MWS.SQliteService.Remote
         ICustomerService customerService = new CustomerService();
         IMaterialService materialService = new MaterialService();
         IFileService fileService = new FileService();
-        public WebWeightService() {
-            WebWeightService.ServerUrl=AppSetting.GetValue("EcsServer");
-        }
-        public static ReturnEntity Login(string CompanyCode, string MachineCode, string RegisterCode) {
-            string url = string.Format("{0}/api/client/login", WebWeightService.ServerUrl);
-            var json = new {
-                companyCode = CompanyCode,
-                machineCode = MachineCode,
-                registerCode = RegisterCode
-            };
-            ReturnEntity entity = WebBaseService.sendPost(url, json);
-            if(entity==null) return null;
-            if (entity.Result && entity.model != null) {
-                Newtonsoft.Json.Linq.JObject obj=entity.model;
-                if (obj != null) {
-                    ClientId = obj["id"].ToString();
-                    Newtonsoft.Json.Linq.JObject company = obj["company"] as Newtonsoft.Json.Linq.JObject;
-                    CompanyId = company["id"].ToString();
-                        }
-            }
-            return entity;
+        public WebWeightService(string serverUrl) {
+            WebWeightService.ServerUrl= serverUrl;
         }
         public static bool synWeightViewDtl(List<SWeightViewDtl> sWeightViewDtls) {
             if (string.IsNullOrEmpty(WebWeightService.Token)) return false;
@@ -63,7 +44,7 @@ namespace YF.MWS.SQliteService.Remote
             var json = new {
                 list = sWeightViewDtls
             }.JsonSerialize();
-            return WebBaseService.sendPost(url, json,Token).Result;
+            return WebBaseService.sendPost<ReturnEntity>(url, json,Token).Result;
         }
         public BWeight Get(string carNo) {
             if (string.IsNullOrEmpty(WebWeightService.Token)) return null;
@@ -73,7 +54,7 @@ namespace YF.MWS.SQliteService.Remote
                 companyId= WebWeightService.CompanyId,
                 clientId= WebWeightService.ClientId
             };
-            ReturnEntity entity= WebBaseService.sendPost(url, json, Token);
+            ReturnEntity entity= WebBaseService.sendPost<ReturnEntity>(url, json, Token);
             if(entity==null||!entity.Result||entity.model==null) return null;
             BWeight weight = new BWeight() { };
             Type type = weight.GetType();
@@ -191,18 +172,28 @@ namespace YF.MWS.SQliteService.Remote
             weight.CreateTime = null;
             weight.UpdateTime = null;
             string url = string.Format("{0}/api/weight/doneWeight", WebWeightService.ServerUrl);
-            var isOk = WebBaseService.sendPost(url, weight, Token).Result;
+            var isOk = WebBaseService.sendPost<ReturnEntity>(url, weight, Token).Result;
             foreach(BFile file in lstFile) {
                    file.FileContent= UnitUtil.FileToBase64(file.FileUrl);
                 file.RecId = weight.Id;
             }
             if (isOk) {
                 url = string.Format("{0}/api/file/save", WebWeightService.ServerUrl);
-                WebBaseService.sendPost(url, lstFile, Token);
+                WebBaseService.sendPost<ReturnEntity>(url, lstFile, Token);
             }
             return isOk;
         }
-
+        public bool sendWeight(BWeight weight,string url) {
+            var json = new {
+                code=weight.WaybillNo,
+                weight=weight.SuttleWeight.ToString()
+            };
+            ServerReturn ser= WebBaseService.sendPost<ServerReturn>(url, json);
+            if (!ser.success) {
+                Logger.Write("提交平台数据错误："+ser.msg);
+            }
+            return ser.success;
+        }
         public bool UpdateState(string weightId, RowState state)
         {
             string url = string.Format("{0}/api/sf/weight/UpdateRowState?weightId={1}&state={2}", AppSetting.GetValue("EcsServer"), weightId, (int)state);

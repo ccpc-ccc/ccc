@@ -38,7 +38,7 @@ namespace YF.MWS.Win.View.Weight {
     public partial class FrmWeightSearch : BaseForm {
         public DataTable Dt { get; set; }
         private IMasterService masterService = new MasterService();
-        private IWebWeightService webWeightService = new WebWeightService();
+        private IWebWeightService webWeightService = new WebWeightService("");
         private IWeightViewService viewService = new WeightViewService();
         private ICardService cardService = new CardService();
         private ICarService carService = new CarService();

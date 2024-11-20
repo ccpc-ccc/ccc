@@ -1036,6 +1036,14 @@ namespace YF.MWS.Metadata
         [Description("30天")]
         Month
     }
+    public enum Analysis {
+        [Description("耀华")]
+        YH,
+        [Description("柯力")]
+        KL,
+        [Description("其它")]
+        Other
+    }
     public static class EnumExtensions {
         public static string toDescription(this System.Enum value) {
             FieldInfo field = value.GetType().GetField(value.ToString());

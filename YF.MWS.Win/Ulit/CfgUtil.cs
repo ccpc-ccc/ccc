@@ -34,18 +34,6 @@ namespace YF.MWS.Win
         private static VoiceCfg voiceCfg = null;
         public static AllFormCfg allFormCfg = null;
 
-        public static void Init() 
-        {
-            SysCfg cfg = GetCfg();
-            if (cfg != null) 
-            {
-                if (cfg.Transfer != null) 
-                {
-                    CurrentClient.Instance.ServerUrl = cfg.Transfer.ServerUrl;
-                }
-            }
-        }
-
         public static string GetAuthCode(AuthCfg cfg) 
         {
             StringBuilder sb = new StringBuilder();

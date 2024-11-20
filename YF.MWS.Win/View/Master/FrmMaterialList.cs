@@ -26,7 +26,6 @@ namespace YF.MWS.Win.View.Master
         private ISyncService syncService = new SyncService();
         private IWebMaterialService webMaterialService = new WebMaterialService();
         private IWeightService weightService = new WeightService();
-        private string serverUrl=string.Empty;
         private GridCheckMarksSelection chkMaterial;
         public FrmMaterialList()
         {
@@ -39,10 +38,6 @@ namespace YF.MWS.Win.View.Master
         private void FrmMaterialList_Load(object sender, EventArgs e)
         {
             BindData();
-            if (Cfg.Transfer != null)
-            {
-                serverUrl = Cfg.Transfer.ServerUrl;
-            }
         }
 
         private void btnItemAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

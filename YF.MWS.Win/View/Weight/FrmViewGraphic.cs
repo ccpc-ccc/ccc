@@ -28,7 +28,6 @@ namespace YF.MWS.Win.View.Weight
         private List<BFile> lstFile = new List<BFile>();
         private IFileService fileService = new FileService();
         private bool loadImageWithRemote = false;
-        private string serverUrl = string.Empty;
         private int currentIndex = 0;
         private int count = 0;
         private CaptureMode mode = CaptureMode.Cut;
@@ -56,21 +55,8 @@ namespace YF.MWS.Win.View.Weight
                 if (Cfg.Weight != null) {
                     loadImageWithRemote = Cfg.Weight.StartLoadImageWithRemote;
                 }
-                if (Cfg.Transfer != null) {
-                    serverUrl = Cfg.Transfer.ServerUrl;
-                }
             }
-            if (loadImageWithRemote) {
-                TPageResult result = fileService.GetListFromRemote(serverUrl, RecId);
-                if (result != null && result.Code == (int)ResultCode.Success && result.Rows != null) {
-                    lstFile = result.Rows.ToString().JsonDeserialize<List<BFile>>().Where(li=>CurrentUser.Instance.Powers.Contains("p2_"+ li.OrderNo)||CurrentUser.Instance.IsAdministrator).ToList();
-                    if (lstFile != null && lstFile.Count > 0) {
-                        lstFile = lstFile.FindAll(c => c.BusinessType == FileBusinessType.Graphic.ToString());
-                    }
-                }
-            } else {
                 lstFile = fileService.Get(RecId, "B_Weight", FileBusinessType.Graphic).Where(li => CurrentUser.Instance.Powers.Contains("p2_" + li.OrderNo) || CurrentUser.Instance.IsAdministrator).ToList();
-            }
             if (lstFile != null && lstFile.Count > 0) {
                 count = lstFile.Count;
             }
@@ -112,18 +98,9 @@ namespace YF.MWS.Win.View.Weight
             if (lstFile.Count >= currentIndex + 1) 
             {
                 BFile file = lstFile[currentIndex];
-                if (loadImageWithRemote)
-                {
-                    string url = string.Format("{0}{1}", serverUrl, file.FileUrl);
-                    //Logger.Write(string.Format("fileId:{0};url:{1}", file.FileId, file.FileUrl));
-                    peView.LoadAsync(url);
-                }
-                else
-                {
                     string fileName = Path.Combine(Application.StartupPath, file.FileUrl);
                     if(File.Exists(fileName))
                        peView.Image = Image.FromFile(fileName);
-                }
                 lblCreateTime.Text = string.Format("抓拍时间:{0}",file.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 lblFileType.Text = string.Format("图片类型:{0}",file.FileType.ToEnum<FileType>().ToDescription());
             }
