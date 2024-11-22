@@ -38,6 +38,7 @@ namespace YF.MWS.Win.Uc
     {
         private IWeightService weightService;
         private ILogService logService = new LogService();
+        private IWebWeightService webWeightService=new WebWeightService();
         private IWeightQueryService weightQueryService;
         private IWeightViewService viewService = new WeightViewService();
         private GridCheckMarksSelection chkWeight;
@@ -158,22 +159,22 @@ namespace YF.MWS.Win.Uc
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.AppendFormat("and a.FinishTime>=datetime('{0}') ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.AppendFormat("and a.CreateTime>=datetime('{0}') ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
                 }
                 else
                 {
-                    sbCondition.AppendFormat("and a.FinishTime>='{0}' ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.AppendFormat("and a.CreateTime>='{0}' ", teStartDate.Time.ToString("yyyy-MM-dd 00:00:00"));
                 }
             }
             if (teEndDate.Time != DateTime.MinValue)
             {
                 if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite)
                 {
-                    sbCondition.AppendFormat("and a.FinishTime<datetime('{0}') ", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.AppendFormat("and a.CreateTime<datetime('{0}') ", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
                 }
                 else
                 {
-                    sbCondition.AppendFormat("and a.FinishTime<'{0}'", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
+                    sbCondition.AppendFormat("and a.CreateTime<'{0}'", teEndDate.Time.AddDays(1).ToString("yyyy-MM-dd 00:00:00"));
                 }
             }
             if (finishState != 2)
@@ -211,13 +212,13 @@ namespace YF.MWS.Win.Uc
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "FinishTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
             {
                 gvWeight.Columns[fieldName].DisplayFormat.FormatString = "yyyy-MM-dd HH:mm:ss";
-                gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                //gvWeight.Columns[fieldName].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             }
             fieldName = "TareTime";
             if (DxHelper.ContainsField(gvWeight, fieldName))
@@ -252,6 +253,8 @@ namespace YF.MWS.Win.Uc
             //gvWeight.GridControl.ForceInitialize();
             gvWeight.Columns[0].Visible = false;
             gvWeight.Columns[1].Visible = false;
+            gvWeight.Columns[2].SummaryItem.SummaryType = SummaryItemType.Count;
+            gvWeight.Columns[2].SummaryItem.DisplayFormat = "车数：{0}";
             gcWeight.RefreshDataSource();
             //gvWeight.OptionsView.ColumnAutoWidth = true;
             gvWeight.BestFitColumns();
@@ -438,6 +441,30 @@ namespace YF.MWS.Win.Uc
             bool canPrint = frmWeight.CanPrint(weight);
             if (canPrint) {
                 frmWeight.Print(this.CurrentWeightId);
+            }
+        }
+
+        private void 上传ToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (string.IsNullOrEmpty(this.CurrentWeightId)) {
+                MessageDxUtil.ShowWarning("请选择要上传的数据");
+                return;
+            }
+            BWeight weight = weightService.Get(this.CurrentWeightId);
+            bool isOk= webWeightService.doneWeight(weight, cfg.Transfer);
+            if (isOk) {
+            weightService.UpdateSyncState(this.CurrentWeightId);
+                MessageBox.Show("上传数据成功");
+            } else {
+                MessageBox.Show("上传数据失败");
+            }
+        }
+
+        private void gvWeight_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e) {
+            if (e.Column.FieldName == "SyncState") {
+                if(e.Value.ToString()=="1")
+                e.DisplayText = "已同步";
+                else
+                e.DisplayText = "未同步";
             }
         }
     }

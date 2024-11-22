@@ -124,7 +124,6 @@ namespace YF.MWS.SQliteService
             {
                 lstSql.Add("delete from B_CarPark");
                 lstSql.Add("delete from B_Park");
-                lstSql.Add("delete from B_Plan");
                 lstSql.Add("delete from B_PayRecord");
                 lstSql.Add("delete from B_Qc");
                 lstSql.Add("delete from B_Scan");

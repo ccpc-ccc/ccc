@@ -16,6 +16,7 @@ using YF.MWS.BaseMetadata;
 using YF.Data.NHProvider;
 using YF.Utility.Language;
 using static System.Windows.Forms.AxHost;
+using NHibernate.Hql.Ast;
 
 namespace YF.MWS.SQliteService
 {
@@ -1055,13 +1056,9 @@ namespace YF.MWS.SQliteService
             return isSaved;
         }
         public bool Save(BWeight weight) {
-            bool isSaved = false;
-            if (CurrentClient.Instance.DataBase == DataBaseType.Sqlite) {
-                isSaved = sqliteDb.ExecuteNonQuery(SqliteSqlUtil.GetSaveSql<BWeight>(weight, "B_Weight")) > 0;
-            } else {
-                isSaved = service.Save<BWeight>(weight, weight.Id);
-            }
-            return isSaved;
+            BWeight old = sqliteDb.db.Queryable<BWeight>().Where(li=>li.Id==weight.Id).First();
+            if(old==null) return sqliteDb.db.Insertable(weight).ExecuteCommand() > 0;
+            else return sqliteDb.db.Updateable(weight).Where(li=>li.Id==old.Id).ExecuteCommand()>0;
         }
 
 

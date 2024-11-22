@@ -631,61 +631,6 @@ namespace YF.MWS.Win.View.Weight
                     }
                 }
             }
-            if (startPlan)
-            {
-                string customerId = string.Empty;
-                string customerName = string.Empty;
-                if (isNewWeight)
-                {
-                    if (currentPlan == null)
-                    {
-                        if (wlookupCustomer != null)
-                        {
-                            customerId = wlookupCustomer.CurrentValue.ToObjectString();
-                            customerName = wlookupCustomer.Text;
-                        }
-                    }
-                    currentPlan = planService.Get(customerId, PlanStateType.Going);
-                    if (currentPlan == null)
-                    {
-                        isValidated = false;
-                        ShowWeightStateTip(string.Format("({0})不存在计划单",customerName));
-                    }
-                    else
-                    {
-                        if (currentPlan.EndTime.HasValue && currentPlan.EndTime.Value < DateTime.Now)
-                        {
-                            isValidated = false;
-                            ShowWeightStateTip(string.Format("({0})的计划单已过期",customerName));
-                        }
-                    }
-                }
-                else
-                {
-                    if(currentWeight!=null)
-                        currentPlan = planService.Get(currentWeight.RefId);
-                    if (currentPlan != null)
-                    {
-                        if (currentPlan.LimitType == PlanLimitType.Count)
-                        {
-                            if (currentPlan.SurplusCarCount <= 0)
-                            {
-                                isValidated = false;
-                                ShowWeightStateTip(string.Format("({0})的计划单剩余次数不足", customerName));
-                            }
-                        }
-                        if (currentPlan.LimitType == PlanLimitType.Weight)
-                        {
-                            suttleWeight = UnitUtil.GetValue(currentDeviceCfg.SUnit, "Ton", suttleWeight);
-                            if (currentPlan.SurplusWeight- suttleWeight < 0)
-                            {
-                                isValidated = false;
-                                ShowWeightStateTip(string.Format("({0})的计划单剩余吨位不足", customerName));
-                            }
-                        }
-                    }
-                }
-            }
             return isValidated;
         }
 
@@ -784,34 +729,9 @@ namespace YF.MWS.Win.View.Weight
                     //无人职守模式
                     if (currentWeighWay == WeightWay.Nobody)
                     {
-                        //转换重量数字为文字形式
-                        DigitConvertUtil digitConverter = new DigitConvertUtil((double)currentStableWeight);
-                        if (startVoice && voiceCfg.BroadcastWeight == BroadcastWeightType.SuttleWeight)
-                        {
-                            if (weSuttleWeight != null) 
-                            {
-                                digitConverter.Numeric = (double)weSuttleWeight.Text.ToDecimal();
-                            }
-                        }
-                        string voice = string.Empty;
-                        if (startVoice)
-                        {
-                            if (currentWeight == null)
-                            {
-                                voice = string.Format(voiceCfg.FirstWeight, digitConverter.ConvertToString());
-                            }
-                            else
-                            {
-                                voice = string.Format(voiceCfg.SecondWeight, digitConverter.ConvertToString());
-                            }
-                        }
                         //保存称重截图
                         //AsyncCapturePhoto(GetWeightCapture(currentWeightId, currentStableWeight));
                         bool isSaved = Save();
-                        if (startVoice && speecher != null && isSaved)
-                        {
-                            this.speecher.Speak(voice);
-                        }
                         
                         if (isSaved)
                         {

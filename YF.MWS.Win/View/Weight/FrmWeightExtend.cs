@@ -46,7 +46,6 @@ namespace YF.MWS.Win.View.Weight
         private IStatementService statementSerivice = new StatementService();
         private ITaskService taskService = new TaskService();
         private ILogService logService = new LogService();
-        private IPlanService planService = new PlanService();
         private IWebWeightService webWeightService = new WebWeightService();
         private IWebWeightProcessService webWeightProcessService = new WebWeightProcessService();
         private IWeightProcessService weightProcessService = new WeightProcessService();
@@ -370,14 +369,9 @@ namespace YF.MWS.Win.View.Weight
         /// </summary>
         private bool secondLightGroupRed = true;
         /// <summary>
-        /// 启用计划单限制功能
-        /// </summary>
-        private bool startPlan = false;
-        /// <summary>
         /// 启用双击加载未完成磅单
         /// </summary>
         private bool startDoubleClickUnfinished = false;
-        private BPlan currentPlan = null;
         /// <summary>
         /// 启用身份证信息生成客户单位
         /// </summary>
@@ -479,7 +473,6 @@ namespace YF.MWS.Win.View.Weight
                 if (Cfg.Weight != null)
                 {
                     startDoubleClickUnfinished = Cfg.Weight.StartDoubleClickUnfinished;
-                    startPlan = Cfg.Weight.StartPlan;
                     payCode = Cfg.Weight.PayCode;
                     weightNoGenerateMode = Cfg.Weight.WeightNoGenerateMode;
                     unfinishedTimeOut = Cfg.Weight.UnfinishedTimeOut;
@@ -767,7 +760,7 @@ namespace YF.MWS.Win.View.Weight
         {
             try
             {
-                if (hasGetCarNo&&GetCurrentWeight()>0)
+                if (hasGetCarNo&&GetCurrentWeight()>0&& Cfg.MeasureFun == "Nobody")
                 {
                     if (speecher != null) 
                     {
@@ -862,7 +855,7 @@ namespace YF.MWS.Win.View.Weight
                     SendInfoToLed(WeightFlowType.CarNoRecognition,"车牌:"+strPlate);
                     if (startVoice)
                     {
-                        speecher.Speak(voiceCfg.CarRecognition);
+                        speecher.Speak(string.Format(voiceCfg.CarRecognition,strPlate));
                     }
                     #region WeightWay.Nobody
                     if (currentWeighWay == WeightWay.Nobody)
@@ -1391,16 +1384,8 @@ namespace YF.MWS.Win.View.Weight
                     isNewWeight = false;
                     currentWeightId = currentWeight.Id;
                     hasLoaded = true;
-                }else if (Cfg.Transfer.isOpen) {
-                    currentWeight = webWeightService.Get(carNo);
-                    if (currentWeight != null) {
-                        currentWeight.ServiceId = currentWeight.Id;
-                        currentWeight.Id = Guid.NewGuid().ToString("N");
-                        currentWeightId=currentWeight.Id;
-                        isNewWeight = true;
-                        LoadWeight(currentWeight,false);
-                        hasLoaded = true;
-                    }
+                } else {
+                    currentWeightId=Guid.NewGuid().ToString("N");
                 }
             }
             if (!hasLoaded) 
@@ -1506,9 +1491,13 @@ namespace YF.MWS.Win.View.Weight
 
         private void New(bool completelyClear = false)
         {
+
             ClearWeightControl();
             CreateNewWeight();
             mainWeight.Clear(completelyClear);
+            if(Cfg.MeasureFun != "Nobody") {
+                hasGetCarNo = false;
+            }
         }
 
         /// <summary>

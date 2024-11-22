@@ -63,13 +63,13 @@ namespace YF.MWS.Win.View.Weight
             if (loadImageWithRemote) {
                 TPageResult result = fileService.GetListFromRemote(serverUrl, RecId);
                 if (result != null && result.Code == (int)ResultCode.Success && result.Rows != null) {
-                    lstFile = result.Rows.ToString().JsonDeserialize<List<BFile>>().Where(li=>CurrentUser.Instance.Powers.Contains("p2_"+ li.OrderNo)||CurrentUser.Instance.IsAdministrator).ToList();
+                    lstFile = result.Rows.ToString().JsonDeserialize<List<BFile>>().ToList();
                     if (lstFile != null && lstFile.Count > 0) {
                         lstFile = lstFile.FindAll(c => c.BusinessType == FileBusinessType.Graphic.ToString());
                     }
                 }
             } else {
-                lstFile = fileService.Get(RecId, "B_Weight", FileBusinessType.Graphic).Where(li => CurrentUser.Instance.Powers.Contains("p2_" + li.OrderNo) || CurrentUser.Instance.IsAdministrator).ToList();
+                lstFile = fileService.Get(RecId, "B_Weight", FileBusinessType.Graphic).ToList();
             }
             if (lstFile != null && lstFile.Count > 0) {
                 count = lstFile.Count;

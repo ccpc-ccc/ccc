@@ -7,9 +7,13 @@ using YF.Utility.Metadata;
 
 namespace YF.MWS.Db.Server {
     public class ReturnEntity {
-        public bool Result { get; set; }
-        public string Token { get; set; }
-        public string Message { get; set; }
-        public Newtonsoft.Json.Linq.JObject model { get; set; }
+        public Result result { get; set; }
+        public int status { get; set; }
+        public string message { get; set; }
+    }
+    public class Result {
+        public string status { get; set; }
+        public string message { get; set; }
+
     }
 }

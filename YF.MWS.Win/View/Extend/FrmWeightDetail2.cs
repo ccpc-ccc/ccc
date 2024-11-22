@@ -41,7 +41,6 @@ namespace YF.MWS.Win.View.Extend
         private IAttributeService attributeService = new AttributeService();
         private IWeightExtService weightExtService = new WeightExtService();
         private ISeqNoService seqNoService = new SeqNoService();
-        private IPlanService planService = new PlanService();
         private IFileService fileService = new FileService();
         private IWebPayService webPayService = new WebPayService();
         private ILogService logService = new LogService();

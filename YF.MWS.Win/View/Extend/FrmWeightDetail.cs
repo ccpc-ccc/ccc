@@ -40,7 +40,6 @@ namespace YF.MWS.Win.View.Extend
         private IAttributeService attributeService = new AttributeService();
         private IWeightExtService weightExtService = new WeightExtService();
         private ISeqNoService seqNoService = new SeqNoService();
-        private IPlanService planService = new PlanService();
         private IFileService fileService = new FileService();
         private IWebPayService webPayService = new WebPayService();
         private ILogService logService = new LogService();
@@ -516,14 +515,6 @@ namespace YF.MWS.Win.View.Extend
                 bool isSaved=weightService.Save(weight);
                 if (isSaved)
                 {
-                    if (startPlan)
-                    {
-                        if (oldWeight != null && !string.IsNullOrEmpty(oldWeight.RefId) && oldWeight.RefId != weight.RefId)
-                        {
-                            planService.Update(oldWeight);
-                        }
-                        planService.Update(weight);
-                    }
                     string desc = string.Empty;
                     if (isNewWeight)
                     {

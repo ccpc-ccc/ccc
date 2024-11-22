@@ -46,8 +46,12 @@ namespace YF.MWS.Win.View.Setting
             if (cfg != null)
             {
                 TransferCfg transfer = cfg.Transfer;
-                txtCompanyCode.Text = transfer.CompanyCode;// AppSetting.GetValue("MobileServer");
+                txtServerUrl.Text = transfer.ServerUrl;// AppSetting.GetValue("MobileServer");
+                txtCompanyCode.Text = transfer.CompanyCode;
+                txtName.Text = transfer.CompanyName;
+                txtAddress.Text = transfer.Address;
                 checkEdit1.Checked = transfer.isOpen;
+                chkAuto.Checked = transfer.AutoSend;
             }
         }
 
@@ -61,8 +65,11 @@ namespace YF.MWS.Win.View.Setting
             }
             TransferCfg transfer = cfg.Transfer;
             transfer.CompanyCode = txtCompanyCode.Text;
-            //transfer.ServerUrl = txtCompanyCode.Text;
+            transfer.CompanyName = txtName.Text;
+            transfer.ServerUrl = txtServerUrl.Text;
+            transfer.Address = txtAddress.Text;
             transfer.isOpen = checkEdit1.Checked;
+            transfer.AutoSend = chkAuto.Checked;
             CfgUtil.SaveCfg(cfg);
             MessageDxUtil.ShowTips("成功保存云磅传输设置信息");
         }

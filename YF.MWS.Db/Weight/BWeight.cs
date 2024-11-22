@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace YF.MWS.Db
     /// Author:闫孝感
     /// Date:2024-09-10
     /// </summary>
+    [SugarTable("B_Weight")]
     public class BWeight:BaseEntity
     {
         /// <summary>
@@ -165,11 +167,11 @@ namespace YF.MWS.Db
         /// <summary>
         /// 毛重时间
         /// </summary>
-        public virtual DateTime GrossTime { get; set; }
+        public virtual DateTime GrossTime { get; set; } = DateTime.MinValue;
         /// <summary>
         /// 皮重时间
         /// </summary>
-        public virtual DateTime TareTime { get; set; }
+        public virtual DateTime TareTime { get; set; } = DateTime.MinValue;
         /// <summary>
         /// 收费单价
         /// </summary>
@@ -283,8 +285,10 @@ namespace YF.MWS.Db
         public virtual int SyncState { get; set; }
         public virtual string RefId { get; set; }
         [Field(IsSqliteIgnore =true)]
+        [SugarColumn(IsIgnore =true)]
         public virtual int FinishedCarCount { get; set; }
         [Field(IsSqliteIgnore = true)]
+        [SugarColumn(IsIgnore = true)]
         public virtual decimal FinishedWeight { get; set; }
         /// <summary>
         /// 服务端磅单Id

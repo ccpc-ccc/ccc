@@ -11,8 +11,6 @@ namespace YF.MWS.Client.DataService.Interface
 {
     public interface ICardService
     {
-        bool DeleteBatch(List<string> lstCardId);
-        bool Delete(string cardId);
         bool DeleteDetail(string detailId);
         bool ExistCarNo(string cardId, string carNo);
         List<ImportResult> ImportCard(List<BPlanCard> lstCard, ImportMode mode, ICarService carService, ICustomerService customerService,IMaterialService materialService);
@@ -22,10 +20,7 @@ namespace YF.MWS.Client.DataService.Interface
         BPlanCard GetByCarNo(string carNo);
         BPlanCard GetByNo(string cardNo);
         SCardViewDtl GetCardDetail(string viewId, string detailId);
-        DataTable GetExport();
         List<QPlanCard> GetList();
-        PageList<QPlanCard> GetList(PlanCardQuery query);
-        DataTable GetCardList();
         List<QCardViewDtl> GetDetailList(string viewId);
         List<SWeightViewDtl> GetInitedWVDetailList(string viewId);
         List<BCardPreset> GetPresetList();

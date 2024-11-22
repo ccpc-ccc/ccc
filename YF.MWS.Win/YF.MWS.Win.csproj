@@ -881,18 +881,6 @@
     <Compile Include="View\Master\FrmWriteCard.Designer.cs">
       <DependentUpon>FrmWriteCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Order\FrmPlanEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Order\FrmPlanEdit.Designer.cs">
-      <DependentUpon>FrmPlanEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Order\FrmPlanList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Order\FrmPlanList.designer.cs">
-      <DependentUpon>FrmPlanList.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Report\FrmTemplateEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1483,12 +1471,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Master\FrmWriteCard.resx">
       <DependentUpon>FrmWriteCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Order\FrmPlanEdit.resx">
-      <DependentUpon>FrmPlanEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Order\FrmPlanList.resx">
-      <DependentUpon>FrmPlanList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Report\FrmTemplateEdit.resx">
       <DependentUpon>FrmTemplateEdit.cs</DependentUpon>

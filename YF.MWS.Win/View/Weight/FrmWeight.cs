@@ -59,7 +59,6 @@ namespace YF.MWS.Win.View.Weight {
         private int currentDate = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd"));
         private LoginCfg loginCfg = null;
         private string loginCfgXml = Path.Combine(Application.StartupPath, "LoginCfg.xml");
-        private BWeight tempWeight = null;
         /// <summary>
         /// 抓拍图片和视频文件信息
         /// </summary>
@@ -1628,7 +1627,6 @@ namespace YF.MWS.Win.View.Weight {
             currentTareWeight = 0;
             oldTareWeight = 0;
             oldGrossWeight = 0;
-            tempWeight = null;
             currentGrossWeight = 0;
         }
 
@@ -1721,7 +1719,6 @@ namespace YF.MWS.Win.View.Weight {
             this.lstWeightValue.Clear();
             this.isNoteCheckCar = false;
             this.checkCarCount = 0;
-            currentPlan = null;
             currentWeight = null;
             overWeight = 0;
             refusePay = false;
@@ -1759,21 +1756,20 @@ namespace YF.MWS.Win.View.Weight {
             }
             return isChanged;
         }
-        private void getWeightTime(ref BWeight weight) {
-            if (Cfg.Weight.ProcessMode == 0) {
+        /*private void getWeightTime(ref BWeight weight) {
+            if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstGross) {
                 if (weGrossWeight != null && weGrossWeight.Text.ToDecimal() <= 0) {
                     weight.GrossTime = DateTime.Now;
                 } else if (weTareWeight != null) {
                     weight.TareTime = DateTime.Now;
                 }
-            } else if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstTare) { //第一次皮重时
+            } else  { //第一次皮重时
                 if (weTareWeight != null && weTareWeight.Text.ToDecimal() <= 0) {
-                    tempWeight.TareTime = DateTime.Now;
                 } else if (weGrossWeight != null) {
                     weight.GrossTime = DateTime.Now;
                 }
             }
-        }
+        }*/
         public bool Save() {
             bool isSaved = false;
             try {
@@ -1809,10 +1805,18 @@ namespace YF.MWS.Win.View.Weight {
                 if (wCardNo != null) {
                     currentWeight.CardNo = wCardNo.Text;
                 }
+                Logger.Write($"称重时间1：{currentWeight.TareTime}  {currentWeight.GrossTime}");
                 FinishState state = FinishState.Unfinished;
                     if (currentWeight.TareWeight > 0 && currentWeight.GrossWeight > 0) {
                         state = FinishState.Finished;
-                    }
+                    if(currentWeight.TareTime==DateTime.MinValue) currentWeight.TareTime = DateTime.Now;
+                    if(currentWeight.GrossTime== DateTime.MinValue) currentWeight.GrossTime = DateTime.Now;
+                } else {
+                    currentWeight.CreateTime = DateTime.Now;
+                    if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstTare) {
+                        currentWeight.TareTime = DateTime.Now;
+                    }else currentWeight.GrossTime = DateTime.Now;
+                }
                 currentWeight.OrderSource = source.ToString();
                 currentWeight.FinishState = (int)state;
                 currentWeight.MeasureUnit = currentDeviceCfg.SUnit;
@@ -1822,7 +1826,7 @@ namespace YF.MWS.Win.View.Weight {
                 //currentWeight.SuttleWeight = Math.Abs(currentWeight.GrossWeight - currentWeight.TareWeight);
                 currentWeight.WarehBizType = radWarehBizType.EditValue.ToString();
                 currentWeight.CompanyId = CurrentUser.Instance.CompanyId;
-                getWeightTime(ref currentWeight);
+                //getWeightTime(ref currentWeight);
                 if (startOverWeight) {
                     currentWeight.MaxWeight = maxWeight;
                     currentWeight.OverWeight = overWeight;
@@ -1843,18 +1847,31 @@ namespace YF.MWS.Win.View.Weight {
                     if (currentWeight.FinishState == (int)FinishState.Unfinished)
                         currentWeight.RegularCharge = 0;
                 }
-                if (isNew && startPlan) {
-                    if (currentPlan != null)
-                        currentWeight.RefId = currentPlan.Id;
-                }
                 isSaved = weightService.Save(currentWeight);
-                if (isSaved && startPlan && !string.IsNullOrEmpty(currentWeight.RefId)) {
-                    planService.Update(currentWeight);
-                }
                 AsyncCapturePhoto(GetWeightCapture(currentWeight.Id));
                 if (isSaved&&Cfg.Transfer.isOpen&&currentWeight.FinishState == 1) {//
                     Thread thread = new Thread(new ParameterizedThreadStart(sendWeight));
                     thread.Start(currentWeight);
+                }
+                if (isSaved) {
+                    //转换重量数字为文字形式
+                   /* DigitConvertUtil digitConverter = new DigitConvertUtil((double)currentStableWeight);
+                    if (startVoice && voiceCfg.BroadcastWeight == BroadcastWeightType.SuttleWeight) {
+                        if (weSuttleWeight != null) {
+                            digitConverter.Numeric = (double)weSuttleWeight.Text.ToDecimal();
+                        }
+                    }*/
+                    string voice = string.Empty;
+                    if (startVoice) {
+                        if (currentWeight == null) {
+                            voice = string.Format(voiceCfg.FirstWeight);
+                        } else {
+                            voice = string.Format(voiceCfg.SecondWeight);
+                        }
+                    }
+                    if (startVoice && speecher != null && isSaved) {
+                        this.speecher.Speak(voice);
+                    }
                 }
                 if (isNew && !isSaved) {
                     seqNoService.Cancel(SeqCode.Weight.ToString());
@@ -1865,25 +1882,6 @@ namespace YF.MWS.Win.View.Weight {
                 //无人值守模式下保存重量后，将是否归零设为False，是为了反正重复保存
                 if (isSaved && currentWeighWay == WeightWay.Nobody) {
                     returnZero = false;
-                }
-                BPay pay = null;
-                if (isSaved && startWeightPay) {
-                    if (currentWeight.RegularCharge <= 0) {
-                        paySuccess = true;
-                    } else {
-                        if (currentChargeTriggerCondtion == ChargeTriggerCondtionType.NewWeight) {
-                            if (isNew)
-                                pay = SavePay(currentWeight.Id, currentWeight.CarNo, currentWeight.WeightNo, currentWeight.RegularCharge, currentWeight.GrossWeight);
-                            else
-                                paySuccess = true;
-                        }
-                        if (currentChargeTriggerCondtion == ChargeTriggerCondtionType.FinishWeight) {
-                            if (isNew)
-                                paySuccess = true;
-                            if (currentWeight.FinishState == (int)FinishState.Finished)
-                                pay = SavePay(currentWeight.Id, currentWeight.CarNo, currentWeight.WeightNo, currentWeight.RegularCharge, currentWeight.GrossWeight);
-                        }
-                    }
                 }
                 SendReturnZero(SendReturnZeroProcessType.WeightSaved);
                 if (isSaved) {
@@ -1928,6 +1926,7 @@ namespace YF.MWS.Win.View.Weight {
                     MessageDxUtil.ShowError("保存磅单信息时发生未知错误,请重试.");
                 }
             } finally {
+                Logger.Write("刷新磅单信息");
                 New(!Cfg.Weight.SaveFormData);
             }
             return isSaved;
@@ -1935,8 +1934,16 @@ namespace YF.MWS.Win.View.Weight {
         private void sendWeight(object obj) {
             BWeight weight=obj as BWeight;
             if (weight == null) return;
+            if (Cfg.Transfer.AutoSend) {
             Thread.Sleep(5000);
-            webWeightService.doneWeight(currentWeight,Cfg.Transfer.CompanyCode);
+            bool isOk= webWeightService.doneWeight(currentWeight,Cfg.Transfer);
+            if (isOk) {
+                weightService.UpdateSyncState(weight.Id);
+            } else {
+                MessageBox.Show("上传数据失败");
+            }
+
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e) {
@@ -1960,35 +1967,18 @@ namespace YF.MWS.Win.View.Weight {
             setMainWeight(weight);
         }
         private void setMainWeight(decimal weight) {
-            if (tempWeight == null) tempWeight = new BWeight();
             //第一次毛重
-            if (Cfg.Weight.ProcessMode == 0) {
-                if (weGrossWeight != null && weGrossWeight.Text.ToDecimal() <= 0) {
+            if (Cfg.Weight.ProcessMode == MeasureProcessMode.FirstGross) {
+                if (weGrossWeight != null && currentWeight == null) {
                     weGrossWeight.Text = weight.ToString();
-                    tempWeight.GrossTime = DateTime.Now;
-                    tempWeight.GrossWeight = weight;
-                    tempWeight.FinishState = 0;
-                    tempWeight.MeasureType = "gross";
                 } else if (weTareWeight != null) {
                     weTareWeight.Text = weight.ToString();
-                    tempWeight.TareTime = DateTime.Now;
-                    tempWeight.TareWeight = weight;
-                    tempWeight.FinishState = 1;
-                    tempWeight.MeasureType = "tare";
                 }
-            } else if (Cfg.Weight.ProcessMode ==MeasureProcessMode.FirstTare) { //第一次皮重时
-                if (weTareWeight != null&&weTareWeight.Text.ToDecimal() <= 0) {
+            } else { //第一次皮重时
+                if (weTareWeight != null&& currentWeight == null) {
                     weTareWeight.Text = weight.ToString();
-                    tempWeight.TareTime = DateTime.Now;
-                    tempWeight.TareWeight = weight;
-                    tempWeight.FinishState = 0;
-                    tempWeight.MeasureType = "tare";
                 } else if(weGrossWeight!=null){
                     weGrossWeight.Text = weight.ToString();
-                    tempWeight.GrossTime = DateTime.Now;
-                    tempWeight.GrossWeight = weight;
-                    tempWeight.FinishState = 1;
-                    tempWeight.MeasureType = "gross";
                 }
             }
         }

@@ -60,7 +60,6 @@
     <Compile Include="IMaterialService.cs" />
     <Compile Include="IMasterService.cs" />
     <Compile Include="IPayService.cs" />
-    <Compile Include="IPlanService.cs" />
     <Compile Include="IReportService.cs" />
     <Compile Include="IRoleService.cs" />
     <Compile Include="ISeqNoService.cs" />

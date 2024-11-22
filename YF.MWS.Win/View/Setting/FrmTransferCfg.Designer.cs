@@ -42,8 +42,15 @@
             this.plMain = new DevExpress.XtraEditors.PanelControl();
             this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             this.gpRuiJieYun = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.lblRemoteServerUrl = new DevExpress.XtraEditors.LabelControl();
+            this.txtAddress = new DevExpress.XtraEditors.TextEdit();
+            this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.txtCompanyCode = new DevExpress.XtraEditors.TextEdit();
+            this.txtServerUrl = new DevExpress.XtraEditors.TextEdit();
+            this.chkAuto = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgListSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plMain)).BeginInit();
@@ -51,7 +58,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).BeginInit();
             this.gpRuiJieYun.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerUrl.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAuto.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -110,7 +121,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 161);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 233);
             this.barDockControlBottom.Manager = this.barManager;
             this.barDockControlBottom.Size = new System.Drawing.Size(437, 0);
             // 
@@ -120,7 +131,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 24);
             this.barDockControlLeft.Manager = this.barManager;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 137);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 209);
             // 
             // barDockControlRight
             // 
@@ -128,7 +139,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(437, 24);
             this.barDockControlRight.Manager = this.barManager;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 137);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 209);
             // 
             // imgListSmall
             // 
@@ -139,12 +150,13 @@
             // 
             // plMain
             // 
+            this.plMain.Controls.Add(this.chkAuto);
             this.plMain.Controls.Add(this.checkEdit1);
             this.plMain.Controls.Add(this.gpRuiJieYun);
             this.plMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plMain.Location = new System.Drawing.Point(0, 24);
             this.plMain.Name = "plMain";
-            this.plMain.Size = new System.Drawing.Size(437, 137);
+            this.plMain.Size = new System.Drawing.Size(437, 209);
             this.plMain.TabIndex = 5;
             // 
             // checkEdit1
@@ -159,14 +171,44 @@
             // 
             // gpRuiJieYun
             // 
+            this.gpRuiJieYun.Controls.Add(this.labelControl3);
+            this.gpRuiJieYun.Controls.Add(this.labelControl2);
+            this.gpRuiJieYun.Controls.Add(this.labelControl1);
             this.gpRuiJieYun.Controls.Add(this.lblRemoteServerUrl);
+            this.gpRuiJieYun.Controls.Add(this.txtAddress);
+            this.gpRuiJieYun.Controls.Add(this.txtName);
             this.gpRuiJieYun.Controls.Add(this.txtCompanyCode);
+            this.gpRuiJieYun.Controls.Add(this.txtServerUrl);
             this.gpRuiJieYun.Enabled = false;
             this.gpRuiJieYun.Location = new System.Drawing.Point(12, 39);
             this.gpRuiJieYun.Name = "gpRuiJieYun";
-            this.gpRuiJieYun.Size = new System.Drawing.Size(415, 90);
+            this.gpRuiJieYun.Size = new System.Drawing.Size(415, 170);
             this.gpRuiJieYun.TabIndex = 60;
             this.gpRuiJieYun.Text = "云磅服务器设置";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(36, 141);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(52, 14);
+            this.labelControl3.TabIndex = 11;
+            this.labelControl3.Text = "开单地址:";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(48, 109);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(40, 14);
+            this.labelControl2.TabIndex = 11;
+            this.labelControl2.Text = "开单员:";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(36, 72);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(52, 14);
+            this.labelControl1.TabIndex = 11;
+            this.labelControl1.Text = "采区名称:";
             // 
             // lblRemoteServerUrl
             // 
@@ -176,19 +218,52 @@
             this.lblRemoteServerUrl.TabIndex = 11;
             this.lblRemoteServerUrl.Text = "接口地址:";
             // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(119, 138);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(263, 20);
+            this.txtAddress.TabIndex = 12;
+            this.txtAddress.Tag = "";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(119, 106);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(263, 20);
+            this.txtName.TabIndex = 12;
+            this.txtName.Tag = "ServerUrl";
+            // 
             // txtCompanyCode
             // 
-            this.txtCompanyCode.Location = new System.Drawing.Point(119, 37);
+            this.txtCompanyCode.Location = new System.Drawing.Point(119, 70);
             this.txtCompanyCode.Name = "txtCompanyCode";
             this.txtCompanyCode.Size = new System.Drawing.Size(263, 20);
             this.txtCompanyCode.TabIndex = 12;
             this.txtCompanyCode.Tag = "ServerUrl";
             // 
+            // txtServerUrl
+            // 
+            this.txtServerUrl.Location = new System.Drawing.Point(119, 37);
+            this.txtServerUrl.Name = "txtServerUrl";
+            this.txtServerUrl.Size = new System.Drawing.Size(263, 20);
+            this.txtServerUrl.TabIndex = 12;
+            this.txtServerUrl.Tag = "ServerUrl";
+            // 
+            // chkAuto
+            // 
+            this.chkAuto.Location = new System.Drawing.Point(146, 13);
+            this.chkAuto.Name = "chkAuto";
+            this.chkAuto.Properties.Caption = "自动上传";
+            this.chkAuto.Size = new System.Drawing.Size(75, 20);
+            this.chkAuto.TabIndex = 19;
+            this.chkAuto.CheckedChanged += new System.EventHandler(this.checkEdit1_CheckedChanged);
+            // 
             // FrmTransferCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 161);
+            this.ClientSize = new System.Drawing.Size(437, 233);
             this.Controls.Add(this.plMain);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -209,7 +284,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gpRuiJieYun)).EndInit();
             this.gpRuiJieYun.ResumeLayout(false);
             this.gpRuiJieYun.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCompanyCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtServerUrl.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAuto.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,6 +309,13 @@
         private DevExpress.XtraEditors.GroupControl gpRuiJieYun;
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
         private DevExpress.XtraEditors.LabelControl lblRemoteServerUrl;
+        private DevExpress.XtraEditors.TextEdit txtServerUrl;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtCompanyCode;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.TextEdit txtName;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.TextEdit txtAddress;
+        private DevExpress.XtraEditors.CheckEdit chkAuto;
     }
 }

@@ -46,6 +46,7 @@ namespace YF.MWS.SQliteService.Remote
                 }
                 responseStream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
                 res = responseStream.ReadToEnd();
+                Logger.Write("服务器返回数据： "+res);
             } catch (Exception ex) {
                 if (dataStream != null) {
                     dataStream.Close();

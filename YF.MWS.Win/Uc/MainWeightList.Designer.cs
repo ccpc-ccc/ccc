@@ -46,12 +46,13 @@
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.gcWeight = new DevExpress.XtraGrid.GridControl();
-            this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.补录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.作废ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.上传ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gvWeight = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.pcHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teEndDate.Properties)).BeginInit();
@@ -60,8 +61,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // pcHeader
@@ -257,6 +258,52 @@
             this.gcWeight.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvWeight});
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.补录ToolStripMenuItem,
+            this.修改ToolStripMenuItem,
+            this.作废ToolStripMenuItem,
+            this.打印ToolStripMenuItem,
+            this.上传ToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 114);
+            // 
+            // 补录ToolStripMenuItem
+            // 
+            this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
+            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.补录ToolStripMenuItem.Text = "补录";
+            this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
+            // 
+            // 修改ToolStripMenuItem
+            // 
+            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
+            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // 作废ToolStripMenuItem
+            // 
+            this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
+            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.作废ToolStripMenuItem.Text = "作废";
+            this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
+            // 
+            // 打印ToolStripMenuItem
+            // 
+            this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
+            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.打印ToolStripMenuItem.Text = "打印";
+            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
+            // 
+            // 上传ToolStripMenuItem
+            // 
+            this.上传ToolStripMenuItem.Name = "上传ToolStripMenuItem";
+            this.上传ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.上传ToolStripMenuItem.Text = "上传";
+            this.上传ToolStripMenuItem.Click += new System.EventHandler(this.上传ToolStripMenuItem_Click);
+            // 
             // gvWeight
             // 
             this.gvWeight.Appearance.ColumnFilterButton.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold);
@@ -322,45 +369,8 @@
             this.gvWeight.OptionsView.ShowFooter = true;
             this.gvWeight.OptionsView.ShowGroupPanel = false;
             this.gvWeight.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvWeight_RowClick);
+            this.gvWeight.CustomColumnDisplayText += new DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler(this.gvWeight_CustomColumnDisplayText);
             this.gvWeight.DoubleClick += new System.EventHandler(this.gvWeight_DoubleClick);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.补录ToolStripMenuItem,
-            this.修改ToolStripMenuItem,
-            this.作废ToolStripMenuItem,
-            this.打印ToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 114);
-            // 
-            // 补录ToolStripMenuItem
-            // 
-            this.补录ToolStripMenuItem.Name = "补录ToolStripMenuItem";
-            this.补录ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.补录ToolStripMenuItem.Text = "补录";
-            this.补录ToolStripMenuItem.Click += new System.EventHandler(this.补录ToolStripMenuItem_Click);
-            // 
-            // 修改ToolStripMenuItem
-            // 
-            this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
-            this.修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.修改ToolStripMenuItem.Text = "修改";
-            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
-            // 
-            // 打印ToolStripMenuItem
-            // 
-            this.打印ToolStripMenuItem.Name = "打印ToolStripMenuItem";
-            this.打印ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.打印ToolStripMenuItem.Text = "打印";
-            this.打印ToolStripMenuItem.Click += new System.EventHandler(this.打印ToolStripMenuItem_Click);
-            // 
-            // 作废ToolStripMenuItem
-            // 
-            this.作废ToolStripMenuItem.Name = "作废ToolStripMenuItem";
-            this.作废ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.作废ToolStripMenuItem.Text = "作废";
-            this.作废ToolStripMenuItem.Click += new System.EventHandler(this.作废ToolStripMenuItem_Click);
             // 
             // MainWeightList
             // 
@@ -382,8 +392,8 @@
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvWeight)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -411,5 +421,6 @@
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 作废ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打印ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 上传ToolStripMenuItem;
     }
 }

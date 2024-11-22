@@ -17,12 +17,24 @@ namespace YF.MWS.Metadata.Cfg
         /// </summary>
         public string ServerUrl { get; set; }
         /// <summary>
-        /// 服务器地址
+        /// 
         /// </summary>
         public string CompanyCode { get; set; }
         /// <summary>
         /// 是否开启
         /// </summary>
         public bool isOpen { get; set; }
+        /// <summary>
+        /// 是否自动上传
+        /// </summary>
+        public bool AutoSend { get; set; }
+        /// <summary>
+        /// 开单员姓名
+        /// </summary>
+        public string CompanyName { get; set; }
+        /// <summary>
+        /// 开单地址
+        /// </summary>
+        public string Address { get; set; }
     }
 }

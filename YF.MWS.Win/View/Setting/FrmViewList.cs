@@ -220,13 +220,6 @@ namespace YF.MWS.Win.View
                 MessageDxUtil.ShowTips("请先开启远程服务！");
                 return;
             }
-
-            bool isSyn = WebWeightService.synWeightViewDtl(lstViewDetail);
-            if (isSyn) {
-                MessageDxUtil.ShowTips("同步成功");
-            } else {
-                MessageDxUtil.ShowError("同步失败");
-            }
         }
 
         private void btnItemSetting_ItemClick(object sender, ItemClickEventArgs e)

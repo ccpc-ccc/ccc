@@ -42,7 +42,6 @@ namespace YF.MWS.Win.View.Weight {
         private IWeightViewService viewService = new WeightViewService();
         private ICardService cardService = new CardService();
         private ICarService carService = new CarService();
-        private IPlanService planService = new PlanService();
         private IWeightService weightService = new WeightService();
         private IWeightQueryService weightQueryService = new WeightQueryService();
         private IWeightProcessService weightProcessService = new WeightProcessService();
@@ -548,16 +547,10 @@ namespace YF.MWS.Win.View.Weight {
                 WeightUpdate update = new WeightUpdate();
                 update.RowState = RowState.Edit;
                 foreach (DataRow row in listWeight) {
-                    weightId = row["WeightId"].ToObjectString();
+                    weightId = row["Id"].ToObjectString();
                     weightNo = row["WeightNo"].ToObjectString();
                     bool isUpdated = weightService.UpdateWeight(weightId, RowState.Edit);
                     if (isUpdated) {
-                        if (startPlan) {
-                            BWeight weight = weightService.Get(weightId);
-                            if (weight != null) {
-                                planService.Update(weight);
-                            }
-                        }
                         update.WeightIds.Add(weightId);
                         desc = string.Format("恢复磅单号:{0}", weightNo);
                         logService.Add(LogActionType.Weight, weightId, weightNo, desc);
@@ -583,11 +576,6 @@ namespace YF.MWS.Win.View.Weight {
                         BWeight weight = weightService.Get(weightId);
                         bool isDeleted = weightService.DeleteWeight(weight);
                         if (isDeleted) {
-                            if (startPlan) {
-                                if (weight != null) {
-                                    planService.Update(weight);
-                                }
-                            }
                             weightProcessService.Delete(weightId);
                             desc = string.Format("删除磅单号:{0}", weightNo);
                             logService.Add(LogActionType.Weight, weightId, weightNo, desc);
